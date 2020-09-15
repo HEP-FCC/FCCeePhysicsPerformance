@@ -10,10 +10,13 @@
  
 ### Software tutorials
 
-- the [FCCSW tutorial, January 20200](https://hep-fcc.github.io/fcc-tutorials/index.html)
+- the [FCCSW tutorial, January 20200](https://hep-fcc.github.io/fcc-tutorials/index.html)  
 - the [tutorial in preparation (Clement Helsens) for Snowmass](https://github.com/clementhelsens/fcc-tutorials/blob/master/FCCsnowmass.md): Getting started with simulating events and analysing them
 
-
+### Useful repositories
+- [FCCSW](https://github.com/HEP-FCC/FCCSW)
+- [DELPHES]( https://github.com/delphes/delphes)
+- [DD4Hep](https://github.com/AIDASoft/DD4hep)
 
 ----------------------------------------------------
 Below is the github-pages template..

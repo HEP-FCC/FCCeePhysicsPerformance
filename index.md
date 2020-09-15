@@ -20,7 +20,7 @@
 - [FCCSW](https://github.com/HEP-FCC/FCCSW)
 - [DELPHES]( https://github.com/delphes/delphes)
 - [DD4Hep](https://github.com/AIDASoft/DD4hep)
-- [key4hep//EDM4hep] (https://github.com/key4hep/EDM4hep)
+- [key4hep/EDM4hep](https://github.com/key4hep/EDM4hep)
 
 ----------------------------------------------------
 Below is the github-pages template..

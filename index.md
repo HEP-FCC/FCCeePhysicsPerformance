@@ -1,4 +1,23 @@
-## Welcome to GitHub Pages
+## Welcome to the FCC-ee Physics Performance Documentation
+
+
+### Documents submitted to Snowmass 2021
+
+- [Letters of Interests](https://indico.cern.ch/event/951830/) sent by members of the FCC study group
+- LOIs sent by the [CEPC](https://indico.ihep.ac.cn/event/12410/) collaboration
+- LOIs sent by the [CALICE](https://agenda.linearcollider.org/event/8647/) collaboration
+- Link to the [Snowmass portal](https://snowmass21.org)
+ 
+### Software tutorials
+
+- the [FCCSW tutorial, January 20200](https://hep-fcc.github.io/fcc-tutorials/index.html)
+- the [tutorial in preparation (Clement Helsens) for Snowmass](https://github.com/clementhelsens/fcc-tutorials/blob/master/FCCsnowmass.md): Getting started with simulating events and analysing them
+
+
+
+----------------------------------------------------
+Below is the github-pages template..
+
 
 You can use the [editor on GitHub](https://github.com/EmanuelPerez/FCCeePhysicsPerformance/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 

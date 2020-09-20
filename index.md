@@ -22,6 +22,9 @@
 - [DD4Hep](https://github.com/AIDASoft/DD4hep)
 - [key4hep/EDM4hep](https://github.com/key4hep/EDM4hep)
 
+### Case studies
+See [here](https://EmanuelPerez.github.io/FCCeePhysPerf/case-studies)
+
 ----------------------------------------------------
 Below is the github-pages template..
 

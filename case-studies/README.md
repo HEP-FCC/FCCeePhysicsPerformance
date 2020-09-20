@@ -1,11 +1,10 @@
 # Physics case studies
 
-## Z lineshape
+- [Z lineshape](https://emanuelperez.github.io/FCCeePhysPerf/case-studies/lineshape)
+- [Tau physics](https://emanuelperez.github.io/FCCeePhysPerf/case-studies/taus)
 
-See [here](https://emanuelperez.github.io/FCCeePhysPerf/case-studies/lineshape)
 
-## Tau physics
-See [here](https://emanuelperez.github.io/FCCeePhysPerf/case-studies/taus)
+
 
 ```eval_rst
 .. toctree::

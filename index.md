@@ -4,6 +4,14 @@
 - Patrizia Azzi (INFN Padova) - Patrizia.Azzi@cern.ch
 - Emmanuel Perez (CERN) - Emmanuel.Perez@cern.ch
 
+### Physics Performance meetings
+
+O(monthly) meetings: Mondays, 3pm-5pm, CERN time
+Next meetings:
+- October 12
+- November 16 or November 23
+- December 7 or December 14
+
 ### Documents submitted to Snowmass 2021
 
 - [Letters of Interests](https://indico.cern.ch/event/951830/) sent by members of the FCC study group

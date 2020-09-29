@@ -1,11 +1,22 @@
 # Physics case studies
 
-### Z lineshape
+### Table of Contents
+
+1. [Electroweak physics at the Z peak](#electroweak-physics-at-the-z-peak)
+2. [Tau Physics](#tau-physics)
+3. [WW threshold](#ww-threshold)
+4. [Higgs physics](#higgs-physics)
+5. [Top physics](#top-physics)
+
+### Electroweak physics at the Z peak
 
 #### References
 [Precision Electroweak Measurements on the Z Resonance](https://arxiv.org/abs/hep-ex/0509008): The Phys Report from the LEP & SLD Electroweak WG, 2006
 
 #### Case studies
+- [The ratio Rl](lineshape/rl/README.md)
+- [The total Z width](lineshape/zwidth//README.md)
+
 
 ### Tau Physics
 

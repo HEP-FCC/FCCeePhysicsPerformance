@@ -11,7 +11,7 @@
 
 ### Electroweak physics at the Z peak
 
-#### References
+#### General references
 [Precision Electroweak Measurements on the Z Resonance](https://arxiv.org/abs/hep-ex/0509008): The Phys Report from the LEP & SLD Electroweak WG, 2006
 
 #### Case studies
@@ -24,7 +24,7 @@
 
 ### Tau Physics
 
-#### References
+#### General references
 - [Precision Tau Physics](https://doi.org/10.1016/j.ppnp.2013.11.002): review by A. Pich
 - [Tau-lepton Physics at the FCC-ee circular e+e− Collider](https://arxiv.org/abs/1811.09408): Mogens Dam, proceedings TAU'2018
 
@@ -32,6 +32,7 @@
 
 
 ### WW Threshold
+
 [Electroweak measurements in electron–positron collisions at W-boson-pair energies at LEP](https://arxiv.org/abs/1302.3415): The Physics Report from the LEP Electroweak WG 2006
 
 ### Higgs physics

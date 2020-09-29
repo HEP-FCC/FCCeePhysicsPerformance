@@ -1,3 +1,5 @@
+{% include toc.html html=content %}
+
 ## Welcome to the FCC-ee Physics Performance Documentation
 
 ### Organisation

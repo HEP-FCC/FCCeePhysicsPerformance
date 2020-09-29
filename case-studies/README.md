@@ -17,9 +17,9 @@
 #### Case studies
 - [The ratio Rl](lineshape/rl)
 - [The total Z width](lineshape/zwidth)
-- [The Z peak cross-section sogma^0\_had](lineshape/sigma_had)
+- [The Z peak cross-section sigma^0\_had](lineshape/sigma_had)
 - [The muon pair forward-backward asymmetry A^mumu\_FB](lineshape/AFBmumu)
-- [The orward-backward asymmetry of b quarks at the Z pole](lineshape/AFBbb)
+- [The forward-backward asymmetry of b quarks at the Z pole](lineshape/AFBbb)
 
 
 ### Tau Physics

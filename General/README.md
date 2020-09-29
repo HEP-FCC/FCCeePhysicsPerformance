@@ -15,7 +15,7 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 
 ### Vertexing and flavour tagging
 - Description of the [LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) used for the CLD studies
-- see also the work done in te context of the Hcc case study
+- see also the work done in the context of the Hcc case study
 
 ### Producing five-parameter tracks with the Delphes interface
 
@@ -53,7 +53,7 @@ module FastJetFinder GenJetFinder {
 }
 ```
 
-- In some cases, in may  be desirable to run the algorithm in the "exclusive" mode, forcing the algorithm to produce a fixed number of jets. This can be done by setting the following parameters in the Delphes FastJet finder:
+- In some cases, it may  be desirable to run the algorithm in the "exclusive" mode, forcing the algorithm to produce a fixed number of jets. This can be done by setting the following parameters in the Delphes FastJet finder:
 
 ```markdown
 module FastJetFinder GenJetFinder {
@@ -68,6 +68,6 @@ module FastJetFinder GenJetFinder {
 
 - The [VLC algorithm](https://link.springer.com/article/10.1140%2Fepjc%2Fs10052-018-5594-6) was largely used for CLIC studies (where it showed good performance in particular to reject the background from gamma gamma to hadrons, which is severe at CLIC).
 
-
+- See also the [FastJet user manual](https://arxiv.org/abs/1111.6097) 
 
 

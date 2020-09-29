@@ -34,10 +34,10 @@ Next meetings:
     - Link to the [Snowmass portal](https://snowmass21.org)
 
 ### Case studies
-See [here](https://EmanuelPerez.github.io/FCCeePhysPerf/case-studies)
+See [here](case-studies)
 
 ### General information
-Existing performance documents, analysis tips etc are collected [here](https://EmanuelPerez.github.io/FCCeePhysPerf/General).
+Existing performance documents, analysis tips etc are collected [here](General).
  
 ### Software
 

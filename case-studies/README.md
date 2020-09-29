@@ -4,9 +4,10 @@
 
 1. [Electroweak physics at the Z peak](#electroweak-physics-at-the-z-peak)
 2. [Tau Physics](#tau-physics)
-3. [WW threshold](#ww-threshold)
-4. [Higgs physics](#higgs-physics)
-5. [Top physics](#top-physics)
+3. [Flavour physics](#flavour-physics)
+4. [WW threshold](#ww-threshold)
+5. [Higgs physics](#higgs-physics)
+6. [Top physics](#top-physics)
 
 ### Electroweak physics at the Z peak
 
@@ -16,12 +17,18 @@
 #### Case studies
 - [The ratio Rl](lineshape/rl/README.md)
 - [The total Z width](lineshape/zwidth//README.md)
+- [The Z peak cross-section sogma^0\_had](lineshape/sigma_had.md)
+- [The muon pair forward-backward asymmetry A^mumu\_FB](lineshape/AFBmumu.md)
+- [The orward-backward asymmetry of b quarks at the Z pole](lineshape/AFBbb.md)
 
 
 ### Tau Physics
 
 [Precision Tau Physics](https://doi.org/10.1016/j.ppnp.2013.11.002)
 [Tau-lepton Physics at the FCC-ee circular e+e− Collider](https://arxiv.org/abs/1811.09408): Mogens Dam, proceedings TAU'2018
+
+### Flavour physics
+
 
 ### WW Threshold
 [Electroweak measurements in electron–positron collisions at W-boson-pair energies at LEP](https://arxiv.org/abs/1302.3415): The Physics Report from the LEP Electroweak WG 2006

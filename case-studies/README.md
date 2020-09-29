@@ -24,8 +24,9 @@
 
 ### Tau Physics
 
-[Precision Tau Physics](https://doi.org/10.1016/j.ppnp.2013.11.002)
-[Tau-lepton Physics at the FCC-ee circular e+e− Collider](https://arxiv.org/abs/1811.09408): Mogens Dam, proceedings TAU'2018
+#### References
+- [Precision Tau Physics](https://doi.org/10.1016/j.ppnp.2013.11.002): review by A. Pich
+- [Tau-lepton Physics at the FCC-ee circular e+e− Collider](https://arxiv.org/abs/1811.09408): Mogens Dam, proceedings TAU'2018
 
 ### Flavour physics
 

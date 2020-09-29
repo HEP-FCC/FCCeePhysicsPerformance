@@ -15,11 +15,11 @@
 [Precision Electroweak Measurements on the Z Resonance](https://arxiv.org/abs/hep-ex/0509008): The Phys Report from the LEP & SLD Electroweak WG, 2006
 
 #### Case studies
-- [The ratio Rl](lineshape/rl/README.md)
-- [The total Z width](lineshape/zwidth/README.md)
-- [The Z peak cross-section sogma^0\_had](lineshape/sigma_had/README.md)
-- [The muon pair forward-backward asymmetry A^mumu\_FB](lineshape/AFBmumu/README.md)
-- [The orward-backward asymmetry of b quarks at the Z pole](lineshape/AFBbb/README.md)
+- [The ratio Rl](lineshape/rl)
+- [The total Z width](lineshape/zwidth)
+- [The Z peak cross-section sogma^0\_had](lineshape/sigma_had)
+- [The muon pair forward-backward asymmetry A^mumu\_FB](lineshape/AFBmumu)
+- [The orward-backward asymmetry of b quarks at the Z pole](lineshape/AFBbb)
 
 
 ### Tau Physics

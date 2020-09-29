@@ -2,6 +2,13 @@
 
 Rather random for the while...
 
+### Table of Contents
+
+1. [CLD paper](#cld-paper)
+2. [Common event samples](#common-event-samples)
+3. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+4. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
+5. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
 
 ### CLD paper
 The [CLD performance paper on arXiv](https://arxiv.org/abs/1911.12230)

@@ -5,6 +5,7 @@
 1. [Organisation](#organisation)
 2. [Towards the definition of detector requirements](#towards-the-definition-of-detector-requirements)
 3. [Case studies](#case-studies)
+4. [General information](#general-information)
 4. [Software](#software)
 
 ### Organisation

@@ -11,6 +11,6 @@ for ∼ 10 inverse atobarn accumulated luminosity, which can provide measurement
 statistical error of order 1%. The estimation of the systematic experimental error will require more work, 
 but most likely it will be of similar size.
 
-- Paper: [Precision measurement of the Z boson to electron neutrino coupling at the future circular colliders](https://arxiv.org/abs/1908.06338),R Aleksan, S. Jadach, Physics Letters B 799 (2019) 135034
+- Paper: [Precision measurement of the Z boson to electron neutrino coupling at the future circular colliders](https://arxiv.org/abs/1908.06338), R Aleksan, S. Jadach, Physics Letters B 799 (2019) 135034
 
-- Talk [from Roy Aleksan at the FCC-ee physics meeting, Sep 2019] (https://indico.cern.ch/event/848940/contributions/3574822/attachments/1917458/3170672/ee-Zgamma.pdf)
+- Talk [from Roy Aleksan at the FCC-ee physics meeting, Sep 2019](https://indico.cern.ch/event/848940/contributions/3574822/attachments/1917458/3170672/ee-Zgamma.pdf)

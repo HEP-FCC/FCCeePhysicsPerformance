@@ -34,7 +34,7 @@ Next meetings:
     - Link to the [Snowmass portal](https://snowmass21.org)
 
 ### Case studies
-See [here](case-studies)
+The (evolving) list of case studies can be found [here](case-studies).
 
 ### General information
 Existing performance documents, analysis tips etc are collected [here](General).
@@ -43,8 +43,9 @@ Existing performance documents, analysis tips etc are collected [here](General).
 
 #### Software tutorials
 
-- the [FCCSW tutorial, January 20200](https://hep-fcc.github.io/fcc-tutorials/index.html)  
-- the [tutorial in preparation (Clement Helsens) for Snowmass](https://github.com/clementhelsens/fcc-tutorials/blob/master/FCCsnowmass.md): Getting started with simulating events and analysing them
+- the [FCCSW tutorials](https://hep-fcc.github.io/fcc-tutorials/)
+- the tutorials given for Snowmass (September 2020) have been recorded, see [here](https://indico.cern.ch/event/945608/timetable/#20200922.detailed) and [here](https://indico.cern.ch/event/949950/timetable/?layout=room#20200929.detailed)
+
 
 #### Useful repositories
 - [FCCSW](https://github.com/HEP-FCC/FCCSW)

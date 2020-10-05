@@ -75,7 +75,6 @@
 
 #### General references
 - [Top-Quark Physics at the CLIC Electron-Positron Linear Collider](https://arxiv.org/abs/1807.02441) H. Abramowicz et al, JHEP 11 (2019) 003
-- The [Snowmass LOI](https://indico.cern.ch/event/951830/contributions/3999022/attachments/2095114/3521333/Top_SNOWMASS21-EF3_EF4_Patrizia_Azzi-154.pdf)
     
 #### Case studies
 - [The top mass, width and Yukawa coupling](top/mass-width)

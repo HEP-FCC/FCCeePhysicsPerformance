@@ -63,11 +63,12 @@
 
 #### Case studies
 - [Measurement of the ZH production cross section with hadronic Z decays (and the Higgs self-coupling)](higgs/ZH-crosssection): hadronic mass and hadronic recoil-mass resolutions
-- [The Higgs coupling to charm quarks](higgs/Hcc)
+- [The Higgs coupling to charm quarks](higgs/hcc): flavour tagging, vertexing (hence beam-pipe radius, tracker material etc)
 - [Determination of the HZγ effective coupling](higgs/hzgamma): photon identification, energy and angular scale
 - [The invisible Higgs branching fraction](higgs/invisible)
 - [The Higgs boson mass from the recoil mass](higgs/mass-recoil): lepton momentum resolution
 - [The Higgs boson mass from ZH -> bbqq](higgs/mass-bbqq): jet angular resolution, b-tagging
+- [Electron Yukawa coupling via s-channel e+e− → H production at the Higgs pole](higgs/eeh): monochromatization
 
 
 ### Top physics

@@ -18,7 +18,7 @@
 
 #### Case studies
 - [The ratio Rl](lineshape/rl): geometrical acceptance for lepton pairs
-- [The total Z width](lineshape/zwidth): track momentum (and angular) resolution, scale stability
+- [The total Z width](lineshape/zwidth): track momentum (and angular) resolution, scale (magnetic field) stability
 - [Luminosity from diphoton events (for sigma^0\_had)](lineshape/sigma_had): electron-photon separation, photon acceptance
 - [The muon pair forward-backward asymmetry A^mumu\_FB](lineshape/AFBmumu): QED corections
 - [The forward-backward asymmetry of b quarks at the Z pole](lineshape/AFBbb): flavour tagging, QCD corrections

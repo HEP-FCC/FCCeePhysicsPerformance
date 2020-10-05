@@ -9,6 +9,7 @@ Rather random for the while...
 3. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
 4. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
 5. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
+6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
 
 ### CLD paper
 The [CLD performance paper on arXiv](https://arxiv.org/abs/1911.12230)
@@ -26,10 +27,10 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 
 ### Producing five-parameter tracks with the Delphes interface
 
-- Recent versions of Delphes offer a rather detailed simulation of the tracks via the [TrackCovariance Delphes module](https://github.com/delphes/delphes/blob/master/modules/TrackCovariance.cc), developed from a code by Franco Bedeschi. The module, in the input card, must contain a description of the tracker, see for example [the delphes_card_IDEAtrkCov.tcl](https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl).
+- Recent versions of Delphes offer a rather detailed modelling of the tracks via the [TrackCovariance Delphes module](https://github.com/delphes/delphes/blob/master/modules/TrackCovariance.cc), developed from a code by Franco Bedeschi. The module, in the input card, must contain a description of the tracker, see for example [the delphes_card_IDEAtrkCov.tcl](https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl).
 (Try to give more detail here about the geometry description). This produces five-parameter tracks - i.e., including the transverse and longitudinal impact parameters - with their covariance matrix.
 
-- In FCCSW: in order to save the 5-parameter tracks and their covariance matrix, the [DelphesSaveChargedParticles](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/src/DelphesSaveChargedParticles.cpp) should be configured with the flag **saveTrkCov** set to True. Example:
+- In FCCSW: in order to save the 5-parameter tracks and their covariance matrix, the [DelphesSaveChargedParticles](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/src/DelphesSaveChargedParticles.cpp) module should be configured with the flag **saveTrkCov** set to True. Example:
 ```markdown
 chhadSaveTool = DelphesSaveChargedParticles("efcharged")
 chhadSaveTool.delphesArrayName = "Calorimeter/eflowTracks"
@@ -39,6 +40,9 @@ chhadSaveTool.particles.Path      = "efcharged"
 chhadSaveTool.particles_trkCov.Path      = "efcharged_trkCov"
 chhadSaveTool.mcAssociations.Path = "efchargedToMC"
 ```
+See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for a usage example.
+
+- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
 
 
 
@@ -78,3 +82,8 @@ module FastJetFinder GenJetFinder {
 - See also the [FastJet user manual](https://arxiv.org/abs/1111.6097) 
 
 
+### Making particle combinations with awkward arrays
+
+Combinatoric functions provided by the python *awkward array* pckage  are very helpful to make particle combinations - e.g. loop over all Kaons and pions to find D candidates. To use them, the files should be analyzed with *uproot*. Very nice examples of how to use uproot and awkward arrays have been prepared by Donal Hill, see [this repository](https://github.com/donalrinho/fcc_python_tools).
+- see also [Donal's talk, Sep 21, 2020](https://indico.cern.ch/event/956147/contributions/4026597/attachments/2106045/3542351/FCC_ee_PP_meeting_21_9_20.pdf)
+- the [the scikit-hep software project](https://scikit-hep.org)

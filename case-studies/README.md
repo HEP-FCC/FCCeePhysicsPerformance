@@ -81,7 +81,6 @@
 
 ### Case studies
 - [Searches for long-lived particles](LLP)
-- testing if I can edit
 
 
 

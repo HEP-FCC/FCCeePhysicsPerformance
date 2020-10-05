@@ -72,11 +72,15 @@
 
 ### Top physics
 
-- [Jeremy Andrea's googledoc](https://docs.google.com/document/d/1sfJ8XtIyVJW_8iZZ6dv9GmqfBEEGi-soSJJWXIIFfs8/edit#heading=h.8hz8z8ru1cp0)
-    - not sure he wants. to have it public ?
-
+#### General references
+- [Top-Quark Physics at the CLIC Electron-Positron Linear Collider](https://arxiv.org/abs/1807.02441) H. Abramowicz et al, JHEP 11 (2019) 003
 - The [Snowmass LOI](https://indico.cern.ch/event/951830/contributions/3999022/attachments/2095114/3521333/Top_SNOWMASS21-EF3_EF4_Patrizia_Azzi-154.pdf)
     
+#### Case studies
+- [The top mass, width and Yukawa coupling](top/mass-width)
+- [The top electroweak couplings](top/electroweak-couplings)
+- [FCNC decays of the top quark](top/fcnc)
+
 ### Direct searches for new physics
 
 ### Case studies

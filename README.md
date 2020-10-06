@@ -8,6 +8,8 @@
 4. [General information](#general-information)
 4. [Software](#software)
 
+-----
+
 ### Organisation
 
 #### Coordinators
@@ -21,6 +23,8 @@ Next meetings:
 - October 19, 2020
 - November 16 or November 23
 - December 7 or December 14
+
+-----
 
 ### Towards the definition of detector requirements
 
@@ -42,6 +46,8 @@ Next meetings:
 
 ### General information
 Existing performance documents, analysis tips etc are collected [here](General).
+ 
+----------
  
 ### Software
 

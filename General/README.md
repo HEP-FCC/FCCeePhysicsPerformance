@@ -10,6 +10,7 @@ Rather random for the while...
 4. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
 5. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
 6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+7. [Monte-Carlo programs](#monte-carlo-programs)
 
 ### CLD paper
 The [CLD performance paper on arXiv](https://arxiv.org/abs/1911.12230)
@@ -87,3 +88,8 @@ module FastJetFinder GenJetFinder {
 Combinatoric functions provided by the python *awkward array* pckage  are very helpful to make particle combinations - e.g. loop over all Kaons and pions to find D candidates. To use them, the files should be analyzed with *uproot*. Very nice examples of how to use uproot and awkward arrays have been prepared by Donal Hill, see [this repository](https://github.com/donalrinho/fcc_python_tools).
 - see also [Donal's talk, Sep 21, 2020](https://indico.cern.ch/event/956147/contributions/4026597/attachments/2106045/3542351/FCC_ee_PP_meeting_21_9_20.pdf)
 - the [the scikit-hep software project](https://scikit-hep.org)
+
+### Monte-Carlo programs
+
+- [Tutorial for Whizard for e+e-](https://indico.fnal.gov/event/45413/timetable/?view=standard) (Sep 2020)
+

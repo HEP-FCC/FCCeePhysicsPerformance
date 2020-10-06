@@ -8,6 +8,7 @@ m<sup>2</sup><sub>recoil</sub> =s + m<sup>2</sup><sub>ll</sub> − 2√s (El+ +E
 The first step in this quest is therefore the determination of the centre-of-mass energy
 precision of O(1 MeV). The requirements on the detector design to achieve such a precision on √s, regarding in particular the lepton and jet angular resolution, as well as the detector acceptance, will be studied with a consolidated analysis of the e+e− →Z(γ) process at √s = 240GeV – as proposed in [1] – with Z → l+l− and qq ̄, and with realistic FCC-ee collision parameters (beam energy spread, beam crossing angle). The feasibility of a calibration of the method, to reduce systematic uncertainties of various origins, with e+e− → Z(γ) events recorded at the WW threshold – where the centre-of-mass energy can be determined with resonant depolarization with a few 100 keV accuracy as well – will be ascertained.
 
+- [[1] Polarization and Centre-of-mass Energy Calibration at FCC-ee](https://arxiv.org/abs/1909.12245)
 
 - The [corresponding Snowmass LOI](https://indico.cern.ch/event/951830/contributions/3999001/attachments/2095109/3521327/HiggsParams_SNOWMASS21-EF1_EF0_Patrick_Janot-169.pdf)
 

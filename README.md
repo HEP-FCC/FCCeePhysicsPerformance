@@ -33,8 +33,12 @@ Next meetings:
     - LOIs sent by the [CALICE](https://agenda.linearcollider.org/event/8647/) collaboration
     - Link to the [Snowmass portal](https://snowmass21.org)
 
+---------
+
 ### Case studies
-The (evolving) list of case studies can be found [here](case-studies).
+<span style="color:red">The (evolving) list of case studies can be found [here](case-studies).</span>
+
+----------
 
 ### General information
 Existing performance documents, analysis tips etc are collected [here](General).

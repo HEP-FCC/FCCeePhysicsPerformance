@@ -11,4 +11,11 @@ precision of O(1 MeV). The requirements on the detector design to achieve such a
 
 - The [corresponding Snowmass LOI](https://indico.cern.ch/event/951830/contributions/3999001/attachments/2095109/3521327/HiggsParams_SNOWMASS21-EF1_EF0_Patrick_Janot-169.pdf)
 
+### Bibliography
+
+- [Determination of the LEP center-of-mass energy from Z gamma events](https://arxiv.org/abs/hep-ex/9907043) : ALEPH, Phys.Lett.B 464 (1999) 339-349
+- [A Determination of the Centre-of-Mass Energy at LEP2 using Radiative 2-fermion Events](https://arxiv.org/abs/hep-ex/0602016) : DELPHI, Eur.Phys.J.C 46 (2006) 295-305
+- [Measurement of the Z boson mass using e+ e- ---> Z gamma events at center of mass energies above the Z pole](https://arxiv.org/abs/hep-ex/0402001) : L3, Phys.Lett.B 585 (2004) 42-52
+- [Determination of the LEP beam energy using radiative fermion-pair events](https://arxiv.org/abs/hep-ex/0408130) : OPAL, Phys.Lett.B 604 (2004) 31-47
+
 

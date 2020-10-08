@@ -8,4 +8,5 @@ Measuring the electron Yukawa is impossible in Higgs boson decays, H → e+e−,
 ### Contact
 David d'Enterria
 
+- [The Snowmass/EF01 meeting devoted to ee -> H, 2 Sep, 2020](https://indico.fnal.gov/event/44636/)
 

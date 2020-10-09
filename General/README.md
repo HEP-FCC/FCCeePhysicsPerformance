@@ -24,7 +24,7 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 
 ### Vertexing and flavour tagging
 - Description of the [LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) used for the CLD studies
-- see also the work done in the context of the Hcc case study
+- see also the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
 
 ### Producing five-parameter tracks with the Delphes interface
 

@@ -18,11 +18,11 @@
 
 #### Physics Performance meetings
 
-O(monthly) meetings: Mondays, 3pm-5pm, CERN time
+O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of each month. See the [indico category](https://indico.cern.ch/category/12894/).
 Next meetings:
-- October 19, 2020
-- November 16 or November 23
-- December 7 or December 14
+- during the november workshop, Nov 13
+- December 7, tbc
+
 
 -----
 

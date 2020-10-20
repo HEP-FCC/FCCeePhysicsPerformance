@@ -10,7 +10,8 @@ An irreducible source of uncertainty in the current estimate of A0,b\_FB , fully
 
 Juan Alcaraz Juan.Alcaraz@cern.ch
 
-### Talks
+### Talks and notes
 
-- [Physics meeting, Sep 28, 2020](https://indico.cern.ch/event/954922/contributions/4012573/attachments/2110971/3550905/Alcaraz_AfbQ_28Sep2020.pdf)
+- [Talk at the Physics meeting, Sep 28, 2020](https://indico.cern.ch/event/954922/contributions/4012573/attachments/2110971/3550905/Alcaraz_AfbQ_28Sep2020.pdf)
+- [Revisiting QCD corrections to the forward-backward charge asymmetry of heavy quarks in electron-positron collisions at the Z pole: really a problem?](https://arxiv.org/abs/2010.08604) Juan Alcaraz, arXiv:2010.08604
 

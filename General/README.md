@@ -24,7 +24,9 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 
 ### Vertexing and flavour tagging
 - Description of the [LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) used for the CLD studies
+- [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
 - see also the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
+- [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
 
 ### Producing five-parameter tracks with the Delphes interface
 

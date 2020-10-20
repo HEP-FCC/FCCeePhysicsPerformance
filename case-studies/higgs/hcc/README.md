@@ -16,3 +16,4 @@ Michele Selvaggi Michele.Selvaggi@cern.ch
 
 - [Review of flavour tagging algorithms at pp+ee and plans](https://indico.cern.ch/event/924668/contributions/3902802/attachments/2067888/3470740/lg-fccee-flvtagging_20200702.pdf) L. Gouskos and M. Selvaggi, talk at the FCC-ee physics meeting, July 2, 2020
 - [Jet flavor tagging for FCC-ee](https://indico.cern.ch/event/956147/contributions/4018062/attachments/2106040/3541880/lg-fccee-flvtagging_20200921.pdf) L. Gouskos and M. Selvaggi, talk at the Physics Performance meeting, Sep 21, 2020
+- [Update on jet flavour tagging using ParticleNet](https://indico.cern.ch/event/965346/contributions/4070750/attachments/2125772/3578978/lg-fccee-flvtagging_20201019.pdf) L. Gouskos and M. Selvaggi, talk at the FCC-ee physics performance meeting, Oct. 19, 2020

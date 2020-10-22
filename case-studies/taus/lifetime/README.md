@@ -6,7 +6,7 @@ At Z-pole energies, the τ lifetime is determined via measurement of the 2.2 mm 
 
 - The [corresponding Snowmass LOI](https://indico.cern.ch/event/951830/contributions/3998995/attachments/2095101/3521315/TauProperties_SNOWMASS21-EF4_EF3_Mogens_Dam-252.pdf)
 
-#### References:
+#### Bibliography
 
 - [Measurement of the τ-lepton lifetime at Belle](https://arxiv.org/abs/1310.8503) - the most precise measurememnt to date
 - [Local Alignment of the BABAR Silicon Vertex Tracking Detector](https://arxiv.org/abs/0809.3823), D.N. Brown et al, NIM A 603 (2009) 467–484

@@ -5,5 +5,6 @@
 ### Bibliography
 
 - [Physics Behind Precision](https://arxiv.org/abs/1703.01626) P Azzi et al, arXiv:1703.01626
+- [Data-taking strategy for the precise measurement of the W boson mass with a threshold scan at circular electron positron colliders](https://arxiv.org/abs/1812.09855) P.X. Shen, P. Azzurri et al, Eur.Phys.J.C 80 (2020) 1,
 - [Calorimetry and W mass measurement for future experiments](https://cds.cern.ch/record/2710098/files/CERN-THESIS-2019-291.pdf) Marina Béguin, PhD thesis, Université de Paris-Saclay, Dec 2019
 

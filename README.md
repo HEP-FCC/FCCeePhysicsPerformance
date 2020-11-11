@@ -40,7 +40,8 @@ Next meetings:
 ---------
 
 ### Case studies
-<span style="color:red">The (evolving) list of case studies can be found [here](case-studies).</span>
+
+<span style="color:red">  [This page](case-studies) contains the information about case studies and CS-groups activity  </span>
 
 ----------
 

@@ -5,8 +5,8 @@
 1. [Organisation](#organisation)
 2. [Towards the definition of detector requirements](#towards-the-definition-of-detector-requirements)
 3. [Case studies](#case-studies)
-4. [General information](#general-information)
-4. [Software](#software)
+4. [General information, LOIs, etc](#general-information)
+5. [Software](#software)
 
 -----
 
@@ -18,10 +18,12 @@
 
 #### Physics Performance meetings
 
-O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of each month. See the [indico category](https://indico.cern.ch/category/12894/).
+O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of each month. 
+- [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
+
 Next meetings:
-- during the november workshop, Nov 13
-- December 7, tbc
+-- during the november workshop, Nov 13
+-- December 7, tbc
 
 
 -----
@@ -33,8 +35,16 @@ Next meetings:
 
 ---------
 
-### Case studies
-<span style="color:red">The (evolving) list of case studies can be found [here](case-studies).</span>
+### Case studies (evolving list) 
+
+1. [Electroweak physics at the Z peak](case-studies/#electroweak-physics-at-the-z-peak)
+2. [Tau Physics](case-studies#tau-physics)
+3. [Flavour physics](case-studies#flavour-physics)
+4. [WW threshold](case-studies#ww-threshold)
+5. [QCD measurements](case-studies#qcd-measurements)
+6. [Higgs physics](case-studies#higgs-physics)
+7. [Top physics](case-studies#top-physics)
+8. [Direct searches for new physics](case-studies#direct-searches-for-new-physics)
 
 ----------
 

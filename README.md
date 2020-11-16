@@ -42,7 +42,7 @@ Next meetings:
 3. [Flavour physics](case-studies/flavour)
 4. [WW threshold](case-studies/ww)
 5. [QCD measurements](case-studies/QCD)
-6. [Higgs physics](case-studies/Higgs)
+6. [Higgs physics](case-studies/higgs)
 7. [Top physics](case-studies/top)
 8. [Direct searches for new physics](case-studies/BSM)
 

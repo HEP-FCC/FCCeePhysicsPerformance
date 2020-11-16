@@ -11,49 +11,11 @@
 7. [Top physics](#top-physics)
 8. [Direct searches for new physics](#direct-searches-for-new-physics)
 
-### Tau Physics
-
-#### General references
-- [Precision Tau Physics](https://doi.org/10.1016/j.ppnp.2013.11.002): review by A. Pich
-- [Tau-lepton Physics at the FCC-ee circular e+e− Collider](https://arxiv.org/abs/1811.09408): Mogens Dam, proceedings TAU'2018
-
-#### Case studies
-- [The measurement of the tau lifetime](taus/lifetime): accuracy of the construction and the alignment of the vertex detector
-- [The measurement of the tau mass](taus/mass): track momentum scale (in a multi-track collimated environment)
-- [The measurement of the tau leptonic branching fractions](taus/leptonicbranchings): electron and muon identification
-- [Tau polarisation and exclusive branching fractions](taus/polarisation): reconstruction of photons, π0s and other neutral particles,  K/π separation
-- [Lepton Flavor violation in Z and tau decays](taus/lfv): lepton momentum scale
-
-### Flavour physics
-
-#### Case studies
-- [CP violation in Bs decays](flavour/cpv): track momentum, PID, photon energy scale
-- more to be added
-
-### WW Threshold
-
-#### General references
-[Electroweak measurements in electron–positron collisions at W-boson-pair energies at LEP](https://arxiv.org/abs/1302.3415): The Physics Report from the LEP Electroweak WG 2013
-
-#### Case studies
-- [Measurement of the W mass and width](ww/mass): lepton momentum scale and resolution, modelling of hadronic W decays
-- [Measurement of sqrts via radiative return events](ww/radiativereturn): lepton and jet angular resolutions, acceptance
 
 ### QCD measurements
 
 #### Case studies
 - [Measurement of alphaS](qcd/alphs)
-
-### Higgs physics
-
-#### Case studies
-- [Measurement of the ZH production cross section with hadronic Z decays (and the Higgs self-coupling)](higgs/ZH-crosssection): hadronic mass and hadronic recoil-mass resolutions
-- [The Higgs coupling to charm quarks](higgs/hcc): flavour tagging, vertexing (hence beam-pipe radius, tracker material etc)
-- [Determination of the HZγ effective coupling](higgs/hzgamma): photon identification, energy and angular scale
-- [The invisible Higgs branching fraction](higgs/invisible)
-- [The Higgs boson mass from the recoil mass](higgs/mass-recoil): lepton momentum resolution
-- [The Higgs boson mass from ZH -> bbqq](higgs/mass-bbqq): jet angular resolution, b-tagging
-- [Electron Yukawa coupling via s-channel e+e− → H production at the Higgs pole](higgs/eeh): monochromatization
 
 
 ### Top physics

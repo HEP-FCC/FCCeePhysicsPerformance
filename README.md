@@ -37,7 +37,7 @@ Next meetings:
 
 ### Case studies (evolving list) 
 
-1. [Electroweak physics at the Z peak](case-studies/#electroweak-physics-at-the-z-peak)
+1. [Electroweak physics at the Z peak](case-studies/lineshape)
 2. [Tau Physics](case-studies#tau-physics)
 3. [Flavour physics](case-studies#flavour-physics)
 4. [WW threshold](case-studies#ww-threshold)

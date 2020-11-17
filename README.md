@@ -4,8 +4,8 @@
 ### Table of Contents
 1. [Organisation](#organisation)
 2. [Towards the definition of detector requirements](#towards-the-definition-of-detector-requirements)
-3. [List of Active Case studies (evolving)](#case-studies)
-4. [General information, LOIs, etc](#general-information)
+3. [List of Active Case studies (evolving)](#case-studies-evolving-list)
+4. [General information, LOIs, etc](#general-information-snowmass-submitted-lois-etc)
 5. [Software](#software)
 
 -----

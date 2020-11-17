@@ -10,7 +10,8 @@ Rather random for the while...
 4. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
 5. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
 6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-7. [Monte-Carlo programs](#monte-carlo-programs)
+7. [Generating events](#generating-events)
+8. [Monte-Carlo programs](#monte-carlo-programs)
 
 ### CLD paper
 The [CLD performance paper on arXiv](https://arxiv.org/abs/1911.12230)
@@ -91,6 +92,18 @@ module FastJetFinder GenJetFinder {
 Combinatoric functions provided by the python *awkward array* pckage  are very helpful to make particle combinations - e.g. loop over all Kaons and pions to find D candidates. To use them, the files should be analyzed with *uproot*. Very nice examples of how to use uproot and awkward arrays have been prepared by Donal Hill, see [this repository](https://github.com/donalrinho/fcc_python_tools).
 - see also [Donal's talk, Sep 21, 2020](https://indico.cern.ch/event/956147/contributions/4026597/attachments/2106045/3542351/FCC_ee_PP_meeting_21_9_20.pdf)
 - the [the scikit-hep software project](https://scikit-hep.org)
+
+### Generating events
+
+#### Beam energy spread
+
+At FCC, the energy of the beams is distributed according to a Gaussian function. The corresponding beam energy spread is given in Table S.1 of the CDR, see the highlighted line here. One should use the second number, the one that corresponds to "BS" (with beamstrahlung). For example, at the Z peak, the beam energy spread amounts to 0.132%. Note that this is the spread of the energy of the beam; to get the relative spread of the centre-of-mass energy √s, these numbers  have to be divided by √2.
+
+It is important to take into account the beam energy spread when generating events. Some Monte-Carlo programs (e.g. Whizard) offer a built-in possibility to convolute the matrix elements with a Gaussian beam energy distribution. 
+
+#### Vertex distribution
+
+#### Transverse boost to account for the crossing angle
 
 ### Monte-Carlo programs
 

@@ -57,7 +57,7 @@ Next meetings:
     - LOIs sent by the [CALICE](https://agenda.linearcollider.org/event/8647/) collaboration
     - Link to the [Snowmass portal](https://snowmass21.org)
 
-- Other existing performance documents, analysis tips etc are collected [here](General).
+- Other existing [performance documents, analysis tips etc are collected here](General).
  
 ----------
  

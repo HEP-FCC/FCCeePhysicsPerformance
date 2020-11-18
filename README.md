@@ -5,7 +5,7 @@
 1. [Organisation](#organisation)
 2. [Towards the definition of detector requirements](#towards-the-definition-of-detector-requirements)
 3. [List of Active Case studies (evolving)](#case-studies-evolving-list)
-4. [General information, LOIs, etc](#general-information-snowmass-submitted-lois-etc)
+4. [General information, analysis tips, LOIs, etc](#general-information-analysis-tips-snowmass-submitted-lois-etc)
 5. [Software](#software)
 
 -----

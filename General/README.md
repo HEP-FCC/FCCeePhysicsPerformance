@@ -47,7 +47,7 @@ chhadSaveTool.mcAssociations.Path = "efchargedToMC"
 ```
 See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for a usage example.
 
-- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
+- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
 
 
 
@@ -97,13 +97,48 @@ Combinatoric functions provided by the python *awkward array* pckage  are very h
 
 #### Beam energy spread
 
-At FCC, the energy of the beams is distributed according to a Gaussian function. The corresponding beam energy spread is given in Table S.1 of the CDR, see the highlighted line here. One should use the second number, the one that corresponds to "BS" (with beamstrahlung). For example, at the Z peak, the beam energy spread amounts to 0.132%. Note that this is the spread of the energy of the beam; to get the relative spread of the centre-of-mass energy √s, these numbers  have to be divided by √2.
+At FCC, the energy of the beams is distributed according to a Gaussian function. The corresponding beam energy spread is given in Table S.1 of the CDR, [see the highlighted line here](parameters_CDR_table.pdf). One should use the second number, the one that corresponds to "BS" (with beamstrahlung). For example, at the Z peak, the beam energy spread amounts to 0.132%. Note that this is the spread of the energy of the beam; to get the relative spread of the centre-of-mass energy √s, these numbers  have to be divided by √2.
 
 It is important to take into account the beam energy spread when generating events. Some Monte-Carlo programs (e.g. Whizard) offer a built-in possibility to convolute the matrix elements with a Gaussian beam energy distribution. 
 
 #### Vertex distribution
 
+- Bunch dimensions: 
+  - The bunch length is given by the σ<sub>z</sub> line in the [CDR table](parameters_CDR_table.pdf); one should use the second number, corresponding to the "BS" (with beamstrahlung case). For example, at the Z peak, it amounts to 12.1 mm
+  - The bunch dimensions in the transverse plane, at the interaction point,  are given by 
+     σ<sub>x,y</sub> = √ ( β*<sub>x,y</sub> ε<sub>x,y</sub>) where the values of the β function at the IP, and the horizontal and vertical emittance ε<sub>x,y</sub>  are given in the [CDR table](parameters_CDR_table.pdf).
+
+- For gaussian bunches, the vertex distribution in (x, y, z) and in time is well approximated by a 4-dimensional gaussian distribution, with (see [here](overlap_gaussian_bunches.pdf) ):
+<img src="vertex_formulae.png" alt="drawing" width="480"/>
+where α denotes the half-crossing angle, α = 15 mrad.
+
+Summary table:
+
+
+
+  √s (GeV)  |  91.2  |  80  |  120  |  175  |  182.5  
+------------|--------|------|-------|-------|----------
+σ<sub>x</sub> (µm)  |  6.4  |  13.0  |  13.7  |  36.6  |  38.2
+σ<sub>y</sub> (nm)  |  28.3  |  41.2  |  36.1  |  65.7  |  68.1
+σ<sub>z</sub> (mm)  |  12.1  |  6.0  |  5.3  |  2.62  |  2.54
+Vertex σ<sub>x</sub> (µm) | 4.5 | 9.2 | 9.7 | 25.9 | 27.0
+Vertex σ<sub>y</sub> (nm) | 20  | 29.2 | 25.5 | 46.5 | 48.2 
+Vertex σ<sub>z</sub> (mm) | 0.30 | 0.60 | 0.64 | 1.26 |1.27 
+Vertex σ<sub>t</sub> (ps) | 28.6 | 14.1 | 12.5 | 6.2 | 6.0 
+
+
 #### Transverse boost to account for the crossing angle
+
+Monte-Carlo programs generate events in a frame where the incoming particles collide head-on. The crossing angle in the (x, z) plane results in a transverse boost along the x direction. The parameter of the Lorentz transformation is given by :
+γ = √ ( 1 + tan<sup>2</sup> α ), where α denotes the half-crossing angle, α = 15 mrad.
+Hence, prior to be sent to the detector simulation, the 4-vectors of the particles in the final state have to be boosted according to :
+
+<img src="transverse_boost_formulae.png" alt="drawing" width="480"/>
+
+where the "star" quantities denote the kinematics in the head-on frame, and the quantities on the leftside of the formulae correspond to the kinematics in the detector frame.
+
+The convention used here is that the incoming bunches have a positive velocity along the x axis. It is this convention that is used in the DD4HEP files that model the interaction region (i.e. the center of the LumiCals is at x > 0).
+
 
 ### Monte-Carlo programs
 
@@ -111,4 +146,5 @@ It is important to take into account the beam energy spread when generating even
 - KKMC : the state-of-the-art Monte Carlo for e−e+ → ffbar + nγ
   - [KKMC-ee in GitHub](https://github.com/KrakowHEPSoft/KKMCee)
   - [Talk by Martin Chrzaszcz, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062342/attachments/2125634/3578715/mchrzasz.pdf)
+
 

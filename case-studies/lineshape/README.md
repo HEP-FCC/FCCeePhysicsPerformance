@@ -9,6 +9,5 @@
 - [Luminosity from diphoton events (for sigma^0\_had)](sigma_had): electron-photon separation, photon acceptance
 - [The muon pair forward-backward asymmetry A^mumu\_FB](AFBmumu): QED corections
 - [The forward-backward asymmetry of b quarks at the Z pole](AFBbb): flavour tagging, QCD corrections
-- [The coupling of the Z to electron neutrinos](Znuenue): photon energy scale
 - [Lepton Flavor violation in Z and tau decays](../taus/lfv): lepton momentum scale
 

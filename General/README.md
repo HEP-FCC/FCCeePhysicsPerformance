@@ -137,6 +137,8 @@ Hence, prior to be sent to the detector simulation, the 4-vectors of the particl
 
 where the "star" quantities denote the kinematics in the head-on frame, and the quantities on the leftside of the formulae correspond to the kinematics in the detector frame.
 
+The convention used here is that the incoming bunches have a positive velocity along the x axis. It is this convention that is used in the DD4HEP files that model the interaction region (i.e. the center of the LumiCals is at x > 0).
+
 
 ### Monte-Carlo programs
 

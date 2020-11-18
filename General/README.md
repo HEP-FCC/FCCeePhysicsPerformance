@@ -106,21 +106,10 @@ It is important to take into account the beam energy spread when generating even
 - Bunch dimensions: 
   - The bunch length is given by the σ<sub>z</sub> line in the [CDR table](parameters_CDR_table.pdf); one should use the second number, corresponding to the "BS" (with beamstrahlung case). For example, at the Z peak, it amounts to 12.1 mm
   - The bunch dimensions in the transverse plane, at the interaction point,  are given by 
-     σ<sub>x,y</sub> = √ ( β*<sub>x,y</sub> x ε<sub>x,y</sub>) where the values of the β function at the IP, and the horizontal and vertical emittance ε<sub>x,y</sub>  are given in the [CDR table](parameters_CDR_table.pdf).
+     σ<sub>x,y</sub> = √ ( β*<sub>x,y</sub> ε<sub>x,y</sub>) where the values of the β function at the IP, and the horizontal and vertical emittance ε<sub>x,y</sub>  are given in the [CDR table](parameters_CDR_table.pdf).
 
 - For gaussian bunches, the vertex distribution in (x, y, z) and in time is well approximated by a 4-dimensional gaussian distribution, with (see [here](overlap_gaussian_bunches.pdf) ):
-![vertex_formulae.png]
-
-
-
-$$ 
-\begin{align*}
-\sigma_{X_{vtx}} &= & 1 / \sqrt{ 2 \left( \frac{\cos^2 \alpha}{\sigma^2_x} + \frac{\sin^2 \alpha}{\sigma^2_z} \right) } \simeq  \sigma_x / \sqrt{2}  \\
-\sigma_{Y_{vtx}} &= &\sigma_y / \sqrt 2  \\
-\sigma_{Z_{vtx}} &= & 1 / \sqrt{ 2 \left( \frac{\cos^2 \alpha}{\sigma^2_z} + \frac{\sin^2 \alpha}{\sigma^2_x} \right) } \\
-\sigma_t &= & \sigma_z / ( c \sqrt{2} ) 
-\end{align*}
-$$ 
+![Image of vtx formulae](https://github.com/EmanuelPerez/FCCeePhysicsPerformance/blob/updates/General/vertex_formulae.png)
 where α denotes the half-crossing angle, α = 15 mrad.
 
 #### Transverse boost to account for the crossing angle

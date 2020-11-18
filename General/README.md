@@ -132,6 +132,7 @@ Vertex σ<sub>t</sub> (ps) | 28.6 | 14.1 | 12.5 | 6.2 | 6.0
 Monte-Carlo programs generate events in a frame where the incoming particles collide head-on. The crossing angle in the (x, z) plane results in a transverse boost along the x direction. The parameter of the Lorentz transformation is given by :
 γ = √ ( 1 + tan<sup>2</sup> α ), where α denotes the half-crossing angle, α = 15 mrad.
 Hence, prior to be sent to the detector simulation, the 4-vectors of the particles in the final state have to be boosted according to :
+
 <img src="transverse_boost_formulae.png" alt="drawing" width="480"/>
 
 where the "star" quantities denote the kinematics in the head-on frame, and the quantities on the leftside of the formulae correspond to the kinematics in the detector frame.

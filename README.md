@@ -48,7 +48,7 @@ Next meetings:
 
 ----------
 
-### General information, Snowmass submitted LOIs, etc...
+### General information, analysis tips, Snowmass submitted LOIs, etc...
 
 - [Initial list of case studies](https://indico.cern.ch/event/951830/contributions/4000220/attachments/2095812/3522643/SNOWMASS21-EF0-NF0-RF0-TF0-IF0-CompF0-017.pdf)
 - "Letters of Interest"  submitted to Snowmass 2021 process (Aug 2020). Collected also here [this repository](https://indico.cern.ch/event/951830/) under "Energy Frontier".

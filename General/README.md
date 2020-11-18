@@ -47,7 +47,7 @@ chhadSaveTool.mcAssociations.Path = "efchargedToMC"
 ```
 See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for a usage example.
 
-- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
+- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
 
 
 
@@ -112,7 +112,28 @@ It is important to take into account the beam energy spread when generating even
 ![Image of vtx formulae](https://github.com/EmanuelPerez/FCCeePhysicsPerformance/blob/updates/General/vertex_formulae.png)
 where α denotes the half-crossing angle, α = 15 mrad.
 
+Summary table:
+
+
+
+  √s (GeV)  |  91.2  |  80  |  120  |  175  |  182.5  
+------------|--------|------|-------|-------|----------
+σ<sub>x</sub> (µm)  |  6.4  |  13.0  |  13.7  |  36.6  |  38.2
+σ<sub>y</sub> (nm)  |  28.3  |  41.2  |  36.1  |  65.7  |  68.1
+σ<sub>z</sub> (mm)  |  12.1  |  6.0  |  5.3  |  2.62  |  2.54
+Vertex σ<sub>x</sub> (µm) | 4.5 | 9.2 | 9.7 | 25.9 | 27.0
+Vertex σ<sub>y</sub> (nm) | 20  | 29.2 | 25.5 | 46.5 | 48.2 
+Vertex σ<sub>z</sub> (mm) | 0.30 | 0.60 | 0.64 | 1.26 |1.27 
+Vertex σ<sub>t</sub> (ps) | 28.6 | 14.1 | 12.5 | 6.2 | 6.0 
+
+
 #### Transverse boost to account for the crossing angle
+
+Monte-Carlo programs generate events in a frame where the incoming particles collide head-on. The crossing angle in the (x, z) plane results in a transverse boost along the x direction. The parameter of the Lorentz transformation is given by :
+γ = √ ( 1 + tan<sup>2</sup> α ), where α denotes the half-crossing angle, α = 15 mrad.
+Hence, prior to be sent to the detector simulation, the 4-vectors of the particles in the final state have to be boosted according to :
+![Image of boost formulae](https://github.com/EmanuelPerez/FCCeePhysicsPerformance/blob/updates/General/transverse_boost_formulae.png)
+where the "star" quantities denote the kinematics in the head-on frame, and the quantities on the leftside of the formulae correspond to the kinematics in the detector frame.
 
 ### Monte-Carlo programs
 

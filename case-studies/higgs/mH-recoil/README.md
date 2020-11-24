@@ -8,7 +8,7 @@ The requirements on the detector design (*electron energy and muon momentum reso
 The need for calibration data at the Z pole will also be estimated (frequency, number of events).
 
 
-See also [the determination of the centre-of-mass energy √s with a precision of O(1 MeV)](../ww/radiativereturn/README.md) which is a key ingredient
+See also [the determination of the centre-of-mass energy √s with a precision of O(1 MeV)](../../ww/radiativereturn/README.md) which is a key ingredient
 for the determination of the recoil mass.
 
 

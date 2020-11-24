@@ -5,6 +5,7 @@ Rather random for the while...
 ### Table of Contents
 
 1. [Common event samples](#common-event-samples)
+2. [Example analyses](#example-analyses)
 2. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
 3. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
 4. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
@@ -23,7 +24,7 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 
 #### Delphes samples in EDM4HEP, Nov 2020
 A large set of DELPHES samples have been produced in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
-See [here for The EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
+See [here for the EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
 - Samples at √s = 91 GeV
   - Inclusive samples :
     - Z → tau tau; Z → light jets; Z → cc ; Z → bb 
@@ -38,42 +39,23 @@ See [here for The EOS path, number of events, cross-section, etc](http://fcc-phy
   - ee → ZH
   - diboson production: ee → WW, ee → ZZ
 
-### Vertexing and flavour tagging
-- The LCFIPlus algorithm, developed for ILC and CLIC and used in the [CLD performance paper](https://arxiv.org/abs/1911.12230)
-  - [Description of the LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) T. Suehara,T. Tanabe, arXiv1506.08371
-  - [LCFIPlus in GitHub](https://github.com/lcfiplus/LCFIPlus)
-  - [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
-    - the algorithm was run on EDM4HEP samples using a converter toLCIO as a first step. 
-- Vertexing from Decay chain fitting :
-  - [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
-  - [Global Decay Chain Vertex Fitting at B-Factories](https://arxiv.org/abs/1901.11198) J.-F. Krohn et al, NIM A, Volume 976, 2020, 164269 - the implementation of Belle-II
-- Flavour tagging using machine learning
-  - see the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
+### Example analyses
 
-### Producing five-parameter tracks with the Delphes interface
-
-- Recent versions of Delphes offer a rather detailed modelling of the tracks via the [TrackCovariance Delphes module](https://github.com/delphes/delphes/blob/master/modules/TrackCovariance.cc), developed from a code by Franco Bedeschi. The module, in the input card, must contain a description of the tracker, see for example [the delphes_card_IDEAtrkCov.tcl](https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl).
-(Try to give more detail here about the geometry description). This produces five-parameter tracks - i.e., including the transverse and longitudinal impact parameters - with their covariance matrix.
-
-- In FCCSW: in order to save the 5-parameter tracks and their covariance matrix, the [DelphesSaveChargedParticles](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/src/DelphesSaveChargedParticles.cpp) module should be configured with the flag **saveTrkCov** set to True. Example:
-```markdown
-chhadSaveTool = DelphesSaveChargedParticles("efcharged")
-chhadSaveTool.delphesArrayName = "Calorimeter/eflowTracks"
-chhadSaveTool.saveIsolation = False
-chhadSaveTool.saveTrkCov = True
-chhadSaveTool.particles.Path      = "efcharged"
-chhadSaveTool.particles_trkCov.Path      = "efcharged_trkCov"
-chhadSaveTool.mcAssociations.Path = "efchargedToMC"
-```
-See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for a usage example.
-
-- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
-
-- In the EDM4HEP output, the saved parameters are (d0, phi, rho, z0, tanLambda), with d0 and z0 in mm and the curvature rho in mm<sup>-1</sup>. The covariance matrix is saved as 15 floats corresponding to the former basis. Only the diagonal elements are currently saved (to be fixed). 
+Example analyses can be found in the [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
+Checkout the edm4hep branch if you want to analyze EDM4HEP samples; the default (master) branch contains examples for the FCCSW samples.
+And follow [this section of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimAnalysis.html#part-ii-analyse-with-fccanalyses).
+- The ZH\_Zmumu analysis is used in the tutorial. 
+- Example (in EDM4HEP) to see how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle) : see [FCCeeAnalyses/Z\_Zbb\_Flavor/dataframe/analysis.py](https://github.com/HEP-FCC/FCCAnalyses/blob/edm4hep/FCCeeAnalyses/Z_Zbb_Flavor/dataframe/analysis.py) 
+- Example to see how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc): see [FCCeeAnalyses/Z\_Zbb\_Flavor/dataframe/analysis.py](https://github.com/HEP-FCC/FCCAnalyses/blob/edm4hep/FCCeeAnalyses/Z_Zbb_Flavor/dataframe/analysis.py) 
 
 
 
-### Jet algorithms in the Delphes interface
+### To produce your own Delphes samples
+
+- see [this part of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for FCCSW samples.
+- for EDM4HEP samples: see fast-sim-and-analysis/FccFastSimDelphes\_edm4hep.md - the file still needs to be pushed to the fcc-tutorials repository
+
+#### Change the Jet algorithms in the Delphes interface
 
 - The choice of which jet algorithm is run is made in the Delphes cards, for example :
 
@@ -100,12 +82,50 @@ module FastJetFinder GenJetFinder {
 }
 ```
 
-- Algorithms that use the difference in (pseudo-)rapidity between particles in order to define the distance are not well suited for FCC-ee. At FCC, the center-of-mass of the collisions is at rest with respect to the detector, in contrast to what happens at pp colliders. And using Delta( Eta ), instead of Delta(theta) or Delta( cos theta) is harmful, since Delta( Eta ) is not a good measure of the angular separation: for two particles that are emitted close-by and at small angle, their difference in pseudo-rapidity diverges as the log of the polar angle. Hence, using a jet  algorithm thar relies on Eta instead of the polar angle Theta will create too many jets in the forward region. 
+- Algorithms that use the difference in (pseudo-)rapidity between particles in order to define the distance are not well suited for FCC-ee. At FCC, the center-of-mass of the collisions is at rest with respect to the detector, in contrast to what happens at pp colliders. And using Delta( Eta ), instead of Delta(theta) or Delta( cos theta) is harmful, since Delta( Eta ) is not a good measure of the angular separation: for two particles that are emitted close-by and at small angle, their difference in pseudo-rapidity diverges as the log of the polar angle. Hence, using a jet  algorithm thar relies on Eta instead of the polar angle Theta will create too many jets in the forward region.
 
 
 - The [VLC algorithm](https://link.springer.com/article/10.1140%2Fepjc%2Fs10052-018-5594-6) was largely used for CLIC studies (where it showed good performance in particular to reject the background from gamma gamma to hadrons, which is severe at CLIC).
 
-- See also the [FastJet user manual](https://arxiv.org/abs/1111.6097) 
+- See also the [FastJet user manual](https://arxiv.org/abs/1111.6097)
+
+
+### The five-parameter tracks produced by the Delphes interface
+
+- Recent versions of Delphes offer a rather detailed modelling of the tracks via the [TrackCovariance Delphes module](https://github.com/delphes/delphes/blob/master/modules/TrackCovariance.cc), developed from a code by Franco Bedeschi. The module, in the input card, must contain a description of the tracker, see for example [the delphes_card_IDEAtrkCov.tcl](https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl).
+(Try to give more detail here about the geometry description). This produces five-parameter tracks - i.e., including the transverse and longitudinal impact parameters - with their covariance matrix.
+
+- In FCCSW: in order to save the 5-parameter tracks and their covariance matrix, the [DelphesSaveChargedParticles](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/src/DelphesSaveChargedParticles.cpp) module should be configured with the flag **saveTrkCov** set to True. Example:
+```markdown
+chhadSaveTool = DelphesSaveChargedParticles("efcharged")
+chhadSaveTool.delphesArrayName = "Calorimeter/eflowTracks"
+chhadSaveTool.saveIsolation = False
+chhadSaveTool.saveTrkCov = True
+chhadSaveTool.particles.Path      = "efcharged"
+chhadSaveTool.particles_trkCov.Path      = "efcharged_trkCov"
+chhadSaveTool.mcAssociations.Path = "efchargedToMC"
+```
+See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for a usage example.
+
+- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
+
+- In the EDM4HEP output, the saved parameters are (d0, phi, rho, z0, tanLambda), with d0 and z0 in mm and the curvature rho in mm<sup>-1</sup>. The covariance matrix is saved as 15 floats corresponding to the former basis. Only the diagonal elements are currently saved (to be fixed).
+
+
+
+
+### Vertexing and flavour tagging
+- The LCFIPlus algorithm, developed for ILC and CLIC and used in the [CLD performance paper](https://arxiv.org/abs/1911.12230)
+  - [Description of the LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) T. Suehara,T. Tanabe, arXiv1506.08371
+  - [LCFIPlus in GitHub](https://github.com/lcfiplus/LCFIPlus)
+  - [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
+    - the algorithm was run on EDM4HEP samples using a converter to LCIO as a first step. 
+- Vertexing from Decay chain fitting :
+  - [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
+  - [Global Decay Chain Vertex Fitting at B-Factories](https://arxiv.org/abs/1901.11198) J.-F. Krohn et al, NIM A, Volume 976, 2020, 164269 - the implementation of Belle-II
+- Flavour tagging using machine learning
+  - see the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
+
 
 
 ### Making particle combinations with awkward arrays
@@ -114,7 +134,9 @@ Combinatoric functions provided by the python *awkward array* pckage  are very h
 - see also [Donal's talk, Sep 21, 2020](https://indico.cern.ch/event/956147/contributions/4026597/attachments/2106045/3542351/FCC_ee_PP_meeting_21_9_20.pdf)
 - the [the scikit-hep software project](https://scikit-hep.org)
 
-### Generating events
+
+
+### Generating events under realistic FCC-ee environment conditions
 
 #### Beam energy spread
 

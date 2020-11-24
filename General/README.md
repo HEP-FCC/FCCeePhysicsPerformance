@@ -6,11 +6,11 @@ Rather random for the while...
 
 1. [Common event samples](#common-event-samples)
 2. [Example analyses](#example-analyses)
-2. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
-3. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
-4. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
-5. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-6. [Generating events](#generating-events)
+3. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
+4. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
+5. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+6. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
 7. [Monte-Carlo programs](#monte-carlo-programs)
 8. [Bibliography](#bibliography)
 

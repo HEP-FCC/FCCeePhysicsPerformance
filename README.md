@@ -5,7 +5,8 @@
 1. [Organisation](#organisation)
 2. [Towards the definition of detector requirements](#towards-the-definition-of-detector-requirements)
 3. [List of Active Case studies (evolving)](#case-studies-evolving-list)
-4. [General information, analysis tips, LOIs, etc](#general-information-analysis-tips-snowmass-submitted-lois-etc)
+4. [General information for FCC-ee analyses](#general-information-for-fcc-ee-analyses)
+5. [LOIs submitted to Snowmass](#lois-submitted-to-snowmass)
 5. [Software](#software)
 
 -----
@@ -51,18 +52,18 @@ Next meetings:
 ### General information for FCC-ee analyses
 
 1. [Common event samples](General/README.md#common-event-samples)
-2. [Example analyses](#example-analyses)
-3. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
-    1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
-4. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
-5. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
-6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-6. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
-    1. [Beam energy spread](#beam-energy-spread)
-    2. [Vertex distribution](#vertex-distribution)
-    3. [Transverse boost to account for the crossing angle](#transverse-boost-to-account-for-the-crossing-angle)
-7. [Monte-Carlo programs](#monte-carlo-programs)
-8. [Bibliography](#bibliography)
+2. [Example analyses](General/README.md#example-analyses)
+3. [To produce your own Delphes samples](General/README.md#to-produce-your-own-delphes-samples)
+    1. [Change the Jet algorithms](General/README.md#change-the-jet-algorithm-in-the-delphes-interface)
+4. [The five-parameter tracks produced by the Delphes interface](General/README.md#the-five-parameter-tracks-produced-by-the-delphes-interface)
+5. [Vertexing and flavour tagging](General/README.md#vertexing-and-flavour-tagging)
+6. [Making particle combinations with awkward arrays](General/README.md#making-particle-combinations-with-awkward-arrays)
+6. [Generating events under realistic FCC-ee environment conditions](General/README.md#generating-events-under-realistic-fcc-ee-environment-conditions)
+    1. [Beam energy spread](General/README.md#beam-energy-spread)
+    2. [Vertex distribution](General/README.md#vertex-distribution)
+    3. [Transverse boost to account for the crossing angle](General/README.md#transverse-boost-to-account-for-the-crossing-angle)
+7. [Monte-Carlo programs](General/README.md#monte-carlo-programs)
+8. [Bibliography](General/README.md#bibliography)
 
 
 ----------

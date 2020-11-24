@@ -27,6 +27,7 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 - Description of the [LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) used for the CLD studies
   - [LCFIPlus in GitHub](https://github.com/lcfiplus/LCFIPlus)
 - [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
+  - [Global Decay Chain Vertex Fitting at B-Factories](https://arxiv.org/abs/1901.11198) J.-F. Krohn et al, NIM A, Volume 976, 2020, 164269 - the implementation of Belle-II
 - see also the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
 - [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
 
@@ -49,6 +50,7 @@ See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-ana
 
 - In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
 
+- In the EDM4HEP output, the saved parameters are (d0, phi, rho, z0, tanLambda), with d0 and z0 in mm and the curvature rho in mm<sup>-1</sup>. The covariance matrix is saved as 15 floats corresponding to the former basis. Only the diagonal elements are currently saved (to be fixed). 
 
 
 

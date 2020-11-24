@@ -22,7 +22,6 @@ O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of ea
 - [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
 
 Next meetings:
--- during the november workshop, Nov 13
 -- December 7, tbc
 
 

@@ -1,3 +1,5 @@
+## Determination of the HZγ effective coupling
+
 ### Abstract
 
 The HZγ coupling can be obtained from the measurement of the H → Zγ branching fraction in the ZZγ final state, on the one hand; and from the combined measurement of the H → γγ branching fraction and the e+e− → Hγ cross section, on the other. The requirements on the detector design **(photon identification, photon energy/angular resolutions, in particular)** to achieve a meaningful measurement of the HZγ coupling (e.g., with a precision significantly better than HL- LHC projections) will be studied.

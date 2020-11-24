@@ -48,7 +48,26 @@ Next meetings:
 
 ----------
 
-### General information, analysis tips, Snowmass submitted LOIs, etc...
+### General information for FCC-ee analyses
+
+1. [Common event samples](General/README.md#common-event-samples)
+2. [Example analyses](#example-analyses)
+3. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
+    1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
+4. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
+5. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+6. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
+    1. [Beam energy spread](#beam-energy-spread)
+    2. [Vertex distribution](#vertex-distribution)
+    3. [Transverse boost to account for the crossing angle](#transverse-boost-to-account-for-the-crossing-angle)
+7. [Monte-Carlo programs](#monte-carlo-programs)
+8. [Bibliography](#bibliography)
+
+
+----------
+
+### LOIs submitted to Snowmass
 
 - [Initial list of case studies](https://indico.cern.ch/event/951830/contributions/4000220/attachments/2095812/3522643/SNOWMASS21-EF0-NF0-RF0-TF0-IF0-CompF0-017.pdf)
 - "Letters of Interest"  submitted to Snowmass 2021 process (Aug 2020). Collected also here [this repository](https://indico.cern.ch/event/951830/) under "Energy Frontier".

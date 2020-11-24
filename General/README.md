@@ -59,7 +59,7 @@ And follow [this section of the tutorial](https://hep-fcc.github.io/fcc-tutorial
 - see [this part of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for FCCSW samples.
 - for EDM4HEP samples: see fast-sim-and-analysis/FccFastSimDelphes\_edm4hep.md - the file still needs to be pushed to the fcc-tutorials repository
 
-#### Change the Jet algorithms in the Delphes interface
+#### Change the Jet algorithm in the Delphes interface
 
 - The choice of which jet algorithm is run is made in the Delphes cards, for example :
 

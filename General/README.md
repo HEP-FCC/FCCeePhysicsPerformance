@@ -4,32 +4,51 @@ Rather random for the while...
 
 ### Table of Contents
 
-1. [CLD paper](#cld-paper)
-2. [Common event samples](#common-event-samples)
-3. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
-4. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
-5. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
-6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-7. [Generating events](#generating-events)
-8. [Monte-Carlo programs](#monte-carlo-programs)
+1. [Common event samples](#common-event-samples)
+2. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+3. [Producing five-parameter tracks with the Delphes interface](#producing-five-parameter-tracks-with-the-delphes-interface)
+4. [Jet algorithms in the Delphes interface](#jet-algorithms-in-the-delphes-interface)
+5. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+6. [Generating events](#generating-events)
+7. [Monte-Carlo programs](#monte-carlo-programs)
+8. [Bibliography](#bibliography)
 
-### CLD paper
-The [CLD performance paper on arXiv](https://arxiv.org/abs/1911.12230)
 
 ### Common event samples
 
-Some samples (ZH, ZZ and WW, at sqrts = 240 GeV) have been produced (Sep 2020) for the Snowmass Software tutorial.
+#### Delphes samples (FCCSW), September 2020
+Some samples in FCC-EDM (ZH, ZZ and WW, at sqrts = 240 GeV) have been produced (Sep 2020) for the Snowmass Software tutorial.
 The events were simulated with Delphes, with the "IDEA\_TrkCov" card.
 They are on EOS at CERN, details can be found [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php).
- 
+
+#### Delphes samples in EDM4HEP, Nov 2020
+A large set of DELPHES samples have been produced in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
+See [here for The EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
+- Samples at √s = 91 GeV
+  - Inclusive samples :
+    - Z → tau tau; Z → light jets; Z → cc ; Z → bb 
+  - Exclusive samples :
+    - many Z → bb samples with exclusive decays performed by EVTGEN, for flavour physics
+    - Z → tau tau with tau → µ gamma
+- Samples at √s = 125 GeV: 
+  - ee → H with H → gg ; H → bb ; H → cc ; H → tau tau
+  - diboson production: ee → WW, ee → ZZ, ee → H
+  - Drell-Yan : tautau, qq, bb, cc
+- Samples at √s = 240 GeV: 
+  - ee → ZH
+  - diboson production: ee → WW, ee → ZZ
 
 ### Vertexing and flavour tagging
-- Description of the [LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) used for the CLD studies
+- The LCFIPlus algorithm, developed for ILC and CLIC and used in the [CLD performance paper](https://arxiv.org/abs/1911.12230)
+  - [Description of the LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) T. Suehara,T. Tanabe, arXiv1506.08371
   - [LCFIPlus in GitHub](https://github.com/lcfiplus/LCFIPlus)
-- [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
+  - [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
+    - the algorithm was run on EDM4HEP samples using a converter toLCIO as a first step. 
+- Vertexing from Decay chain fitting :
+  - [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
   - [Global Decay Chain Vertex Fitting at B-Factories](https://arxiv.org/abs/1901.11198) J.-F. Krohn et al, NIM A, Volume 976, 2020, 164269 - the implementation of Belle-II
-- see also the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
-- [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
+- Flavour tagging using machine learning
+  - see the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
 
 ### Producing five-parameter tracks with the Delphes interface
 
@@ -149,4 +168,11 @@ The convention used here is that the incoming bunches have a positive velocity a
   - [KKMC-ee in GitHub](https://github.com/KrakowHEPSoft/KKMCee)
   - [Talk by Martin Chrzaszcz, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062342/attachments/2125634/3578715/mchrzasz.pdf)
 
+
+### Bibliography
+
+- The [CLD performance paper on arXiv](https://arxiv.org/abs/1911.12230) N. Bacchetta et al,arXiv:1911.12230
+- [Physics and Detectors at CLIC: CLIC Conceptual Design Report](https://arxiv.org/abs/1202.5940) The CLIC Physics CDR, L.Linssen et al
+- The [CEPC CDR, Physics and Detector](https://arxiv.org/abs/1811.10545) CEPC study group, arXiv:1811.10545
+- The ILC TDR : [Physics](https://arxiv.org/ftp/arxiv/papers/1306/1306.6352.pdf) and [Detectors](https://arxiv.org/abs/1306.6329)
 

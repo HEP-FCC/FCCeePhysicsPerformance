@@ -27,7 +27,7 @@ The events were simulated with Delphes, with the "IDEA\_TrkCov" card.
 They are on EOS at CERN, details can be found [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php).
 
 #### Delphes samples in EDM4HEP, Nov 2020
-A large set of DELPHES samples have been produced in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
+A large set of DELPHES samples have been produced (C. Helsens) in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
 See [here for the EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
 - Samples at √s = 91 GeV
   - Inclusive samples :

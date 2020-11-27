@@ -27,8 +27,10 @@ The events were simulated with Delphes, with the "IDEA\_TrkCov" card.
 They are on EOS at CERN, details can be found [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php).
 
 #### Delphes samples in EDM4HEP, Nov 2020
-A large set of DELPHES samples have been produced (C. Helsens) in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
+A large set of DELPHES samples (Pythia) have been produced (C. Helsens) in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
 See [here for the EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
+The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards, and the DELPHES card used for this production is in /eos/experiment/fcc/ee/utils/delphescards/fcc\_tmp.    
+ *(Note: these samples are known to have an issue with the associations for electrons)*    
 - Samples at √s = 91 GeV
   - Inclusive samples :
     - Z → tau tau; Z → light jets; Z → cc ; Z → bb 
@@ -46,7 +48,7 @@ See [here for the EOS path, number of events, cross-section, etc](http://fcc-phy
 ### Example analyses
 
 Example analyses can be found in the [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
-Checkout the edm4hep branch if you want to analyze EDM4HEP samples; the default (master) branch contains examples for the FCCSW samples.
+Checkout the master branch if you want to analyze EDM4HEP samples (the fccedm branch contains examples for the FCCSW-FCCEDM samples).
 And follow [this section of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimAnalysis.html#part-ii-analyse-with-fccanalyses).
 - The ZH\_Zmumu analysis is used in the tutorial. 
 - Example (in EDM4HEP) to see how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle) : see [FCCeeAnalyses/Z\_Zbb\_Flavor/dataframe/analysis.py](https://github.com/HEP-FCC/FCCAnalyses/blob/edm4hep/FCCeeAnalyses/Z_Zbb_Flavor/dataframe/analysis.py) 

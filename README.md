@@ -92,6 +92,7 @@ Next meetings:
 - [DELPHES]( https://github.com/delphes/delphes)
 - [DD4Hep](https://github.com/AIDASoft/DD4hep)
 - [key4hep/EDM4hep](https://github.com/key4hep/EDM4hep)
+- [FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses)
 
 
 

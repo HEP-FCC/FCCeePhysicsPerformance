@@ -14,6 +14,17 @@ for the determination of the recoil mass.
 
 - The [corresponding Snomass LOI](https://indico.cern.ch/event/951830/contributions/3999001/attachments/2095109/3521327/HiggsParams_SNOWMASS21-EF1_EF0_Patrick_Janot-169.pdf)
 
+
+### Preliminary analyses (Clement Helsens)
+Using the corresponding ```FCCAnalyses``` [ZH_Zmumu](https://github.com/HEP-FCC/FCCAnalyses/tree/master/FCCeeAnalyses/ZH_Zmumu) and [ZH_Zee](https://github.com/HEP-FCC/FCCAnalyses/tree/master/FCCeeAnalyses/ZH_Zee) and using the input files in ```edm4hep``` of this [sample production](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php), produced ```FlatNtuples``` and ```histograms``` used to fit the recoil: ```/eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/```.
+Running the fit could be achieved
+
+```python
+python case-studies/higgs/mH-recoil/massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zee/ leptonic_recoil_m_zoom3 sel1
+ 1060* python case-studies/higgs/mH-recoil/massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zmumu/ leptonic_recoil_m_zoom4 sel1 123 127
+```
+
+
 ### Bibliography
 
 - [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002

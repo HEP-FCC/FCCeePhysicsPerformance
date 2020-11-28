@@ -94,6 +94,7 @@ leg.AddEntry(frame.findObject("ras_bkg"),"background","l")
 leg.Draw()
 
 r.gPad.SaveAs("fitResult.pdf")
+r.gPad.SaveAs("fitResult.png")
 
 
 

@@ -24,9 +24,10 @@ python case-studies/higgs/mH-recoil/massFit.py
 usage:   python massFit.py BASEDIR HISTONAME SELECTION BINLOW=120 BINHIGH=140
 example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zee/ leptonic_recoil_m_zoom3 sel1
 example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zmumu/ leptonic_recoil_m_zoom4 sel0 122 128
-
 ```
 
+Fit result shown below:
+![](fitResult.png?raw=true)
 
 ### Bibliography
 

@@ -26,7 +26,6 @@ example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH
 example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zmumu/ leptonic_recoil_m_zoom4 sel0 122 128
 ```
 
-Fit result shown below:
 ![](fitResult.png?raw=true)
 
 ### Bibliography

@@ -29,9 +29,14 @@ example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH
 example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zmumu/ leptonic_recoil_m_zoom4 sel0 122 128
 ```
 
-![](fitResult.png?raw=true)
 
-Fit result:
+As an example the fit result of running the following command 
+```python
+python case-studies/higgs/mH-recoil/massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zee/ leptonic_recoil_m_zoom4 sel1 123 127:
+```
+
+is shown below (to be re-done with including beam energy spread)
+
 ```bash
   EXT PARAMETER                                INTERNAL      INTERNAL  
   NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
@@ -43,6 +48,9 @@ Fit result:
    6  nbkg         7.59189e+03   2.15350e+02   1.34305e-03  -1.51568e+00
    7  nsig         9.05996e+03   2.19379e+02   1.28389e-03  -1.51059e+00
 ```
+
+![](fitResult.png?raw=true)
+
 
 ### Bibliography
 

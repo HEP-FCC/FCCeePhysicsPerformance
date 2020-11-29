@@ -30,7 +30,8 @@ They are on EOS at CERN, details can be found [here](http://fcc-physics-events.w
 A large set of DELPHES samples (Pythia) have been produced (C. Helsens) in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
 See [here for the EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
 The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards, and the DELPHES card used for this production is in /eos/experiment/fcc/ee/utils/delphescards/fcc\_tmp.    
- *(Note: these samples are known to have an issue with the associations for electrons)*    
+*Caveats: beam-energy spread is not included ; and these samples are known to have an issue with the associations for electrons.*
+  
 - Samples at √s = 91 GeV
   - Inclusive samples :
     - Z → tau tau; Z → light jets; Z → cc ; Z → bb 

@@ -17,7 +17,7 @@ for the determination of the recoil mass.
 
 ### Preliminary analyses
 
-A preliminay analysis implemented in FCCAnalyses is available [here](https://github.com/clementhelsens/FCCAnalyses/tree/dev-branch/FCCeeAnalyses/higgs/mH-recoil)
+A preliminay analysis implemented in FCCAnalyses is available [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/FCCeeAnalyses/higgs/mH-recoil)
 
 ### Bibliography
 

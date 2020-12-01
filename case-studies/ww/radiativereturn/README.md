@@ -1,3 +1,5 @@
+## Measurement of √s via radiative return events:
+
 ### Abstract
 
 A measurement of the Higgs boson mass with a precision of O(10 MeV) is in general sufficient to predict Higgs production cross sections and decay branching fractions with an accuracy sufficiently smaller than the statistical precision expected at FCC-ee. One notable exception is the electron Yukawa coupling determination from the e+e− →H resonant production at √s = 125GeV, for which a precision significantly smaller than the Higgs total width (∼ 4 MeV) is needed.

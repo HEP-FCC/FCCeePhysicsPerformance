@@ -15,15 +15,18 @@ for the determination of the recoil mass.
 - The [corresponding Snomass LOI](https://indico.cern.ch/event/951830/contributions/3999001/attachments/2095109/3521327/HiggsParams_SNOWMASS21-EF1_EF0_Patrick_Janot-169.pdf)
 
 
-### Preliminary analyses (Clement Helsens)
-Using the corresponding ```FCCAnalyses``` [ZH_Zmumu](https://github.com/HEP-FCC/FCCAnalyses/tree/master/FCCeeAnalyses/ZH_Zmumu) and [ZH_Zee](https://github.com/HEP-FCC/FCCAnalyses/tree/master/FCCeeAnalyses/ZH_Zee) and using the input files in ```edm4hep``` of this [sample production](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php), produced ```FlatNtuples``` and ```histograms``` used to fit the recoil: ```/eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/```.
+### Contributors
+- Clement Helsens: Developer, Sample production, Preliminary FCCAnalyses design, Preliminary recoil fit analysis
 
-![](leptonic_recoil_m_ZH_sel1_stack_lin.png?raw=true)
+### Preliminary analyses
+To run the analysis, should use the corresponding [FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses/tree/master/) configurations located in ```FCCAnalyses-config/mumu``` and ```FCCAnalyses-config/ee```. This preliminary analysis i using the input files produced in the ```edm4hep``` data format, and produced with this [sample production](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php). ```FlatNtuples``` and ```histograms``` will be produced and used to fit the recoil mass. ```FCCAnalyses``` output files can also be directly accessed on eos ```/eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/```.
+
+![](images/leptonic_recoil_m_ZH_sel1_stack_lin.png?raw=true)
 
 
 arguments and examples to run the fitting macro could be seen by running
 ```python
-python case-studies/higgs/mH-recoil/massFit.py
+python utils/massFit.py
 usage:   python massFit.py BASEDIR HISTONAME SELECTION BINLOW=120 BINHIGH=140
 example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zee/ leptonic_recoil_m_zoom3 sel1
 example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zmumu/ leptonic_recoil_m_zoom4 sel0 122 128
@@ -32,7 +35,7 @@ example: python massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH
 
 As an example the fit result of running the following command 
 ```python
-python case-studies/higgs/mH-recoil/massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zee/ leptonic_recoil_m_zoom4 sel1 123 127:
+python utils/massFit.py /eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/ZH_Zee/ leptonic_recoil_m_zoom4 sel1 123 127:
 ```
 
 is shown below (to be re-done with including beam energy spread)
@@ -49,7 +52,7 @@ is shown below (to be re-done with including beam energy spread)
    7  nsig         9.05996e+03   2.19379e+02   1.28389e-03  -1.51059e+00
 ```
 
-![](fitResult.png?raw=true)
+![](images/fitResult.png?raw=true)
 
 
 ### Bibliography

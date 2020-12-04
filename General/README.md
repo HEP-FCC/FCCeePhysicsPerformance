@@ -45,15 +45,18 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
 - Samples at √s = 240 GeV: 
   - ee → ZH
   - diboson production: ee → WW, ee → ZZ
+- Samples at √s = 365 GeV:
+  - ttbar, ZZ, WW, ZH production
+  - ttbar, ZZ and WW in the full hadronic channel
 
 ### Example analyses
 
 Example analyses can be found in the [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
 Checkout the master branch if you want to analyze EDM4HEP samples (the fccedm branch contains examples for the FCCSW-FCCEDM samples).
-And follow [this section of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimAnalysis.html#part-ii-analyse-with-fccanalyses).
-- The ZH\_Zmumu analysis is used in the tutorial. 
-- Example (in EDM4HEP) to see how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle) : see [FCCeeAnalyses/Z\_Zbb\_Flavor/dataframe/analysis.py](https://github.com/HEP-FCC/FCCAnalyses/blob/edm4hep/FCCeeAnalyses/Z_Zbb_Flavor/dataframe/analysis.py) 
-- Example to see how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc): see [FCCeeAnalyses/Z\_Zbb\_Flavor/dataframe/analysis.py](https://github.com/HEP-FCC/FCCAnalyses/blob/edm4hep/FCCeeAnalyses/Z_Zbb_Flavor/dataframe/analysis.py) 
+And follow the instructions in the README of [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
+- Simple example used in the README: [examples/FCCee/higgs/mH-recoil/mumu/](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/higgs/mH-recoil/mumu)
+- The example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
+- The same example also shows how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc):
 
 
 

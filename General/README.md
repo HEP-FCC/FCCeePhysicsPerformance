@@ -56,7 +56,7 @@ Checkout the master branch if you want to analyze EDM4HEP samples (the fccedm br
 And follow the instructions in the README of [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
 - Simple example used in the README: [examples/FCCee/higgs/mH-recoil/mumu/](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/higgs/mH-recoil/mumu)
 - The example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
-- The same example also shows how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc):
+- The same example also shows how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc)
 
 
 

@@ -8,7 +8,8 @@ To run the case-studies analyses from this repository and using the common insta
 
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
-export PYTHONPATH=/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccanalyses-0.2.0pre02-6kok72w65toi2vvgedijdoqnd4hgg2wu/python/:$PYTHONPATH
+export PYTHONPATH=/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccanalyses-0.2.0pre02-6kok72w65toi2vvgedijdoqnd4hgg2wu/python:$PYTHONPATH
+export PATH=/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccanalyses-0.2.0pre02-6kok72w65toi2vvgedijdoqnd4hgg2wu/python/bin:$PATH
 ```
 
 If custom functions/algorithms have been developed in FCCAnalyses, we need to point to the proper installation

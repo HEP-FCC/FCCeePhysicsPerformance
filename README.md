@@ -26,7 +26,7 @@ Next meetings:
 - December 14, 16:00 - 18:00 **(note the unusual time)**   
 - January 18, 15:00
 
-E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearch.do).
+E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).
 
 
 -----

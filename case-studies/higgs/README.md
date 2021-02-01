@@ -1,6 +1,10 @@
 ## Higgs physics
 
-#### Case studies
+### General references
+
+- The [introduction to the Higgs session, 2nd FCC-France workshop](https://indico.in2p3.fr/event/23012/contributions/89966/attachments/62013/84752/HiggsIntro_FCCFrance.pdf) talk by P. Janot, Jan 21, 2021
+
+### Case studies
 - [Measurement of the ZH production cross section with hadronic Z decays (and the Higgs self-coupling)](ZH-crosssection): hadronic mass and hadronic recoil-mass resolutions
 - [The Higgs coupling to charm quarks](hcc): flavour tagging, vertexing (hence beam-pipe radius, tracker material etc)
 - [Determination of the HZγ effective coupling](hzgamma): photon identification, energy and angular scale

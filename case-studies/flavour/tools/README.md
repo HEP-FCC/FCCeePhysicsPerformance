@@ -7,17 +7,18 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
 Then first time using the common flavour tools, we need to install some extra packages locally that are not yet available in the common software stack.
-To do so, run the install script only once:
+To do so, run the install script only once, with ```LOCALPATH``` being written in absolute way, like ```/afs/cern.ch/user/x/xyz/FCCsoft/FCCeePhysicsPerformance/case-studies/flavour/tools/localPythonTools```
+
 
 ```
 source ./install.sh LOCALPATH
 ```
 
-Then when reconnecting, you do not need to install the extra packages, but just setup the path correctly:
+
+Finally, and to be done when reconnecting as you do not need to install the extra packages, we setup the path correctly (again with ```LOCALPATH``` written as absolute):
 
 ```
 source ./localSetup.sh LOCALPATH
 ```
 
-Then we need to setup the local variables for the tools.
 

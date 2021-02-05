@@ -7,22 +7,25 @@ fi
 
 mkdir -p ${1}
 export PYTHONUSERBASE=${1}/.local
+export PATH=${1}/.local/bin:$PATH
 
 echo "> getting latest pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py
+python get-pip.py --user
 
 rm get-pip.py
 
-export PATH=${1}/.local/bin:$PATH
 
+pip3 install -U setuptools --user
 
-python -m pip install --user zfit
-python -m pip install --user xgboost
-python -m pip install --user pandas
-python -m pip install --user root_pandas
-python -m pip install --user sklearn
-python -m pip install --user scipy
+pip3 install --user zfit
+pip3 install --user xgboost
+pip3 install --user root_pandas
+pip3 install --user sklearn
+
+#pip3 install --user scipy
+#pip3 install --user pandas
+#pip3 install --user wheel
 
 export PYTHONPATH=${1}/.local/lib/python3.7/site-packages:$PYTHONPATH
 

@@ -4,15 +4,18 @@ import awkward1 as ak
 import json
 import numpy as np
 import matplotlib.pyplot as plt
-from locations import loc
-import kinematics_flat
 from particle import literals as lp
-import plotting
 import tensorflow as tf
 import zfit
 import random
-
 from matplotlib import rc
+
+#Local code
+from userConfig import loc
+import kinematics_flat
+import plotting
+import utils as ut
+
 rc('font',**{'family':'serif','serif':['Roman']})
 rc('text', usetex=True)
 
@@ -273,6 +276,7 @@ plt.text(5.21,0.82*ymax,"\\textbf{TRUE DECAY VERTICES USED}",fontsize=18)
 sigma_val = 1000.*params[sigma]['value']
 plt.text(5.21,0.7*ymax,"Core $\\sigma = %.1f$ MeV/$c^2$" % sigma_val,fontsize=25)
 plt.tight_layout()
+ut.create_dir(loc.PLOTS)
 fig.savefig(loc.PLOTS+f"/{mode}_B_M_reco_fit.pdf")
 
 plotting.errorbar_hist(B,"FD",f"{mode}_B","$B$ flight distance","mm",0.,8.,50)

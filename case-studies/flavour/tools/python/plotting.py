@@ -1,4 +1,4 @@
-from locations import loc
+from userConfig import loc
 import matplotlib.pyplot as plt
 import numpy as np
 import awkward1 as ak

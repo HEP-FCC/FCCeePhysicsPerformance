@@ -21,7 +21,6 @@ def errorbar_hist(P,var,P_name,title,units,low,high,bins):
     ymin, ymax = plt.ylim()
     plt.ylim(0.,ymax*1.1)
     plt.tight_layout()
-    plt.show()
     fig.savefig(f"{loc.PLOTS}/{P_name}_{var}.pdf")
 
 def errorbar_plot(x_vals, y_vals, x_name, y_name, x_title, y_title, x_range, y_range, x_err=None, y_err=None):
@@ -33,7 +32,6 @@ def errorbar_plot(x_vals, y_vals, x_name, y_name, x_title, y_title, x_range, y_r
     plt.ylim(y_range[0],y_range[1])
     ax.tick_params(axis='both', which='major', labelsize=25)
     plt.tight_layout()
-    plt.show()
     fig.savefig(f"{loc.PLOTS}/{x_name}_vs_{y_name}.pdf")
 
 def hist_plot(X,X_name,title,low,high,bins):
@@ -45,7 +43,6 @@ def hist_plot(X,X_name,title,low,high,bins):
     ymin, ymax = plt.ylim()
     plt.ylim(0.,ymax*1.1)
     plt.tight_layout()
-    plt.show()
     fig.savefig(f"{loc.PLOTS}/{X_name}.pdf")
 
 def hist_plot_2d(X,X_name,X_title,Y,Y_name,Y_title,X_low,X_high,Y_low,Y_high,X_bins,Y_bins,log):
@@ -61,5 +58,4 @@ def hist_plot_2d(X,X_name,X_title,Y,Y_name,Y_title,X_low,X_high,Y_low,Y_high,X_b
     plt.ylim(Y_low,Y_high)
     ax.tick_params(axis='both', which='major', labelsize=25)
     plt.tight_layout()
-    plt.show()
     fig.savefig(f"{loc.PLOTS}/{X_name}_vs_{Y_name}.pdf")

@@ -15,7 +15,7 @@ source ./install.sh LOCALPATH
 ```
 
 
-Finally, and to be done when reconnecting as you do not need to install the extra packages, we setup the path correctly (again with ```LOCALPATH``` written as absolute):
+When reconnecting on a fresh shell, you do not need to install the extra packages again, just setup the path correctly (again with ```LOCALPATH``` written as absolute like ```/afs/cern.ch/user/x/xyz/FCCsoft/FCCeePhysicsPerformance/case-studies/flavour/tools/localPythonTools```):
 
 ```
 source ./localSetup.sh LOCALPATH

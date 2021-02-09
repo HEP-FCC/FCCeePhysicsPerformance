@@ -15,8 +15,8 @@ python get-pip.py --user
 
 rm get-pip.py
 
+echo "> getting tools for local running"
 pip3 install -U setuptools --user
-
 pip3 install --user seaborn
 pip3 install --user uproot
 pip3 install --user awkward
@@ -26,3 +26,6 @@ pip3 install --user root-pandas
 pip3 install --user scikit-learn
 
 export PYTHONPATH=${1}/.local/lib/python3.7/site-packages:$PYTHONPATH
+
+echo "> source the localSetup"
+source ./localSetup.sh ${1}

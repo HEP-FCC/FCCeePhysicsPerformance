@@ -17,6 +17,9 @@ rm get-pip.py
 
 echo "> getting tools for local running"
 pip3 install -U setuptools --user
+pip3 install --user seaborn
+pip3 install --user uproot
+pip3 install --user awkward
 pip3 install --user zfit
 pip3 install --user xgboost
 pip3 install --user root-pandas

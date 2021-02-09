@@ -1,6 +1,6 @@
 import sys,os
-import uproot4 as uproot
-import awkward1 as ak
+import uproot
+import awkward as ak
 import json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ import random
 from matplotlib import rc
 
 #Local code
-from userConfig import loc
+from userConfig import loc, mode
 import kinematics_flat
 import plotting
 import utils as ut
@@ -19,9 +19,10 @@ import utils as ut
 rc('font',**{'family':'serif','serif':['Roman']})
 rc('text', usetex=True)
 
-path = "/eos/experiment/fcc/ee/tmp/testmatching/"
-mode = "Bd2KstTauTauTAUHADNU"
+#Location of input files
+path = loc.IN
 
+#Decay mode specified in userConfig
 file = uproot.open(path+f"events_{mode}.root")
 tree = file['events']
 events = tree.arrays(library="ak", how="zip")
@@ -33,7 +34,7 @@ events = events[:n_keep]
 events["RP","pdg"] = events["MC","pdg"][events["RP","MC_parentindex"]]
 #Get the production vertex of the track, smeared by 5%
 for v in ["x","y","z"]:
-    events["RP",f"vertex_{v}"] = events["MC",f"vertex_{v}"][events["RP","MC_index"]] 
+    events["RP",f"vertex_{v}"] = events["MC",f"vertex_{v}"][events["RP","MC_index"]]
 #Separation of vertex from PV
 events["RP","PVsep"] = np.sqrt(events["RP",f"vertex_x"]**2 + events["RP",f"vertex_y"]**2 + events["RP",f"vertex_z"]**2)
 
@@ -85,7 +86,7 @@ tau = ak.combinations(pions,3)
 tau["pi_1"], tau["pi_2"], tau["pi_3"] = ak.unzip(tau)
 
 #Charge cut on the pions
-tau_charge_cut_1 = np.sign(tau["pi_1","charge"]) != np.sign(tau["pi_3","charge"]) 
+tau_charge_cut_1 = np.sign(tau["pi_1","charge"]) != np.sign(tau["pi_3","charge"])
 tau_charge_cut_2 = np.sign(tau["pi_2","charge"]) != np.sign(tau["pi_3","charge"])
 tau_charge_cut = np.logical_and(tau_charge_cut_1, tau_charge_cut_2)
 
@@ -102,7 +103,7 @@ tau = tau[tau_m_cut]
 
 #Truth-matching
 tau_parent_cut_pi1 = abs(tau["pi_1"]["pdg"]) == abs(lp.tau_plus.pdgid)
-tau_parent_cut_pi2 = abs(tau["pi_2"]["pdg"]) == abs(lp.tau_plus.pdgid) 
+tau_parent_cut_pi2 = abs(tau["pi_2"]["pdg"]) == abs(lp.tau_plus.pdgid)
 tau_parent_cut_pi3 = abs(tau["pi_3"]["pdg"]) == abs(lp.tau_plus.pdgid)
 tau_parent_cut_12 = np.logical_and(tau_parent_cut_pi1, tau_parent_cut_pi2)
 tau_parent_cut_all = np.logical_and(tau_parent_cut_12, tau_parent_cut_pi3)
@@ -171,8 +172,8 @@ for tau in ["1","2"]:
 PDG_tau_m = lp.tau_plus.mass/1000.
 for tau in ["1","2"]:
     B["tt",f"tau_{tau}","quad"] = B["tt",f"tau_{tau}","e"]*np.sqrt((PDG_tau_m**2 - B["tt",f"tau_{tau}","mass"]**2)**2 - 4*PDG_tau_m**2*B["tt",f"tau_{tau}","p"]**2*(np.sin(B["tt",f"tau_{tau}","theta"]))**2)
-    B["tt",f"tau_{tau}","p_reco_plus"] = ((B["tt",f"tau_{tau}","mass"]**2 + PDG_tau_m**2)*B["tt",f"tau_{tau}","p"]*np.cos(B["tt",f"tau_{tau}","theta"]) + B["tt",f"tau_{tau}","quad"])/(2.*(B["tt",f"tau_{tau}","e"]**2 - B["tt",f"tau_{tau}","p"]**2*(np.cos(B["tt",f"tau_{tau}","theta"]))**2))     
-    B["tt",f"tau_{tau}","p_reco_minus"] = ((B["tt",f"tau_{tau}","mass"]**2 + PDG_tau_m**2)*B["tt",f"tau_{tau}","p"]*np.cos(B["tt",f"tau_{tau}","theta"]) - B["tt",f"tau_{tau}","quad"])/(2.*(B["tt",f"tau_{tau}","e"]**2 - B["tt",f"tau_{tau}","p"]**2*(np.cos(B["tt",f"tau_{tau}","theta"]))**2))     
+    B["tt",f"tau_{tau}","p_reco_plus"] = ((B["tt",f"tau_{tau}","mass"]**2 + PDG_tau_m**2)*B["tt",f"tau_{tau}","p"]*np.cos(B["tt",f"tau_{tau}","theta"]) + B["tt",f"tau_{tau}","quad"])/(2.*(B["tt",f"tau_{tau}","e"]**2 - B["tt",f"tau_{tau}","p"]**2*(np.cos(B["tt",f"tau_{tau}","theta"]))**2))
+    B["tt",f"tau_{tau}","p_reco_minus"] = ((B["tt",f"tau_{tau}","mass"]**2 + PDG_tau_m**2)*B["tt",f"tau_{tau}","p"]*np.cos(B["tt",f"tau_{tau}","theta"]) - B["tt",f"tau_{tau}","quad"])/(2.*(B["tt",f"tau_{tau}","e"]**2 - B["tt",f"tau_{tau}","p"]**2*(np.cos(B["tt",f"tau_{tau}","theta"]))**2))
     B["tt",f"tau_{tau}","e_reco_plus"] = np.sqrt(B["tt",f"tau_{tau}","p_reco_plus"]**2 + PDG_tau_m**2)
     B["tt",f"tau_{tau}","e_reco_minus"] = np.sqrt(B["tt",f"tau_{tau}","p_reco_minus"]**2 + PDG_tau_m**2)
 
@@ -202,7 +203,7 @@ for i in range(0,len(B)):
     for j in range(0,len(B[i])):
         #Check if valid angle exists for the B candidate
         if(B["theta_plus_plus"][i][j] and not np.isnan(B["theta_plus_plus"][i][j])):
-            
+
             min_angle = np.pi
             best_sol = ""
             for sol1 in ["plus","minus"]:

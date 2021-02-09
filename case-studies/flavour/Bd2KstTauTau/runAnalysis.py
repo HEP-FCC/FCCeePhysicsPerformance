@@ -1,6 +1,6 @@
 import sys,os
-import uproot4 as uproot
-import awkward1 as ak
+import uproot
+import awkward as ak
 import json
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,7 +1,7 @@
 from userConfig import loc
 import matplotlib.pyplot as plt
 import numpy as np
-import awkward1 as ak
+import awkward as ak
 import matplotlib as mpl
 
 def errorbar_hist(P,var,P_name,title,units,low,high,bins):

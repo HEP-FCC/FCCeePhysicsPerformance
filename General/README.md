@@ -7,6 +7,8 @@ Rather random for the while...
 1. [Common event samples](#common-event-samples)
 2. [Example analyses](#example-analyses)
 3. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
+    1. [Quick instructions for producing samples](#quick-instructions-for-producing-samples)
+    2. [Make simple changes to the tracker or beam-pipe description in Delphes](#make-simple-changes-to-the-tracker-or-beam-pipe-description-in-delphes)
     1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
 4. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
 5. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
@@ -49,6 +51,12 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
   - ttbar, ZZ, WW, ZH production
   - ttbar, ZZ and WW in the full hadronic channel
 
+#### Production of (EDM4HEP) Monte-Carlo samples, Feb 2021
+
+List of samples, which MC to use: input is being collected at [this googledoc](https://docs.google.com/document/d/1-3L_8u542-dlaL6ws41PYmCgwzffgsleaQKs_qQb6AM/edit#).
+
+
+
 ### Example analyses
 
 Example analyses can be found in the [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
@@ -57,13 +65,78 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - Simple example used in the README: [examples/FCCee/higgs/mH-recoil/mumu/](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/higgs/mH-recoil/mumu)
 - The example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
 - The same example also shows how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc)
+- To see how one can run the vertex fitter over a collection of tracks, see in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex)
 
 
 
 ### To produce your own Delphes samples
 
-- see [this part of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for FCCSW samples.
-- for EDM4HEP samples: see fast-sim-and-analysis/FccFastSimDelphes\_edm4hep.md - the file still needs to be pushed to the fcc-tutorials repository
+
+#### Quick instructions for producing samples 
+
+(For FCCSW samples (old), see [this part of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html).)  
+ For EDM4HEP samples, first define the environment :
+```markdown
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+```
+and take the output configuration file, [edm4hep\_output\_config.tcl](https://github.com/key4hep/k4SimDelphes/blob/main/examples/edm4hep_output_config.tcl) from key4hep/k4SimDelphes/examples.
+ 
+- To run Pythia and Delphes :
+```markdown
+DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep_output_config.tcl your_pythia_card.cmd outputFile.root
+```
+Example cards for Pythia can be found [here](https://github.com/HEP-FCC/FCC-config/tree/main/Generator/Pythia8), or in EOS at CERN, in /eos/fcc/ee/utils/pythiacards.
+
+- To read an LHE input file and process it through Delphes: the executable is the same, DelphesPythia8\_EDM4HEP, and your Pythia card should just contain:
+```markdown
+! 3) Tell Pythia that LHEF input is used
+Beams:frameType             = 4
+Beams:setProductionScalesFromLHEF = off
+Beams:LHEF = your_input_file.lhe    
+```
+
+- To produce events with PYTHIA+EVTGEN and run them through Delphes:
+```markdown
+DelphesPythia8EvtGen_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep_output_config.tcl p8_ee_Zbb_ecm91_EvtGen.cmd evtgen.root DECAY.DEC evt.pdl Bu2D0Pi.dec 
+```
+where evtgen.root is your output event file; p8\_ee\_Zbb\_ecm91\_EvtGen.cmd can be picked up e.g. from /eos/fcc/ee/utils/pythiacards/p8\_ee\_Zbb\_ecm91\_EvtGen\_Bu2D0Pi.cmd; Bu2D0Pi.dec is the EVTGEN file where you specify the exclusive decay(s) you want, see examples [in the HEP-FCC/FCC-config repository](https://github.com/HEP-FCC/FCC-config/tree/main/Generator/EvtGen); DECAY.DEC and evt.pdl are standard EVTGEN files that, with the environment as defined above, can be found in $EVTGEN.
+
+
+
+#### Make simple changes to the tracker or beam-pipe description in Delphes
+
+The geometry of the (central) beam-pipe and of the tracker is described in $DELPHES\_DIR/cards/delphes\_card\_IDEAtrkCov.tcl for the IDEA tracker. (a version of this file, in which the IDEA drift chamber is replaced by the full-Si tracker of CLD, can be found in lxplus in /afs/cern.ch/user/s/selvaggi/public/4Emilia/delphes\_card\_CLDtrkCov\_Tagging.tcl).
+To see the geometry description, look for the **module TrackCovariance**, and for the lines that are under **set DetectorGeometry**. The convention is as follows:
+```markdown
+	// Layer type 1 = R (barrel) or 2 = z (forward/backward)
+	// Layer label
+	// Minimum dimension z for barrel  or R for forward  (m)
+	// Maximum dimension z for barrel  or R for forward  (m)
+	// R/z location of layera  (m)
+	// Thickness (meters)
+	// Radiation length (in fracion of X0)
+	// Number of measurements in layers (1D or 2D)
+	// Stereo angle (rad) - 0(pi/2) = axial(z) layer - Upper side
+	// Stereo angle (rad) - 0(pi/2) = axial(z) layer - Lower side
+	// Resolution Upper side (meters) - 0 = no measurement
+	// Resolution Lower side (meters) - 0 = no measurement
+	// measurement flag = T, scattering only = F
+```
+For example, in the default description, the first line:
+```markdown
+      1 PIPE -100 100 0.015 0.0012 0.35276 0 0 0 0 0 0
+```
+tells that the beam-pipe is at R = 1.5 cm (inner radius), has a thickness of 1.2 mm, and corresponds to 0.35% X0. 
+In the next lines, corresponding to the vertex detector (barrel), 
+```markdown
+      1 VTXLOW -0.12 0.12 0.017 0.00028 0.0937 2 0 1.5708 3e-006 3e-006 1
+      1 VTXLOW -0.16 0.16 0.023 0.00028 0.0937 2 0 1.5708 3e-006 3e-006 1
+      1 VTXLOW -0.16 0.16 0.031 0.00028 0.0937 2 0 1.5708 3e-006 3e-006 1
+```
+you see that the single hit resolution if each layer is 3 mum. At the end of this module, you see the value of the magnetic field that is used (**set Bz 2.0**), which also needs to be set in the  ParticlePropagator module.    
+
+One can play with these values, to see e.g. how the performance changes when one sets the (beam-pipe and) innermost layer of the vertex detector closer to the beam-line, etc.
+
 
 #### Change the Jet algorithm in the Delphes interface
 
@@ -103,7 +176,7 @@ module FastJetFinder GenJetFinder {
 ### The five-parameter tracks produced by the Delphes interface
 
 - Recent versions of Delphes offer a rather detailed modelling of the tracks via the [TrackCovariance Delphes module](https://github.com/delphes/delphes/blob/master/modules/TrackCovariance.cc), developed from a code by Franco Bedeschi. The module, in the input card, must contain a description of the tracker, see for example [the delphes_card_IDEAtrkCov.tcl](https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl).
-(Try to give more detail here about the geometry description). This produces five-parameter tracks - i.e., including the transverse and longitudinal impact parameters - with their covariance matrix.
+(more details about the geometry description can be found above). This produces five-parameter tracks - i.e., including the transverse and longitudinal impact parameters - with their covariance matrix.
 
 - In FCCSW: in order to save the 5-parameter tracks and their covariance matrix, the [DelphesSaveChargedParticles](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/src/DelphesSaveChargedParticles.cpp) module should be configured with the flag **saveTrkCov** set to True. Example:
 ```markdown

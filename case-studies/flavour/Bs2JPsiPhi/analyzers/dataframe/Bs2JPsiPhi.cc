@@ -1,5 +1,8 @@
 #include "Bs2JPsiPhi.h"
 
+using namespace MCParticle;
+using namespace Vertexing;
+
 
 // the decay vertex of the Bs that decayed to mu mu KK; the indices
 // of the 1 + 4 MC particles are passed as input
@@ -38,7 +41,7 @@ ROOT::VecOps::RVec<edm4hep::MCParticleData> selMC_leg::operator() ( ROOT::VecOps
   ROOT::VecOps::RVec<edm4hep::MCParticleData>  res;
   if ( list_of_indices.size() == 0) return res;
   if ( m_idx < list_of_indices.size() ) {
-	res.push_back( selMC_byIndex( list_of_indices[m_idx], in ) );
+	res.push_back( sel_byIndex( list_of_indices[m_idx], in ) );
 	return res;
   }
   else {
@@ -81,9 +84,12 @@ ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> selRP_leg_atVertex::opera
 				ROOT::VecOps::RVec<edm4hep::TrackState> tracks) {
 
   ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> res;
+
   if ( BsRecoParticles.size() == 0 || m_idx > BsRecoParticles.size() ) {
      return res;
   }
+
+  if ( BsDecayVertex.ntracks <= 1 ) return  res;   // no genuine vertex could be reco'ed
 
   // the updated momenta of the tracks used in the verte fit :
   ROOT::VecOps::RVec< TVector3 >  updated_track_momentum_at_vertex = BsDecayVertex.updated_track_momentum_at_vertex ;

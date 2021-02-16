@@ -13,7 +13,8 @@
 
 #include "MCParticle.h"
 #include "ReconstructedParticle2MC.h"
-#include "Vertex.h"
+#include "Vertexing.h"
+
 
 
 // the decay vertex of the Bs that decayed to mu mu KK; the indices
@@ -39,7 +40,7 @@ struct selRP_leg_atVertex{
    selRP_leg_atVertex( int idx );
    int m_idx;
    ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> operator() ( ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> BsRecoParticles,
-                                FCCAnalysesVertex    BsDecayVertex,
+                                Vertexing::FCCAnalysesVertex    BsDecayVertex,
                                 ROOT::VecOps::RVec<edm4hep::TrackState> tracks) ;
 };
 

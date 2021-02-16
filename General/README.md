@@ -66,6 +66,7 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - The example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
 - The same example also shows how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc)
 - To see how one can run the vertex fitter over a collection of tracks, see in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex)
+- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis.py#L40). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
 
 
 
@@ -74,7 +75,8 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 
 #### Quick instructions for producing samples 
 
-(For FCCSW samples (old), see [this part of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html).)  
+(For FCCSW samples (old), see [this part of the tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html).)    
+
  For EDM4HEP samples, first define the environment :
 ```markdown
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
@@ -83,9 +85,9 @@ and take the output configuration file, [edm4hep\_output\_config.tcl](https://gi
  
 - To run Pythia and Delphes :
 ```markdown
-DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep_output_config.tcl your_pythia_card.cmd outputFile.root
+DelphesPythia8\_EDM4HEP $DELPHES\_DIR/cards/delphes\_card\_IDEAtrkCov.tcl edm4hep\_output\_config.tcl your\_pythia\_card.cmd outputFile.root
 ```
-Example cards for Pythia can be found [here](https://github.com/HEP-FCC/FCC-config/tree/main/Generator/Pythia8), or in EOS at CERN, in /eos/fcc/ee/utils/pythiacards.
+Example cards for Pythia can be found [here](https://github.com/HEP-FCC/FCC-config/tree/main/Generator/Pythia8) (not much populated yet), or in EOS at CERN, in /eos/fcc/ee/utils/pythiacards (which contains the cards for all the samples produced in November 2020).
 
 - To read an LHE input file and process it through Delphes: the executable is the same, DelphesPythia8\_EDM4HEP, and your Pythia card should just contain:
 ```markdown
@@ -114,7 +116,7 @@ To see the geometry description, look for the **module TrackCovariance**, and fo
 	// Maximum dimension z for barrel  or R for forward  (m)
 	// R/z location of layera  (m)
 	// Thickness (meters)
-	// Radiation length (in fracion of X0)
+	// Radiation length of the material (in meters)
 	// Number of measurements in layers (1D or 2D)
 	// Stereo angle (rad) - 0(pi/2) = axial(z) layer - Upper side
 	// Stereo angle (rad) - 0(pi/2) = axial(z) layer - Lower side
@@ -126,7 +128,7 @@ For example, in the default description, the first line:
 ```markdown
       1 PIPE -100 100 0.015 0.0012 0.35276 0 0 0 0 0 0
 ```
-tells that the beam-pipe is at R = 1.5 cm (inner radius), has a thickness of 1.2 mm, and corresponds to 0.35% X0. 
+tells that the beam-pipe is at R = 1.5 cm (inner radius), has a thickness of 1.2 mm, and that the radiation length of the corresponding material is 0.35276 m (the X0 of Berrylium).
 In the next lines, corresponding to the vertex detector (barrel), 
 ```markdown
       1 VTXLOW -0.12 0.12 0.017 0.00028 0.0937 2 0 1.5708 3e-006 3e-006 1
@@ -140,7 +142,7 @@ One can play with these values, to see e.g. how the performance changes when one
 
 #### Change the Jet algorithm in the Delphes interface
 
-- The choice of which jet algorithm is run is made in the Delphes cards, for example :
+- The choice of which jet algorithm is run (for the jets that are written to the EDM4HEP file) is made in the Delphes cards. Note however that, at the analysis level, it is possible to re-run the jet clustering, using another algorithm than the one used when the file was produced. See above, "Example analyses", for more information about this possibility. To change the algorithm that is run when the EDM4HEP file is produced, look up in the Delphes card:
 
 ```markdown
 module FastJetFinder GenJetFinder {
@@ -210,6 +212,11 @@ See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-ana
   - see the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
 
 
+- Link to the [topical meeting on vertexing, Feb 10, 2021](https://indico.cern.ch/event/1003610/) organised jointly by Physics Performance and Software and Computing.
+- A stand-alone vertex-fitter from Franco Bedeschi has been implemented in FCCAnalyses. See an example usage in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex). 
+  - the algorithm was described in [Franco's talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf) at the topical meeting
+
+
 
 ### Making particle combinations with awkward arrays
 
@@ -277,6 +284,7 @@ The convention used here is that the incoming bunches have a positive velocity a
 ### Monte-Carlo programs
 
 - [Tutorial for Whizard for e+e-](https://indico.fnal.gov/event/45413/timetable/?view=standard) (Sep 2020)
+  - the [Whizard main page](https://whizard.hepforge.org) with the online manual
 - KKMC : the state-of-the-art Monte Carlo for e−e+ → ffbar + nγ
   - [KKMC-ee in GitHub](https://github.com/KrakowHEPSoft/KKMCee)
   - [Talk by Martin Chrzaszcz, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062342/attachments/2125634/3578715/mchrzasz.pdf)

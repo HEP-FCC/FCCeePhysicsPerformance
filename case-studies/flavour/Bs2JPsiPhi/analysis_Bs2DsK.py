@@ -13,11 +13,9 @@ _pod  = ROOT.podio.ObjectID()
 _fcc  = ROOT.dummyloader
 _bs  = ROOT.dummyLoader
 
-
-
 print ('edm4hep  ',_edm)
 print ('podio    ',_pod)
-print ('fccana   ',_fcc)
+print ('fccana   ',_bs)
 
 
 class analysis():

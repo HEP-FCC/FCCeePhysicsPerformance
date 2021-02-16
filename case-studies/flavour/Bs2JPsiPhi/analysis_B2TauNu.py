@@ -17,10 +17,13 @@ print ("Load cxx analyzers ... ",)
 ROOT.gSystem.Load("libedm4hep")
 ROOT.gSystem.Load("libpodio")
 ROOT.gSystem.Load("libFCCAnalyses")
+ROOT.gSystem.Load("libBs2JPsiPhi")
+
 ROOT.gErrorIgnoreLevel = ROOT.kFatal
 _edm  = ROOT.edm4hep.ReconstructedParticleData()
 _pod  = ROOT.podio.ObjectID()
 _fcc  = ROOT.dummyloader
+_bs  = ROOT.dummyLoader
 
 
 print ('edm4hep  ',_edm)

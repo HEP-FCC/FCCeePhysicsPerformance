@@ -284,6 +284,7 @@ The convention used here is that the incoming bunches have a positive velocity a
 ### Monte-Carlo programs
 
 - [Tutorial for Whizard for e+e-](https://indico.fnal.gov/event/45413/timetable/?view=standard) (Sep 2020)
+  - the [Whizard main page](https://whizard.hepforge.org) with the online manual
 - KKMC : the state-of-the-art Monte Carlo for e−e+ → ffbar + nγ
   - [KKMC-ee in GitHub](https://github.com/KrakowHEPSoft/KKMCee)
   - [Talk by Martin Chrzaszcz, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062342/attachments/2125634/3578715/mchrzasz.pdf)

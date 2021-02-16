@@ -1,10 +1,7 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-
-
-
-project(Bs2JPsiPhi CXX)
+project(FCCAnalysesFlavour CXX)
 
 find_package(ROOT COMPONENTS ROOTDataFrame)
 include(${ROOT_USE_FILE})
@@ -26,13 +23,5 @@ set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 set(INSTALL_INCLUDE_DIR include CACHE PATH
   "Installation directory for header files")
 
-
-#file(GLOB _run_python_files config/*.py)
-#install(FILES ${_run_python_files} DESTINATION ${CMAKE_INSTALL_PREFIX}/python/config)
-#install(FILES config/doPlots.py PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ DESTINATION ${CMAKE_INSTALL_PREFIX}/python/config)
-
-#install(DIRECTORY FCCeeAnalyses DESTINATION ${CMAKE_INSTALL_PREFIX}/python)
-#install(DIRECTORY FCChhAnalyses DESTINATION ${CMAKE_INSTALL_PREFIX}/python)
-
-add_subdirectory(analyzers/dataframe)
+add_subdirectory(analyzers)
 

@@ -5,7 +5,7 @@ print ("Load cxx analyzers ... ",)
 ROOT.gSystem.Load("libedm4hep")
 ROOT.gSystem.Load("libpodio")
 ROOT.gSystem.Load("libFCCAnalyses")
-ROOT.gSystem.Load("libBs2JPsiPhi")
+ROOT.gSystem.Load("libFCCAnalysesFlavour")
 
 ROOT.gErrorIgnoreLevel = ROOT.kFatal
 _edm  = ROOT.edm4hep.ReconstructedParticleData()

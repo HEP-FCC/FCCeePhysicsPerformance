@@ -1,11 +1,11 @@
-Setup FCCAnalyses in ```vertex_resolution``` branch (need for ENV VAR LOCALFCCANALYSES)
+Setup FCCAnalyses in ```master``` branch (need for ENV VAR LOCALFCCANALYSES)
 ```
 source ./setup.sh
 ```
 
 then come back in 
 ```
-FCCeePhysicsPerformance/case-studies/flavour/Bs2JPsiPhi
+FCCeePhysicsPerformance/case-studies/flavour/dataframe
 ```
 
 source localSetup
@@ -25,7 +25,7 @@ cd ..
 Then in the ```analysis.py``` you need to add 
 
 ```
-ROOT.gSystem.Load("libBs2JPsiPhi")
+ROOT.gSystem.Load("libFCCAnalysesFlavour")
 _bs  = ROOT.dummyLoader
 ```
 

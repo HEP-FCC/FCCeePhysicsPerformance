@@ -29,6 +29,7 @@ print ('fccana   ',_fcc)
 #	Example file : /eos/fcc/users/e/eperez/vertexing/Bs2JpsiPhi_evtgen.root
 # 	Note: these events were generated at (0,0,0), i.e.no smearing of the
 #	primary vertex.
+#       (for some reason, the file above needs first to be copied locally to a disk)
 #
 
 class analysis():

@@ -46,8 +46,8 @@ class analysis():
         print (" done")
     #__________________________________________________________
     def run(self):
-        df2 = (self.df.Range(1000)
-        #df2 = (self.df
+        #df2 = (self.df.Range(1000)	# to test over 1000 events only
+        df2 = (self.df
 
                .Alias("Particle1", "Particle#1.index")
                .Alias("MCRecoAssociations0", "MCRecoAssociations#0.index")

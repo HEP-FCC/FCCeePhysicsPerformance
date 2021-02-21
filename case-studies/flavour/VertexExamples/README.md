@@ -6,14 +6,14 @@
 
 - Examples considered :
   - Bs to JPsi(mumu) Phi(KK)
-    - example file:  /eos/fcc/users/e/eperez/Bs2JPsiPhi\_100k\_fullCovMat\_fixes.root (copy to disk first)
+    - example file:  /eos/experiement/fcc/users/e/eperez/Bs2JPsiPhi\_100k\_fullCovMat\_fixes.root
     - to produce the ntuple: analysis\_Bs2JPsiPhi.py
     - plotting macro: plots\_Bs2JsiPhi.x
   - Bc to tau(3pi nu) nu
     - to produce the ntuple: analysis\_B2TauNu.py
     - plotting script: plots\_B2TauNu.py
   - Bs to Ds(KKPi) K
-    - example file: /eos/fcc/users/e/eperez/Bs2DsK\_100k\_fullCovMat\_fixes.root  (copy to disk first)
+    - example file: /eos/experiement/fcc/users/e/eperez/Bs2DsK\_100k\_fullCovMat\_fixes.root 
     - to produce the ntuple: analysis\_Bs2DsK.py
     - plotting macro: plots\_Bs2DsK.x
 

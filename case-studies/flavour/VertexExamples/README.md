@@ -24,7 +24,7 @@ Setup: see [case-studies/flavour/dataframe](https://github.com/HEP-FCC/FCCeePhys
 - the recipe compiles the code and creates the library libFCCAnalysesFlavour
 - come back to case-studies/flavour/VertexExamples and run e.g. :
  ```markdown
-python analysis\_Bs2JPsiPhi.py /tmp/xxx/Bs2JPsiPhi\_100k\_fullCovMat\_fixes.root 
+python analysis_Bs2JPsiPhi.py /tmp/xxx/Bs2JPsiPhi_100k_fullCovMat_fixes.root 
 ```
 
 ### Production of Delphes samples with a customized tracker or beam-pipe
@@ -42,7 +42,7 @@ The two configuration files are very similar. See detailed comments inside analy
 #### Bs2DsK
 
 The first part, that reconstructs the decay vertex of the Ds, is very similar to what is done for Bs2JpsiPhi.
-The second part is the reconstruction of the Bs decay vertex. This is still work in progress.
+The second part is the reconstruction of the Bs decay vertex. The latter is still work in progress.
 
 
 

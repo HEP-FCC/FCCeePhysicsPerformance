@@ -19,7 +19,7 @@
 
 ### Setup
 
-Setup: see case-studies/flavour/dataframe and follow the recipe in the README
+Setup: see [case-studies/flavour/dataframe](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/dataframe) and follow the recipe in the README
 - the code needed by the analyzers is in case-studies/flavour/dataframe/analyzers, see Bs2JpsiPhi.cc and Bs2DsK.cc
 - the recipe compiles the code and creates the library libFCCAnalysesFlavour
 - come back to case-studies/flavour/VertexExamples and run e.g. :

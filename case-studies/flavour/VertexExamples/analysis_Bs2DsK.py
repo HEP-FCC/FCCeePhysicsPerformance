@@ -53,7 +53,7 @@ class analysis():
                # would there be > 1, the method gives the first one encountered.
                # Returns the indices of : mother Bs, Ds+, K-
 
-               .Define("Bs2DsK_indices", "MCParticle::get_indices_ExclusiveDecay( 531, {431, -321}, false, false) ( Particle, Particle1)" )
+               .Define("Bs2DsK_indices", "MCParticle::get_indices_ExclusiveDecay( -531, {431, -321}, false, false) ( Particle, Particle1)" )
 
 
                # MC indices of (this) Ds+ -> K+ K- Pi+
@@ -181,6 +181,8 @@ class analysis():
                .Define("Kplus_phi",  "MCParticle::get_phi( Kplus )")
                .Define("RecoKplus_phi",  "getRP_phi( RecoKplus ) " )
                .Define("RecoKplus_atVertex_phi", "getRP_phi( RecoKplus_atVertex ) ")
+
+	       .Define("RecoBachelorK_E",  "getRP_e( RecoBachelorK )")
                
 
 
@@ -224,6 +226,7 @@ class analysis():
                 "RecoDs_atVertex_phi",
                 "RecoDs_atVertex_mass",
                 #"RecoBachelorK",
+                "RecoBachelorK_E",
                 "BsVertex",
                 "n_BsTracks",
                 #"RecoDs_atVertex_TrackState_Cov"

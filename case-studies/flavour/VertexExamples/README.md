@@ -13,7 +13,7 @@
     - to produce the ntuple: analysis\_B2TauNu.py
     - plotting script: plots\_B2TauNu.py
   - Bs to Ds(KKPi) K
-    - example file: /eos/experiement/fcc/users/e/eperez/Bs2DsK\_100k\_fullCovMat\_fixes.root 
+    - example file: /eos/experiment/fcc/ee/examples/p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov.root
     - to produce the ntuple: analysis\_Bs2DsK.py
     - plotting macro: plots\_Bs2DsK.x
 

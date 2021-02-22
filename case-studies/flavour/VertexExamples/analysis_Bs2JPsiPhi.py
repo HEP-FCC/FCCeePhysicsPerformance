@@ -26,7 +26,7 @@ print ('fccana   ',_fcc)
 #       The example also shows how to retrieve the MC and reco'ed Bs legs,
 #       as well as the MC Bs, JP]psi and Phis, with their kinematics.
 #
-#       Example file:  /eos/experiment/fcc/users/e/eperez/Bs2JPsiPhi_100k_fullCovMat_fixes.root
+#       Example file: /eos/experiment/fcc/ee/examples/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
 # 	Note: these events were generated at (0,0,0), i.e.no smearing of the
 #	primary vertex.
 #       (for some reason, the file above needs first to be copied locally to a disk)

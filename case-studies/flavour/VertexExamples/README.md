@@ -6,7 +6,7 @@
 
 - Examples considered :
   - Bs to JPsi(mumu) Phi(KK)
-    - example file:  /eos/experiement/fcc/users/e/eperez/Bs2JPsiPhi\_100k\_fullCovMat\_fixes.root
+    - example file:  /eos/experiment/fcc/ee/examples/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
     - to produce the ntuple: analysis\_Bs2JPsiPhi.py
     - plotting macro: plots\_Bs2JsiPhi.x
   - Bc to tau(3pi nu) nu

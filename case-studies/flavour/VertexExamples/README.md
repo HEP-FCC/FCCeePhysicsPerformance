@@ -24,7 +24,7 @@ Setup: see [case-studies/flavour/dataframe](https://github.com/HEP-FCC/FCCeePhys
 - the recipe compiles the code and creates the library libFCCAnalysesFlavour
 - come back to case-studies/flavour/VertexExamples and run e.g. :
  ```markdown
-python analysis_Bs2JPsiPhi.py /tmp/xxx/Bs2JPsiPhi_100k_fullCovMat_fixes.root 
+python analysis_Bs2JPsiPhi.py  /eos/experiement/fcc/users/e/eperez/Bs2JPsiPhi\_100k\_fullCovMat\_fixes.root
 ```
 
 ### Production of Delphes samples with a customized tracker or beam-pipe

@@ -6,14 +6,14 @@
 
 - Examples considered :
   - Bs to JPsi(mumu) Phi(KK)
-    - example file:  /eos/experiment/fcc/ee/examples/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
+    - example file:  /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
     - to produce the ntuple: analysis\_Bs2JPsiPhi.py
     - plotting macro: plots\_Bs2JsiPhi.x
   - Bc to tau(3pi nu) nu
     - to produce the ntuple: analysis\_B2TauNu.py
     - plotting script: plots\_B2TauNu.py
   - Bs to Ds(KKPi) K
-    - example file: /eos/experiment/fcc/ee/examples/p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov.root
+    - example file:  /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov.root
     - to produce the ntuple: analysis\_Bs2DsK.py
     - plotting macro: plots\_Bs2DsK.x
 

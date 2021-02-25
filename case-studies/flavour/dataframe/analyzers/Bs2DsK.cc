@@ -4,7 +4,9 @@
 #include <chrono>
 
 using namespace MCParticle;
-using namespace Vertexing;
+using namespace VertexFitterSimple;
+
+using namespace VertexingUtils;
 
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -186,9 +188,9 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState( RO
         float arbitrary_value = 0.05 ;
 	//float arbitrary_value = 2.;   // 200% !!
         covMatrix[0] = pow( arbitrary_value * track_param[0] ,2);
-        covMatrix[5] = pow( arbitrary_value * track_param[1] , 2);
-        covMatrix[9] = pow( arbitrary_value * track_param[2] , 2) ;
-        covMatrix[12] = pow( arbitrary_value * track_param[3] , 2);
+        covMatrix[2] = pow( arbitrary_value * track_param[1] , 2);
+        covMatrix[5] = pow( arbitrary_value * track_param[2] , 2) ;
+        covMatrix[9] = pow( arbitrary_value * track_param[3] , 2);
         covMatrix[14] = pow( arbitrary_value* track_param[4] , 2);
         track.covMatrix = covMatrix;
 
@@ -283,7 +285,7 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
  std::vector< float> masses={ mK, mK, mPi };
 
  double param_base[5];
- int idxCov[5] = { 0, 5, 9, 12, 14 };  // indices of the diagonal terms in the track covariance matrix
+ int idxCov[5] = { 0, 2, 5, 9, 14 };  // indices of the diagonal terms in the track covariance matrix
  double randomGaus[5] ;
  double param[5];
 

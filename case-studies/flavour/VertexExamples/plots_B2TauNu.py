@@ -108,14 +108,14 @@ cut_B = cut0_B+" && BVertex.chi2 >= 0 && BVertex.chi2 < 10"
 px_Bc = r.TH1F("px_Bc",";Pull x_{vtx}; a.u.",100,-5,5)
 ttBc.Draw("(BVertex.position.x-TauMCDecayVertex.x[0])/TMath::Sqrt(BVertex.covMatrix[0])>>px_Bc",cut_B)
 py_Bc = r.TH1F("py_Bc",";Pull y_{vtx}; a.u.",100,-5,5)
-ttBc.Draw("(BVertex.position.y-TauMCDecayVertex.y[0])/TMath::Sqrt(BVertex.covMatrix[3])>>py_Bc",cut_B)
+ttBc.Draw("(BVertex.position.y-TauMCDecayVertex.y[0])/TMath::Sqrt(BVertex.covMatrix[2])>>py_Bc",cut_B)
 pz_Bc = r.TH1F("pz_Bc",";Pull z_{vtx}; a.u.",100,-5,5)
 ttBc.Draw("(BVertex.position.z-TauMCDecayVertex.z[0])/TMath::Sqrt(BVertex.covMatrix[5])>>pz_Bc",cut_B)
 
 px_Bu = r.TH1F("px_Bu",";Pull x_{vtx}; a.u.",100,-5,5)
 ttBu.Draw("(BVertex.position.x-TauMCDecayVertex.x[0])/TMath::Sqrt(BVertex.covMatrix[0])>>px_Bu",cut_B)
 py_Bu = r.TH1F("py_Bu",";Pull y_{vtx}; a.u.",100,-5,5)
-ttBu.Draw("(BVertex.position.y-TauMCDecayVertex.y[0])/TMath::Sqrt(BVertex.covMatrix[3])>>py_Bu",cut_B)
+ttBu.Draw("(BVertex.position.y-TauMCDecayVertex.y[0])/TMath::Sqrt(BVertex.covMatrix[2])>>py_Bu",cut_B)
 pz_Bu = r.TH1F("pz_Bu",";Pull z_{vtx}; a.u.",100,-5,5)
 ttBu.Draw("(BVertex.position.z-TauMCDecayVertex.z[0])/TMath::Sqrt(BVertex.covMatrix[5])>>pz_Bu",cut_B)
 

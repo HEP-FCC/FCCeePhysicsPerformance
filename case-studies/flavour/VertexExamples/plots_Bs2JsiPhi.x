@@ -19,6 +19,7 @@ tt.DrawLatexNDC(0.2,0.96,"B_{s} #rightarrow J/#psi #phi #rightarrow #mu#muKK");
 gPad -> SetLogy(1);
 
 // Chi2 of the vertex fit
+gStyle->SetOptStat(1110);
 TCanvas* c1 = new TCanvas("chi2","chi2");
 TH1F* hchi2 = new TH1F("hchi2",";#chi^{2}/n.d.f.; a.u.",100,0.,10.);
 gStyle->SetOptStat(1110);
@@ -41,7 +42,7 @@ px->Draw(); px->Fit("gaus");
 
 c2->cd(2);
 TH1F* py = new TH1F("py",";Pull y_{vtx}; a.u.",100,-5,5);
-events->Draw("(BsVertex.position.y-BsMCDecayVertex.y[0])/TMath::Sqrt(BsVertex.covMatrix[3])>>py",cut);
+events->Draw("(BsVertex.position.y-BsMCDecayVertex.y[0])/TMath::Sqrt(BsVertex.covMatrix[2])>>py",cut);
 py->Draw();py->Fit("gaus");
 
 c2->cd(3);
@@ -100,9 +101,9 @@ TCanvas* c4 = new TCanvas("pull_fd","pull_fd");
 TString fld_mm = "TMath::Sqrt( pow( BsVertex.position.x, 2) + pow( BsVertex.position.y,2) + pow( BsVertex.position.z,2))";
 TString fld_gen_mm = "TMath::Sqrt( pow( BsMCDecayVertex.x[0], 2) + pow( BsMCDecayVertex.y[0],2) + pow( BsMCDecayVertex.z[0],2)   )";
 TString fld_res_mm =  fld_mm + " - " + fld_gen_mm;
-TString term1 = " BsVertex.position.x * ( BsVertex.covMatrix[0] * BsVertex.position.x + BsVertex.covMatrix[1] * BsVertex.position.y + BsVertex.covMatrix[2] * BsVertex.position.z ) " ;
-TString term2 = " BsVertex.position.y * ( BsVertex.covMatrix[1] * BsVertex.position.x + BsVertex.covMatrix[3] * BsVertex.position.y + BsVertex.covMatrix[4] * BsVertex.position.z ) " ;
-TString term3 = " BsVertex.position.z * ( BsVertex.covMatrix[2] * BsVertex.position.x + BsVertex.covMatrix[4] * BsVertex.position.y + BsVertex.covMatrix[5] * BsVertex.position.z ) ";
+TString term1 = " BsVertex.position.x * ( BsVertex.covMatrix[0] * BsVertex.position.x + BsVertex.covMatrix[1] * BsVertex.position.y + BsVertex.covMatrix[3] * BsVertex.position.z ) " ;
+TString term2 = " BsVertex.position.y * ( BsVertex.covMatrix[1] * BsVertex.position.x + BsVertex.covMatrix[2] * BsVertex.position.y + BsVertex.covMatrix[4] * BsVertex.position.z ) " ;
+TString term3 = " BsVertex.position.z * ( BsVertex.covMatrix[3] * BsVertex.position.x + BsVertex.covMatrix[4] * BsVertex.position.y + BsVertex.covMatrix[5] * BsVertex.position.z ) ";
 TString tsum = term1 + " + " + term2 + " + " + term3;
 TString fld_unc = " ( TMath::Sqrt( " + tsum + ") / " + fld_mm +" ) ";
 TString fld_pull = "( " + fld_res_mm + " ) / " + fld_unc;

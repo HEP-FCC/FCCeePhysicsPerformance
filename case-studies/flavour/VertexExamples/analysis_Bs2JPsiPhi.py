@@ -10,7 +10,7 @@ ROOT.gSystem.Load("libFCCAnalysesFlavour")
 ROOT.gErrorIgnoreLevel = ROOT.kFatal
 _edm  = ROOT.edm4hep.ReconstructedParticleData()
 _pod  = ROOT.podio.ObjectID()
-_fcc  = ROOT.dummyloader
+_fcc  = ROOT.dummyLoader
 _bs  = ROOT.dummyLoader
 
 
@@ -26,10 +26,10 @@ print ('fccana   ',_fcc)
 #       The example also shows how to retrieve the MC and reco'ed Bs legs,
 #       as well as the MC Bs, JP]psi and Phis, with their kinematics.
 #
-#       Example file: /eos/experiment/fcc/ee/examples/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
+#       Example file: 
+#       /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
 # 	Note: these events were generated at (0,0,0), i.e.no smearing of the
 #	primary vertex.
-#       (for some reason, the file above needs first to be copied locally to a disk)
 #
 
 class analysis():
@@ -58,7 +58,7 @@ class analysis():
                .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
 
                # number of tracks in the event
-               .Define("ntracks","getTK_n(EFlowTrack_1)")
+               .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
 
                # Retrieve the decay vertex of all MC particles
                #.Define("MC_DecayVertices",  "MCParticle::get_endPoint( Particle, Particle1)" )
@@ -119,20 +119,20 @@ class analysis():
                # the list BsRecoParticles is the mu+, then the mu-, etc.
                # (selRP_matched_to_list ignores the unstable MC particles that are in the input list of indices
  	       # hence the mother particle, which is the [0] element of the Bs2MuMuKK_indices vector).
-               .Define("BsRecoParticles",  "selRP_matched_to_list( Bs2MuMuKK_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+               .Define("BsRecoParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( Bs2MuMuKK_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
 
                # the corresponding tracks - here, dummy particles, if any, are removed, i.e. one may have < 4 tracks,
                # e.g. if one muon or kaon was emitted outside of the acceptance
-               .Define("BsTracks",   "getRP2TRK( BsRecoParticles, EFlowTrack_1)" )
+               .Define("BsTracks",   "ReconstructedParticle2Track::getRP2TRK( BsRecoParticles, EFlowTrack_1)" )
 
                # number of tracks in this BsTracks collection ( = the #tracks used to reconstruct the Bs vertex)
-               .Define("n_BsTracks", "getTK_n( BsTracks )")
+               .Define("n_BsTracks", "ReconstructedParticle2Track::getTK_n( BsTracks )")
 
                # Now we reconstruct the Bs decay vertex using the reco'ed tracks.
                # First the full object, of type Vertexing::FCCAnalysesVertex
-               .Define("BsVertexObject",   "Vertexing::VertexFitter_Tk( 2, BsTracks)" )
+               .Define("BsVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, BsTracks)" )
                # from which we extract the edm4hep::VertexData object, which contains the vertex positiob in mm
-               .Define("BsVertex",  "Vertexing::get_VertexData( BsVertexObject )")
+               .Define("BsVertex",  "VertexingUtils::get_VertexData( BsVertexObject )")
 
 
 	       # We may want to look at the reco'ed Bs legs: in the BsRecoParticles vector, 
@@ -142,25 +142,25 @@ class analysis():
                .Define("RecoKplus",    "selRP_leg(2)( BsRecoParticles )")
                .Define("RecoKminus",   "selRP_leg(3)( BsRecoParticles )")
                # and their kinematics :
-               .Define("RecoMuplus_theta",  "getRP_theta( RecoMuplus )")
-               .Define("RecoMuplus_phi",  "getRP_phi( RecoMuplus )")
-               .Define("RecoMuplus_e",  "getRP_e( RecoMuplus )")
-               .Define("RecoMuminus_theta",  "getRP_theta( RecoMuminus )")
-               .Define("RecoMuminus_phi",  "getRP_phi( RecoMuminus )")
-               .Define("RecoMuminus_e",  "getRP_e( RecoMuminus )")
-               .Define("RecoKplus_theta",  "getRP_theta( RecoKplus )")
-               .Define("RecoKplus_phi",  "getRP_phi( RecoKplus )")
-               .Define("RecoKplus_e",  "getRP_e( RecoKplus )")
-               .Define("RecoKminus_theta",  "getRP_theta( RecoKminus )")
-               .Define("RecoKminus_phi",  "getRP_phi( RecoKminus )")
-               .Define("RecoKminus_e",  "getRP_e( RecoKminus )")
+               .Define("RecoMuplus_theta",  "ReconstructedParticle::get_theta( RecoMuplus )")
+               .Define("RecoMuplus_phi",  "ReconstructedParticle::get_phi( RecoMuplus )")
+               .Define("RecoMuplus_e",  "ReconstructedParticle::get_e( RecoMuplus )")
+               .Define("RecoMuminus_theta",  "ReconstructedParticle::get_theta( RecoMuminus )")
+               .Define("RecoMuminus_phi",  "ReconstructedParticle::get_phi( RecoMuminus )")
+               .Define("RecoMuminus_e",  "ReconstructedParticle::get_e( RecoMuminus )")
+               .Define("RecoKplus_theta",  "ReconstructedParticle::get_theta( RecoKplus )")
+               .Define("RecoKplus_phi",  "ReconstructedParticle::get_phi( RecoKplus )")
+               .Define("RecoKplus_e",  "ReconstructedParticle::get_e( RecoKplus )")
+               .Define("RecoKminus_theta",  "ReconstructedParticle::get_theta( RecoKminus )")
+               .Define("RecoKminus_phi",  "ReconstructedParticle::get_phi( RecoKminus )")
+               .Define("RecoKminus_e",  "ReconstructedParticle::get_e( RecoKminus )")
 
 	       # Looks at the angular separation (3D angles) between the Bs daughters: among
                # all the pairs of particles in BsRecoParticles, retrieve the minimal angular distance,
                # the maximal distance, and the average distance
-               .Define("deltaAlpha_max","angular_separation(0)( BsRecoParticles )")
-               .Define("deltaAlpha_min","angular_separation(1)( BsRecoParticles )")
-               .Define("deltaAlpha_ave","angular_separation(2)( BsRecoParticles )")
+               .Define("deltaAlpha_max","ReconstructedParticle::angular_separationBuilder(0)( BsRecoParticles )")
+               .Define("deltaAlpha_min","ReconstructedParticle::angular_separationBuilder(1)( BsRecoParticles )")
+               .Define("deltaAlpha_ave","ReconstructedParticle::angular_separationBuilder(2)( BsRecoParticles )")
 
 	       # To look at the angular separation between the MC Jpsi and the Phi :
 
@@ -192,17 +192,17 @@ class analysis():
                # the reco'ed legs, with the momenta at the Bs decay vertex - instead of at their
 	       # point of dca
                .Define("RecoMuplus_atVertex",  "selRP_leg_atVertex(0) ( BsRecoParticles, BsVertexObject, EFlowTrack_1 )")
-               .Define("RecoMuplus_atVertex_theta",   "getRP_theta( RecoMuplus_atVertex )")
-               .Define("RecoMuplus_atVertex_phi",   "getRP_phi( RecoMuplus_atVertex )")
+               .Define("RecoMuplus_atVertex_theta",   "ReconstructedParticle::get_theta( RecoMuplus_atVertex )")
+               .Define("RecoMuplus_atVertex_phi",   "ReconstructedParticle::get_phi( RecoMuplus_atVertex )")
                .Define("RecoMuminus_atVertex",  "selRP_leg_atVertex(1) ( BsRecoParticles, BsVertexObject, EFlowTrack_1 )")
-               .Define("RecoMuminus_atVertex_theta",   "getRP_theta( RecoMuminus_atVertex )")
-               .Define("RecoMuminus_atVertex_phi",   "getRP_phi( RecoMuminus_atVertex )")
+               .Define("RecoMuminus_atVertex_theta",   "ReconstructedParticle::get_theta( RecoMuminus_atVertex )")
+               .Define("RecoMuminus_atVertex_phi",   "ReconstructedParticle::get_phi( RecoMuminus_atVertex )")
                .Define("RecoKplus_atVertex",  "selRP_leg_atVertex(2) ( BsRecoParticles, BsVertexObject, EFlowTrack_1 )")
-               .Define("RecoKplus_atVertex_theta",   "getRP_theta( RecoKplus_atVertex )")
-               .Define("RecoKplus_atVertex_phi",   "getRP_phi( RecoKplus_atVertex )")
+               .Define("RecoKplus_atVertex_theta",   "ReconstructedParticle::get_theta( RecoKplus_atVertex )")
+               .Define("RecoKplus_atVertex_phi",   "ReconstructedParticle::get_phi( RecoKplus_atVertex )")
                .Define("RecoKminus_atVertex",  "selRP_leg_atVertex(3) ( BsRecoParticles, BsVertexObject, EFlowTrack_1 )")
-               .Define("RecoKminus_atVertex_theta",   "getRP_theta( RecoKminus_atVertex )")
-               .Define("RecoKminus_atVertex_phi",   "getRP_phi( RecoKminus_atVertex )")
+               .Define("RecoKminus_atVertex_theta",   "ReconstructedParticle::get_theta( RecoKminus_atVertex )")
+               .Define("RecoKminus_atVertex_phi",   "ReconstructedParticle::get_phi( RecoKminus_atVertex )")
 
                # not so useful here, but for completeness : Bs to JPsi decay ?
                # Returns booleans. e.g. the first one means that the event contains a Bs that decayed to a JPsi (443) + X, 
@@ -211,8 +211,8 @@ class analysis():
                .Define("Bsbardecay",  "MCParticle::get_decay(-531, 443, false)(Particle, Particle1)")
 
 	       # to get the distribution of the d0 of the mu+ track
-	       .Define("RecoMuplus_d0",  "getRP2TRK_D0( RecoMuplus, EFlowTrack_1) ")
-	       .Define("RecoMuplus_z0",  "getRP2TRK_Z0( RecoMuplus, EFlowTrack_1) ")
+	       .Define("RecoMuplus_d0",  "ReconstructedParticle2Track::getRP2TRK_D0( RecoMuplus, EFlowTrack_1) ")
+	       .Define("RecoMuplus_z0",  "ReconstructedParticle2Track::getRP2TRK_Z0( RecoMuplus, EFlowTrack_1) ")
 
 
         )

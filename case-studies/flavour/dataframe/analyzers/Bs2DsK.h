@@ -14,7 +14,7 @@
 
 #include "MCParticle.h"
 #include "ReconstructedParticle2MC.h"
-#include "Vertexing.h"
+#include "VertexFitterSimple.h"
 
 #include <random>
 
@@ -50,7 +50,7 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  tracks_for_fitting_the_Bs_vertex(
 ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_withCovariance (
                         ROOT::VecOps::RVec<edm4hep::TrackState> DsTracks,
                         ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState,
-			Vertexing::FCCAnalysesVertex centralVertex ) ;
+			VertexingUtils::FCCAnalysesVertex centralVertex ) ;
 
 ROOT::VecOps::RVec<edm4hep::TrackState>  tracks_for_fitting_the_Bs_vertex(
                                 ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_withCovariance,

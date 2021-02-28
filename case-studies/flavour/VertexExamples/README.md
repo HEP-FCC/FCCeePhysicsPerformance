@@ -7,7 +7,7 @@
 - Examples considered :
   - Bs to JPsi(mumu) Phi(KK)
     - example file:  /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
-    - to produce the ntuple: analysis\_Bs2JPsiPhi.py
+    - to produce the ntuple: [`analysis_Bs2JPsiPhi.py`](analysis_Bs2JPsiPhi.py)
     - plotting macro: plots\_Bs2JsiPhi.x
   - Bc to tau(3pi nu) nu
     - to produce the ntuple: analysis\_B2TauNu.py
@@ -20,11 +20,11 @@
 ### Setup
 
 Setup: see [case-studies/flavour/dataframe](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/dataframe) and follow the recipe in the README
-- the code needed by the analyzers is in case-studies/flavour/dataframe/analyzers, see Bs2JpsiPhi.cc and Bs2DsK.cc
+- the code needed by the analyzers is in case-studies/flavour/dataframe/analyzers, see ```Bs2JpsiPhi.cc``` and ```Bs2DsK.cc```
 - the recipe compiles the code and creates the library libFCCAnalysesFlavour
 - come back to case-studies/flavour/VertexExamples and run e.g. :
  ```markdown
-python analysis_Bs2JPsiPhi.py  /eos/experiement/fcc/users/e/eperez/Bs2JPsiPhi\_100k\_fullCovMat\_fixes.root
+python analysis_Bs2JPsiPhi.py  /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2JpsiPhi_IDEAtrkCov.root
 ```
 
 ### Production of Delphes samples with a customized tracker or beam-pipe
@@ -37,7 +37,7 @@ python analysis_Bs2JPsiPhi.py  /eos/experiement/fcc/users/e/eperez/Bs2JPsiPhi\_1
 
 #### Bs2JpsiPhi, BtoTau 
 
-The two configuration files are very similar. See detailed comments inside analysis\_Bs2JPsiPhi.py
+The two configuration files are very similar. See detailed comments inside ```analysis_Bs2JPsiPhi.py```
 
 #### Bs2DsK
 

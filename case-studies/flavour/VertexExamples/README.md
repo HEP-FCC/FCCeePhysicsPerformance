@@ -20,7 +20,7 @@
 ### Setup
 
 Setup: see [case-studies/flavour/dataframe](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/dataframe) and follow the recipe in the README
-- the code needed by the analyzers is in case-studies/flavour/dataframe/analyzers, see [`Bs2JpsiPhi.cc`](../dataframe/Bs2JpsiPhi.cc) ```Bs2JpsiPhi.cc``` and ```Bs2DsK.cc```
+- the code needed by the analyzers is in ```case-studies/flavour/dataframe/analyzers```, see [`Bs2JpsiPhi.cc`](../dataframe/Bs2JpsiPhi.cc) and [`Bs2DsK.cc`](../dataframe/Bs2DsK.cc)
 - the recipe compiles the code and creates the library libFCCAnalysesFlavour
 - come back to case-studies/flavour/VertexExamples and run e.g. :
  ```markdown
@@ -37,7 +37,7 @@ python analysis_Bs2JPsiPhi.py  /eos/experiment/fcc/ee/examples/lowerTriangle/p8_
 
 #### Bs2JpsiPhi, BtoTau 
 
-The two configuration files are very similar. See detailed comments inside ```analysis_Bs2JPsiPhi.py```
+The two configuration files are very similar. See detailed comments inside [`analysis_Bs2JPsiPhi.py`](analysis_Bs2JPsiPhi.py)
 
 #### Bs2DsK
 

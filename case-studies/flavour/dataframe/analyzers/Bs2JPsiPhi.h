@@ -14,6 +14,7 @@
 #include "MCParticle.h"
 #include "ReconstructedParticle2MC.h"
 #include "VertexFitterSimple.h"
+#include "VertexingUtils.h"
 
 
 
@@ -42,7 +43,7 @@ struct selRP_leg_atVertex{
    selRP_leg_atVertex( int idx );
    int m_idx;
   ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> operator() (ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> BsRecoParticles,
-								     Vertexing::FCCAnalysesVertex BsDecayVertex,
+								     VertexingUtils::FCCAnalysesVertex BsDecayVertex,
 								     ROOT::VecOps::RVec<edm4hep::TrackState> tracks) ;
 };
 

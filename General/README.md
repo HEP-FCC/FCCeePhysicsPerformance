@@ -12,6 +12,11 @@ Rather random for the while...
     1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
 4. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
 5. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+    1. [Vertex-fitter code from Franco Bedeschi](#vertex-fitter-code-from-franco-bedeschi)
+    2. [Vertexing with the ACTS suite](#vertexing-with-the-acts-suite)
+    3. [The LCFI+ algorithm](#the-lcfi+-algorithm)
+    4. [The DecayTreeFitter (DTF) algorithm](#the-decaytreefitter-(dtf)-algorithm)
+    5. [Flavour tagging using machine learning](#flavour-tagging-using-machine-learning)
 6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
 6. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
     1. [Beam energy spread](#beam-energy-spread)
@@ -85,7 +90,7 @@ and take the output configuration file, [edm4hep\_output\_config.tcl](https://gi
  
 - To run Pythia and Delphes :
 ```markdown
-DelphesPythia8\_EDM4HEP $DELPHES\_DIR/cards/delphes\_card\_IDEAtrkCov.tcl edm4hep\_output\_config.tcl your\_pythia\_card.cmd outputFile.root
+DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep_output_config.tcl your_pythia_card.cmd outputFile.root
 ```
 Example cards for Pythia can be found [here](https://github.com/HEP-FCC/FCC-config/tree/main/Generator/Pythia8) (not much populated yet), or in EOS at CERN, in /eos/fcc/ee/utils/pythiacards (which contains the cards for all the samples produced in November 2020).
 
@@ -179,7 +184,9 @@ module FastJetFinder GenJetFinder {
 
 - Recent versions of Delphes offer a rather detailed modelling of the tracks via the [TrackCovariance Delphes module](https://github.com/delphes/delphes/blob/master/modules/TrackCovariance.cc), developed from a code by Franco Bedeschi. The module, in the input card, must contain a description of the tracker, see for example [the delphes_card_IDEAtrkCov.tcl](https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl).
 (more details about the geometry description can be found above). This produces five-parameter tracks - i.e., including the transverse and longitudinal impact parameters - with their covariance matrix.
+    - for more details about the TrackCovariance module, see Franco's talk at the [FCC detector meeting of March 2019](https://indico.cern.ch/event/802367/contributions/3343375/attachments/1808003/2951636/TrackingSim_WG11_FCC_March2019.pdf), or at the [CEPC meeting in Oxford, April 2019](https://indico.cern.ch/event/783429/contributions/3376675/attachments/1829951/3712651/Oxford_April2019_V1.pdf).
 
+<!---
 - In FCCSW: in order to save the 5-parameter tracks and their covariance matrix, the [DelphesSaveChargedParticles](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/src/DelphesSaveChargedParticles.cpp) module should be configured with the flag **saveTrkCov** set to True. Example:
 ```markdown
 chhadSaveTool = DelphesSaveChargedParticles("efcharged")
@@ -191,30 +198,66 @@ chhadSaveTool.particles_trkCov.Path      = "efcharged_trkCov"
 chhadSaveTool.mcAssociations.Path = "efchargedToMC"
 ```
 See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimDelphes.html) for a usage example.
+-->
 
-- In the FCCEDM output, this will save the track parameters: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
+- (old) In the FCCEDM output, the track parameters thar are saved are: ( d0, z0, phi, theta, q/p ) with d0 and z0 in mm and q/p in GeV-1 [TBC for q/p]. The covariance matrix is given in this basis. It is saved as 15 floats,  trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
 
-- In the EDM4HEP output, the saved parameters are (d0, phi, rho, z0, tanLambda), with d0 and z0 in mm and the curvature rho in mm<sup>-1</sup>. The covariance matrix is saved as 15 floats corresponding to the former basis. Only the diagonal elements are currently saved (to be fixed).
+- In the EDM4HEP output, the track parameters are (d0, phi, rho, z0, tanLambda), with d0 and z0 in mm and the curvature rho in mm<sup>-1</sup>. The sign convention for the curvature rho is such that with Bz > 0 , rho is positive for a particle with Q > 0. The covariance matrix is saved as 15 floats corresponding to the former basis. 
+    - For files produced before end of February 2021, only the diagonal elements of the covariance matrix of the track parameters were saved. And the matrix was saved as an **upper-triangle** matrix, trkCov[0], trkCov[5], trkCov[9], trkCov[12] and trkCov[14] denoting the diagonal elements of the symmetric matrix.
+    - Starting with the SW distribution deployed on Feb 26, 2021, the off-diagonal terms are stored too. Moreover, to comply with the convention used throughout EDM4HEP, **it is now the lower-triangle matrix that is stored**: trkCov[0], trkCov[2], trkCov[5], trkCov[9] and trkCov[14] denote the variances of d0, phi, rho, z0 and tanLambda; trkCov[1] is the covariance between d0 and phi, trkCov[3] between d0 and rho, etc.
 
 
 
 
 ### Vertexing and flavour tagging
-- The LCFIPlus algorithm, developed for ILC and CLIC and used in the [CLD performance paper](https://arxiv.org/abs/1911.12230)
+
+#### Topical meeting on vertexing, Feb 10, 2021
+
+Link to the [topical meeting on vertexing, Feb 10, 2021](https://indico.cern.ch/event/1003610/) organised jointly by Physics Performance and Software and Computing. And the [meeting summary (plus progress)](https://indico.cern.ch/event/996337/contributions/4238680/attachments/2194428/3709760/Vertexing_Summary_22_02_2021.pdf)  presented by Clement Helsens at the FCC-ee general meeting of February 22, 2021.
+
+
+#### Vertex-fitter code from Franco Bedeschi
+
+A stand-alone vertex-fitter from Franco Bedeschi has been **implemented in FCCAnalyses**.
+  - the algorithm was described in [Franco's talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf) at the [topical meeting on vertexing, Feb 10, 2021](https://indico.cern.ch/event/1003610/).
+  - In FCCAnalyses, see an example usage in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex).
+    - analysis.py runs over Z to light jet events and determines the event primary vertex
+    - The macro vertex\_plots.x makes plots of the chi2 of the fit, of the resolutions of the fitted vertex position in (x, y, z), and of the corresponding pulls.
+    - the code retrieves an edm4hep::VertexData object, where: 
+      - the vertex coordinates (x, y, z) are in mm
+      - the returned chi2 is normalised to the number of degrees of freedom of the fit ( n.d.f. = 2 x N<sub>tracks</sub> -3)
+      - the covariance matrix of (x, y, z) is stored as a an array of 6 floats, corresponding to the **lower-triangle** matrix (i.e. covMat[0], covMat[2], covMat[5] denote the variances of x, y, z, respectively)
+    - the code is in [analyzers/dataframe/VertexFitterSimple.cc](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/VertexFitterSimple.cc), and makes use of [analyzers/dataframe/VertexingUtils.cc](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/VertexingUtils.cc)
+  - Examples that run this vertex fitter and determine resolutions of displaced vertices, in example exclusive B decay processes, can be found in the [FCCeePhysicsPerformance repository, in case-studies/flavour/VertexExamples](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/VertexExamples) vertex resolutions
+    - with configuration files (analysis\_xxx.py) and plotting macros (plots\_xxx) that run over the ntuples created by the configuration files, and produce plots like those shown in [Clement's and Emmanuel's talk at the topical meeting](https://indico.cern.ch/event/1003610/contributions/4214580/attachments/2187832/3696984/2021_02_10_VertexResolutions.pdf)
+
+#### Vertexing with the ACTS suite
+  - see the [talks of Andrea Salzbuger](https://indico.cern.ch/event/1003610/contributions/4214597/attachments/2187835/3697041/2020-ACTS-FCCee-Intro.pdf) and of [Bastian Schlag](https://indico.cern.ch/event/1003610/contributions/4214597/attachments/2187835/3696987/acts_vertexing.pdf) at the topical meeting of Feb 2021, for an overview of the ACTS project and a report on the ACTS vertexing suite
+  - The **ACTS vertexing suite is interfaced with FCCAnalyses**. 
+    - see example usage in [examples/FCCee/vertex/analysis.py](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/vertex/analysis.py) to see how one can run the AMVF vertex finder and the Billoir vretex fitter
+    - the code is in [analyzers/dataframe/VertexFinderActs.cc](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/VertexFinderActs.cc) and [analyzers/dataframe/VertexFitterActs.cc](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/VertexFitterActs.cc)
+    - same convention as described above for the quantities that are retrieved
+
+
+#### The LCFI+ algorithm
+The LCFIPlus algorithm, developed for ILC and CLIC and used in the [CLD performance paper](https://arxiv.org/abs/1911.12230).
   - [Description of the LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) T. Suehara,T. Tanabe, arXiv1506.08371
   - [LCFIPlus in GitHub](https://github.com/lcfiplus/LCFIPlus)
   - [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
     - the algorithm was run on EDM4HEP samples using a converter to LCIO as a first step. 
-- Vertexing from Decay chain fitting :
-  - [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
-  - [Global Decay Chain Vertex Fitting at B-Factories](https://arxiv.org/abs/1901.11198) J.-F. Krohn et al, NIM A, Volume 976, 2020, 164269 - the implementation of Belle-II
-- Flavour tagging using machine learning
+  - the [status of the implementation into key4hep](https://indico.cern.ch/event/1003610/contributions/4214593/attachments/2187925/3697155/k4marlinWrapper_plfernan_10feb2021.pdf) as reported at the topical meeting of Feb 10, 2021 (P. Fernandez, A. Sailer)
+
+#### The DecayTreeFitter (DTF) algorithm
+The DecayTreeFitter algorithm was developed at BaBar and is used at BaBar, LHCb and Belle-2.
+- [Decay Chain Fitting with a Kalman Filter](https://arxiv.org/abs/physics/0503191) W. D. Hulsbergen, Nucl.Instrum.Meth.A 552 (2005) 566
+- [Global Decay Chain Vertex Fitting at B-Factories](https://arxiv.org/abs/1901.11198) J.-F. Krohn et al, NIM A, Volume 976, 2020, 164269: the implementation of Belle-II
+- the [overview talk from Wouter Hulsbergen](https://indico.cern.ch/event/1003610/contributions/4214583/attachments/2187816/3697390/decaytreefitter_fccee_20210210.pdf) at the topical meeting of Feb 10, 2021
+- the [LHCb gitlab repository](https://gitlab.cern.ch/lhcb/Phys/-/tree/master/Phys/DecayTreeFitter)
+
+
+
+#### Flavour tagging using machine learning
   - see the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
-
-
-- Link to the [topical meeting on vertexing, Feb 10, 2021](https://indico.cern.ch/event/1003610/) organised jointly by Physics Performance and Software and Computing.
-- A stand-alone vertex-fitter from Franco Bedeschi has been implemented in FCCAnalyses. See an example usage in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex). 
-  - the algorithm was described in [Franco's talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf) at the topical meeting
 
 
 

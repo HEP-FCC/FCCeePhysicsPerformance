@@ -215,6 +215,8 @@ See the [tutorial here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-ana
 
 Link to the [topical meeting on vertexing, Feb 10, 2021](https://indico.cern.ch/event/1003610/) organised jointly by Physics Performance and Software and Computing. And the [meeting summary (plus progress)](https://indico.cern.ch/event/996337/contributions/4238680/attachments/2194428/3709760/Vertexing_Summary_22_02_2021.pdf)  presented by Clement Helsens at the FCC-ee general meeting of February 22, 2021.
 
+#### Informal e-group
+An informal e-group was created after the topical meeting:   vertexing-FCCee-informal
 
 #### Vertex-fitter code from Franco Bedeschi
 

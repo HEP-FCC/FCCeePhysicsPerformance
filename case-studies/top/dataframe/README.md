@@ -5,7 +5,7 @@ source ./setup.sh
 
 then come back in 
 ```
-FCCeePhysicsPerformance/case-studies/flavour/dataframe
+FCCeePhysicsPerformance/case-studies/top/dataframe
 ```
 
 source localSetup

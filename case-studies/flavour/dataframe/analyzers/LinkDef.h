@@ -6,6 +6,6 @@
 #pragma link off all functions;
 #pragma link C++ nestedclasses;
 
-#pragma link C++ function dummyLoader;
+#pragma link C++ function dummyLoaderFlavour;
 
 #endif

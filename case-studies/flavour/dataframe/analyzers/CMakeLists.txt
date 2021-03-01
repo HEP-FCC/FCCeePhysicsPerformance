@@ -13,7 +13,7 @@ get_target_property(EDM4HEP_INCLUDE_DIRS EDM4HEP::edm4hep INTERFACE_INCLUDE_DIRE
 
 include_directories(${EDM4HEP_INCLUDE_DIRS} ${podio_INCLUDE_DIR})
 
-ROOT_GENERATE_DICTIONARY(G__FCCAnalysesFlavour Bs2JPsiPhi.h Bs2DsK.h dummyLoader.h LINKDEF LinkDef.h)
+ROOT_GENERATE_DICTIONARY(G__FCCAnalysesFlavour Bs2JPsiPhi.h Bs2DsK.h dummyLoaderFlavour.h LINKDEF LinkDef.h)
 
 
 file(GLOB sources *.cc)

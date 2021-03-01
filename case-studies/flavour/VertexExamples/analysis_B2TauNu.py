@@ -22,7 +22,7 @@ ROOT.gSystem.Load("libFCCAnalysesFlavour")
 ROOT.gErrorIgnoreLevel = ROOT.kFatal
 _edm  = ROOT.edm4hep.ReconstructedParticleData()
 _pod  = ROOT.podio.ObjectID()
-_fcc  = ROOT.dummyloader
+_fcc  = ROOT.dummyLoader
 _bs  = ROOT.dummyLoader
 
 
@@ -87,7 +87,7 @@ class analysis():
                .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
 
                # number of tracks
-               .Define("ntracks","getTK_n(EFlowTrack_1)")
+               .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
 
                # Retrieve the decay vertex of all MC particles
                .Define("MC_DecayVertices",  "MCParticle::get_endPoint( Particle, Particle1)" )
@@ -166,25 +166,25 @@ class analysis():
                # possibly including "dummy" particles in case one of the leg did not make a RecoParticle.
                # This is on purpose, to maintain the mapping with the indices - i.e. the 1st particle in 
                # the list is the Nu_taubar, then the Nu_tau, etc.
-               .Define("BRecoParticles",  "if (B2NuNuPiPiPi_indices.size()>0) return selRP_matched_to_list( B2NuNuPiPiPi_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle); else return selRP_matched_to_list( Bbar2NuNuPiPiPi_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle);")
+               .Define("BRecoParticles",  "if (B2NuNuPiPiPi_indices.size()>0) return ReconstructedParticle2MC::selRP_matched_to_list( B2NuNuPiPiPi_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle); else return ReconstructedParticle2MC::selRP_matched_to_list( Bbar2NuNuPiPiPi_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle);")
 
                #Returns the pion with minimum energy
                .Define("minPionE", "MyMinEnergy(BRecoParticles)")
 
                # the corresponding tracks - here, dummy particles, if any, are removed
-               .Define("BTracks",   "getRP2TRK( BRecoParticles, EFlowTrack_1)" )
+               .Define("BTracks",   "ReconstructedParticle2Track::getRP2TRK( BRecoParticles, EFlowTrack_1)" )
 
                # number of tracks used to reconstruct the Bc vertex 
-               .Define("n_BTracks", "getTK_n( BTracks )")
+               .Define("n_BTracks", "ReconstructedParticle2Track::getTK_n( BTracks )")
 
                # the reco'ed vertex :
-               .Define("BVertexObject",   "Vertexing::VertexFitter_Tk( 2, BTracks)" )
-               .Define("BVertex",  "Vertexing::get_VertexData( BVertexObject )")
+               .Define("BVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, BTracks)" )
+               .Define("BVertex",  "VertexingUtils::get_VertexData( BVertexObject )")
 
                # Angular separation between the tracks from the Bc decays
-               .Define("deltaAlpha_max","angular_separation(0)( BRecoParticles )")
-               .Define("deltaAlpha_min","angular_separation(1)( BRecoParticles )")
-               .Define("deltaAlpha_ave","angular_separation(2)( BRecoParticles )")
+               .Define("deltaAlpha_max","ReconstructedParticle::angular_separationBuilder(0)( BRecoParticles )")
+               .Define("deltaAlpha_min","ReconstructedParticle::angular_separationBuilder(1)( BRecoParticles )")
+               .Define("deltaAlpha_ave","ReconstructedParticle::angular_separationBuilder(2)( BRecoParticles )")
 
         )
 

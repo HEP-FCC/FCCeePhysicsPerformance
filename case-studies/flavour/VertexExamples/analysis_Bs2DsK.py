@@ -10,13 +10,18 @@ ROOT.gSystem.Load("libFCCAnalysesFlavour")
 ROOT.gErrorIgnoreLevel = ROOT.kFatal
 _edm  = ROOT.edm4hep.ReconstructedParticleData()
 _pod  = ROOT.podio.ObjectID()
-_fcc  = ROOT.dummyloader
+_fcc  = ROOT.dummyLoader
 _bs  = ROOT.dummyLoader
 
 print ('edm4hep  ',_edm)
 print ('podio    ',_pod)
 print ('fccana   ',_bs)
 
+
+#
+#       Example file: 
+#       /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov.root
+#
 
 class analysis():
 
@@ -43,7 +48,7 @@ class analysis():
                .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
 
                # number of tracks
-               .Define("ntracks","getTK_n(EFlowTrack_1)")
+               .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
 
 
                # MC indices of the decay Bs -> Ds+ K-
@@ -53,7 +58,7 @@ class analysis():
                # would there be > 1, the method gives the first one encountered.
                # Returns the indices of : mother Bs, Ds+, K-
 
-               .Define("Bs2DsK_indices", "MCParticle::get_indices_ExclusiveDecay( 531, {431, -321}, false, false) ( Particle, Particle1)" )
+               .Define("Bs2DsK_indices", "MCParticle::get_indices_ExclusiveDecay( -531, {431, -321}, false, false) ( Particle, Particle1)" )
 
 
                # MC indices of (this) Ds+ -> K+ K- Pi+
@@ -111,13 +116,13 @@ class analysis():
                # the size of this collection is always 3 provided that Ds2KKPi_indices is not empty.
                # In case one of the Ds legs did not make a RecoParticle, a "dummy" particle is inserted in the liat.
                # This is done on purpose, to maintain the mapping with the indices.
-               .Define("DsRecoParticles",   " selRP_matched_to_list( Ds2KKPi_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+               .Define("DsRecoParticles",   " ReconstructedParticle2MC::selRP_matched_to_list( Ds2KKPi_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
 
                # the corresponding tracks - here, dummy particles, if any, are removed
-               .Define("DsTracks",  "getRP2TRK( DsRecoParticles, EFlowTrack_1)" )
+               .Define("DsTracks",  "ReconstructedParticle2Track::getRP2TRK( DsRecoParticles, EFlowTrack_1)" )
 
                # number of tracks used to reconstruct the Ds vertex
-               .Define("n_DsTracks", "getTK_n( DsTracks )")
+               .Define("n_DsTracks", "ReconstructedParticle2Track::getTK_n( DsTracks )")
 
                # the RecoParticles associated with the K+, K- and Pi+ of teh Ds decay
                .Define("RecoKplus",  "selRP_leg(0)( DsRecoParticles )" )
@@ -125,8 +130,8 @@ class analysis():
                .Define("RecoPiplus", "selRP_leg(2)( DsRecoParticles )" )
 
                # Reco'ed vertex of the Ds
-               .Define("DsVertexObject",  "Vertexing::VertexFitter_Tk( 3, DsTracks)" )
-               .Define("DsVertex",  "Vertexing::get_VertexData( DsVertexObject )")
+               .Define("DsVertexObject",  "VertexFitterSimple::VertexFitter_Tk( 3, DsTracks)" )
+               .Define("DsVertex",  "VertexingUtils::get_VertexData( DsVertexObject )")
 
 
 	       # -------------------------------------------------------------------------------------------------------
@@ -139,48 +144,50 @@ class analysis():
                .Define("RecoPiplus_atVertex",  "selRP_leg_atVertex(2)( DsRecoParticles, DsVertexObject, EFlowTrack_1)")
 
                # the  RecoParticle associated with  the bachelor K
-                .Define("BsRecoParticles", "selRP_matched_to_list( Bs2KKPiK_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+                .Define("BsRecoParticles", "ReconstructedParticle2MC::selRP_matched_to_list( Bs2KKPiK_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
                 .Define("RecoBachelorK",  "selRP_leg(3)( BsRecoParticles )")
                # and the corresponding track
-                .Define("BachelorKTrack",  "getRP2TRK(  RecoBachelorK, EFlowTrack_1)" )
+                .Define("BachelorKTrack",  "ReconstructedParticle2Track::getRP2TRK(  RecoBachelorK, EFlowTrack_1)" )
 
                # Reconstructed Ds
                 .Define("RecoDs", " ReconstructedDs( RecoKplus, RecoKminus, RecoPiplus ) ")
                 .Define("RecoDs_atVertex",  " ReconstructedDs( RecoKplus_atVertex, RecoKminus_atVertex, RecoPiplus_atVertex) ")
 
-                .Define("RecoDs_pt",  "getRP_pt( RecoDs )")
-                .Define("RecoDs_theta",  "getRP_theta( RecoDs ) ")
-                .Define("RecoDs_phi",   "getRP_phi( RecoDs )")
-                .Define("RecoDs_mass",  "getRP_mass( RecoDs )")
+                .Define("RecoDs_pt",  "ReconstructedParticle::get_pt( RecoDs )")
+                .Define("RecoDs_theta",  "ReconstructedParticle::get_theta( RecoDs ) ")
+                .Define("RecoDs_phi",   "ReconstructedParticle::get_phi( RecoDs )")
+                .Define("RecoDs_mass",  "ReconstructedParticle::get_mass( RecoDs )")
 
-                .Define("RecoDs_atVertex_pt",  "getRP_pt( RecoDs_atVertex )")
-                .Define("RecoDs_atVertex_theta",  "getRP_theta( RecoDs_atVertex )")
-                .Define("RecoDs_atVertex_phi",   "getRP_phi( RecoDs_atVertex )")
-                .Define("RecoDs_atVertex_mass",  "getRP_mass( RecoDs_atVertex )")
+                .Define("RecoDs_atVertex_pt",  "ReconstructedParticle::get_pt( RecoDs_atVertex )")
+                .Define("RecoDs_atVertex_theta",  "ReconstructedParticle::get_theta( RecoDs_atVertex )")
+                .Define("RecoDs_atVertex_phi",   "ReconstructedParticle::get_phi( RecoDs_atVertex )")
+                .Define("RecoDs_atVertex_mass",  "ReconstructedParticle::get_mass( RecoDs_atVertex )")
 
                # the list of tracks to reconstruct the Bs vertex
 	       # here, a TrackState is built from the RecoDs_atVertex, but the elements of the covariance matrix are
                # set arbitrarily - use a relative uncertainty of 5% for the parameters.
                # See below for a better way to do it.
                .Define("BsTracks",  "tracks_for_fitting_the_Bs_vertex( RecoDs_atVertex, BachelorKTrack, Ds, DsMCDecayVertex )" )
-               .Define("n_BsTracks", "getTK_n( BsTracks )")
+               .Define("n_BsTracks", "ReconstructedParticle2Track::getTK_n( BsTracks )")
 
                # Reco'ed Bs vertex
-               .Define("BsVertexObject",  "Vertexing::VertexFitter_Tk( 2, BsTracks)" )
-               .Define("BsVertex",  "Vertexing::get_VertexData( BsVertexObject )")
+               .Define("BsVertexObject",  "VertexFitterSimple::VertexFitter_Tk( 2, BsTracks)" )
+               .Define("BsVertex",  "VertexingUtils::get_VertexData( BsVertexObject )")
 
 
 	       # Try to better account for the covariance matrix of the Ds pseudo-track
                .Define("ReconstructedDs_atVertex_TrackState", "ReconstructedDs_atVertex_TrackState( RecoDs_atVertex, Ds, DsMCDecayVertex )" )
                .Define("RecoDs_atVertex_TrackState_Cov",  "ReconstructedDs_atVertex_TrackState_withCovariance( DsTracks, ReconstructedDs_atVertex_TrackState, DsVertexObject) ")
                .Define("BsTracks_Cov",  "tracks_for_fitting_the_Bs_vertex( RecoDs_atVertex_TrackState_Cov, BachelorKTrack) ")
-               .Define("BsVertexObject_Cov",  "Vertexing::VertexFitter_Tk( 2, BsTracks_Cov)" )
+               .Define("BsVertexObject_Cov",  "VertexFitterSimple::VertexFitter_Tk( 2, BsTracks_Cov)" )
                # This is the final Bs vertex
-               .Define("BsVertex_Cov",  "Vertexing::get_VertexData( BsVertexObject_Cov )")
+               .Define("BsVertex_Cov",  "VertexingUtils::get_VertexData( BsVertexObject_Cov )")
 
                .Define("Kplus_phi",  "MCParticle::get_phi( Kplus )")
-               .Define("RecoKplus_phi",  "getRP_phi( RecoKplus ) " )
-               .Define("RecoKplus_atVertex_phi", "getRP_phi( RecoKplus_atVertex ) ")
+               .Define("RecoKplus_phi",  "ReconstructedParticle::get_phi( RecoKplus ) " )
+               .Define("RecoKplus_atVertex_phi", "ReconstructedParticle::get_phi( RecoKplus_atVertex ) ")
+
+	       .Define("RecoBachelorK_E",  "ReconstructedParticle::get_e( RecoBachelorK )")
                
 
 
@@ -224,6 +231,7 @@ class analysis():
                 "RecoDs_atVertex_phi",
                 "RecoDs_atVertex_mass",
                 #"RecoBachelorK",
+                "RecoBachelorK_E",
                 "BsVertex",
                 "n_BsTracks",
                 #"RecoDs_atVertex_TrackState_Cov"

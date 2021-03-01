@@ -23,8 +23,7 @@ O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of ea
 - [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
 
 Next meetings:
-- February 10, 14:00 - 17:00: topical meeting on vertexing, joint with Software
-- February 15: regular Physics Performance meeting
+- March 15: regular Physics Performance meeting
 
 E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).
 
@@ -54,12 +53,20 @@ E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [he
 
 ### General information for FCC-ee analyses
 
+
 1. [Common event samples](General/README.md#common-event-samples)
 2. [Example analyses](General/README.md#example-analyses)
 3. [To produce your own Delphes samples](General/README.md#to-produce-your-own-delphes-samples)
+    1. [Quick instructions for producing samples](General/README.md#quick-instructions-for-producing-samples)
+    2. [Make simple changes to the tracker or beam-pipe description in Delphes](General/README.md#make-simple-changes-to-the-tracker-or-beam-pipe-description-in-delphes)
     1. [Change the Jet algorithms](General/README.md#change-the-jet-algorithm-in-the-delphes-interface)
 4. [The five-parameter tracks produced by the Delphes interface](General/README.md#the-five-parameter-tracks-produced-by-the-delphes-interface)
 5. [Vertexing and flavour tagging](General/README.md#vertexing-and-flavour-tagging)
+    1. [Vertex-fitter code from Franco Bedeschi](General/README.md#vertex-fitter-code-from-franco-bedeschi)
+    2. [Vertexing with the ACTS suite](General/README.md#vertexing-with-the-acts-suite)
+    3. [The LCFI+ algorithm](General/README.md#the-lcfi+-algorithm)
+    4. [The DecayTreeFitter (General/README.mdDTF) algorithm](General/README.md#the-decaytreefitter-(General/README.mddtf)-algorithm)
+    5. [Flavour tagging using machine learning](General/README.md#flavour-tagging-using-machine-learning)
 6. [Making particle combinations with awkward arrays](General/README.md#making-particle-combinations-with-awkward-arrays)
 6. [Generating events under realistic FCC-ee environment conditions](General/README.md#generating-events-under-realistic-fcc-ee-environment-conditions)
     1. [Beam energy spread](General/README.md#beam-energy-spread)
@@ -67,6 +74,7 @@ E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [he
     3. [Transverse boost to account for the crossing angle](General/README.md#transverse-boost-to-account-for-the-crossing-angle)
 7. [Monte-Carlo programs](General/README.md#monte-carlo-programs)
 8. [Bibliography](General/README.md#bibliography)
+
 
 
 ----------

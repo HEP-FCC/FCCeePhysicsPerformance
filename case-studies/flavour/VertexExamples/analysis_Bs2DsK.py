@@ -11,7 +11,8 @@ ROOT.gErrorIgnoreLevel = ROOT.kFatal
 _edm  = ROOT.edm4hep.ReconstructedParticleData()
 _pod  = ROOT.podio.ObjectID()
 _fcc  = ROOT.dummyLoader
-_bs  = ROOT.dummyLoader
+_bs  = ROOT.dummyLoaderFlavour
+
 
 print ('edm4hep  ',_edm)
 print ('podio    ',_pod)

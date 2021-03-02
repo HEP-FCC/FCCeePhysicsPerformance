@@ -21,7 +21,7 @@ file(GLOB headers *.h)
 add_library(FCCAnalysesFlavour SHARED ${sources} ${headers} G__FCCAnalysesFlavour.cxx )
 target_include_directories(FCCAnalysesFlavour  PUBLIC
         ${CMAKE_SOURCE_DIR}/analyzers
-	$ENV{LOCALFCCANALYSES}
+	${FCCANALYSES_INCLUDE_PATH}
 )
 target_link_libraries(FCCAnalysesFlavour ROOT::Physics ROOT::MathCore ROOT::ROOTVecOps ROOT::ROOTDataFrame EDM4HEP::edm4hep EDM4HEP::edm4hepDict podio::podio)
 

@@ -1,18 +1,16 @@
-Setup FCCAnalyses in ```master``` branch (need for ENV VAR LOCALFCCANALYSES)
+If not already done, setup the common SW
 ```
-source ./setup.sh
-```
-
-then come back in 
-```
-FCCeePhysicsPerformance/case-studies/top/dataframe
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
-source localSetup
+then source localSetup
 
 ```
 source ./localSetup.sh
 ```
+
+and compile
+
 
 ```
 mkdir build install

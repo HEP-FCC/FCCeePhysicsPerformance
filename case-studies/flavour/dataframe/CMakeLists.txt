@@ -25,3 +25,5 @@ set(INSTALL_INCLUDE_DIR include CACHE PATH
 
 add_subdirectory(analyzers)
 
+set(FCCANALYSES_INCLUDE_PATH "FCCAnalysesIncludePath" CACHE PATH "Description")
+message(STATUS "FCCAnalysesIncludePath ${FCCANALYSES_INCLUDE_PATH}")

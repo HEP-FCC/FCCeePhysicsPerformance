@@ -20,8 +20,12 @@ make install
 cd ..
 ```
 
-where ```PATH_FCCANALYSES_INSTALL_INCLUDE_DIR``` points to the install include dir of FCCAnalyes. For example ```/afs/cern.ch/user/h/helsens/FCCsoft/HEP-FCC/FCCAnalyses/install/include/FCCAnalyses```.
+where ```PATH_FCCANALYSES_INSTALL_INCLUDE_DIR``` points to the install include dir of FCCAnalyses :
 
+- if you have a local version of FCCAnalyses installed (for example because you need to recompile some code in FCCAnalyses), ```PATH_FCCANALYSES_INSTALL_INCLUDE_DIR``` should point to, for example: ```/afs/cern.ch/user/h/helsens/FCCsoft/HEP-FCC/FCCAnalyses/install/include/FCCAnalyses```.
+
+
+- otherwise, you are using the "central" version of FCCAnalyses.
 To find a cvmfs version, use ```spack```:
 ```
 spack find  --paths fccanalyses

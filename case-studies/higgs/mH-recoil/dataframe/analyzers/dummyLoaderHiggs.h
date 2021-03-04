@@ -1,0 +1,5 @@
+#ifndef DUMMYLOADERHIGGS_ANALYZERS_H
+#define DUMMYLOADERHIGGS_ANALYZERS_H
+
+bool dummyLoaderHiggs();
+#endif

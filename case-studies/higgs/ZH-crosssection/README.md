@@ -1,4 +1,4 @@
-## Measurement of the ZH cross-section
+## Measurement of the ZH cross-section with hadronic Z decays
 
 ### Abstract
 

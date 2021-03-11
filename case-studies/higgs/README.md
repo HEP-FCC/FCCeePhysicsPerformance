@@ -13,6 +13,6 @@
 - [The invisible Higgs branching fraction](invisible): hadronic mass resolution, hadronic recoil-mass resolutions, maybe b-tagging performance
 - [The total decay width of the Higgs boson via ZZZ\* events](width-zzz): jet clustering algorithms, jet directions, kinematic fits (separation of H → ZZ∗ and H → WW∗ )
 - [The total decay width of the Higgs boson via bbnunu events](width-bbnunu): visible and missing mass resolutions
-- [The Higgs boson mass from the recoil mass](mH-recoil): lepton momentum resolution
+- [The Higgs boson mass and σ(ZH) from the recoil mass with leptonic Z decays](mH-recoil): lepton momentum resolution
 - [The Higgs boson mass from ZH -> bbqq](mH-bbqq): jet angular resolution, b-tagging
 - [Electron Yukawa coupling via s-channel e+e− → H production at the Higgs pole](eeh): monochromatization

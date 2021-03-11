@@ -1,4 +1,4 @@
-## The Higgs boson mass from the recoil mass
+## The Higgs boson mass and σ(ZH) from the recoil mass with leptonic Z decays
 
 ### Abstract
 
@@ -16,9 +16,14 @@ for the determination of the recoil mass.
 
 
 ### Contributors
+- Clement Helsens (CERN)
+- Ang Li, Gregorio Bernardi (LPNHE)
+- Sylvie Braibant, Valentina Diolaiti, Paolo Giacomelli (Bologna)
+- Markus Klute (MIT)
+ 
+### Preliminary analyses 
 - Clement Helsens: Developer, Sample production, Preliminary FCCAnalyses design, Preliminary recoil fit analysis
 
-### Preliminary analyses
 To run the analysis, should use the corresponding [FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses/tree/master/) configurations located in ```FCCAnalyses-config/mumu``` and ```FCCAnalyses-config/ee```. This preliminary analysis i using the input files produced in the ```edm4hep``` data format, and produced with this [sample production](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php). ```FlatNtuples``` and ```histograms``` will be produced and used to fit the recoil mass. ```FCCAnalyses``` output files can also be directly accessed on eos ```/eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/```.
 
 ![](images/leptonic_recoil_m_ZH_sel1_stack_lin.png?raw=true)

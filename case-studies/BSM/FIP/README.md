@@ -17,3 +17,7 @@ sometimes the kinematic of the photons is such that they might get merged by the
 
 #### References
 - [Presentations at the PPC of March 15,2021] (https://indico.cern.ch/event/1016361/) 
+
+#### Case studies
+
+- [Z-boson decays into an invisible massless dark photon at FCC-ee](masslessdarkgamma) : angular coverage, crack regions, photon resolution

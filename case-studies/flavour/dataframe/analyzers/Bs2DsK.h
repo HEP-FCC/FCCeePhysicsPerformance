@@ -57,4 +57,6 @@ tracks_for_fitting_the_Bs_vertex(ROOT::VecOps::RVec<edm4hep::TrackState>  Recons
 				 ROOT::VecOps::RVec<edm4hep::TrackState> BachelorKTrack);
 
 
+/// Smear the Ds momentum according to its cov matrix
+TVectorD SmearVector( int NDIM, std::default_random_engine generator, TVectorD Ds_momentum, TMatrixDSym Cov_Ds_momentum );
 #endif

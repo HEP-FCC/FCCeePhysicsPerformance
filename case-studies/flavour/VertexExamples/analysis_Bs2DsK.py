@@ -23,6 +23,7 @@ print ('fccana   ',_bs)
 #       Example file: 
 #       /eos/experiment/fcc/ee/examples/lowerTriangle/p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov.root
 #
+#	better (p10) :  /eos/experiment/fcc/users/e/eperez/vertexing/p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov_p10.root
 
 class analysis():
 

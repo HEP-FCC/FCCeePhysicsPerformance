@@ -284,16 +284,20 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
  float mPi = 1.3957018e-01;
  std::vector< float> masses={ mK, mK, mPi };
 
- double param_base[5];
+// double param_base[5];
+ TVectorD param_base(5);
  int idxCov[5] = { 0, 2, 5, 9, 14 };  // indices of the diagonal terms in the track covariance matrix
  double randomGaus[5] ;
- double param[5];
+// double param[5];
+ TVectorD  param(5);
 
  double convert[5] = { 1e-3, 1., 0.5*1e3, 1e-3, 1. }; // to convert the edm4hep tracks into Franco's tracks
 						      // ( convert mm to m, and his C = rho / 2 )
 
  double sum[5];   // to determine the average of the Ds track parameters
  double sumsq[5]; // to determine the variance of the parameters
+ TMatrix cov(5,5);   // covariance matrix of the Ds parameters
+
  
  for (int i=0; i < 5; i++) {
    sum[i] = 0;
@@ -322,6 +326,7 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
 	    edm4hep::TrackState modified_track = track;
 
 	    // modify the track parameters according to their covariance matrix
+/*
 	    for (int i=0; i < 5; i++) {
 	        double uncertainty = 0;
 	        if ( track.covMatrix[ idxCov[i] ] > 0 ) {
@@ -332,6 +337,27 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
 	        // and using Franco's definitions & units :
 	        //param_Franco[i] = param[i] * convert[i] ;
 	    }
+*/
+
+            // -----  Using the full matrix :
+           TMatrixDSym  trackCov(5);
+           int ktk=-1;
+           for (int itk=0; itk < 5; itk++) {
+            for (int jtk=0; jtk <= itk; jtk++) {
+                ktk ++;
+                trackCov[itk][jtk] = track.covMatrix[ktk];
+            } 
+           }
+           for (int itk=0; itk < 5; itk++) {
+             for (int jtk=itk+1; jtk < 5; jtk++) {
+                trackCov[itk][jtk] = trackCov[jtk][itk] ;
+             }
+           }
+        
+           TVectorD modified_track_param = SmearVector( 5, generator, param_base, trackCov) ;
+           param = modified_track_param;
+           // ------
+
 
 	    modified_track.D0 		= param[0] ;
 	    modified_track.phi 		= param[1] ;
@@ -398,6 +424,9 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
 	for (int i=0; i < 5; i++) {
 	    sum[i] += param[i];
 	    sumsq[i] += pow( param[i] - central_param[i], 2 );
+            for (int j=0; j < 5; j++) {
+                cov[i][j] +=  ( param[i] - central_param[i] ) * ( param[j] - central_param[j] );
+            }
    	}
 
  } // end loop over isample
@@ -409,6 +438,9 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
  for (int i=0; i < 5; i++) {
      sum[i] = sum[i] / float(nsamples);
      sumsq[i] = sumsq[i] / ( nsamples - 1. );
+     for ( int j=0; j < 5; j++) {
+        cov[i][j] = cov[i][j] / ( nsamples - 1. );
+     }
   }
 
   // printouts...
@@ -426,12 +458,103 @@ ROOT::VecOps::RVec<edm4hep::TrackState>  ReconstructedDs_atVertex_TrackState_wit
 
   edm4hep::TrackState the_final_Ds = ReconstructedDs_atVertex_TrackState[0];
   // set up its covariance matrix :
-   for (int i=0; i < 5; i++) {
-     the_final_Ds.covMatrix[ idxCov[i] ] = sumsq[i] ;
+   //for (int i=0; i < 5; i++) {
+     //the_final_Ds.covMatrix[ idxCov[i] ] = sumsq[i] ;
+   //}
+
+  // full covariance matrix with off diagonal terms :
+  int kdx=-1;
+  for (int i=0; i < 5; i++) {
+   for (int j=0; j <= i ; j++) {
+     kdx++;
+     the_final_Ds.covMatrix[ kdx ] = cov[i][j];
    }
+  }
+
    result.push_back( the_final_Ds );
 
  return result;
+
+}
+
+
+
+// ------------------------------------------------------------------------------
+// 
+//      Smear the Ds momentum according to its cov matrix
+//              Exploits some code from Franco B for the Choleski decomposition
+
+//TVectorD SmearDsMomentum( std::default_random_engine generator, TVectorD Ds_momentum, TMatrixDSym Cov_Ds_momentum )  {
+TVectorD SmearVector( int NDIM, std::default_random_engine generator, TVectorD Ds_momentum, TMatrixDSym Cov_Ds_momentum )  {
+
+
+///bool debug = true;
+bool debug = false;
+
+  //std::default_random_engine generator (seed);
+  std::normal_distribution<double> gaus_distribution(0., 1. );
+
+ if (debug) std::cout << " enter in SmearDsMomentum " << std::endl;
+ if (debug) {
+   std::cout << " Ds_momentum : " << std::endl;
+   Ds_momentum.Print();
+   std::cout << " Cov_Ds_momentum : " <<std::endl;
+   Cov_Ds_momentum.Print();
+ }
+
+        //
+        //
+        // Now do Choleski decomposition and random number extraction, with appropriate stabilization
+        //
+        //const int ndim = 3;
+        const int ndim =  NDIM ;
+        TMatrixDSym CvN = Cov_Ds_momentum;
+        TMatrixDSym DCv(ndim); DCv.Zero();
+        TMatrixDSym DCvInv(ndim); DCvInv.Zero();
+        for (Int_t id = 0; id < ndim; id++)
+        {
+                Double_t dVal = TMath::Sqrt(Cov_Ds_momentum (id, id));
+                DCv   (id, id) = dVal;
+                DCvInv(id, id) = 1.0 / dVal;
+        }
+        CvN.Similarity(DCvInv);                 // Normalize diagonal to 1
+        if (debug) {
+          std::cout << " CvN matrix : " << std::endl;
+          CvN.Print();
+        }
+        TDecompChol Chl(CvN);
+        Bool_t OK = Chl.Decompose();            // Choleski decomposition of normalized matrix
+        if ( ! OK ) {
+            std::cout << "  !!! in SmearDsMomentum: Choleski decomposition failed. Track is not smeared. " << std::endl;
+             std::cout << " CvN matrix : " << std::endl;
+             CvN.Print();
+             std::cout << " Cvn determinant = " << CvN.Determinant() << std::endl;
+            return Ds_momentum;
+        }
+        if (debug &&  OK) std::cout << "  --- Choleski decomposition worked " << std::endl;
+
+
+        TMatrixD U = Chl.GetU();                        // Get Upper triangular matrix
+        TMatrixD Ut(TMatrixD::kTransposed, U); // Transposed of U (lower triangular)
+        TVectorD r(ndim);
+        for (Int_t i = 0; i < ndim; i++) {
+            //r(i) = gRandom->Gaus(0.0, 1.0);           // Array of normal random numbers
+           r(i) = gaus_distribution(generator) ;
+           //std::cout << " a random " << r(i) << std::endl;
+        }
+
+        TVectorD smearedMomentum  = Ds_momentum  + DCv*(Ut*r);    // smeared momentum
+        //
+
+   if (debug) std::cout << " end of SmearTrackParameters " << std::endl;
+   if (debug) {
+    std::cout  << " Initial momentum : " << std::endl;
+    Ds_momentum.Print();
+    std::cout <<  "final momentum : " << std::endl;
+    smearedMomentum.Print();
+   }
+
+   return smearedMomentum;
 
 }
 

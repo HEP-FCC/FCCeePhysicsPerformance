@@ -2,7 +2,8 @@
 
 
 TChain* events = new TChain("events","events");
-events ->Add("Bs2DsK_evtgen.root");
+events->Add("p8_ecm91GeV_Zbb_EvtGen_Bs2DsK_IDEAtrkCov_p10_v0.root");
+
 
 
 // Basic cut & acceptance : demand only one Bs decay to make it safer,
@@ -120,9 +121,11 @@ tt.DrawLatexNDC(0.2,0.96,"B_{s} #rightarrow D_{s}K  #rightarrow KK#piK");
 cut = cut + " && n_BsTracks >=2" ;   // remove events for which the bachelor K did not make a reco'ed track
 
 TCanvas* cc = new TCanvas("Bschi2","Bschi2");
-//TH1F* hbschi2 = new TH1F("hbschi2",";#chi^{2}/n.d.f.;a.u.",100,0.,10.);
-TH1F* hbschi2 = new TH1F("hbschi2",";#chi^{2}/n.d.f.;a.u.",100,0.,5.);
+TH1F* hbschi2 = new TH1F("hbschi2",";#chi^{2}/n.d.f.;a.u.",100,0.,10.);
+//TH1F* hbschi2 = new TH1F("hbschi2",";#chi^{2}/n.d.f.;a.u.",100,0.,5.);
 events->Draw("BsVertex_Cov.chi2 >>hbschi2",cut);
+tt.DrawLatexNDC(0.2,0.96,"B_{s} #rightarrow D_{s}K  #rightarrow KK#piK");
+tt.DrawLatexNDC(0.2, 0.9, "B_{s} decay vertex");
 
 // resolution on flight  distance :
 
@@ -160,6 +163,23 @@ gStyle->SetOptStat(1110);
 tt.DrawLatexNDC(0.2, 0.9, "B_{s} decay vertex");
 Bpx->Fit("gaus");
 //c6 -> SaveAs("plots/Bsvertex_pull_x.pdf");
+
+TH1F* Bpy = new TH1F("Bpy",";Pull y_{vtx}; a.u.",100,-5,5) ;
+TString Bpully = "(BsVertex_Cov.position.y-BsMCDecayVertex.y)/TMath::Sqrt(BsVertex_Cov.covMatrix[2])>>Bpy";
+events->Draw(Bpully, cut+"&& BsVertex_Cov.chi2 > 0 && BsVertex_Cov.chi2 <10");
+tt.DrawLatexNDC(0.2,0.96,"B_{s} #rightarrow D_{s}K  #rightarrow KK#piK");
+gStyle->SetOptStat(1110);
+tt.DrawLatexNDC(0.2, 0.9, "B_{s} decay vertex");
+Bpy->Fit("gaus");
+
+TH1F* Bpz = new TH1F("Bpz",";Pull z_{vtx}; a.u.",100,-5,5) ;
+TString Bpullz = "(BsVertex_Cov.position.z-BsMCDecayVertex.z)/TMath::Sqrt(BsVertex_Cov.covMatrix[5])>>Bpz";
+events->Draw(Bpullz, cut+"&& BsVertex_Cov.chi2 > 0 && BsVertex_Cov.chi2 <10");
+tt.DrawLatexNDC(0.2,0.96,"B_{s} #rightarrow D_{s}K  #rightarrow KK#piK");
+gStyle->SetOptStat(1110);
+tt.DrawLatexNDC(0.2, 0.9, "B_{s} decay vertex");
+Bpz->Fit("gaus");
+
 
 
 // pulls on the Bs vertex position

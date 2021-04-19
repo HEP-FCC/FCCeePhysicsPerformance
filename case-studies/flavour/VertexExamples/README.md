@@ -42,7 +42,7 @@ The two configuration files are very similar. See detailed comments inside [`ana
 #### Bs2DsK
 
 The first part, that reconstructs the decay vertex of the Ds, is very similar to what is done for Bs2JpsiPhi.
-The second part is the reconstruction of the Bs decay vertex. The latter is still work in progress.
+The second part is the reconstruction of the Bs decay vertex. The reconstruction method is explained in the [talk given at the topical meeting on vertexing of Feb 2021](https://indico.cern.ch/event/1003610/contributions/4214580/attachments/2187832/3696984/2021_02_10_VertexResolutions.pdf).
 
 
 

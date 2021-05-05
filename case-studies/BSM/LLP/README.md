@@ -7,7 +7,8 @@ Contents:
   * [Software setup](#software-setup)
   * [Generator cards](#generator-cards)
   * [WIP](#wip)
-
+  
+You can check some of the available literature [here](Literature.md). Please let us know of more papers/reviews/talks we could add. 
 
 #### Meetings, mailing list
 Indico category: https://indico.cern.ch/category/5664/

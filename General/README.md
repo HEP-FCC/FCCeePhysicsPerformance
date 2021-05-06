@@ -6,24 +6,25 @@ Rather random for the while...
 
 1. [Common event samples](#common-event-samples)
 2. [Example analyses](#example-analyses)
-3. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
+3. [Code development](#code-development)
+4. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
     1. [Quick instructions for producing samples](#quick-instructions-for-producing-samples)
     2. [Make simple changes to the tracker or beam-pipe description in Delphes](#make-simple-changes-to-the-tracker-or-beam-pipe-description-in-delphes)
     1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
-4. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
-5. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+5. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
+6. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
     1. [Vertex-fitter code from Franco Bedeschi](#vertex-fitter-code-from-franco-bedeschi)
     2. [Vertexing with the ACTS suite](#vertexing-with-the-acts-suite)
     3. [The LCFI+ algorithm](#the-lcfi+-algorithm)
     4. [The DecayTreeFitter (DTF) algorithm](#the-decaytreefitter-(dtf)-algorithm)
     5. [Flavour tagging using machine learning](#flavour-tagging-using-machine-learning)
-6. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-6. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
+7. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+8. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
     1. [Beam energy spread](#beam-energy-spread)
     2. [Vertex distribution](#vertex-distribution)
     3. [Transverse boost to account for the crossing angle](#transverse-boost-to-account-for-the-crossing-angle)
-7. [Monte-Carlo programs](#monte-carlo-programs)
-8. [Bibliography](#bibliography)
+9. [Monte-Carlo programs](#monte-carlo-programs)
+10. [Bibliography](#bibliography)
 
 
 ### Common event samples
@@ -56,9 +57,22 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
   - ttbar, ZZ, WW, ZH production
   - ttbar, ZZ and WW in the full hadronic channel
 
-#### Production of (EDM4HEP) Monte-Carlo samples, Feb 2021
 
-List of samples, which MC to use: input is being collected at [this googledoc](https://docs.google.com/document/d/1-3L_8u542-dlaL6ws41PYmCgwzffgsleaQKs_qQb6AM/edit#).
+#### The "spring2021" Monte-Carlo samples (May 2021)
+
+- some input on the MC production had been collected in early 2021 at [this googledoc](https://docs.google.com/document/d/1-3L_8u542-dlaL6ws41PYmCgwzffgsleaQKs_qQb6AM/edit#).
+- Details of the spring2021 samples:
+  - the production  uses the [EventProducer](https://github.com/HEP-FCC/EventProducer) developed by C. Helsens.
+  - release from 2021-04-30, uses Delphes 3.4.3pre10
+  - configuration cards (delphes cards, Monte-Carlo cards): see the  [FCC-configs repository](https://github.com/HEP-FCC/FCC-config), branch  **spring2021**.
+  - Main changes compared to the "tmp" samples:
+    - bugfix of the MC-associations for electrons
+    - beam-pipe model updated
+    - better resolution for displaced tracks; 
+    - the error matrix of the track parameters now include also the off-diagonal terms
+    - addition of "inclusive" (non-isolated) muons in the output files
+  - See [here for  information about the files made with IDEA](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php)
+  - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA_3T.php)
 
 
 
@@ -74,6 +88,19 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis.py#L40). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
 
 
+### Code development
+
+Generalities:
+- Code that is "general", expected to be useful for many analyses, is hosted into the [FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses) repository. 
+- Code that is very specific to an analysis is expected to go into the "case-studies" directory of the [FCCeePhysicsPerformance](https://github.com/HEP-FCC/FCCeePhysicsPerformance) repository. For example, in [FCCeePhysicsPerformance/case-studies/flavour/dataframe/analyzers/](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/dataframe/analyzers), there  is a Bs2DsK.cc which contains some code  that is specific to the reconstruction of the Bs to DsK decay; for examples that use this code, and for the recipe to  set up the envirionment,  see in [flavour/VertexExamples](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/VertexExamples).
+- as a first step, since the setup is easier, you may start to  develop some code (even if it is analysis-specific) locally, in your local FCCAnalysis, and move it later to FCCeePhysicsPerformance. Or, if your code is of general interest, make a pull request such  that your code gets  merged in the central FCCAnalysis  repository.
+
+How to add a new functionnality in FCCAnalysis:
+- all the code is in [analyzers/dataframe](https://github.com/HEP-FCC/FCCAnalyses/tree/master/analyzers/dataframe)
+- you may  add a new function to an existing file, for example if you add some basic functionnality that works on the Monte-Carlo particles, like retrieving the MC particle with the highest energy, it makes sense to add it into MCParticle.cc
+- or you can create a new file MyStuff.cc (for example, FlavourTagging.cc, ParticleIdentification.cc, etc). In that case, you just need to create a MyStuff.h, a MyStuff.cc, and to add your MyStuff.h in the CMakeLists.txt file (look for the others .h)
+
+ 
 
 ### To produce your own Delphes samples
 

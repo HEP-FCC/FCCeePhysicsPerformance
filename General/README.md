@@ -89,6 +89,8 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 
 Other basic examples, although not marged yet in the master branch of the repository, can be found [here](https://github.com/HEP-FCC/FCCAnalyses/tree/basicexamples/examples/basics), with basic documentation being in-progress. The configuration file [read_EDM4HEP.py](https://github.com/HEP-FCC/FCCAnalyses/blob/basicexamples/examples/basics/read_EDM4HEP.py) contains a few comments, which can help people get started. 
 
+An introduction to FCCAnalyses was also given in [Clement's talk at our December Phys Perf meeting](https://indico.cern.ch/event/982690/contributions/4138504/attachments/2162441/3648904/FCCAnalyses_clement.pdf).
+
 
 ### Code development
 

@@ -7,7 +7,7 @@
 ## HNL 
 - Sterile Neutrino Constraints - http://www.hep.ucl.ac.uk/~pbolton/index.html
 
-
+- Z-Boson Decays into Majorana or Dirac (Heavy) Neutrinos - [arXiv:2105.06576](https://arxiv.org/abs/2105.06576)
 - Feebly-Interacting Particles: FIPs 2020 Workshop Report - [arXiv:2102.12143](https://arxiv.org/abs/2102.12143)
 - Neutrinoless double beta decay versus other probes of heavy sterile neutrinos - [arXiv:1912.03058](https://arxiv.org/abs/1912.03058)
 - Low-scale leptogenesis with three heavy neutrinos - [arXiv:1810.12463](https://arxiv.org/abs/1810.12463)

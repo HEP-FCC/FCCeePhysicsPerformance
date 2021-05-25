@@ -13,17 +13,23 @@ loc.PLOTS = loc.OUT+'plots'
 loc.TEX = loc.OUT+'tex'
 loc.JSON = loc.OUT+'json'
 
+#EOS location for files used in analysis
+loc.EOS = "/eos/experiment/fcc/ee/analyses/case-studies/flavour/Bc2TauNu"
+
 #Output BDT model location - used in official sample production to assign MVA weights
-loc.BDT = "/eos/experiment/fcc/ee/analyses/case-studies/flavour/Bc2TauNu"
+loc.BDT = loc.EOS+""
+
+#Loaction of prod_04 tuples used in analysis
+loc.PROD = f"{loc.EOS}/flatNtuples/spring2021/prod_04"
 
 #Samples for first stage BDT training
-loc.TRAIN = "/eos/experiment/fcc/ee/analyses/case-studies/flavour/Bc2TauNu/flatNtuples/spring2021/prod_03/Batch_Training_4stage1/"
+loc.TRAIN = f"{loc.PROD}/Batch_Training_4stage1/"
 
 #Samples for second stage training
-loc.TRAIN2 = "/eos/experiment/fcc/ee/analyses/case-studies/flavour/Bc2TauNu/flatNtuples/spring2021/prod_03/Training_4stage2/"
+loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
 
 #Samples for final analysis
-loc.ANALYSIS = "/eos/experiment/fcc/ee/analyses/case-studies/flavour/Bc2TauNu/flatNtuples/spring2021/prod_04/Analysis_stage2/"
+loc.ANALYSIS = f"{loc.PROD}/Analysis_stage2/"
 
 #First stage BDT including event-level vars
 train_vars = ["EVT_ThrustEmin_E",

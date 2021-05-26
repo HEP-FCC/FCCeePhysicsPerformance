@@ -1,0 +1,41 @@
+{
+  "creators": [
+    {
+      "affiliation": "CERN",
+      "name": "Perez, Emmanuel",
+      "orcid": "0000-0002-7359-9689"
+    },
+    {
+      "affiliation": "CERN",
+      "name": "Helsens, Clement",
+      "orcid": "0000-0002-9243-7554"
+    },
+    {
+      "affiliation": "INFN Padova / CERN",
+      "name": "Azzi, Patrizia",
+      "orcid": "0000-0002-3129-828X"
+     },
+     {
+      "affiliation": "EPFL",
+      "name": "Hill, Donal",
+      "orcid": "0000-0003-2613-7315"
+     },
+     {
+      "affiliation": "Uppsala University",
+      "name": "Gonzalez Suarez, Rebeca",
+      "orcid": "0000-0002-6126-7230"
+    },
+    {
+      "affiliation": "CERN",
+      "name": "Volkl, Valentin",
+      "orcid": "0000-0002-9172-6629"
+    }
+  ],
+    "keywords": [
+        "fcc",
+	"data analyses",
+        "physics detector requirements"
+    ],
+    "license": "Apache-2.0",
+    "upload_type": "software"
+}

@@ -83,7 +83,7 @@ def run(nz):
             print(N_bkg_tot[f"{b}_{d}"])
 
     #Olcyr calculation of BF(Bc -> tau nu)
-    BF_Bc2TauNu = 2.21e-2
+    BF_Bc2TauNu = 1.94e-2
     #PDG values
     BF_Bu2TauNu = 1.09e-4
     BF_Tau23Pi = 0.0931

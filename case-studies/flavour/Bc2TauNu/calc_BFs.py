@@ -65,7 +65,7 @@ for nz in number_of_zs:
 
     #Theory expectation for Bc -> tau nu (not so important, just sets the level of expected signal and our central value estimated BF)
     #Olcyr value from paper
-    BF_Bc2TauNu_expected = 2.21e-2
+    BF_Bc2TauNu_expected = 1.94e-2
 
     #Full efficiency of Bc -> tau nu analysis, known to 1% uncertainty
     #Read value from optimisation

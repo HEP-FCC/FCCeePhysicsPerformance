@@ -11,7 +11,7 @@ from decay_mode_xs import modes as bkg_modes
 from scipy import interpolate
 
 #Local code
-from userConfig import loc, mode, train_vars, train_vars_vtx, Ediff_cut
+from userConfig import loc, train_vars, train_vars_vtx, Ediff_cut
 import plotting
 import utils as ut
 
@@ -38,7 +38,7 @@ bdt = {"MVA1": 0.95,
        "MVA2": 0.95
        }
 
-cut = f"EVT_ThrustDiff_E > {Ediff_cut} and EVT_MVA1 > {bdt['MVA1']} and EVT_MVA2 > {bdt['MVA2']}"
+cut = f"EVT_ThrustDiff_E {Ediff_cut} and EVT_MVA1 > {bdt['MVA1']} and EVT_MVA2 > {bdt['MVA2']}"
 
 #Load dataframes for each mode
 tree = {}

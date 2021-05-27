@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from userConfig import loc, train_vars, train_vars_vtx
 import plotting
 import utils as ut
+import matplotlib.ticker as plticker
 
 from matplotlib import rc
 rc('font',**{'family':'serif','serif':['Roman']})
@@ -147,9 +148,9 @@ for nz in number_of_zs:
     f.write("\\def\\BFBctoTauNuRelErr{" + "%.1f}\n" % x)
 
 #Make trend plots as a function of NZ for different variables
-params = {"N_Bc2TauNu": {"name": "$N(B_c^+ \\to \\tau^+ \\nu_\\tau)$ relative $\\sigma$"},
-          "BF_Bc2TauNu": {"name": "$\\mathcal{B}(B_c^+ \\to \\tau^+ \\nu_\\tau)$ relative $\\sigma$"},
-          "BF_ratio": {"name": "$R_c$ relative $\\sigma$"}
+params = {"N_Bc2TauNu": {"name": "$N(B_c^+ \\to \\tau^+ \\nu_\\tau)$ relative $\\sigma$","low": 0.02, "high": 0.12},
+          "BF_Bc2TauNu": {"name": "$\\mathcal{B}(B_c^+ \\to \\tau^+ \\nu_\\tau)$ relative $\\sigma$", "low": 0.08, "high": 0.15},
+          "BF_ratio": {"name": "$R_c$ relative $\\sigma$", "low": 0.02, "high": 0.12}
          }
 for v in params:
     fig, ax = plt.subplots(figsize=(9,8))
@@ -162,8 +163,16 @@ for v in params:
     for s in syst:
         plt.errorbar(x=number_of_zs,y=x[s],xerr=None,yerr=None,color=syst[s],fmt="o-",label="$\\sigma_{syst} = %s \\times \\sigma_{stat}$" % s)
     ax.tick_params(axis='both', which='major', labelsize=25)
+    #plt.grid(which="both",axis="y")
+    lmax = plticker.MultipleLocator(base=0.02)
+    lmin = plticker.MultipleLocator(base=0.01)
+    ax.yaxis.set_major_locator(lmax)
+    ax.yaxis.set_minor_locator(lmin)
+    # Add the grid
+    ax.grid(which='both', axis='y', linestyle='-')
     plt.ylabel(params[v]["name"],fontsize=30)
     plt.xlabel("$N_Z (\\times 10^{12})$",fontsize=30)
+    plt.ylim(params[v]["low"],params[v]["high"])
     if(v=="N_Bc2TauNu"):
         plt.legend(loc="upper right",fontsize=25)
     plt.tight_layout()

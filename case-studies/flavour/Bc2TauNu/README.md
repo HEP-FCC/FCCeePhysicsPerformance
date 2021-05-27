@@ -39,3 +39,4 @@ A few scripts are also used to generate plots and tables for the paper:
 - `exclusive_bkg_summary_table.py`: summarise the exclusive background statistics and efficiencies for the paper in a table.
 - `plot_max_hem_E.py`: plot charged vs neutral maximum hemisphere energies in signal and background, which are shown in paper.
 - `make_signal_yield_table.py`: make a table for the paper showing signal yields and uncertainties for different number of Z's.
+- `make_yield_BF_summary_tables.py`: make summary tables of yield and branching fraction precision as a function of number of Z's.

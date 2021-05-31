@@ -17,9 +17,16 @@ for the determination of the recoil mass.
 
 ### Contributors
 - Clement Helsens (CERN)
-- Ang Li, Gregorio Bernardi (LPNHE)
-- Sylvie Braibant, Valentina Diolaiti, Paolo Giacomelli (Bologna)
-- Markus Klute (MIT)
+- Ang Li, Gregorio Bernardi (APC)
+- Sylvie Braibant, Valentina Diolaiti, Paolo Giacomelli (Bologna), Giacomo Ortona (Torino)
+- Markus Klute, Jan Eysermans, Tianyu Justin Yang (MIT)
+
+### Bibliography
+
+- [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002
+- [Measurement of the Higgs boson mass and ee → ZH cross section using Z→μμ and Z→ee at the ILC](https://arxiv.org/abs/1604.07524) J. Yan et al, Phys Rev D94 (2016) 113002
+
+
  
 ### Preliminary analyses 
 - Clement Helsens: Developer, Sample production, Preliminary FCCAnalyses design, Preliminary recoil fit analysis
@@ -60,7 +67,7 @@ is shown below (to be re-done with including beam energy spread)
 ![](images/fitResult.png?raw=true)
 
 
-### Bibliography
 
-- [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002
+
+
 

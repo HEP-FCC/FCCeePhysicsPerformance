@@ -22,7 +22,8 @@
 - From the trees to the forest: a review of radiative neutrino mass models - [arXiv:1706.08524](https://arxiv.org/abs/1706.08524)
 - Neutrinos and Collider Physics - [arXiv:1502.06541](https://arxiv.org/abs/1502.06541)
 
-## Dark Sector - ALPs
+## Dark Sector / ALPs
+- Tera-Zooming in on light (composite) axion-like particles [arXiv:2104.11064](https://arxiv.org/abs/2104.11064)
 - Axion-Like Particles at Future Colliders - [arXiv:1808.10323](https://arxiv.org/abs/1808.10323)
 - Exposing Dark Sector with Future Z-Factories [arXiv:1712.07237](https://arxiv.org/abs/1712.07237)
 

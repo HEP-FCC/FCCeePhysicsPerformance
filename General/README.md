@@ -316,7 +316,9 @@ For example with Pythia, at √s = 240 GeV where the beam energy spread amounts 
     Beams:sigmaPzA = 0.198
     Beams:sigmaPzB = 0.198
 ```
-    
+ 
+ Note: do **not** use this functionnality, though, if Pythia is just used to hadronize LHE events.
+ 
     
 #### Vertex distribution
 

@@ -11,11 +11,12 @@ to approach the ultimate statistical precision on the Higgs self-coupling will b
 ### Bibliography
 
 - [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002
+- [Model-Independent Measurement of the e+e- -> HZ Cross Section at a Future e+e- Linear Collider using Hadronic Z Decays](https://arxiv.org/abs/1509.02853) M.A. Thomson, EUr. Phys. J. C (2016). 76
 
 
 ### People
 
 Interest from:
-- M. Klute et al, MIT
-- Ang Li, G. Bernardi, LPNHE
-- R. Salerno (LLR)
+- F. Simon, S. Sasikumar (MPI)
+- M. Klute et al (MIT)
+- Ang Li, G. Bernardi (APC)

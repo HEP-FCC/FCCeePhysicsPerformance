@@ -6,7 +6,7 @@ Clement Helsens <Clement.Helsens@cern.ch>
 Donal Hill <Donal.Hill@cern.ch>  
 
 
-### Pre-print submitted 
+### Pre-print submitted May 28, 2021
 
 - [Prospects for B+c→τ+ντ at FCC-ee](https://arxiv.org/abs/2105.13330)
 
@@ -14,6 +14,9 @@ Donal Hill <Donal.Hill@cern.ch>
 ### Talks
 
 - [First studies of Bc+ → τ+ ντ with EDM4hep and FCCAnalyses](https://indico.cern.ch/event/982690/contributions/4149358/attachments/2162425/3648879/Bc2TauNu_FCC_ee_PP_meeting_14_12_20.pdf) Donal Hill, talk at the Physics Performance meeting, Dec 14, 2020. 
+- [Analysis of Bc / B+ to tau nu](https://indico.cern.ch/event/1029041/#25-analysis-of-bc-b-to-tau-nu) Clement Helsens, talk at the Physics Performance meeting, Apr 19, 2021.
+- [Updates on the Bc / B+ to tau nu analysis](https://indico.cern.ch/event/1038347/#25-updates-on-the-bc-b-to-tau) Donal Hill, talk at the Physics Performance meeting, May 17, 2021. 
+- https://indico.cern.ch/event/1019438/#4-prospects-for-b_cto-tau-nu_t(Prospects for 𝐵+𝑐→𝜏+𝜈𝜏 at FCC-ee) Clement Helsens, talk at the general FCC-ee physics meeting, May 31, 2021
 
 
 ### Bibliography

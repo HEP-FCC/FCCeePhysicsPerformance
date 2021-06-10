@@ -2,11 +2,13 @@
 
 ### Contact
 
+Clement Helsens <Clement.Helsens@cern.ch>
 Donal Hill <Donal.Hill@cern.ch>  
-Clement Helsens  <Clement.Helsens@cern.ch>
 
 
-Studies have started in the tau -> hadrons channel.
+### Pre-print submitted 
+
+- [Prospects for B+c→τ+ντ at FCC-ee](https://arxiv.org/abs/2105.13330)
 
 
 ### Talks

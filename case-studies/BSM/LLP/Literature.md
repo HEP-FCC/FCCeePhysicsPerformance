@@ -37,3 +37,6 @@
 
 ## Detectors 
 - HADES: A long lived particle detector concept for the FCC-ee or CEPC - [arXiv:2011.01005](https://arxiv.org/abs/2011.01005)
+
+## Student theses
+- [Towards Vertexing Studies of Heavy Neutral Leptons with the Future Circular Collider at CERN](http://uu.diva-portal.org/smash/record.jsf?pid=diva2%3A1563610&dswid=6831) - Rohini Sengupta, Uppsala University, June 2021. 

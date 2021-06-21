@@ -14,7 +14,7 @@ _higgs  = ROOT.dummyLoaderHiggs
 print ('edm4hep  ',_edm)
 print ('podio    ',_pod)
 print ('fccana   ',_fcc)
-print ('apchiggstools   ',_higgs)
+print ('higgs   ',_higgs)
 
 class analysis():
 
@@ -35,16 +35,17 @@ class analysis():
                .Alias("Muon0", "Muon#0.index")
                # define the muon collection
                .Define("muons",  "ReconstructedParticle::get(Muon0, ReconstructedParticles)")
-               # define missingET
+               # define missing momentum
                .Define('missingET_px', 'MissingET.momentum.x')
                .Define('missingET_py', 'MissingET.momentum.y')
                .Define('missingET_pz', 'MissingET.momentum.z')
                .Define('missingET_e', 'MissingET.energy')
-               .Define('missingET_costheta', 'APCHiggsTools::get_MET_costheta(missingET_px,missingET_py,missingET_pz,missingET_e)')
+               # get cosTheta miss
+               .Define('missingET_costheta', 'APCHiggsTools::get_cosTheta_miss(missingET_px,missingET_py,missingET_pz,missingET_e)')
                #select muons on pT
                #.Define("selected_muons", "ReconstructedParticle::sel_pt(10.)(muons)")
-							 #muon quality check opposite charge
-							 .Define("selected_muons", "APCHiggsTools::muon_quality_check(muons)")
+							 #muon quality check at least one muon plus and one muon minus
+               .Define("selected_muons", "APCHiggsTools::muon_quality_check(muons)")
 							 #select muons +
 							 .Define("selected_muons_plus", "ReconstructedParticle::sel_charge(1.0,false)(selected_muons)")
 							 #select muons -
@@ -66,7 +67,7 @@ class analysis():
                # create branch with muon mass
                .Define("selected_muons_m",     "ReconstructedParticle::get_mass(selected_muons)")
                # create branch with muon costheta
-               .Define("selected_muons_costheta",  "APCHiggsTools::get_costheta(selected_muons)")
+               .Define("selected_muons_costheta",  "APCHiggsTools::get_cosTheta(selected_muons)")
                # find zed candidates from  di-muon resonances  
                .Define("zed_leptonic",         "APCHiggsTools::resonanceZBuilder(91)(selected_muons)")      
                # write branch with zed mass
@@ -84,7 +85,7 @@ class analysis():
                # write branch with zed energy
                .Define("zed_leptonic_e",      "ReconstructedParticle::get_e(zed_leptonic)")
                # write branch with zed costheta
-               .Define("zed_leptonic_costheta",  "APCHiggsTools::get_costheta(zed_leptonic)")
+               .Define("zed_leptonic_costheta",  "APCHiggsTools::get_cosTheta(zed_leptonic)")
                # calculate recoil of zed_leptonic
                .Define("zed_leptonic_recoil",  "ReconstructedParticle::recoilBuilder(240)(zed_leptonic)")
                 # write branch with recoil mass

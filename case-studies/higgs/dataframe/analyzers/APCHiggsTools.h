@@ -20,11 +20,11 @@ namespace APCHiggsTools{
 
 
 	/// return the costheta of the input ReconstructedParticles
-	ROOT::VecOps::RVec<float> get_costheta(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in);
+	ROOT::VecOps::RVec<float> get_cosTheta(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in);
 
-	/// return the costheta of the input ReconstructedParticles MET
-  ROOT::VecOps::RVec<float> get_MET_costheta(ROOT::VecOps::RVec<Float_t>Px, ROOT::VecOps::RVec<Float_t>Py, ROOT::VecOps::RVec<Float_t>Pz, ROOT::VecOps::RVec<Float_t>E);
-  ///return muon_quality_check result
+	/// return the costheta of the input missing momentum 
+  ROOT::VecOps::RVec<float> get_cosTheta_miss(ROOT::VecOps::RVec<Float_t>Px, ROOT::VecOps::RVec<Float_t>Py, ROOT::VecOps::RVec<Float_t>Pz, ROOT::VecOps::RVec<Float_t>E);
+  ///return muon_quality_check result (at least one muon plus and one muon minus)
 	ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>  muon_quality_check(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in);
 }
 #endif

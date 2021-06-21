@@ -21,7 +21,7 @@ ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>  APCHiggsTools::muon_qual
 	return result;
 }
 
-ROOT::VecOps::RVec<float> APCHiggsTools::get_costheta(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in) {
+ROOT::VecOps::RVec<float> APCHiggsTools::get_cosTheta(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in) {
    ROOT::VecOps::RVec<float> result;
 	 for (auto & p: in) {
 		 TLorentzVector tlv;
@@ -31,7 +31,7 @@ ROOT::VecOps::RVec<float> APCHiggsTools::get_costheta(ROOT::VecOps::RVec<edm4hep
 	 return result;
 }
 
-ROOT::VecOps::RVec<float> APCHiggsTools::get_MET_costheta(ROOT::VecOps::RVec<Float_t>Px, ROOT::VecOps::RVec<Float_t>Py, ROOT::VecOps::RVec<Float_t>Pz, ROOT::VecOps::RVec<Float_t>E) {
+ROOT::VecOps::RVec<float> APCHiggsTools::get_cosTheta_miss(ROOT::VecOps::RVec<Float_t>Px, ROOT::VecOps::RVec<Float_t>Py, ROOT::VecOps::RVec<Float_t>Pz, ROOT::VecOps::RVec<Float_t>E) {
   ROOT::VecOps::RVec<float> result;
   for (int i =0; i < Px.size(); ++i) {
 		TLorentzVector tlv;

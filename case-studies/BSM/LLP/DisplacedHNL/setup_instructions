@@ -1,0 +1,16 @@
+# Setting up lxplus enviornment
+
+- [Lxplus setup](#lxplus-setup)
+  * [Pre-requisits] (#prereq)
+  * [LCG repositories](#lcg)
+
+
+## Pre-requisits
+The specific route taken for the project involves creating HNL samples and then using Delphes to understand the detector performances. In order to do that we use 
+  * MadGraph
+  * HNL model from here
+  * Pythia8
+  * Delphes
+  * Delphes card from here (https://github.com/delphes/delphes/blob/master/cards/delphes_card_IDEAtrkCov.tcl). The card is suggested by Michele.
+
+## LCG repositories

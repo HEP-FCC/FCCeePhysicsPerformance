@@ -3,6 +3,7 @@
 ## General
 - [FCC-ee: The Lepton Collider : Future Circular Collider Conceptual Design Report Volume 2](https://cds.cern.ch/record/2651299?ln=en)
 - [Physics Briefing Book : Input for the European Strategy for Particle Physics Update 2020](https://cds.cern.ch/record/2691414/)
+- [Hunt for rare processes and long-lived particles at FCC-ee](https://arxiv.org/abs/2106.15459)
 
 ## HNL 
 - Sterile Neutrino Constraints - http://www.hep.ucl.ac.uk/~pbolton/index.html

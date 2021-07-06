@@ -91,6 +91,14 @@ class analysis():
                 # write branch with recoil mass
                .Define("zed_leptonic_recoil_m","ReconstructedParticle::get_mass(zed_leptonic_recoil)") 
 
+                # Recoil mass with the MC muons kinematics
+                .Alias("MCRecoAssociations0", "MCRecoAssociations#0.index")
+                .Alias("MCRecoAssociations1", "MCRecoAssociations#1.index")
+                .Define("zed_leptonic_MC",   "APCHiggsTools::resonanceZBuilder2(91, true)(selected_muons, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+	        .Define("zed_leptonic_MC_mass",    "ReconstructedParticle::get_mass( zed_leptonic_MC )" )
+		.Define("zed_leptonic_recoil_MC",  "ReconstructedParticle::recoilBuilder(240)( zed_leptonic_MC )")
+		.Define("zed_leptonic_recoil_MC_mass",   "ReconstructedParticle::get_mass( zed_leptonic_recoil_MC )")
+
         )
 
         
@@ -117,7 +125,10 @@ class analysis():
 								"zed_leptonic_costheta",
                 "zed_leptonic_charge",
                 "zed_leptonic_recoil_m",
-                "missingET_costheta"
+                "missingET_costheta",
+
+		"zed_leptonic_MC_mass",
+		"zed_leptonic_recoil_MC_mass"
                 ]:
             branchList.push_back(branchName)
         df2.Snapshot("events", self.outname, branchList)

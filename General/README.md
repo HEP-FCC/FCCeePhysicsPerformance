@@ -308,8 +308,16 @@ Combinatoric functions provided by the python *awkward array* pckage  are very h
 
 At FCC, the energy of the beams is distributed according to a Gaussian function. The corresponding beam energy spread is given in Table S.1 of the CDR, [see the highlighted line here](parameters_CDR_table.pdf). One should use the second number, the one that corresponds to "BS" (with beamstrahlung). For example, at the Z peak, the beam energy spread amounts to 0.132%. Note that this is the spread of the energy of the beam; to get the relative spread of the centre-of-mass energy √s, these numbers  have to be divided by √2.
 
-It is important to take into account the beam energy spread when generating events. Some Monte-Carlo programs (e.g. Pythia, Whizard) offer a built-in possibility to convolute the matrix elements with a Gaussian beam energy distribution.   
+It is important to take into account the beam energy spread when generating events. Some Monte-Carlo programs (e.g. Whizard) offer a built-in possibility to convolute the matrix elements with a Gaussian beam energy distribution.   
 
+For example, with Whizard, at √s = 240 GeV where the beam energy spread amounts to 0.165%, the steering card should contain:
+```markdown
+beams = e1, E1 => gaussian => isr
+gaussian_spread1 = 0.165%
+gaussian_spread2 = 0.165%
+```
+
+<!--
 For example with Pythia, at √s = 240 GeV where the beam energy spread amounts to 0.165% i.e. 0.165%  x 120 GeV = 0.198 GeV, the steering card should contain:
 ```markdown
     Beams:allowMomentumSpread  = on
@@ -318,7 +326,7 @@ For example with Pythia, at √s = 240 GeV where the beam energy spread amounts 
 ```
  
  Note: do **not** use this functionnality, though, if Pythia is just used to hadronize LHE events.
- 
+ --->
     
 #### Vertex distribution
 

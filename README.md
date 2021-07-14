@@ -23,7 +23,7 @@ O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of ea
 - [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
 
 Next meetings:
-- June 21: regular Physics Performance meeting
+- July 19: regular Physics Performance meeting
 
 E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).
 

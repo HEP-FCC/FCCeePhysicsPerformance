@@ -12,13 +12,23 @@ to
 generate e+ e- > ve n1, (n1 > e e nu)
 add process e+ e- > ve~ n1, (n1 > e e nu)
 
+First create the LHE file. To do this, you'll need to download the latest version of madgraph, and make sure you're using python 3.7 or greater. Then you can do:
+
+```
+./bin/mg5_aMC mg5_proc_card.dat
+```
+to create the LHE file.
+
+
 The resulting events will be stored in  HNL_ljj/Events/run_01/unweighted_events.lhe.gz file.
 
 Unzip it and give the path to HNL_pythia.cmnd file to generate the delphes root file.
 
 To create delphes root file you need to do the following on your command line:
 
+```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep_output_config.tcl HNL_pythia.cmnd HNL_ejj.root
+```
 
 the resulting HNL_ejj.root is your EDM sample.

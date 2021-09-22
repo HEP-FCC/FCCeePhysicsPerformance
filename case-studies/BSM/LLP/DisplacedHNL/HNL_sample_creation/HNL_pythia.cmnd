@@ -11,7 +11,7 @@ Next:numberCount = 100             ! print message every n events
 
 Beams:frameType = 4                ! read info from a LHEF
 ! Change the LHE file here
-Beams:LHEF = HNL_eenu_30GeV_20cm.lhe
+Beams:LHEF = HNL_eenu_50GeV_20cm.lhe
 
 ! 3) Settings for the event generation process in the Pythia8 library.
 PartonLevel:ISR = on               ! initial-state radiation

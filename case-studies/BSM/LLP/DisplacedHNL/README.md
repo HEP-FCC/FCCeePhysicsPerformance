@@ -1,4 +1,4 @@
-# HNL Project
+.# HNL Project
 
 - [HNL Project](#hnl-project)
   * [Welcome](#welcome)
@@ -19,12 +19,12 @@ The setup requires python 3.7 (or higher), Root (version 6.x), PYTHIA8, DELPHES 
 The input for the gen_distributions_delphes.py analysis file is the HNL sample created by running the wrapper (mg5 + pythia8 + delphes)
 from the standalone framework.
 
-The gen_distributions_delphes.py file is used to validate and analyze the HNL sample. It validates the sample by checking the time
+The gen_distributions_delphes.py file is used to validate and analyze the HNL sample produced with standalone delphes (not the edm4hep format). It validates the sample by checking the time
 distribution and the transverese displacement of the sample. The analysis provides studies on the kinematics of the HNL and its
 daughter particles.
 
 The analysis_HNL_read.py file is an adaptation from the original read_EDM4HEP.py file which provides a basic example showing how to read
-different objects from the EDM4HEP files and how to access and store some simple variables in an output ntuple. The analysis_HNL_read.py
+different objects from the EDM4HEP files and how to access and store some simple variables in an output ntuple. This is the main script to use with the edm4hep samples. The analysis_HNL_read.py
 file is specific for the study of HNLs. It presents a possibility to validate created HNL samples by checking the lifetimes and transverse
 displacements of the samples and also presents the starting point for HNL vertex analysis.
 

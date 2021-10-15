@@ -28,6 +28,9 @@ print ('Finished loading analyzers. Ready to go.')
 
 
 #The analysis class handles which variables are defined and written to the output ntuple
+
+#right now, only set up for HNL decays to e e nu
+#to do: add ejj channel - will need to define a new function called MCParticle::get_indices_InclusiveDecay in MCParticle.cc within FCCAnalyses
 class analysis():
 	#__________________________________________________________
 	def __init__(self, inputlist, outname, ncpu):
@@ -79,15 +82,22 @@ class analysis():
                 # Kinematics of the mother particle HNL
                 .Define("HNL_mass", "MCParticle::get_mass( HNL )")
                 .Define("HNL_pT", "MCParticle::get_pt( HNL )")
+                .Define("HNL_eta", "MCParticle::get_eta( HNL )")
+                .Define("HNL_phi", "MCParticle::get_phi( HNL )")
 
                 # Finding the kinematics of each of these daughters
                 .Define("electron_mass", "MCParticle::get_mass( electron )")
                 .Define("electron_pT", "MCParticle::get_pt( electron )")
                 .Define("positron_pT", "MCParticle::get_pt( positron )")
+                .Define("electron_eta", "MCParticle::get_eta( electron )")
+                .Define("positron_eta", "MCParticle::get_eta( positron )")
+                .Define("electron_phi", "MCParticle::get_phi( electron )")
+                .Define("positron_phi", "MCParticle::get_phi( positron )")
                 
                 # Finding the production vertex of the daughters (checking electron here)
                 .Define("electron_vertex_x", "MCParticle::get_vertex_x( electron )")
                 .Define("electron_vertex_y", "MCParticle::get_vertex_y( electron )")
+                .Define("electron_vertex_z", "MCParticle::get_vertex_z( electron )")
 
                 # Finding the Lxy of the HNL
                 # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )  
@@ -112,29 +122,49 @@ class analysis():
 
                 # Reconstructed particles
                 # Returns the RecoParticles associated with the HNL decay products
-                .Define("HNLRecoParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( HNL_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")  
+                .Define("RecoHNLParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( HNL_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
                 # Reconstructing the tracks from the HNL
-                .Define("HNLTracks",   "ReconstructedParticle2Track::getRP2TRK( HNLRecoParticles, EFlowTrack_1)") 
+                .Define("RecoHNLTracks",   "ReconstructedParticle2Track::getRP2TRK( RecoHNLParticles, EFlowTrack_1)") 
 
-                # Number of tracks in this HNLTracks collection ( = the #tracks used to reconstruct the HNL vertex)
-                .Define("n_HNLTracks", "ReconstructedParticle2Track::getTK_n( HNLTracks )")
+                # Number of tracks in this RecoHNLTracks collection ( = the #tracks used to reconstruct the HNL reco decay vertex)
+                .Define("n_RecoHNLTracks", "ReconstructedParticle2Track::getTK_n( RecoHNLTracks )")
 
-                # Now we reconstruct the HNL decay vertex using the reco'ed tracks
+                # Now we reconstruct the HNL reco decay vertex using the reco'ed tracks
                 # First the full object, of type Vertexing::FCCAnalysesVertex
-                .Define("HNLVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, HNLTracks)" )
+                .Define("RecoHNLDecayVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, RecoHNLTracks)" )
 
                 # from which we extract the edm4hep::VertexData object, which contains the vertex position in mm
-                .Define("HNLVertex",  "VertexingUtils::get_VertexData( HNLVertexObject )")
+                .Define("RecoHNLDecayVertex",  "VertexingUtils::get_VertexData( RecoHNLDecayVertexObject )")
                 
-                # We may want to look at the reco'ed HNLs legs: in the HNLRecoParticles vector,
+                # We may want to look at the reco'ed HNLs legs: in the RecoHNLParticles vector,
                 # the first particle (vector[0]) is the e-, etc :
-                .Define("RecoElectron",   "selRP_leg(0)( HNLRecoParticles )")
-                .Define("RecoPositron",   "selRP_leg(1)( HNLRecoParticles )")
+                .Define("RecoElectron",   "selRP_leg(0)( RecoHNLParticles )")
+                .Define("RecoPositron",   "selRP_leg(1)( RecoHNLParticles )")
                 
-                # pT of the reconstruced electron
+                # reconstruced electron, positron values
                 .Define("RecoElectron_pT",  "ReconstructedParticle::get_pt( RecoElectron )") 
                 .Define("RecoPositron_pT",  "ReconstructedParticle::get_pt( RecoPositron )")
+                .Define("RecoElectron_eta",  "ReconstructedParticle::get_eta( RecoElectron )") 
+                .Define("RecoPositron_eta",  "ReconstructedParticle::get_eta( RecoPositron )")
+                .Define("RecoElectron_phi",  "ReconstructedParticle::get_phi( RecoElectron )") 
+                .Define("RecoPositron_phi",  "ReconstructedParticle::get_phi( RecoPositron )")
+                .Define("RecoElectron_charge",  "ReconstructedParticle::get_charge( RecoElectron )") 
+                .Define("RecoPositron_charge",  "ReconstructedParticle::get_charge( RecoPositron )")
+                #add dxy, dz, dxyz, and uncertainties
 
+                #gen-reco
+                .Define("GenMinusRecoElectron_pT",   "electron_pT-RecoElectron_pT") 
+                .Define("GenMinusRecoPositron_pT",   "positron_pT-RecoPositron_pT")
+                .Define("GenMinusRecoElectron_eta",  "electron_eta-RecoElectron_eta") 
+                .Define("GenMinusRecoPositron_eta",  "positron_eta-RecoPositron_eta")
+                .Define("GenMinusRecoElectron_phi",  "electron_phi-RecoElectron_phi") 
+                .Define("GenMinusRecoPositron_phi",  "positron_phi-RecoPositron_phi")
+
+                .Define("GenMinusRecoHNL_DecayVertex_x",  "electron_vertex_x-RecoHNLDecayVertex.position.x")
+                .Define("GenMinusRecoHNL_DecayVertex_y",  "electron_vertex_y-RecoHNLDecayVertex.position.y")
+                .Define("GenMinusRecoHNL_DecayVertex_z",  "electron_vertex_z-RecoHNLDecayVertex.position.z")
+                
+                       
                 ####################################################################################################
                 # From here the general study begins
 
@@ -177,54 +207,79 @@ class analysis():
 		# select branches for output file
 		branchList = ROOT.vector('string')()
 		for branchName in [
-						#"n_jets", 
-						#"n_photons",
-						#"n_electrons",
-						#"n_muons",
-						#"seljet_pT", 
-						#"seljet_eta",
-						#"seljet_phi", 
-						#"MET",
-						#"MET_x",
-						#"MET_y",
-						#"MET_phi",
-                                                ######## Monte-Carlo particles #######
-                                                #"HNL_PID", 
-                                                #"HNL_pT",  
-                                                #"HNL_mass",
-                                                #"ePID", 
-                                                #"e_pT", 
-                                                #"HNL_indices",  
-                                                "HNL_vertex_x", 
-                                                "HNL_vertex_y", 
-                                                "HNL_vertex_z", 
-                                                #"HNL", 
-                                                #"electron", 
-                                                #"positron", 
-                                                #"neutrino", 
-                                                "HNL_mass",
-                                                "HNL_pT", 
-                                                "electron_mass",
-                                                "electron_pT",
-                                                "positron_pT",
-                                                "HNL_decay",
-                                                "electron_vertex_x",
-                                                "electron_vertex_y",
-                                                #"HNL_Lxy",
-                                                "L_xy",
-                                                "HNL_lifetime",
-                                                "HNLMCDecayVertex",
-                                                "MC_PrimaryVertex",
-                                                "ntracks",
-                                                ######## Reconstructed particles #######
-                                                "HNLRecoParticles",
-                                                "HNLTracks",
-                                                "n_HNLTracks",
-                                                "HNLVertexObject",
-                                                "HNLVertex",
-                                                "RecoElectron_pT",
-                                                "RecoPositron_pT" 
-						]:
+				#"n_jets", 
+				#"n_photons",
+				#"n_electrons",
+				#"n_muons",
+				#"seljet_pT", 
+				#"seljet_eta",
+				#"seljet_phi", 
+				#"MET",
+				#"MET_x",
+				#"MET_y",
+				#"MET_phi",
+                                ######## Monte-Carlo particles #######
+                                #"HNL_PID", 
+                                #"HNL_pT",  
+                                #"HNL_mass",
+                                #"ePID", 
+                                #"e_pT", 
+                                #"HNL_indices",  
+                                "HNL_vertex_x", 
+                                "HNL_vertex_y", 
+                                "HNL_vertex_z", 
+                                #"HNL", 
+                                #"electron", 
+                                #"positron", 
+                                #"neutrino", 
+                                "HNL_mass",
+                                "HNL_pT",
+                                "HNL_eta",
+                                "HNL_phi",
+                                "electron_mass",
+                                "electron_pT",
+                                "positron_pT",
+                                "electron_eta",
+                                "positron_eta",
+                                "electron_phi",
+                                "positron_phi",
+                                "HNL_decay",
+                                "electron_vertex_x",
+                                "electron_vertex_y",
+                                "electron_vertex_z",
+                                #"HNL_Lxy",
+                                "L_xy",
+                                "HNL_lifetime",
+                                "HNLMCDecayVertex",
+                                "MC_PrimaryVertex",
+                                "ntracks",
+                                ######## Reconstructed particles #######
+                                "RecoHNLParticles",
+                                "RecoHNLTracks",
+                                "n_RecoHNLTracks",
+                                "RecoHNLDecayVertexObject",
+                                "RecoHNLDecayVertex",
+                                "RecoElectron_pT",
+                                "RecoPositron_pT", 
+                                "RecoElectron_eta",
+                                "RecoPositron_eta", 
+                                "RecoElectron_phi",
+                                "RecoPositron_phi", 
+                                "RecoElectron_charge",
+                                "RecoPositron_charge",
+
+                                "GenMinusRecoElectron_pT", 
+                                "GenMinusRecoPositron_pT",
+                                "GenMinusRecoElectron_eta", 
+                                "GenMinusRecoPositron_eta",
+                                "GenMinusRecoElectron_phi", 
+                                "GenMinusRecoPositron_phi",
+
+                                "GenMinusRecoHNL_DecayVertex_x",
+                                "GenMinusRecoHNL_DecayVertex_y",
+                                "GenMinusRecoHNL_DecayVertex_z",
+
+		]:
 			branchList.push_back(branchName)
 		df2.Snapshot("events", self.outname, branchList)
 
@@ -247,6 +302,7 @@ if __name__ == "__main__":
 	#build the name/path of the output file:
 	output_file = os.path.join(args.out_dir, args.input_file.split("/")[-1])
 
+        
 	#TODO: CLEAN UP
 	#now run:
 	print("##### Running basic example analysis #####")

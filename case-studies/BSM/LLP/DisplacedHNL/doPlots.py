@@ -31,12 +31,15 @@ def mapHistos(var, label, sel, param):
                 h=tf.Get(var)
                 hh = copy.deepcopy(h)
                 #scaleSig=1.
-                scaleSig=1./hh.GetSumOfWeights()
+                if hh.GetSumOfWeights()!=0.:
+                    scaleSig=1./hh.GetSumOfWeights()
+                else:
+                    scaleSig=1.
                 try:
                     scaleSig=param.scaleSig
                 except AttributeError:
                     print ('no scale signal, using 1')
-                print ('scaleSig ',scaleSig)
+                #print ('scaleSig ',scaleSig)
                 #hh.Scale(param.intLumi*scaleSig)
                 hh.Scale(scaleSig)
                 if len(hsignal[s])==0:
@@ -162,7 +165,6 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
 
     if unitBeginIndex is not -1 and unitEndIndex is not -1: #x axis has a unit
         ylabel += " / " + width + " " + xAxisLabel[unitBeginIndex+2:-1]
-        print(ylabel)
     else:
         ylabel += " per bin (" + width + " width)"
 
@@ -335,8 +337,8 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     #legend.SetTextFont(font) 
     legend.Draw() 
      
-    #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
-    pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
+    pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
+    #pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
     pave.SetFillColor(0)
     pave.SetBorderSize(0)
     for m,s in zip(mean, stdDev):

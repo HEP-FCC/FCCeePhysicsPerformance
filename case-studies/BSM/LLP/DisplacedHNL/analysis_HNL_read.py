@@ -51,7 +51,7 @@ class analysis():
 		#Access the various objects and their properties with the following syntax: .Define("<your_variable>", "<accessor_fct (name_object)>")
 		#This will create a column in the RDataFrame named <your_variable> and filled with the return value of the <accessor_fct> for the given collection/object 
 		#Accessor functions are the functions found in the C++ analyzers code that return a certain variable, e.g. <namespace>::get_n(object) returns the number 
-		#of these objects in the event and <namespace>::get_pt(object) returns the pT of the object. Here you can pick between two namespaces to access either
+		#of these objects in the event and <namespace>::get_pt(object) returns the pt of the object. Here you can pick between two namespaces to access either
 		#reconstructed (namespace = ReconstructedParticle) or MC-level objects (namespace = MCParticle). 
 		#For the name of the object, in principle the names of the EDM4HEP collections are used - photons, muons and electrons are an exception, see below
 
@@ -65,66 +65,69 @@ class analysis():
                 .Alias("MCRecoAssociations1", "MCRecoAssociations#1.index")
  
                 ##### Added branch for MCParticle; finding PID of the MC particle for HNL
-                .Define("HNL_PID", "MCParticle::sel_pdgID(9900012, false)(Particle)") 
-                .Define("HNL_decay", "MCParticle::list_of_particles_from_decay(0, HNL_PID, Particle1)")
-                #.Define("HNL_pT", "MCParticle::get_pt(HNL_PID)")    #finding the pT of the HNL thorugh separate HNL branch
-                #.Define("HNL_mass", "MCParticle::get_mass(HNL_PID)") #finding the generator mass of the HNL through separate HNL branch
+                .Define("GenHNL_PID", "MCParticle::sel_pdgID(9900012, false)(Particle)")
+                .Define("GenHNL_decay", "MCParticle::list_of_particles_from_decay(0, GenHNL_PID, Particle1)")
+                #.Define("GenHNL_pt", "MCParticle::get_pt(GenHNL_PID)")    #finding the pt of the HNL thorugh separate HNL branch
+                #.Define("GenHNL_mass", "MCParticle::get_mass(GenHNL_PID)") #finding the generator mass of the HNL through separate HNL branch
                 # Defining a vector containing the HNL and its daughters in order written
                 # Name of vector is HNL_indices
-                .Define("HNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
+                .Define("GenHNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
                 
                 # Defining the individual particles from the vector
-                .Define("HNL", "selMC_leg(0)(HNL_indices, Particle)")                
-                .Define("electron", "selMC_leg(1)(HNL_indices, Particle)")
-                .Define("positron", "selMC_leg(2)(HNL_indices, Particle)")
-                .Define("neutrino", "selMC_leg(3)(HNL_indices, Particle)")
+                .Define("GenHNL", "selMC_leg(0)(GenHNL_indices, Particle)")
+                .Define("GenHNLElectron", "selMC_leg(1)(GenHNL_indices, Particle)")
+                .Define("GenHNLPositron", "selMC_leg(2)(GenHNL_indices, Particle)")
+                .Define("GenHNLNeutrino", "selMC_leg(3)(GenHNL_indices, Particle)")
 
                 # Kinematics of the mother particle HNL
-                .Define("HNL_mass", "MCParticle::get_mass( HNL )")
-                .Define("HNL_pT", "MCParticle::get_pt( HNL )")
-                .Define("HNL_eta", "MCParticle::get_eta( HNL )")
-                .Define("HNL_phi", "MCParticle::get_phi( HNL )")
+                .Define("GenHNL_mass", "MCParticle::get_mass( GenHNL )")
+                .Define("GenHNL_pt", "MCParticle::get_pt( GenHNL )")
+                .Define("GenHNL_eta", "MCParticle::get_eta( GenHNL )")
+                .Define("GenHNL_phi", "MCParticle::get_phi( GenHNL )")
 
                 # Finding the kinematics of each of these daughters
-                .Define("electron_mass", "MCParticle::get_mass( electron )")
-                .Define("electron_pT", "MCParticle::get_pt( electron )")
-                .Define("positron_pT", "MCParticle::get_pt( positron )")
-                .Define("electron_eta", "MCParticle::get_eta( electron )")
-                .Define("positron_eta", "MCParticle::get_eta( positron )")
-                .Define("electron_phi", "MCParticle::get_phi( electron )")
-                .Define("positron_phi", "MCParticle::get_phi( positron )")
+                .Define("GenHNLElectron_mass", "MCParticle::get_mass( GenHNLElectron )")
+                .Define("GenHNLElectron_pt", "MCParticle::get_pt( GenHNLElectron )")
+                .Define("GenHNLPositron_pt", "MCParticle::get_pt( GenHNLPositron )")
+                .Define("GenHNLNeutrino_pt", "MCParticle::get_pt( GenHNLNeutrino )")
+                .Define("GenHNLElectron_eta", "MCParticle::get_eta( GenHNLElectron )")
+                .Define("GenHNLPositron_eta", "MCParticle::get_eta( GenHNLPositron )")
+                .Define("GenHNLNeutrino_eta", "MCParticle::get_eta( GenHNLNeutrino )")
+                .Define("GenHNLElectron_phi", "MCParticle::get_phi( GenHNLElectron )")
+                .Define("GenHNLPositron_phi", "MCParticle::get_phi( GenHNLPositron )")
+                .Define("GenHNLNeutrino_phi", "MCParticle::get_phi( GenHNLNeutrino )")
                 
-                # Finding the production vertex of the daughters (checking electron here)
-                .Define("electron_vertex_x", "MCParticle::get_vertex_x( electron )")
-                .Define("electron_vertex_y", "MCParticle::get_vertex_y( electron )")
-                .Define("electron_vertex_z", "MCParticle::get_vertex_z( electron )")
+                # Finding the production vertex of the daughters (checking GenHNLElectron here)
+                .Define("GenHNLElectron_vertex_x", "MCParticle::get_vertex_x( GenHNLElectron )")
+                .Define("GenHNLElectron_vertex_y", "MCParticle::get_vertex_y( GenHNLElectron )")
+                .Define("GenHNLElectron_vertex_z", "MCParticle::get_vertex_z( GenHNLElectron )")
 
                 # Finding the Lxy of the HNL
                 # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )  
-                .Define("L_xy", "return sqrt(electron_vertex_x*electron_vertex_x + electron_vertex_y*electron_vertex_y)")
+                .Define("GenHNL_Lxy", "return sqrt(GenHNLElectron_vertex_x*GenHNLElectron_vertex_x + GenHNLElectron_vertex_y*GenHNLElectron_vertex_y)")
                 
                 # Calculating the lifetime of the HNL
                 # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
-                .Define("HNL_lifetime", "return ( L_xy * HNL_mass / (HNL_pT * 3E8 * 1000))" )
+                .Define("GenHNL_lifetime", "return ( GenHNL_Lxy * GenHNL_mass / (GenHNL_pt * 3E8 * 1000))" )
                
                 # Finding the production vertex of the HNL which should be at (0,0,0) 
-                .Define("HNL_vertex_x", "MCParticle::get_vertex_x(HNL_PID)")
-                .Define("HNL_vertex_y", "MCParticle::get_vertex_y(HNL_PID)")
-                .Define("HNL_vertex_z", "MCParticle::get_vertex_z(HNL_PID)")
+                .Define("GenHNL_vertex_x", "MCParticle::get_vertex_x(GenHNL_PID)")
+                .Define("GenHNL_vertex_y", "MCParticle::get_vertex_y(GenHNL_PID)")
+                .Define("GenHNL_vertex_z", "MCParticle::get_vertex_z(GenHNL_PID)")
 
                 # Vertexing studies
                 # Finding the vertex of the mother particle HNL using decicated Bs method
-                .Define("HNLMCDecayVertex",   "BsMCDecayVertex( HNL_indices, Particle )") 
+                .Define("GenHNLMCDecayVertex",   "BsMCDecayVertex( GenHNL_indices, Particle )")
 
                 # MC event primary vertex
                 .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
-                .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
+                .Define("n_RecoTracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
 
                 # Reconstructed particles
                 # Returns the RecoParticles associated with the HNL decay products
-                .Define("RecoHNLParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( HNL_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+                .Define("RecoHNLParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( GenHNL_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
                 # Reconstructing the tracks from the HNL
-                .Define("RecoHNLTracks",   "ReconstructedParticle2Track::getRP2TRK( RecoHNLParticles, EFlowTrack_1)") 
+                .Define("RecoHNLTracks",   "ReconstructedParticle2Track::getRP2TRK( RecoHNLParticles, EFlowTrack_1)")
 
                 # Number of tracks in this RecoHNLTracks collection ( = the #tracks used to reconstruct the HNL reco decay vertex)
                 .Define("n_RecoHNLTracks", "ReconstructedParticle2Track::getTK_n( RecoHNLTracks )")
@@ -138,146 +141,171 @@ class analysis():
                 
                 # We may want to look at the reco'ed HNLs legs: in the RecoHNLParticles vector,
                 # the first particle (vector[0]) is the e-, etc :
-                .Define("RecoElectron",   "selRP_leg(0)( RecoHNLParticles )")
-                .Define("RecoPositron",   "selRP_leg(1)( RecoHNLParticles )")
+                .Define("RecoHNLElectron",   "selRP_leg(0)( RecoHNLParticles )")
+                .Define("RecoHNLPositron",   "selRP_leg(1)( RecoHNLParticles )")
                 
                 # reconstruced electron, positron values
-                .Define("RecoElectron_pT",  "ReconstructedParticle::get_pt( RecoElectron )") 
-                .Define("RecoPositron_pT",  "ReconstructedParticle::get_pt( RecoPositron )")
-                .Define("RecoElectron_eta",  "ReconstructedParticle::get_eta( RecoElectron )") 
-                .Define("RecoPositron_eta",  "ReconstructedParticle::get_eta( RecoPositron )")
-                .Define("RecoElectron_phi",  "ReconstructedParticle::get_phi( RecoElectron )") 
-                .Define("RecoPositron_phi",  "ReconstructedParticle::get_phi( RecoPositron )")
-                .Define("RecoElectron_charge",  "ReconstructedParticle::get_charge( RecoElectron )") 
-                .Define("RecoPositron_charge",  "ReconstructedParticle::get_charge( RecoPositron )")
+                .Define("RecoHNLElectron_pt",  "ReconstructedParticle::get_pt( RecoHNLElectron )")
+                .Define("RecoHNLPositron_pt",  "ReconstructedParticle::get_pt( RecoHNLPositron )")
+                .Define("RecoHNLElectron_eta",  "ReconstructedParticle::get_eta( RecoHNLElectron )")
+                .Define("RecoHNLPositron_eta",  "ReconstructedParticle::get_eta( RecoHNLPositron )")
+                .Define("RecoHNLElectron_phi",  "ReconstructedParticle::get_phi( RecoHNLElectron )")
+                .Define("RecoHNLPositron_phi",  "ReconstructedParticle::get_phi( RecoHNLPositron )")
+                .Define("RecoHNLElectron_charge",  "ReconstructedParticle::get_charge( RecoHNLElectron )")
+                .Define("RecoHNLPositron_charge",  "ReconstructedParticle::get_charge( RecoHNLPositron )")
                 #add dxy, dz, dxyz, and uncertainties
 
                 #gen-reco
-                .Define("GenMinusRecoElectron_pT",   "electron_pT-RecoElectron_pT") 
-                .Define("GenMinusRecoPositron_pT",   "positron_pT-RecoPositron_pT")
-                .Define("GenMinusRecoElectron_eta",  "electron_eta-RecoElectron_eta") 
-                .Define("GenMinusRecoPositron_eta",  "positron_eta-RecoPositron_eta")
-                .Define("GenMinusRecoElectron_phi",  "electron_phi-RecoElectron_phi") 
-                .Define("GenMinusRecoPositron_phi",  "positron_phi-RecoPositron_phi")
+                .Define("GenMinusRecoHNLElectron_pt",   "GenHNLElectron_pt-RecoHNLElectron_pt")
+                .Define("GenMinusRecoHNLPositron_pt",   "GenHNLPositron_pt-RecoHNLPositron_pt")
+                .Define("GenMinusRecoHNLElectron_eta",  "GenHNLElectron_eta-RecoHNLElectron_eta")
+                .Define("GenMinusRecoHNLPositron_eta",  "GenHNLPositron_eta-RecoHNLPositron_eta")
+                .Define("GenMinusRecoHNLElectron_phi",  "GenHNLElectron_phi-RecoHNLElectron_phi")
+                .Define("GenMinusRecoHNLPositron_phi",  "GenHNLPositron_phi-RecoHNLPositron_phi")
 
-                .Define("GenMinusRecoHNL_DecayVertex_x",  "electron_vertex_x-RecoHNLDecayVertex.position.x")
-                .Define("GenMinusRecoHNL_DecayVertex_y",  "electron_vertex_y-RecoHNLDecayVertex.position.y")
-                .Define("GenMinusRecoHNL_DecayVertex_z",  "electron_vertex_z-RecoHNLDecayVertex.position.z")
+                .Define("GenMinusRecoHNL_DecayVertex_x",  "GenHNLElectron_vertex_x-RecoHNLDecayVertex.position.x")
+                .Define("GenMinusRecoHNL_DecayVertex_y",  "GenHNLElectron_vertex_y-RecoHNLDecayVertex.position.y")
+                .Define("GenMinusRecoHNL_DecayVertex_z",  "GenHNLElectron_vertex_z-RecoHNLDecayVertex.position.z")
                 
                        
                 ####################################################################################################
                 # From here the general study begins
 
 		#JETS
-		.Define("n_jets", "ReconstructedParticle::get_n(Jet)") #count how many jets are in the event in total
+		.Define("n_RecoJets", "ReconstructedParticle::get_n(Jet)") #count how many jets are in the event in total
 
 		#PHOTONS
 		.Alias("Photon0", "Photon#0.index") 
-		.Define("photons",  "ReconstructedParticle::get(Photon0, ReconstructedParticles)") 
-		.Define("n_photons",  "ReconstructedParticle::get_n(photons)") #count how many photons are in the event in total
+		.Define("RecoPhotons",  "ReconstructedParticle::get(Photon0, ReconstructedParticles)")
+		.Define("n_RecoPhotons",  "ReconstructedParticle::get_n(RecoPhotons)") #count how many photons are in the event in total
 
 		#ELECTRONS AND MUONS
 		#TODO: ADD EXPLANATION OF THE EXTRA STEPS
 		.Alias("Electron0", "Electron#0.index")
-		.Define("electrons",  "ReconstructedParticle::get(Electron0, ReconstructedParticles)") 
-		.Define("n_electrons",  "ReconstructedParticle::get_n(electrons)") #count how many electrons are in the event in total
+		.Define("RecoElectrons",  "ReconstructedParticle::get(Electron0, ReconstructedParticles)")
+		.Define("n_RecoElectrons",  "ReconstructedParticle::get_n(RecoElectrons)") #count how many electrons are in the event in total
 
 		.Alias("Muon0", "Muon#0.index")
-		.Define("muons",  "ReconstructedParticle::get(Muon0, ReconstructedParticles)")
-		.Define("n_muons",  "ReconstructedParticle::get_n(muons)") #count how many muons are in the event in total
+		.Define("RecoMuons",  "ReconstructedParticle::get(Muon0, ReconstructedParticles)")
+		.Define("n_RecoMuons",  "ReconstructedParticle::get_n(RecoMuons)") #count how many muons are in the event in total
 
-		#OBJECT SELECTION: Consider only those objects that have pT > certain threshold
-		.Define("selected_jets", "ReconstructedParticle::sel_pt(50.)(Jet)") #select only jets with a pT > 50 GeV
-		.Define("selected_electrons", "ReconstructedParticle::sel_pt(20.)(electrons)") #select only electrons with a pT > 20 GeV
-		.Define("selected_muons", "ReconstructedParticle::sel_pt(20.)(muons)")
-		
-		#SIMPLE VARIABLES: Access the basic kinematic variables of the selected jets, works analogously for electrons, muons
-		.Define("seljet_pT",     "ReconstructedParticle::get_pt(selected_jets)") #transverse momentum pT
-		.Define("seljet_eta",     "ReconstructedParticle::get_eta(selected_jets)") #pseudorapidity eta
-		.Define("seljet_phi",     "ReconstructedParticle::get_phi(selected_jets)") #polar angle in the transverse plane phi
+		#OBJECT SELECTION: Consider only those objects that have pt > certain threshold
+		#.Define("selected_jets", "ReconstructedParticle::sel_pt(0.)(Jet)") #select only jets with a pt > 50 GeV
+		#.Define("selected_electrons", "ReconstructedParticle::sel_pt(0.)(electrons)") #select only electrons with a pt > 20 GeV
+                #.Define("selected_photons", "ReconstructedParticle::sel_pt(0.)(photons)") #select only photons with a pt > 20 GeV
+		#.Define("selected_muons", "ReconstructedParticle::sel_pt(0.)(muons)")
+
+                #.Define("n_selJets", "ReconstructedParticle::get_n(selected_jets)")
+                #.Define("n_selElectrons", "ReconstructedParticle::get_n(selected_electrons)")
+                #.Define("n_selPhotons", "ReconstructedParticle::get_n(selected_photons)")
+                #.Define("n_selMuons", "ReconstructedParticle::get_n(selected_muons)")
+
+		#SIMPLE VARIABLES: Access the basic kinematic variables of the (selected) jets, works analogously for electrons, muons
+		.Define("RecoJet_pt",      "ReconstructedParticle::get_pt(Jet)") #transverse momentum pt
+		.Define("RecoJet_eta",     "ReconstructedParticle::get_eta(Jet)") #pseudorapidity eta
+		.Define("RecoJet_phi",     "ReconstructedParticle::get_phi(Jet)") #polar angle in the transverse plane phi
+                .Define("RecoJet_charge",  "ReconstructedParticle::get_charge(Jet)")
+
+                .Define("RecoElectron_pt",      "ReconstructedParticle::get_pt(RecoElectrons)") #transverse momentum pt
+		.Define("RecoElectron_eta",     "ReconstructedParticle::get_eta(RecoElectrons)") #pseudorapidity eta
+		.Define("RecoElectron_phi",     "ReconstructedParticle::get_phi(RecoElectrons)") #polar angle in the transverse plane phi
+                .Define("RecoElectron_charge",  "ReconstructedParticle::get_charge(RecoElectrons)")
+
+                .Define("RecoPhoton_pt",      "ReconstructedParticle::get_pt(RecoPhotons)") #transverse momentum pt
+		.Define("RecoPhoton_eta",     "ReconstructedParticle::get_eta(RecoPhotons)") #pseudorapidity eta
+		.Define("RecoPhoton_phi",     "ReconstructedParticle::get_phi(RecoPhotons)") #polar angle in the transverse plane phi
+                .Define("RecoPhoton_charge",  "ReconstructedParticle::get_charge(RecoPhotons)")
+
+                .Define("RecoMuon_pt",      "ReconstructedParticle::get_pt(RecoMuons)") #transverse momentum pt
+		.Define("RecoMuon_eta",     "ReconstructedParticle::get_eta(RecoMuons)") #pseudorapidity eta
+		.Define("RecoMuon_phi",     "ReconstructedParticle::get_phi(RecoMuons)") #polar angle in the transverse plane phi
+                .Define("RecoMuon_charge",  "ReconstructedParticle::get_charge(RecoMuons)")
 
 		#EVENTWIDE VARIABLES: Access quantities that exist only once per event, such as the missing transverse energy
-		.Define("MET", "ReconstructedParticle::get_pt(MissingET)") #absolute value of MET
-		.Define("MET_x", "ReconstructedParticle::get_px(MissingET)") #x-component of MET
-		.Define("MET_y", "ReconstructedParticle::get_py(MissingET)") #y-component of MET
-		.Define("MET_phi", "ReconstructedParticle::get_phi(MissingET)") #angle of MET
+		.Define("RecoMET", "ReconstructedParticle::get_pt(MissingET)") #absolute value of RecoMET
+		.Define("RecoMET_x", "ReconstructedParticle::get_px(MissingET)") #x-component of RecoMET
+		.Define("RecoMET_y", "ReconstructedParticle::get_py(MissingET)") #y-component of RecoMET
+		.Define("RecoMET_phi", "ReconstructedParticle::get_phi(MissingET)") #angle of RecoMET
 	
 		)
 
 		# select branches for output file
 		branchList = ROOT.vector('string')()
 		for branchName in [
-				#"n_jets", 
-				#"n_photons",
-				#"n_electrons",
-				#"n_muons",
-				#"seljet_pT", 
-				#"seljet_eta",
-				#"seljet_phi", 
-				#"MET",
-				#"MET_x",
-				#"MET_y",
-				#"MET_phi",
                                 ######## Monte-Carlo particles #######
-                                #"HNL_PID", 
-                                #"HNL_pT",  
-                                #"HNL_mass",
-                                #"ePID", 
-                                #"e_pT", 
-                                #"HNL_indices",  
-                                "HNL_vertex_x", 
-                                "HNL_vertex_y", 
-                                "HNL_vertex_z", 
-                                #"HNL", 
-                                #"electron", 
-                                #"positron", 
-                                #"neutrino", 
-                                "HNL_mass",
-                                "HNL_pT",
-                                "HNL_eta",
-                                "HNL_phi",
-                                "electron_mass",
-                                "electron_pT",
-                                "positron_pT",
-                                "electron_eta",
-                                "positron_eta",
-                                "electron_phi",
-                                "positron_phi",
-                                "HNL_decay",
-                                "electron_vertex_x",
-                                "electron_vertex_y",
-                                "electron_vertex_z",
-                                #"HNL_Lxy",
-                                "L_xy",
-                                "HNL_lifetime",
-                                "HNLMCDecayVertex",
+                                "GenHNL_vertex_x",
+                                "GenHNL_vertex_y",
+                                "GenHNL_vertex_z",
+                                "GenHNL_mass",
+                                "GenHNL_pt",
+                                "GenHNL_eta",
+                                "GenHNL_phi",
+                                "GenHNLElectron_mass",
+                                "GenHNLElectron_pt",
+                                "GenHNLPositron_pt",
+                                "GenHNLNeutrino_pt",
+                                "GenHNLElectron_eta",
+                                "GenHNLPositron_eta",
+                                "GenHNLNeutrino_eta",
+                                "GenHNLElectron_phi",
+                                "GenHNLPositron_phi",
+                                "GenHNLNeutrino_phi",
+                                "GenHNL_decay",
+                                "GenHNLElectron_vertex_x",
+                                "GenHNLElectron_vertex_y",
+                                "GenHNLElectron_vertex_z",
+                                "GenHNL_Lxy",
+                                "GenHNL_lifetime",
+                                "GenHNLMCDecayVertex",
                                 "MC_PrimaryVertex",
-                                "ntracks",
+                                "n_RecoTracks",
                                 ######## Reconstructed particles #######
                                 "RecoHNLParticles",
                                 "RecoHNLTracks",
                                 "n_RecoHNLTracks",
                                 "RecoHNLDecayVertexObject",
                                 "RecoHNLDecayVertex",
-                                "RecoElectron_pT",
-                                "RecoPositron_pT", 
-                                "RecoElectron_eta",
-                                "RecoPositron_eta", 
-                                "RecoElectron_phi",
-                                "RecoPositron_phi", 
-                                "RecoElectron_charge",
-                                "RecoPositron_charge",
-
-                                "GenMinusRecoElectron_pT", 
-                                "GenMinusRecoPositron_pT",
-                                "GenMinusRecoElectron_eta", 
-                                "GenMinusRecoPositron_eta",
-                                "GenMinusRecoElectron_phi", 
-                                "GenMinusRecoPositron_phi",
-
+                                "RecoHNLElectron_pt",
+                                "RecoHNLPositron_pt",
+                                "RecoHNLElectron_eta",
+                                "RecoHNLPositron_eta",
+                                "RecoHNLElectron_phi",
+                                "RecoHNLPositron_phi",
+                                "RecoHNLElectron_charge",
+                                "RecoHNLPositron_charge",
+                                "GenMinusRecoHNLElectron_pt",
+                                "GenMinusRecoHNLPositron_pt",
+                                "GenMinusRecoHNLElectron_eta",
+                                "GenMinusRecoHNLPositron_eta",
+                                "GenMinusRecoHNLElectron_phi",
+                                "GenMinusRecoHNLPositron_phi",
                                 "GenMinusRecoHNL_DecayVertex_x",
                                 "GenMinusRecoHNL_DecayVertex_y",
                                 "GenMinusRecoHNL_DecayVertex_z",
+				"n_RecoJets",
+				"n_RecoPhotons",
+				"n_RecoElectrons",
+				"n_RecoMuons",
+				"RecoJet_pt",
+				"RecoJet_eta",
+				"RecoJet_phi",
+                                "RecoJet_charge",
+                                "RecoPhoton_pt",
+				"RecoPhoton_eta",
+				"RecoPhoton_phi",
+                                "RecoPhoton_charge",
+				"RecoElectron_pt",
+				"RecoElectron_eta",
+				"RecoElectron_phi",
+                                "RecoElectron_charge",
+				"RecoMuon_pt",
+				"RecoMuon_eta",
+				"RecoMuon_phi",
+                                "RecoMuon_charge",
+				"RecoMET",
+				"RecoMET_x",
+				"RecoMET_y",
+				"RecoMET_phi",
 
 		]:
 			branchList.push_back(branchName)

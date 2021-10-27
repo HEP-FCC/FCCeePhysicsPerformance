@@ -172,8 +172,8 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     for h in iterh:
       sumhistos.Add(h)
 
-    maxh = histos[2].GetMaximum()
-    minh = histos[2].GetMinimum()
+    maxh = histos[3].GetMaximum()
+    minh = histos[3].GetMinimum()
 
     if logY: 
        canvas.SetLogy(1)
@@ -249,7 +249,7 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
         histos[0].GetYaxis().SetNdivisions(505);
         histos[0].SetTitle("") '''
         
-        histos[0].GetYaxis().SetTitleOffset(1.2)
+        histos[0].GetYaxis().SetTitleOffset(1.45)
         histos[0].GetXaxis().SetTitleOffset(1.3)
     
 
@@ -277,8 +277,10 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
                 lowY=1000.
                 highY=500.*maxh/ROOT.gPad.GetUymax()
             #
-            histos[0].SetMaximum(highY)
-            histos[0].SetMinimum(lowY)
+            #histos[0].SetMaximum(highY)
+            #histos[0].SetMinimum(lowY)
+            histos[0].SetMaximum(100)
+            histos[0].SetMinimum(0.001)
         else:
             histos[0].SetMaximum(1.5*maxh)
             histos[0].SetMinimum(0.)
@@ -326,7 +328,9 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     if not stacksig:
         if logY:
             maxh=200.*maxh/ROOT.gPad.GetUymax()
-        histos[0].SetMaximum(2.3*maxh)         
+            histos[0].SetMaximum(5000)
+        else:
+            histos[0].SetMaximum(2.3*maxh)         
         histos[0].Draw("hist")
         for h in histos:
             mean.append(h.GetMean(1))
@@ -337,6 +341,8 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     #legend.SetTextFont(font) 
     legend.Draw() 
      
+    #pave = ROOT.TPaveText(0.63,0.42,0.88,0.68,"ndc") #6 entries
+    #pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
     pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
     #pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
     pave.SetFillColor(0)

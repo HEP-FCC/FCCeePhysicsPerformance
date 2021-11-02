@@ -70,10 +70,14 @@ class analysis():
 
                 .Define("All_n_GenHNL", "MCParticle::get_n(GenHNL_PID)")
                 .Define("AllGenHNL_mass", "MCParticle::get_mass(GenHNL_PID)") #finding the generator mass of the HNL through separate HNL branch
+                .Define("AllGenHNL_e", "MCParticle::get_e(GenHNL_PID)")
                 .Define("AllGenHNL_p", "MCParticle::get_p(GenHNL_PID)")
                 .Define("AllGenHNL_pt", "MCParticle::get_pt(GenHNL_PID)")    #finding the pt of the HNL thorugh separate HNL branch
+                .Define("AllGenHNL_px", "MCParticle::get_px(GenHNL_PID)")
+                .Define("AllGenHNL_py", "MCParticle::get_py(GenHNL_PID)")
                 .Define("AllGenHNL_pz", "MCParticle::get_pz(GenHNL_PID)")
                 .Define("AllGenHNL_eta", "MCParticle::get_eta(GenHNL_PID)")
+                .Define("AllGenHNL_theta", "MCParticle::get_theta(GenHNL_PID)")
                 .Define("AllGenHNL_phi", "MCParticle::get_phi(GenHNL_PID)")
                 .Define("AllGenHNL_genStatus", "MCParticle::get_genStatus(GenHNL_PID)")
 
@@ -81,10 +85,14 @@ class analysis():
                 .Define("GenElectron_PID", "MCParticle::sel_pdgID(11, false)(Particle)") #get MCParticle electrons, but not their charge conjugates
                 .Define("FSGenElectron", "MCParticle::sel_genStatus(1)(GenElectron_PID)") #gen status==1 means final state particle (FS)
                 .Define("n_FSGenElectron", "MCParticle::get_n(FSGenElectron)")
+                .Define("FSGenElectron_e", "MCParticle::get_e(FSGenElectron)")
                 .Define("FSGenElectron_p", "MCParticle::get_p(FSGenElectron)")
                 .Define("FSGenElectron_pt", "MCParticle::get_pt(FSGenElectron)")
+                .Define("FSGenElectron_px", "MCParticle::get_px(FSGenElectron)")
+                .Define("FSGenElectron_py", "MCParticle::get_py(FSGenElectron)")
                 .Define("FSGenElectron_pz", "MCParticle::get_pz(FSGenElectron)")
                 .Define("FSGenElectron_eta", "MCParticle::get_eta(FSGenElectron)")
+                .Define("FSGenElectron_theta", "MCParticle::get_theta(FSGenElectron)")
                 .Define("FSGenElectron_phi", "MCParticle::get_phi(FSGenElectron)")
 
                 .Define("FSGenElectron_vertex_x", "MCParticle::get_vertex_x( FSGenElectron )")
@@ -103,41 +111,71 @@ class analysis():
                 .Define("GenPositron_PID", "MCParticle::sel_pdgID(-11, false)(Particle)")
                 .Define("FSGenPositron", "MCParticle::sel_genStatus(1)(GenPositron_PID)") #gen status==1 means final state particle (FS)
                 .Define("n_FSGenPositron", "MCParticle::get_n(FSGenPositron)")
+                .Define("FSGenPositron_e", "MCParticle::get_e(FSGenPositron)")
                 .Define("FSGenPositron_p", "MCParticle::get_p(FSGenPositron)")
                 .Define("FSGenPositron_pt", "MCParticle::get_pt(FSGenPositron)")
+                .Define("FSGenPositron_px", "MCParticle::get_px(FSGenPositron)")
+                .Define("FSGenPositron_py", "MCParticle::get_py(FSGenPositron)")
                 .Define("FSGenPositron_pz", "MCParticle::get_pz(FSGenPositron)")
                 .Define("FSGenPositron_eta", "MCParticle::get_eta(FSGenPositron)")
+                .Define("FSGenPositron_theta", "MCParticle::get_theta(FSGenPositron)")
                 .Define("FSGenPositron_phi", "MCParticle::get_phi(FSGenPositron)")
 
                 #all final state gen neutrinos
                 .Define("GenNeutrino_PID", "MCParticle::sel_pdgID(12, false)(Particle)")
                 .Define("FSGenNeutrino", "MCParticle::sel_genStatus(1)(GenNeutrino_PID)") #gen status==1 means final state particle (FS)
                 .Define("n_FSGenNeutrino", "MCParticle::get_n(FSGenNeutrino)")
+                .Define("FSGenNeutrino_e", "MCParticle::get_e(FSGenNeutrino)")
                 .Define("FSGenNeutrino_p", "MCParticle::get_p(FSGenNeutrino)")
                 .Define("FSGenNeutrino_pt", "MCParticle::get_pt(FSGenNeutrino)")
+                .Define("FSGenNeutrino_px", "MCParticle::get_px(FSGenNeutrino)")
+                .Define("FSGenNeutrino_py", "MCParticle::get_py(FSGenNeutrino)")
                 .Define("FSGenNeutrino_pz", "MCParticle::get_pz(FSGenNeutrino)")
                 .Define("FSGenNeutrino_eta", "MCParticle::get_eta(FSGenNeutrino)")
+                .Define("FSGenNeutrino_theta", "MCParticle::get_theta(FSGenNeutrino)")
                 .Define("FSGenNeutrino_phi", "MCParticle::get_phi(FSGenNeutrino)")
 
                 #all final state gen anti-neutrinos
                 .Define("GenAntiNeutrino_PID", "MCParticle::sel_pdgID(-12, false)(Particle)")
                 .Define("FSGenAntiNeutrino", "MCParticle::sel_genStatus(1)(GenAntiNeutrino_PID)") #gen status==1 means final state particle (FS)
                 .Define("n_FSGenAntiNeutrino", "MCParticle::get_n(FSGenAntiNeutrino)")
+                .Define("FSGenAntiNeutrino_e", "MCParticle::get_e(FSGenAntiNeutrino)")
                 .Define("FSGenAntiNeutrino_p", "MCParticle::get_p(FSGenAntiNeutrino)")
                 .Define("FSGenAntiNeutrino_pt", "MCParticle::get_pt(FSGenAntiNeutrino)")
+                .Define("FSGenAntiNeutrino_px", "MCParticle::get_px(FSGenAntiNeutrino)")
+                .Define("FSGenAntiNeutrino_py", "MCParticle::get_py(FSGenAntiNeutrino)")
                 .Define("FSGenAntiNeutrino_pz", "MCParticle::get_pz(FSGenAntiNeutrino)")
                 .Define("FSGenAntiNeutrino_eta", "MCParticle::get_eta(FSGenAntiNeutrino)")
+                .Define("FSGenAntiNeutrino_theta", "MCParticle::get_theta(FSGenAntiNeutrino)")
                 .Define("FSGenAntiNeutrino_phi", "MCParticle::get_phi(FSGenAntiNeutrino)")
 
                 #all final state gen photons
                 .Define("GenPhoton_PID", "MCParticle::sel_pdgID(22, false)(Particle)")
                 .Define("FSGenPhoton", "MCParticle::sel_genStatus(1)(GenPhoton_PID)") #gen status==1 means final state particle (FS)
                 .Define("n_FSGenPhoton", "MCParticle::get_n(FSGenPhoton)")
+                .Define("FSGenPhoton_e", "MCParticle::get_e(FSGenPhoton)")
                 .Define("FSGenPhoton_p", "MCParticle::get_p(FSGenPhoton)")
                 .Define("FSGenPhoton_pt", "MCParticle::get_pt(FSGenPhoton)")
+                .Define("FSGenPhoton_px", "MCParticle::get_px(FSGenPhoton)")
+                .Define("FSGenPhoton_py", "MCParticle::get_py(FSGenPhoton)")
                 .Define("FSGenPhoton_pz", "MCParticle::get_pz(FSGenPhoton)")
                 .Define("FSGenPhoton_eta", "MCParticle::get_eta(FSGenPhoton)")
+                .Define("FSGenPhoton_theta", "MCParticle::get_theta(FSGenPhoton)")
                 .Define("FSGenPhoton_phi", "MCParticle::get_phi(FSGenPhoton)")
+
+                # ee invariant mass
+                .Define("FSGen_ee_energy", "return (FSGenElectron_e.at(0) + FSGenPositron_e.at(0))")
+                .Define("FSGen_ee_px", "return (FSGenElectron_px.at(0) + FSGenPositron_px.at(0))")
+                .Define("FSGen_ee_py", "return (FSGenElectron_py.at(0) + FSGenPositron_py.at(0))")
+                .Define("FSGen_ee_pz", "return (FSGenElectron_pz.at(0) + FSGenPositron_pz.at(0))")
+                .Define("FSGen_ee_invMass", "return sqrt(FSGen_ee_energy*FSGen_ee_energy - FSGen_ee_px*FSGen_ee_px - FSGen_ee_py*FSGen_ee_py - FSGen_ee_pz*FSGen_ee_pz )")
+
+                # eenu invariant mass
+                .Define("FSGen_eenu_energy", "return (FSGenElectron_e.at(0) + FSGenPositron_e.at(0) + FSGenNeutrino_e.at(0))")
+                .Define("FSGen_eenu_px", "return (FSGenElectron_px.at(0) + FSGenPositron_px.at(0) + FSGenNeutrino_px.at(0))")
+                .Define("FSGen_eenu_py", "return (FSGenElectron_py.at(0) + FSGenPositron_py.at(0) + FSGenNeutrino_py.at(0))")
+                .Define("FSGen_eenu_pz", "return (FSGenElectron_pz.at(0) + FSGenPositron_pz.at(0) + FSGenNeutrino_pz.at(0))")
+                .Define("FSGen_eenu_invMass", "return sqrt(FSGen_eenu_energy*FSGen_eenu_energy - FSGen_eenu_px*FSGen_eenu_px - FSGen_eenu_py*FSGen_eenu_py - FSGen_eenu_pz*FSGen_eenu_pz )")
 
                 # Defining a vector containing the HNL and its daughters in order written
                 # Name of vector is HNL_indices
@@ -152,27 +190,43 @@ class analysis():
 
                 # Kinematics of the mother particle HNL
                 .Define("GenHNL_mass", "MCParticle::get_mass( GenHNL )")
+                .Define("GenHNL_e", "MCParticle::get_e( GenHNL )")
                 .Define("GenHNL_p", "MCParticle::get_p( GenHNL )")
                 .Define("GenHNL_pt", "MCParticle::get_pt( GenHNL )")
+                .Define("GenHNL_px", "MCParticle::get_px( GenHNL )")
+                .Define("GenHNL_py", "MCParticle::get_py( GenHNL )")
                 .Define("GenHNL_pz", "MCParticle::get_pz( GenHNL )")
                 .Define("GenHNL_eta", "MCParticle::get_eta( GenHNL )")
+                .Define("GenHNL_theta", "MCParticle::get_theta( GenHNL )")
                 .Define("GenHNL_phi", "MCParticle::get_phi( GenHNL )")
                 .Define("GenHNL_genStatus", "MCParticle::get_genStatus( GenHNL )")
 
                 # Finding the kinematics of each of these daughters
                 .Define("GenHNLElectron_mass", "MCParticle::get_mass( GenHNLElectron )")
+                .Define("GenHNLElectron_e", "MCParticle::get_e( GenHNLElectron )")
+                .Define("GenHNLPositron_e", "MCParticle::get_e( GenHNLPositron )")
+                .Define("GenHNLNeutrino_e", "MCParticle::get_e( GenHNLNeutrino )")
                 .Define("GenHNLElectron_p", "MCParticle::get_p( GenHNLElectron )")
                 .Define("GenHNLPositron_p", "MCParticle::get_p( GenHNLPositron )")
                 .Define("GenHNLNeutrino_p", "MCParticle::get_p( GenHNLNeutrino )")
                 .Define("GenHNLElectron_pt", "MCParticle::get_pt( GenHNLElectron )")
                 .Define("GenHNLPositron_pt", "MCParticle::get_pt( GenHNLPositron )")
                 .Define("GenHNLNeutrino_pt", "MCParticle::get_pt( GenHNLNeutrino )")
+                .Define("GenHNLElectron_px", "MCParticle::get_px( GenHNLElectron )")
+                .Define("GenHNLPositron_px", "MCParticle::get_px( GenHNLPositron )")
+                .Define("GenHNLNeutrino_px", "MCParticle::get_px( GenHNLNeutrino )")
+                .Define("GenHNLElectron_py", "MCParticle::get_py( GenHNLElectron )")
+                .Define("GenHNLPositron_py", "MCParticle::get_py( GenHNLPositron )")
+                .Define("GenHNLNeutrino_py", "MCParticle::get_py( GenHNLNeutrino )")
                 .Define("GenHNLElectron_pz", "MCParticle::get_pz( GenHNLElectron )")
                 .Define("GenHNLPositron_pz", "MCParticle::get_pz( GenHNLPositron )")
                 .Define("GenHNLNeutrino_pz", "MCParticle::get_pz( GenHNLNeutrino )")
                 .Define("GenHNLElectron_eta", "MCParticle::get_eta( GenHNLElectron )")
                 .Define("GenHNLPositron_eta", "MCParticle::get_eta( GenHNLPositron )")
                 .Define("GenHNLNeutrino_eta", "MCParticle::get_eta( GenHNLNeutrino )")
+                .Define("GenHNLElectron_theta", "MCParticle::get_theta( GenHNLElectron )")
+                .Define("GenHNLPositron_theta", "MCParticle::get_theta( GenHNLPositron )")
+                .Define("GenHNLNeutrino_theta", "MCParticle::get_theta( GenHNLNeutrino )")
                 .Define("GenHNLElectron_phi", "MCParticle::get_phi( GenHNLElectron )")
                 .Define("GenHNLPositron_phi", "MCParticle::get_phi( GenHNLPositron )")
                 .Define("GenHNLNeutrino_phi", "MCParticle::get_phi( GenHNLNeutrino )")
@@ -197,6 +251,20 @@ class analysis():
                 .Define("GenHNL_vertex_x", "MCParticle::get_vertex_x(GenHNL_PID)")
                 .Define("GenHNL_vertex_y", "MCParticle::get_vertex_y(GenHNL_PID)")
                 .Define("GenHNL_vertex_z", "MCParticle::get_vertex_z(GenHNL_PID)")
+
+                # ee invariant mass
+                .Define("GenHNL_ee_energy", "return (GenHNLElectron_e + GenHNLPositron_e)")
+                .Define("GenHNL_ee_px", "return (GenHNLElectron_px + GenHNLPositron_px)")
+                .Define("GenHNL_ee_py", "return (GenHNLElectron_py + GenHNLPositron_py)")
+                .Define("GenHNL_ee_pz", "return (GenHNLElectron_pz + GenHNLPositron_pz)")
+                .Define("GenHNL_ee_invMass", "return sqrt(GenHNL_ee_energy*GenHNL_ee_energy - GenHNL_ee_px*GenHNL_ee_px - GenHNL_ee_py*GenHNL_ee_py - GenHNL_ee_pz*GenHNL_ee_pz )")
+
+                # eenu invariant mass
+                .Define("GenHNL_eenu_energy", "return (GenHNLElectron_e + GenHNLPositron_e + GenHNLNeutrino_e)")
+                .Define("GenHNL_eenu_px", "return (GenHNLElectron_px + GenHNLPositron_px + GenHNLNeutrino_px)")
+                .Define("GenHNL_eenu_py", "return (GenHNLElectron_py + GenHNLPositron_py + GenHNLNeutrino_py)")
+                .Define("GenHNL_eenu_pz", "return (GenHNLElectron_pz + GenHNLPositron_pz + GenHNLNeutrino_pz)")
+                .Define("GenHNL_eenu_invMass", "return sqrt(GenHNL_eenu_energy*GenHNL_eenu_energy - GenHNL_eenu_px*GenHNL_eenu_px - GenHNL_eenu_py*GenHNL_eenu_py - GenHNL_eenu_pz*GenHNL_eenu_pz )")
 
                 # Vertexing studies
                 # Finding the vertex of the mother particle HNL using decicated Bs method
@@ -228,29 +296,52 @@ class analysis():
                 .Define("RecoHNLPositron",   "selRP_leg(1)( RecoHNLParticles )")
                 
                 # reconstruced electron, positron values
+                .Define("RecoHNLElectron_e",  "ReconstructedParticle::get_e( RecoHNLElectron )")
+                .Define("RecoHNLPositron_e",  "ReconstructedParticle::get_e( RecoHNLPositron )")
                 .Define("RecoHNLElectron_p",  "ReconstructedParticle::get_p( RecoHNLElectron )")
                 .Define("RecoHNLPositron_p",  "ReconstructedParticle::get_p( RecoHNLPositron )")
                 .Define("RecoHNLElectron_pt",  "ReconstructedParticle::get_pt( RecoHNLElectron )")
                 .Define("RecoHNLPositron_pt",  "ReconstructedParticle::get_pt( RecoHNLPositron )")
+                .Define("RecoHNLElectron_px",  "ReconstructedParticle::get_px( RecoHNLElectron )")
+                .Define("RecoHNLPositron_px",  "ReconstructedParticle::get_px( RecoHNLPositron )")
+                .Define("RecoHNLElectron_py",  "ReconstructedParticle::get_py( RecoHNLElectron )")
+                .Define("RecoHNLPositron_py",  "ReconstructedParticle::get_py( RecoHNLPositron )")
                 .Define("RecoHNLElectron_pz",  "ReconstructedParticle::get_pz( RecoHNLElectron )")
                 .Define("RecoHNLPositron_pz",  "ReconstructedParticle::get_pz( RecoHNLPositron )")
                 .Define("RecoHNLElectron_eta",  "ReconstructedParticle::get_eta( RecoHNLElectron )")
                 .Define("RecoHNLPositron_eta",  "ReconstructedParticle::get_eta( RecoHNLPositron )")
+                .Define("RecoHNLElectron_theta",  "ReconstructedParticle::get_theta( RecoHNLElectron )")
+                .Define("RecoHNLPositron_theta",  "ReconstructedParticle::get_theta( RecoHNLPositron )")
                 .Define("RecoHNLElectron_phi",  "ReconstructedParticle::get_phi( RecoHNLElectron )")
                 .Define("RecoHNLPositron_phi",  "ReconstructedParticle::get_phi( RecoHNLPositron )")
                 .Define("RecoHNLElectron_charge",  "ReconstructedParticle::get_charge( RecoHNLElectron )")
                 .Define("RecoHNLPositron_charge",  "ReconstructedParticle::get_charge( RecoHNLPositron )")
                 #add dxy, dz, dxyz, and uncertainties
 
+                # ee invariant mass
+                .Define("RecoHNL_ee_energy", "return (RecoHNLElectron_e + RecoHNLPositron_e)")
+                .Define("RecoHNL_ee_px", "return (RecoHNLElectron_px + RecoHNLPositron_px)")
+                .Define("RecoHNL_ee_py", "return (RecoHNLElectron_py + RecoHNLPositron_py)")
+                .Define("RecoHNL_ee_pz", "return (RecoHNLElectron_pz + RecoHNLPositron_pz)")
+                .Define("RecoHNL_ee_invMass", "return sqrt(RecoHNL_ee_energy*RecoHNL_ee_energy - RecoHNL_ee_px*RecoHNL_ee_px - RecoHNL_ee_py*RecoHNL_ee_py - RecoHNL_ee_pz*RecoHNL_ee_pz )")
+
                 #gen-reco
+                .Define("GenMinusRecoHNLElectron_e",   "GenHNLElectron_e-RecoHNLElectron_e")
+                .Define("GenMinusRecoHNLPositron_e",   "GenHNLPositron_e-RecoHNLPositron_e")
                 .Define("GenMinusRecoHNLElectron_p",   "GenHNLElectron_p-RecoHNLElectron_p")
                 .Define("GenMinusRecoHNLPositron_p",   "GenHNLPositron_p-RecoHNLPositron_p")
                 .Define("GenMinusRecoHNLElectron_pt",   "GenHNLElectron_pt-RecoHNLElectron_pt")
                 .Define("GenMinusRecoHNLPositron_pt",   "GenHNLPositron_pt-RecoHNLPositron_pt")
+                .Define("GenMinusRecoHNLElectron_px",   "GenHNLElectron_px-RecoHNLElectron_px")
+                .Define("GenMinusRecoHNLPositron_px",   "GenHNLPositron_px-RecoHNLPositron_px")
+                .Define("GenMinusRecoHNLElectron_py",   "GenHNLElectron_py-RecoHNLElectron_py")
+                .Define("GenMinusRecoHNLPositron_py",   "GenHNLPositron_py-RecoHNLPositron_py")
                 .Define("GenMinusRecoHNLElectron_pz",   "GenHNLElectron_pz-RecoHNLElectron_pz")
                 .Define("GenMinusRecoHNLPositron_pz",   "GenHNLPositron_pz-RecoHNLPositron_pz")
                 .Define("GenMinusRecoHNLElectron_eta",  "GenHNLElectron_eta-RecoHNLElectron_eta")
                 .Define("GenMinusRecoHNLPositron_eta",  "GenHNLPositron_eta-RecoHNLPositron_eta")
+                .Define("GenMinusRecoHNLElectron_theta",  "GenHNLElectron_theta-RecoHNLElectron_theta")
+                .Define("GenMinusRecoHNLPositron_theta",  "GenHNLPositron_theta-RecoHNLPositron_theta")
                 .Define("GenMinusRecoHNLElectron_phi",  "GenHNLElectron_phi-RecoHNLElectron_phi")
                 .Define("GenMinusRecoHNLPositron_phi",  "GenHNLPositron_phi-RecoHNLPositron_phi")
 
@@ -292,31 +383,47 @@ class analysis():
                 #.Define("n_selMuons", "ReconstructedParticle::get_n(selected_muons)")
 
 		#SIMPLE VARIABLES: Access the basic kinematic variables of the (selected) jets, works analogously for electrons, muons
-		.Define("RecoJet_p",      "ReconstructedParticle::get_p(Jet)") #momentum p
+		.Define("RecoJet_e",      "ReconstructedParticle::get_e(Jet)")
+                .Define("RecoJet_p",      "ReconstructedParticle::get_p(Jet)") #momentum p
                 .Define("RecoJet_pt",      "ReconstructedParticle::get_pt(Jet)") #transverse momentum pt
+                .Define("RecoJet_px",      "ReconstructedParticle::get_px(Jet)")
+                .Define("RecoJet_py",      "ReconstructedParticle::get_py(Jet)")
                 .Define("RecoJet_pz",      "ReconstructedParticle::get_pz(Jet)")
 		.Define("RecoJet_eta",     "ReconstructedParticle::get_eta(Jet)") #pseudorapidity eta
+                .Define("RecoJet_theta",   "ReconstructedParticle::get_theta(Jet)")
 		.Define("RecoJet_phi",     "ReconstructedParticle::get_phi(Jet)") #polar angle in the transverse plane phi
                 .Define("RecoJet_charge",  "ReconstructedParticle::get_charge(Jet)")
 
+                .Define("RecoElectron_e",      "ReconstructedParticle::get_e(RecoElectrons)")
                 .Define("RecoElectron_p",      "ReconstructedParticle::get_p(RecoElectrons)")
                 .Define("RecoElectron_pt",      "ReconstructedParticle::get_pt(RecoElectrons)")
+                .Define("RecoElectron_px",      "ReconstructedParticle::get_px(RecoElectrons)")
+                .Define("RecoElectron_py",      "ReconstructedParticle::get_py(RecoElectrons)")
                 .Define("RecoElectron_pz",      "ReconstructedParticle::get_pz(RecoElectrons)")
 		.Define("RecoElectron_eta",     "ReconstructedParticle::get_eta(RecoElectrons)") #pseudorapidity eta
+                .Define("RecoElectron_theta",   "ReconstructedParticle::get_theta(RecoElectrons)")
 		.Define("RecoElectron_phi",     "ReconstructedParticle::get_phi(RecoElectrons)") #polar angle in the transverse plane phi
                 .Define("RecoElectron_charge",  "ReconstructedParticle::get_charge(RecoElectrons)")
 
+                .Define("RecoPhoton_e",      "ReconstructedParticle::get_e(RecoPhotons)")
                 .Define("RecoPhoton_p",      "ReconstructedParticle::get_p(RecoPhotons)")
                 .Define("RecoPhoton_pt",      "ReconstructedParticle::get_pt(RecoPhotons)")
+                .Define("RecoPhoton_px",      "ReconstructedParticle::get_px(RecoPhotons)")
+                .Define("RecoPhoton_py",      "ReconstructedParticle::get_py(RecoPhotons)")
                 .Define("RecoPhoton_pz",      "ReconstructedParticle::get_pz(RecoPhotons)")
 		.Define("RecoPhoton_eta",     "ReconstructedParticle::get_eta(RecoPhotons)") #pseudorapidity eta
+                .Define("RecoPhoton_theta",   "ReconstructedParticle::get_theta(RecoPhotons)")
 		.Define("RecoPhoton_phi",     "ReconstructedParticle::get_phi(RecoPhotons)") #polar angle in the transverse plane phi
                 .Define("RecoPhoton_charge",  "ReconstructedParticle::get_charge(RecoPhotons)")
 
+                .Define("RecoMuon_e",      "ReconstructedParticle::get_e(RecoMuons)")
                 .Define("RecoMuon_p",      "ReconstructedParticle::get_p(RecoMuons)")
                 .Define("RecoMuon_pt",      "ReconstructedParticle::get_pt(RecoMuons)")
+                .Define("RecoMuon_px",      "ReconstructedParticle::get_px(RecoMuons)")
+                .Define("RecoMuon_py",      "ReconstructedParticle::get_py(RecoMuons)")
                 .Define("RecoMuon_pz",      "ReconstructedParticle::get_pz(RecoMuons)")
 		.Define("RecoMuon_eta",     "ReconstructedParticle::get_eta(RecoMuons)") #pseudorapidity eta
+                .Define("RecoMuon_theta",   "ReconstructedParticle::get_theta(RecoMuons)")
 		.Define("RecoMuon_phi",     "ReconstructedParticle::get_phi(RecoMuons)") #polar angle in the transverse plane phi
                 .Define("RecoMuon_charge",  "ReconstructedParticle::get_charge(RecoMuons)")
 
@@ -334,17 +441,25 @@ class analysis():
                                 ######## Monte-Carlo particles #######
                                 "All_n_GenHNL",
                                 "AllGenHNL_mass",
+                                "AllGenHNL_e",
                                 "AllGenHNL_p",
                                 "AllGenHNL_pt",
+                                "AllGenHNL_px",
+                                "AllGenHNL_py",
                                 "AllGenHNL_pz",
                                 "AllGenHNL_eta",
+                                "AllGenHNL_theta",
                                 "AllGenHNL_phi",
                                 "AllGenHNL_genStatus",
                                 "n_FSGenElectron",
+                                "FSGenElectron_e",
                                 "FSGenElectron_p",
                                 "FSGenElectron_pt",
+                                "FSGenElectron_px",
+                                "FSGenElectron_py",
                                 "FSGenElectron_pz",
                                 "FSGenElectron_eta",
+                                "FSGenElectron_theta",
                                 "FSGenElectron_phi",
                                 "FSGenElectron_vertex_x",
                                 "FSGenElectron_vertex_y",
@@ -352,52 +467,85 @@ class analysis():
                                 "FSGen_Lxy",
                                 "FSGen_lifetime",
                                 "n_FSGenPositron",
+                                "FSGenPositron_e",
                                 "FSGenPositron_p",
                                 "FSGenPositron_pt",
+                                "FSGenPositron_px",
+                                "FSGenPositron_py",
                                 "FSGenPositron_pz",
                                 "FSGenPositron_eta",
+                                "FSGenPositron_theta",
                                 "FSGenPositron_phi",
                                 "n_FSGenNeutrino",
+                                "FSGenNeutrino_e",
                                 "FSGenNeutrino_p",
                                 "FSGenNeutrino_pt",
+                                "FSGenNeutrino_px",
+                                "FSGenNeutrino_py",
                                 "FSGenNeutrino_pz",
                                 "FSGenNeutrino_eta",
+                                "FSGenNeutrino_theta",
                                 "FSGenNeutrino_phi",
                                 "n_FSGenAntiNeutrino",
+                                "FSGenAntiNeutrino_e",
                                 "FSGenAntiNeutrino_p",
                                 "FSGenAntiNeutrino_pt",
+                                "FSGenAntiNeutrino_px",
+                                "FSGenAntiNeutrino_py",
                                 "FSGenAntiNeutrino_pz",
                                 "FSGenAntiNeutrino_eta",
+                                "FSGenAntiNeutrino_theta",
                                 "FSGenAntiNeutrino_phi",
                                 "n_FSGenPhoton",
+                                "FSGenPhoton_e",
                                 "FSGenPhoton_p",
                                 "FSGenPhoton_pt",
+                                "FSGenPhoton_px",
+                                "FSGenPhoton_py",
                                 "FSGenPhoton_pz",
                                 "FSGenPhoton_eta",
+                                "FSGenPhoton_theta",
                                 "FSGenPhoton_phi",
+                                "FSGen_ee_invMass",
+                                "FSGen_eenu_invMass",
                                 "GenHNL_vertex_x",
                                 "GenHNL_vertex_y",
                                 "GenHNL_vertex_z",
+                                "GenHNL_ee_invMass",
+                                "GenHNL_eenu_invMass",
                                 "GenHNL_mass",
                                 "GenHNL_p",
                                 "GenHNL_pt",
                                 "GenHNL_pz",
                                 "GenHNL_eta",
+                                "GenHNL_theta",
                                 "GenHNL_phi",
                                 "GenHNL_genStatus",
                                 "GenHNLElectron_mass",
+                                "GenHNLElectron_e",
+                                "GenHNLPositron_e",
+                                "GenHNLNeutrino_e",
                                 "GenHNLElectron_p",
                                 "GenHNLPositron_p",
                                 "GenHNLNeutrino_p",
                                 "GenHNLElectron_pt",
                                 "GenHNLPositron_pt",
                                 "GenHNLNeutrino_pt",
+                                "GenHNLElectron_px",
+                                "GenHNLPositron_px",
+                                "GenHNLNeutrino_px",
+                                "GenHNLElectron_py",
+                                "GenHNLPositron_py",
+                                "GenHNLNeutrino_py",
                                 "GenHNLElectron_pz",
                                 "GenHNLPositron_pz",
                                 "GenHNLNeutrino_pz",
                                 "GenHNLElectron_eta",
                                 "GenHNLPositron_eta",
                                 "GenHNLNeutrino_eta",
+                                "GenHNLElectron_theta",
+                                "GenHNLPositron_theta",
+                                "GenHNLNeutrino_theta",
                                 "GenHNLElectron_phi",
                                 "GenHNLPositron_phi",
                                 "GenHNLNeutrino_phi",
@@ -419,26 +567,43 @@ class analysis():
                                 "n_RecoHNLTracks",
                                 "RecoHNLDecayVertexObject",
                                 "RecoHNLDecayVertex",
+                                "RecoHNLElectron_e",
+                                "RecoHNLPositron_e",
                                 "RecoHNLElectron_p",
                                 "RecoHNLPositron_p",
                                 "RecoHNLElectron_pt",
                                 "RecoHNLPositron_pt",
+                                "RecoHNLElectron_px",
+                                "RecoHNLPositron_px",
+                                "RecoHNLElectron_py",
+                                "RecoHNLPositron_py",
                                 "RecoHNLElectron_pz",
                                 "RecoHNLPositron_pz",
                                 "RecoHNLElectron_eta",
                                 "RecoHNLPositron_eta",
+                                "RecoHNLElectron_theta",
+                                "RecoHNLPositron_theta",
                                 "RecoHNLElectron_phi",
                                 "RecoHNLPositron_phi",
                                 "RecoHNLElectron_charge",
                                 "RecoHNLPositron_charge",
+                                "RecoHNL_ee_invMass",
+                                "GenMinusRecoHNLElectron_e",
+                                "GenMinusRecoHNLPositron_e",
                                 "GenMinusRecoHNLElectron_p",
                                 "GenMinusRecoHNLPositron_p",
                                 "GenMinusRecoHNLElectron_pt",
                                 "GenMinusRecoHNLPositron_pt",
+                                "GenMinusRecoHNLElectron_px",
+                                "GenMinusRecoHNLPositron_px",
+                                "GenMinusRecoHNLElectron_py",
+                                "GenMinusRecoHNLPositron_py",
                                 "GenMinusRecoHNLElectron_pz",
                                 "GenMinusRecoHNLPositron_pz",
                                 "GenMinusRecoHNLElectron_eta",
                                 "GenMinusRecoHNLPositron_eta",
+                                "GenMinusRecoHNLElectron_theta",
+                                "GenMinusRecoHNLPositron_theta",
                                 "GenMinusRecoHNLElectron_phi",
                                 "GenMinusRecoHNLPositron_phi",
                                 "GenMinusRecoHNL_DecayVertex_x",
@@ -448,28 +613,44 @@ class analysis():
 				"n_RecoPhotons",
 				"n_RecoElectrons",
 				"n_RecoMuons",
-				"RecoJet_p",
+				"RecoJet_e",
+                                "RecoJet_p",
                                 "RecoJet_pt",
+                                "RecoJet_px",
+                                "RecoJet_py",
                                 "RecoJet_pz",
 				"RecoJet_eta",
+                                "RecoJet_theta",
 				"RecoJet_phi",
                                 "RecoJet_charge",
+                                "RecoPhoton_e",
                                 "RecoPhoton_p",
                                 "RecoPhoton_pt",
+                                "RecoPhoton_px",
+                                "RecoPhoton_py",
                                 "RecoPhoton_pz",
 				"RecoPhoton_eta",
+                                "RecoPhoton_theta",
 				"RecoPhoton_phi",
                                 "RecoPhoton_charge",
-				"RecoElectron_p",
+				"RecoElectron_e",
+                                "RecoElectron_p",
                                 "RecoElectron_pt",
+				"RecoElectron_px",
+                                "RecoElectron_py",
                                 "RecoElectron_pz",
 				"RecoElectron_eta",
+                                "RecoElectron_theta",
 				"RecoElectron_phi",
                                 "RecoElectron_charge",
-				"RecoMuon_p",
+				"RecoMuon_e",
+                                "RecoMuon_p",
                                 "RecoMuon_pt",
+                                "RecoMuon_px",
+                                "RecoMuon_py",
                                 "RecoMuon_pz",
 				"RecoMuon_eta",
+                                "RecoMuon_theta",
 				"RecoMuon_phi",
                                 "RecoMuon_charge",
 				"RecoMET",

@@ -20,10 +20,12 @@ variables = [
     #gen variables
     "All_n_GenHNL",
     "AllGenHNL_mass",
+    "AllGenHNL_e",
     "AllGenHNL_p",
     "AllGenHNL_pt",
     "AllGenHNL_pz",
     "AllGenHNL_eta",
+    "AllGenHNL_theta",
     "AllGenHNL_phi",
 
     "n_FSGenElectron",
@@ -32,34 +34,44 @@ variables = [
     "n_FSGenAntiNeutrino",
     "n_FSGenPhoton",
 
+    "FSGenElectron_e",
     "FSGenElectron_p",
     "FSGenElectron_pt",
     "FSGenElectron_pz",
     "FSGenElectron_eta",
+    "FSGenElectron_theta",
     "FSGenElectron_phi",
 
+    "FSGenPositron_e",
     "FSGenPositron_p",
     "FSGenPositron_pt",
     "FSGenPositron_pz",
     "FSGenPositron_eta",
+    "FSGenPositron_theta",
     "FSGenPositron_phi",
 
+    "FSGenNeutrino_e",
     "FSGenNeutrino_p",
     "FSGenNeutrino_pt",
     "FSGenNeutrino_pz",
     "FSGenNeutrino_eta",
+    "FSGenNeutrino_theta",
     "FSGenNeutrino_phi",
 
+    "FSGenAntiNeutrino_e",
     "FSGenAntiNeutrino_p",
     "FSGenAntiNeutrino_pt",
     "FSGenAntiNeutrino_pz",
     "FSGenAntiNeutrino_eta",
+    "FSGenAntiNeutrino_theta",
     "FSGenAntiNeutrino_phi",
 
+    "FSGenPhoton_e",
     "FSGenPhoton_p",
     "FSGenPhoton_pt",
     "FSGenPhoton_pz",
     "FSGenPhoton_eta",
+    "FSGenPhoton_theta",
     "FSGenPhoton_phi",
 
     "FSGenElectron_vertex_x",
@@ -69,11 +81,15 @@ variables = [
     "FSGen_Lxy",
     "FSGen_lifetime",
 
+    "FSGen_ee_invMass",
+    "FSGen_eenu_invMass",
+
     "GenHNL_mass",
     "GenHNL_p",
     "GenHNL_pt",
     "GenHNL_pz",
     "GenHNL_eta",
+    "GenHNL_theta",
     "GenHNL_phi",
     "GenHNL_lifetime",
     "GenHNL_Lxy",
@@ -81,6 +97,9 @@ variables = [
     "GenHNL_vertex_y",
     "GenHNL_vertex_z",
 
+    "GenHNLElectron_e",
+    "GenHNLPositron_e",
+    "GenHNLNeutrino_e",
     "GenHNLElectron_p",
     "GenHNLPositron_p",
     "GenHNLNeutrino_p",
@@ -93,12 +112,18 @@ variables = [
     "GenHNLElectron_eta",
     "GenHNLPositron_eta",
     "GenHNLNeutrino_eta",
+    "GenHNLElectron_theta",
+    "GenHNLPositron_theta",
+    "GenHNLNeutrino_theta",
     "GenHNLElectron_phi",
     "GenHNLPositron_phi",
     "GenHNLNeutrino_phi",
     "GenHNLElectron_vertex_x",
     "GenHNLElectron_vertex_y",
     "GenHNLElectron_vertex_z",
+
+    "GenHNL_ee_invMass",
+    "GenHNL_eenu_invMass",
 
     #reco variables
     "n_RecoTracks",
@@ -109,6 +134,8 @@ variables = [
     "RecoHNL_DecayVertex_chi2",
     "RecoHNL_DecayVertex_probability",
 
+    "RecoHNLElectron_e",
+    "RecoHNLPositron_e",
     "RecoHNLElectron_p",
     "RecoHNLPositron_p",
     "RecoHNLElectron_pt",
@@ -117,6 +144,8 @@ variables = [
     "RecoHNLPositron_pz",
     "RecoHNLElectron_eta",
     "RecoHNLPositron_eta",
+    "RecoHNLElectron_theta",
+    "RecoHNLPositron_theta",
     "RecoHNLElectron_phi",
     "RecoHNLPositron_phi",
     "RecoHNLElectron_charge",
@@ -127,31 +156,39 @@ variables = [
     "n_RecoElectrons",
     "n_RecoMuons",
 
+    "RecoJet_e",
     "RecoJet_p",
     "RecoJet_pt",
     "RecoJet_pz",
     "RecoJet_eta",
+    "RecoJet_theta",
     "RecoJet_phi",
     "RecoJet_charge",
 
+    "RecoElectron_e",
     "RecoElectron_p",
     "RecoElectron_pt",
     "RecoElectron_pz",
     "RecoElectron_eta",
+    "RecoElectron_theta",
     "RecoElectron_phi",
     "RecoElectron_charge",
 
+    "RecoPhoton_e",
     "RecoPhoton_p",
     "RecoPhoton_pt",
     "RecoPhoton_pz",
     "RecoPhoton_eta",
+    "RecoPhoton_theta",
     "RecoPhoton_phi",
     "RecoPhoton_charge",
 
+    "RecoMuon_e",
     "RecoMuon_p",
     "RecoMuon_pt",
     "RecoMuon_pz",
     "RecoMuon_eta",
+    "RecoMuon_theta",
     "RecoMuon_phi",
     "RecoMuon_charge",
 
@@ -160,7 +197,11 @@ variables = [
     "RecoMET_y",
     "RecoMET_phi",
 
+    "RecoHNL_ee_invMass",
+
     #gen-reco
+    "GenMinusRecoHNLElectron_e",
+    "GenMinusRecoHNLPositron_e",
     "GenMinusRecoHNLElectron_p",
     "GenMinusRecoHNLPositron_p",
     "GenMinusRecoHNLElectron_pt",
@@ -169,6 +210,8 @@ variables = [
     "GenMinusRecoHNLPositron_pz",
     "GenMinusRecoHNLElectron_eta",
     "GenMinusRecoHNLPositron_eta",
+    "GenMinusRecoHNLElectron_theta",
+    "GenMinusRecoHNLPositron_theta",
     "GenMinusRecoHNLElectron_phi",
     "GenMinusRecoHNLPositron_phi",
 
@@ -189,27 +232,28 @@ extralabel['sel1'] = "Selection: At least 1 N, at least 2 reco electrons"
 
 colors = {}
 #colors['HNL_eenu_5GeV_1p41e-6Ve'] = ROOT.kGreen+2
-#colors['HNL_eenu_10GeV_1p41e-6Ve'] = ROOT.kBlack
+colors['HNL_eenu_10GeV_1p41e-6Ve'] = ROOT.kBlack
 #colors['HNL_eenu_12GeV_1p41e-6Ve'] = ROOT.kCyan
 #colors['HNL_eenu_15GeV_1p41e-6Ve'] = ROOT.kBlue
-#colors['HNL_eenu_20GeV_1p41e-6Ve'] = ROOT.kMagenta
+colors['HNL_eenu_20GeV_1p41e-6Ve'] = ROOT.kMagenta
 #colors['HNL_eenu_30GeV_1p41e-6Ve'] = ROOT.kRed
 colors['HNL_eenu_40GeV_1p41e-6Ve'] = ROOT.kRed
-colors['HNL_eenu_50GeV_1p41e-6Ve'] = ROOT.kBlue
+#colors['HNL_eenu_50GeV_1p41e-6Ve'] = ROOT.kBlue
 colors['HNL_eenu_70GeV_1p41e-6Ve'] = ROOT.kGreen+2
-colors['HNL_eenu_90GeV_1p41e-6Ve'] = ROOT.kBlack
+#colors['HNL_eenu_90GeV_1p41e-6Ve'] = ROOT.kBlack
+colors['HNL_eenu_90GeV_1p41e-6Ve'] = ROOT.kBlue
 #colors['Ztotautau'] = ROOT.kRed
 
 plots = {}
 plots['HNL'] = {'signal':{
     #'HNL_eenu_5GeV_1p41e-6Ve':['HNL_eenu_5GeV_1p41e-6Ve'],
-    #'HNL_eenu_10GeV_1p41e-6Ve':['HNL_eenu_10GeV_1p41e-6Ve'],
+    'HNL_eenu_10GeV_1p41e-6Ve':['HNL_eenu_10GeV_1p41e-6Ve'],
     #'HNL_eenu_12GeV_1p41e-6Ve':['HNL_eenu_12GeV_1p41e-6Ve'],
     #'HNL_eenu_15GeV_1p41e-6Ve':['HNL_eenu_15GeV_1p41e-6Ve'],
-    #'HNL_eenu_20GeV_1p41e-6Ve':['HNL_eenu_20GeV_1p41e-6Ve'],
+    'HNL_eenu_20GeV_1p41e-6Ve':['HNL_eenu_20GeV_1p41e-6Ve'],
     #'HNL_eenu_30GeV_1p41e-6Ve':['HNL_eenu_30GeV_1p41e-6Ve'],
     'HNL_eenu_40GeV_1p41e-6Ve':['HNL_eenu_40GeV_1p41e-6Ve'],
-    'HNL_eenu_50GeV_1p41e-6Ve':['HNL_eenu_50GeV_1p41e-6Ve'],
+    #'HNL_eenu_50GeV_1p41e-6Ve':['HNL_eenu_50GeV_1p41e-6Ve'],
     'HNL_eenu_70GeV_1p41e-6Ve':['HNL_eenu_70GeV_1p41e-6Ve'],
     'HNL_eenu_90GeV_1p41e-6Ve':['HNL_eenu_90GeV_1p41e-6Ve'],
 },
@@ -223,13 +267,13 @@ plots['HNL'] = {'signal':{
 
 legend = {}
 #legend['HNL_eenu_5GeV_1p41e-6Ve']  = 'm_{N} = 5 GeV, V_{e} = 1.41e-6'
-#legend['HNL_eenu_10GeV_1p41e-6Ve'] = 'm_{N} = 10 GeV, V_{e} = 1.41e-6'
+legend['HNL_eenu_10GeV_1p41e-6Ve'] = 'm_{N} = 10 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_12GeV_1p41e-6Ve'] = 'm_{N} = 12 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_15GeV_1p41e-6Ve'] = 'm_{N} = 15 GeV, V_{e} = 1.41e-6'
-#legend['HNL_eenu_20GeV_1p41e-6Ve'] = 'm_{N} = 20 GeV, V_{e} = 1.41e-6'
+legend['HNL_eenu_20GeV_1p41e-6Ve'] = 'm_{N} = 20 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_30GeV_1p41e-6Ve'] = 'm_{N} = 30 GeV, V_{e} = 1.41e-6'
 legend['HNL_eenu_40GeV_1p41e-6Ve'] = 'm_{N} = 40 GeV, V_{e} = 1.41e-6'
-legend['HNL_eenu_50GeV_1p41e-6Ve'] = 'm_{N} = 50 GeV, V_{e} = 1.41e-6'
+#legend['HNL_eenu_50GeV_1p41e-6Ve'] = 'm_{N} = 50 GeV, V_{e} = 1.41e-6'
 legend['HNL_eenu_70GeV_1p41e-6Ve'] = 'm_{N} = 70 GeV, V_{e} = 1.41e-6'
 legend['HNL_eenu_90GeV_1p41e-6Ve'] = 'm_{N} = 90 GeV, V_{e} = 1.41e-6'
 #legend['Ztotautau'] = 'Z #rightarrow #tau#tau'

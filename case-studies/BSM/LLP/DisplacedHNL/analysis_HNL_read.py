@@ -179,7 +179,8 @@ class analysis():
 
                 # Defining a vector containing the HNL and its daughters in order written
                 # Name of vector is HNL_indices
-                .Define("GenHNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
+                .Define("GenHNL_indices", "MCParticle::get_indices_InclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
+                #.Define("GenHNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
                 #.Define("GenHNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12, 22, 22, 22, 22, 22, 22, 22}, true, false)(Particle, Particle1)")
                 
                 # Defining the individual particles from the vector

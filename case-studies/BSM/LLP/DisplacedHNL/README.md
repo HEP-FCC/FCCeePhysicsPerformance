@@ -30,7 +30,7 @@ mkdir build install
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=../install -DFCCANALYSES_INCLUDE_PATH=<Your_Complete_Path_to>/FCCAnalyses/install/include/FCCAnalyses/
 make install
-cd ../../BSM/LLP/DisplacedHNL/
+cd ../../../BSM/LLP/DisplacedHNL/
 ```
 
 ### you will need to run these setup commands every time you log in:

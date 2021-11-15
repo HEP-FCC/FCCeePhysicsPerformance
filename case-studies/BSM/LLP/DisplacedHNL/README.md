@@ -73,4 +73,7 @@ needs to be  linked against FCCeePhysicsPerformane, instructions for which can b
 cd FCCeePhysicsPerformance/case-studies/BSM/LLP/DisplacedHNL
 python3 analysis_HNL_read.py -i HNL_sample_creation/HNL_eenu_50GeV_1p41e-6Ve.root #for one example signal point
 ./runAnalysis.sh #for all points i've generated so far
+
+python3 finalSel.py #to run the "final selection"
+python3 doPlots.py plots.py #to create plots
 ```

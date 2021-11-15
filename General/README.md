@@ -74,7 +74,10 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
   - See [here for  information about the files made with IDEA](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php)
   - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA_3T.php)
 
-
+##### Known caveats in the "spring2021" samples:
+- there is some inefficiency for electrons, due primarily to the overlap removal procedure, see [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)
+- the efficiency for very low momentum tracks is lower than what it should be, see [Tristan's talk](https://indico.cern.ch/event/1076058/contributions/4525621/attachments/2312669/3936050/Talk_FCC_miralles.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)
+- the jets that are on the EDM4Hep files, i.e. that were produced during the Delphes step, **should not be used**. See [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1096051/contributions/4614509/attachments/2344926/3998410/2021_11_12_News.pdf). The issue lies in the Delphes card that was used (some jets are suppressed in the overlap removal procedure). The solution is to **re-cluster the jets in FCCAnalyses, as explained below.**
 
 ### Example analyses
 

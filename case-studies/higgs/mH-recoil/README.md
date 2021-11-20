@@ -26,9 +26,29 @@ for the determination of the recoil mass.
 - [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002
 - [Measurement of the Higgs boson mass and ee → ZH cross section using Z→μμ and Z→ee at the ILC](https://arxiv.org/abs/1604.07524) J. Yan et al, Phys Rev D94 (2016) 113002
 
+### List of Monte-Carlo samples (spring2021)
+
+See  the compilation from Jan at [this googledoc](https://docs.google.com/spreadsheets/d/1W33UhfJbTILDkeN9ovl2Hcs32DTpSB7v0T0xsQzWPNw/edit#gid=0)
+
+Recommended nominal samples in the [spring2021 campaign](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php) :
+  - ZH signal: Use the **Whizard** samples (proper description of the BES), wzp6\_ee\_XXH\_ecm240 with XX = mumu, tautau, ee, nunu, or qq.
+  - WW background:
+    - mumu analysis: better use p8\_ee\_WW\_mumu\_ecm240, which includes W -> mu and W -> tau -> mu
+    - otherwise, the lower statistics inclusive sample p8\_ee\_WW\_ecm240
+  - ZZ background : p8\_ee\_ZZ\_ecm240
+  - Fermion pair production: 
+    - Dileptons: wzp6\_ee\_mumu\_ecm240, wzp6\_ee\_tautau\_ecm240 and wzp6\_ee\_ee\_Mee\_30\_150\_ecm240. The mumu and tautau samples correspond to ee -> Z/gamma\* -> mumu or tautau. The third sample includes the s- and the t-channel (important !), and was generated within 30 < Mee < 150 GeV and 15 deg < theta < 165 deg. The statistics corresponds to O(2x) that expected in 5 ab-1.
+    - Hadrons: p8\_ee\_Zqq\_ecm240, corresponds to ee -> Z / gamma\* -> qq , all quark flavors.
+  - Other small backgrounds generated in the mumu channel :
+    - "single Z", i.e. ee -> e(e)Z with Z -> mumu: use both wzp6\_egamma\_eZ\_Zmumu\_ecm240 and wzp6\_gammae\_eZ\_Zmumu\_ecm240
+    - gamma gamma background: wzp6\_gaga\_mumu\_60\_ecm240 and wzp6\_gaga\_tautau\_60\_ecm240, generated within M(mumu) or M(tautau) > 60 GeV
+
+### Results obtained for the FCC week, July 2021
+
+See [Jan's talk](https://indico.cern.ch/event/995850/contributions/4415989/attachments/2272945/3860610/ZHRecoilAnalysis_FCCWeek_29062021.pdf)
 
  
-### Preliminary analyses 
+### Early version of the analysis (December 2020)
 - Clement Helsens: Developer, Sample production, Preliminary FCCAnalyses design, Preliminary recoil fit analysis
 
 To run the analysis, should use the corresponding [FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses/tree/master/) configurations located in ```FCCAnalyses-config/mumu``` and ```FCCAnalyses-config/ee```. This preliminary analysis i using the input files produced in the ```edm4hep``` data format, and produced with this [sample production](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php). ```FlatNtuples``` and ```histograms``` will be produced and used to fit the recoil mass. ```FCCAnalyses``` output files can also be directly accessed on eos ```/eos/experiment/fcc/ee/analyses/case-studies/higgs/mH-recoil/FlatNtuples/```.

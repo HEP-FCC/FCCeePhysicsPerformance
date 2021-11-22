@@ -40,8 +40,8 @@ define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 import model SM_HeavyN_CKM_AllMasses_LO
 define e = e+ e-
-generate e+ e- > ve n1, (n1 > e e ve)
-add process e+ e- > ve~ n1, (n1 > e e ve)
+define nue = ve ve~
+generate e+ e- > nue n1, (n1 > e e nue)
 output HNL_llnu_10GeV_1p41e-6Ve
 launch HNL_llnu_10GeV_1p41e-6Ve
 done

@@ -18,6 +18,8 @@ First create the LHE file. To do this, you'll need to download the latest versio
 scp MG5_aMC_v3.2.0.tar.gz username@lxplus7.cern.ch:/afs_path/yadda_yadda/
 ```
 
+Then ssh to lxplus and unzip the tarball (tar -xf MG5_aMC_v3.2.0.tar.gz). If you're going to generate ALPs, copy the ALP_NLO_UFO/ directory into MG5_aMC_v3_2_0/models.
+
 Then you can do:
 
 ```
@@ -28,7 +30,7 @@ to create the LHE file, where mg5_proc_card.dat is the madgraph proc card you ar
 
 The resulting events will be stored in  HNL_ljj/Events/run_01/unweighted_events.lhe.gz file.
 
-Unzip it and give the path to HNL_pythia.cmnd file to generate the delphes root file.
+Unzip it (gunzip unweighted_events.lhe.gz) and give the path to HNL_pythia.cmnd file to generate the delphes root file.
 
 You also need to grab the latest official Delphes card and edm4hep tcl file:
 ```

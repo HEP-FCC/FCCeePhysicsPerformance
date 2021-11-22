@@ -12,12 +12,18 @@ to
 generate e+ e- > ve n1, (n1 > e e nu)
 add process e+ e- > ve~ n1, (n1 > e e nu)
 
-First create the LHE file. To do this, you'll need to download the latest version of madgraph, and make sure you're using python 3.7 or greater. Then you can do:
+First create the LHE file. To do this, you'll need to download the latest version of madgraph (http://madgraph.phys.ucl.ac.be/) and make sure you're using python 3.7 or greater. For the Snowmass study, we're using MadGraph5 v3.2.0. Copy the Madgraph tarball to your local area on lxplus:
+
+```
+scp MG5_aMC_v3.2.0.tar.gz username@lxplus7.cern.ch:/afs_path/yadda_yadda/
+```
+
+Then you can do:
 
 ```
 ./bin/mg5_aMC mg5_proc_card.dat
 ```
-to create the LHE file.
+to create the LHE file, where mg5_proc_card.dat is the madgraph proc card you are interested in generating.
 
 
 The resulting events will be stored in  HNL_ljj/Events/run_01/unweighted_events.lhe.gz file.

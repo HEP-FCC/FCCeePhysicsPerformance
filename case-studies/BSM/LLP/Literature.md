@@ -22,6 +22,7 @@
 - The seesaw path to leptonic CP violation (Measuring CP phases from flavour ratios at FCC-ee) - [arXiv:1611.05000](https://arxiv.org/abs/1611.05000)
 - Displaced vertex searches for sterile neutrinos at future lepton colliders - [arXiv:1604.02420](https://arxiv.org/abs/1604.02420)
 - Search for Heavy Right Handed Neutrinos at the FCC-ee - [arXiv:1411.5230](https://arxiv.org/abs/1411.5230)
+- Flavoured Resonant Leptogenesis at Sub-TeV Scales - [arXiv:2009.03166](https://arxiv.org/abs/2009.03166)
 - Uniting low-scale leptogeneses - [arXiv:2008.13771](https://arxiv.org/abs/2008.13771)
 
 ### Reviews:

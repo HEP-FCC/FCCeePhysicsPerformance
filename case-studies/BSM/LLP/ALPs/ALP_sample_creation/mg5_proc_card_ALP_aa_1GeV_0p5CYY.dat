@@ -55,7 +55,7 @@ set ebeam2 45.594
 set Ma 1.
 # set ALP couplings
 set cWW = 0.0
-set CYY = 0.05
+set CYY = 0.5
 set cGG = 0.
 set cuu = 0.
 set cdd = 0.

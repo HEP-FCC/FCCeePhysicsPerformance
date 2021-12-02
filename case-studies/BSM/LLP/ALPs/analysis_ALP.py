@@ -235,7 +235,7 @@ class analysis():
                 
                 # Calculating the lifetime of the ALP
                 # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
-                .Define("GenALP_lifetime", "return ( GenALP_Lxy * GenALP_mass / (GenALP_pt * 3E8 * 1000))" )
+                .Define("GenALP_lifetime_xy", "return ( GenALP_Lxy * GenALP_mass / (GenALP_pt * 3E8 * 1000))" )
                 .Define("GenALP_lifetime_xyz", "return ( GenALP_Lxyz * GenALP_mass / (GenALP_p * 3E8 * 1000))" )
                
                 # Finding the production vertex of the ALP which should be at (0,0,0) 
@@ -531,7 +531,7 @@ class analysis():
                                 "GenALPPhoton1_vertex_z",
                                 "GenALP_Lxy",
                                 "GenALP_Lxyz",
-                                "GenALP_lifetime",
+                                "GenALP_lifetime_xy",
                                 "GenALP_lifetime_xyz",
                                 #"GenALPMCDecayVertex",
                                 "MC_PrimaryVertex",

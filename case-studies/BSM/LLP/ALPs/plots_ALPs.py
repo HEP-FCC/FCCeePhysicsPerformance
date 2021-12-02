@@ -95,7 +95,7 @@ variables = [
     "GenALP_eta",
     "GenALP_theta",
     "GenALP_phi",
-    "GenALP_lifetime",
+    "GenALP_lifetime_xy",
     "GenALP_lifetime_xyz",
     "GenALP_Lxy",
     "GenALP_Lxyz",

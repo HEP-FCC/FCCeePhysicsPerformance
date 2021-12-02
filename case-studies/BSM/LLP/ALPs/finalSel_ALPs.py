@@ -104,7 +104,7 @@ variables = {
     "GenALP_eta":      {"name":"GenALP_eta",      "title":"Gen ALP #eta",            "bin":60, "xmin":-3,"xmax":3},
     "GenALP_theta":    {"name":"GenALP_theta",    "title":"Gen ALP #theta",          "bin":64, "xmin":0,"xmax":3.2},
     "GenALP_phi":      {"name":"GenALP_phi",      "title":"Gen ALP #phi",            "bin":64, "xmin":-3.2,"xmax":3.2},
-    "GenALP_lifetime": {"name":"GenALP_lifetime", "title":"Gen ALP #tau [s]",        "bin":100,"xmin":0 ,"xmax":10E-9},
+    "GenALP_lifetime_xy": {"name":"GenALP_lifetime_xy", "title":"Gen ALP #tau_{xy} [s]",        "bin":100,"xmin":0 ,"xmax":10E-9},
     "GenALP_lifetime_xyz": {"name":"GenALP_lifetime_xyz", "title":"Gen ALP #tau_{xyz} [s]",        "bin":100,"xmin":0 ,"xmax":10E-9},
     "GenALP_Lxy":      {"name":"GenALP_Lxy",      "title":"Gen ALP L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
     "GenALP_Lxyz":     {"name":"GenALP_Lxyz",     "title":"Gen ALP L_{xyz} [mm]",    "bin":100,"xmin":0 ,"xmax":1000},

@@ -43,8 +43,8 @@ define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 import model ALP_NLO_UFO
 generate e+ e- > Z, (Z > a ALP, (ALP > a a))
-output test_ALP
-launch test_ALP
+output ALP_Z_aa_1GeV_cYY_0p5
+launch ALP_Z_aa_1GeV_cYY_0p5
 done
 # set to electron beams (0 for ele, 1 for proton)
 set lpp1 0
@@ -52,6 +52,27 @@ set lpp2 0
 set ebeam1 45.594
 set ebeam2 45.594
 # set ALP mass
-set Ma 1
+set Ma 1.
+# set ALP couplings
+set cWW = 0.0
+set CYY = 0.5
+set cGG = 0.
+set cuu = 0.
+set cdd = 0.
+set ccc = 0.
+set css = 0.
+set ctt = 0.
+set cbb = 0.
+set cee = 0.
+set cmumu = 0.
+set ctautau = 0.
+set cah = 0.
+set cZh5 = 0.
+# set supression scale in the effective operators coupling the ALP to SM particles
+set falp = 1000
+
+# set the decay width of the ALP to auto
+set WALP auto
+set time_of_flight 0
 set nevents 10000
 done

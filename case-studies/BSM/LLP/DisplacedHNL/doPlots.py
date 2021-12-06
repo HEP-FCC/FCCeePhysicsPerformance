@@ -172,8 +172,8 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     for h in iterh:
       sumhistos.Add(h)
 
-    maxh = histos[3].GetMaximum()
-    minh = histos[3].GetMinimum()
+    maxh = histos[0].GetMaximum()
+    minh = histos[0].GetMinimum()
 
     if logY: 
        canvas.SetLogy(1)
@@ -342,8 +342,8 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     legend.Draw() 
      
     #pave = ROOT.TPaveText(0.63,0.42,0.88,0.68,"ndc") #6 entries
-    #pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
-    pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
+    pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
+    #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
     #pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
     pave.SetFillColor(0)
     pave.SetBorderSize(0)
@@ -355,7 +355,7 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     Text = ROOT.TLatex()
     
     Text.SetNDC() 
-    Text.SetTextAlign(31);
+    Text.SetTextAlign(31)
     Text.SetTextSize(0.04) 
 
     text = '#it{' + leftText +'}'

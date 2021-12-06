@@ -94,18 +94,6 @@ class analysis():
                 .Define("FSGenElectron_theta", "MCParticle::get_theta(FSGenElectron)")
                 .Define("FSGenElectron_phi", "MCParticle::get_phi(FSGenElectron)")
 
-                .Define("FSGenElectron_vertex_x", "MCParticle::get_vertex_x( FSGenElectron )")
-                .Define("FSGenElectron_vertex_y", "MCParticle::get_vertex_y( FSGenElectron )")
-                .Define("FSGenElectron_vertex_z", "MCParticle::get_vertex_z( FSGenElectron )")
-
-                # Finding the Lxy of the ALP
-                # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )
-                #.Define("FSGen_Lxy", "return sqrt(FSGenElectron_vertex_x*FSGenElectron_vertex_x + FSGenElectron_vertex_y*FSGenElectron_vertex_y)")
-
-                # Calculating the lifetime of the ALP
-                # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
-                #.Define("FSGen_lifetime", "return ( FSGen_Lxy.at(0) * AllGenALP_mass / (AllGenALP_pt * 3E8 * 1000))" )
-
                 #all final state gen positrons
                 .Define("GenPositron_PID", "MCParticle::sel_pdgID(-11, false)(Particle)")
                 .Define("FSGenPositron", "MCParticle::sel_genStatus(1)(GenPositron_PID)") #gen status==1 means final state particle (FS)
@@ -162,113 +150,149 @@ class analysis():
                 .Define("FSGenPhoton_theta", "MCParticle::get_theta(FSGenPhoton)")
                 .Define("FSGenPhoton_phi", "MCParticle::get_phi(FSGenPhoton)")
 
-                # ee invariant mass
-                #.Define("FSGen_ee_energy", "return (FSGenElectron_e.at(0) + FSGenPositron_e.at(0))")
-                #.Define("FSGen_ee_px", "return (FSGenElectron_px.at(0) + FSGenPositron_px.at(0))")
-                #.Define("FSGen_ee_py", "return (FSGenElectron_py.at(0) + FSGenPositron_py.at(0))")
-                #.Define("FSGen_ee_pz", "return (FSGenElectron_pz.at(0) + FSGenPositron_pz.at(0))")
-                #.Define("FSGen_ee_invMass", "return sqrt(FSGen_ee_energy*FSGen_ee_energy - FSGen_ee_px*FSGen_ee_px - FSGen_ee_py*FSGen_ee_py - FSGen_ee_pz*FSGen_ee_pz )")
+                # Number of final state electrons and positrons when the number of final state photons is only 2
+                # Returns -2 if the number of final state photons != 2, and therefore will be shown as -2 in the plots
+                # .Define("n_FSGenElectron_forFS2GenPhotons", "if (n_FSGenPhoton == 2) {return (n_FSGenElectron); } else {return (-2); }")
+                # .Define("n_FSGenPositron_forFS2GenPhotons", "if (n_FSGenPhoton == 2) {return (n_FSGenPositron); } else {return (-2); }")
 
-                # eenu invariant mass
-                #.Define("FSGen_eenu_energy", "return (FSGenElectron_e.at(0) + FSGenPositron_e.at(0) + FSGenNeutrino_e.at(0))")
-                #.Define("FSGen_eenu_px", "return (FSGenElectron_px.at(0) + FSGenPositron_px.at(0) + FSGenNeutrino_px.at(0))")
-                #.Define("FSGen_eenu_py", "return (FSGenElectron_py.at(0) + FSGenPositron_py.at(0) + FSGenNeutrino_py.at(0))")
-                #.Define("FSGen_eenu_pz", "return (FSGenElectron_pz.at(0) + FSGenPositron_pz.at(0) + FSGenNeutrino_pz.at(0))")
-                #.Define("FSGen_eenu_invMass", "return sqrt(FSGen_eenu_energy*FSGen_eenu_energy - FSGen_eenu_px*FSGen_eenu_px - FSGen_eenu_py*FSGen_eenu_py - FSGen_eenu_pz*FSGen_eenu_pz )")
+                .Define("FSGenPhoton_vertex_x", "MCParticle::get_vertex_x( FSGenPhoton )")
+                .Define("FSGenPhoton_vertex_y", "MCParticle::get_vertex_y( FSGenPhoton )")
+                .Define("FSGenPhoton_vertex_z", "MCParticle::get_vertex_z( FSGenPhoton )")
+
+                # Finding the Lxy of the ALP
+                # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )
+                .Define("FSGen_Lxy", "return sqrt(FSGenPhoton_vertex_x*FSGenPhoton_vertex_x + FSGenPhoton_vertex_y*FSGenPhoton_vertex_y)")
+                .Define("FSGen_Lxyz", "return sqrt(FSGenPhoton_vertex_x*FSGenPhoton_vertex_x + FSGenPhoton_vertex_y*FSGenPhoton_vertex_y + FSGenPhoton_vertex_z*FSGenPhoton_vertex_z)")
+
+                # Calculating the lifetime of the ALP
+                # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
+                .Define("FSGen_lifetime_xy", "return ( FSGen_Lxy.at(0) * AllGenALP_mass / (AllGenALP_pt * 3E8 * 1000))" )
+                .Define("FSGen_lifetime_xyz", "return ( FSGen_Lxy.at(0) * AllGenALP_mass / (AllGenALP_p * 3E8 * 1000))" )
+
+                # Separating the three first final state photons
+                # Returns -2 if the number of final state photons != 2, and therefore will be shown as -2 in the plots
+                # .Define("FSGenPhoton0_e", "return FSGenPhoton_e.at(0)")
+                # .Define("FSGenPhoton1_e", "if (n_FSGenPhoton > 2) {return FSGenPhoton_e.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_e", "if (n_FSGenPhoton > 3) {return FSGenPhoton_e.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_p", "return FSGenPhoton_p.at(0)")
+                # .Define("FSGenPhoton1_p", "if (n_FSGenPhoton > 2) {return FSGenPhoton_p.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_p", "if (n_FSGenPhoton > 2) {return FSGenPhoton_p.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_pt", "return FSGenPhoton_pt.at(0)")
+                # .Define("FSGenPhoton1_pt", "if (n_FSGenPhoton > 2) {return FSGenPhoton_pt.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_pt", "if (n_FSGenPhoton > 3) {return FSGenPhoton_pt.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_px", "return FSGenPhoton_px.at(0)")
+                # .Define("FSGenPhoton1_px", "if (n_FSGenPhoton > 2) {return FSGenPhoton_px.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_px", "if (n_FSGenPhoton > 3) {return FSGenPhoton_px.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_py", "return FSGenPhoton_py.at(0)")
+                # .Define("FSGenPhoton1_py", "if (n_FSGenPhoton > 2) {return FSGenPhoton_py.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_py", "if (n_FSGenPhoton > 3) {return FSGenPhoton_py.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_pz", "return FSGenPhoton_pz.at(0)")
+                # .Define("FSGenPhoton1_pz", "if (n_FSGenPhoton > 2) {return FSGenPhoton_pz.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_pz", "if (n_FSGenPhoton > 3) {return FSGenPhoton_pz.at(2);} else {return (-2.0f); }")
+
+                # aa invariant mass - for all three combinations of the three first FS photons
+                # returns -2 for events with only 1 number of photons
+                # .Define("FSGen_a0a1_energy", "return (FSGenPhoton0_e + FSGenPhoton1_e)")
+                # .Define("FSGen_a0a1_px", "return (FSGenPhoton0_px + FSGenPhoton1_px)")
+                # .Define("FSGen_a0a1_py", "return (FSGenPhoton0_py + FSGenPhoton1_py)")
+                # .Define("FSGen_a0a1_pz", "return (FSGenPhoton0_pz + FSGenPhoton1_pz)")
+                # .Define("FSGen_a0a1_invMass", "if (n_FSGenPhoton > 1) { return sqrt(FSGen_a0a1_energy*FSGen_a0a1_energy - FSGen_a0a1_px*FSGen_a0a1_px - FSGen_a0a1_py*FSGen_a0a1_py - FSGen_a0a1_pz*FSGen_a0a1_pz ); } else {return -2.0f;}")
+
+                # .Define("FSGen_a0a2_energy", "return (FSGenPhoton0_e + FSGenPhoton2_e)")
+                # .Define("FSGen_a0a2_px", "return (FSGenPhoton0_px + FSGenPhoton2_px)")
+                # .Define("FSGen_a0a2_py", "return (FSGenPhoton0_py + FSGenPhoton2_py)")
+                # .Define("FSGen_a0a2_pz", "return (FSGenPhoton0_pz + FSGenPhoton2_pz)")
+                # .Define("FSGen_a0a2_invMass", "if (n_FSGenPhoton > 1) { return sqrt(FSGen_a0a2_energy*FSGen_a0a2_energy - FSGen_a0a2_px*FSGen_a0a2_px - FSGen_a0a2_py*FSGen_a0a2_py - FSGen_a0a2_pz*FSGen_a0a2_pz ); } else {return -2.0f;}")
+
+                # .Define("FSGen_a1a2_energy", "return (FSGenPhoton1_e + FSGenPhoton2_e)")
+                # .Define("FSGen_a1a2_px", "return (FSGenPhoton1_px + FSGenPhoton2_px)")
+                # .Define("FSGen_a1a2_py", "return (FSGenPhoton1_py + FSGenPhoton2_py)")
+                # .Define("FSGen_a1a2_pz", "return (FSGenPhoton1_pz + FSGenPhoton2_pz)")
+                # .Define("FSGen_a1a2_invMass", "if (n_FSGenPhoton > 1) { return sqrt(FSGen_a1a2_energy*FSGen_a1a2_energy - FSGen_a1a2_px*FSGen_a1a2_px - FSGen_a1a2_py*FSGen_a1a2_py - FSGen_a1a2_pz*FSGen_a1a2_pz ); } else {return -2.0f;}")
+
+                # aaa invariant mass
+                # Returns -2 for events with only 1 or 2 number of photons
+                # .Define("FSGen_aaa_energy", "return (FSGenPhoton0_e + FSGenPhoton1_e + FSGenPhoton2_e)")
+                # .Define("FSGen_aaa_px", "return (FSGenPhoton0_px + FSGenPhoton1_px + FSGenPhoton2_px)")
+                # .Define("FSGen_aaa_py", "return (FSGenPhoton0_py + FSGenPhoton1_py + FSGenPhoton2_py)")
+                # .Define("FSGen_aaa_pz", "return (FSGenPhoton0_pz + FSGenPhoton1_pz + FSGenPhoton2_pz)")
+                # .Define("FSGen_aaa_invMass", "if (n_FSGenPhoton > 2) { return sqrt(FSGen_aaa_energy*FSGen_aaa_energy - FSGen_aaa_px*FSGen_aaa_px - FSGen_aaa_py*FSGen_aaa_py - FSGen_aaa_pz*FSGen_aaa_pz ); } else {return -2.0f;}")
 
                 # Defining a vector containing the ALP and its daughters in order written
                 # Name of vector is ALP_indices
-                #.Define("GenALP_indices", "MCParticle::get_indices_InclusiveDecay(9000005, {11, -11, 12}, true, false)(Particle, Particle1)")
-                #.Define("GenALP_indices", "MCParticle::get_indices_ExclusiveDecay(9000005, {11, -11, 12}, true, false)(Particle, Particle1)")
-                #.Define("GenALP_indices", "MCParticle::get_indices_ExclusiveDecay(9000005, {11, -11, 12, 22, 22, 22, 22, 22, 22, 22}, true, false)(Particle, Particle1)")
+                .Define("GenALP_indices", "MCParticle::get_indices_InclusiveDecay(9000005, {22, 22}, true, false, false)(Particle, Particle1)")
                 
                 # Defining the individual particles from the vector
-                #.Define("GenALP", "selMC_leg(0)(GenALP_indices, Particle)")
-                #.Define("GenALPElectron", "selMC_leg(1)(GenALP_indices, Particle)")
-                #.Define("GenALPPositron", "selMC_leg(2)(GenALP_indices, Particle)")
-                #.Define("GenALPNeutrino", "selMC_leg(3)(GenALP_indices, Particle)")
+                .Define("GenALP", "selMC_leg(0)(GenALP_indices, Particle)")
+                .Define("GenALPPhoton1", "selMC_leg(1)(GenALP_indices, Particle)")
+                .Define("GenALPPhoton2", "selMC_leg(2)(GenALP_indices, Particle)")
 
                 # Kinematics of the mother particle ALP
-                #.Define("GenALP_mass", "MCParticle::get_mass( GenALP )")
-                #.Define("GenALP_e", "MCParticle::get_e( GenALP )")
-                #.Define("GenALP_p", "MCParticle::get_p( GenALP )")
-                #.Define("GenALP_pt", "MCParticle::get_pt( GenALP )")
-                #.Define("GenALP_px", "MCParticle::get_px( GenALP )")
-                #.Define("GenALP_py", "MCParticle::get_py( GenALP )")
-                #.Define("GenALP_pz", "MCParticle::get_pz( GenALP )")
-                #.Define("GenALP_eta", "MCParticle::get_eta( GenALP )")
-                #.Define("GenALP_theta", "MCParticle::get_theta( GenALP )")
-                #.Define("GenALP_phi", "MCParticle::get_phi( GenALP )")
-                #.Define("GenALP_genStatus", "MCParticle::get_genStatus( GenALP )")
+                .Define("GenALP_mass", "MCParticle::get_mass( GenALP )")
+                .Define("GenALP_e", "MCParticle::get_e( GenALP )")
+                .Define("GenALP_p", "MCParticle::get_p( GenALP )")
+                .Define("GenALP_pt", "MCParticle::get_pt( GenALP )")
+                .Define("GenALP_px", "MCParticle::get_px( GenALP )")
+                .Define("GenALP_py", "MCParticle::get_py( GenALP )")
+                .Define("GenALP_pz", "MCParticle::get_pz( GenALP )")
+                .Define("GenALP_eta", "MCParticle::get_eta( GenALP )")
+                .Define("GenALP_theta", "MCParticle::get_theta( GenALP )")
+                .Define("GenALP_phi", "MCParticle::get_phi( GenALP )")
+                .Define("GenALP_genStatus", "MCParticle::get_genStatus( GenALP )")
 
                 # Finding the kinematics of each of these daughters
-                #.Define("GenALPElectron_mass", "MCParticle::get_mass( GenALPElectron )")
-                #.Define("GenALPElectron_e", "MCParticle::get_e( GenALPElectron )")
-                #.Define("GenALPPositron_e", "MCParticle::get_e( GenALPPositron )")
-                #.Define("GenALPNeutrino_e", "MCParticle::get_e( GenALPNeutrino )")
-                #.Define("GenALPElectron_p", "MCParticle::get_p( GenALPElectron )")
-                #.Define("GenALPPositron_p", "MCParticle::get_p( GenALPPositron )")
-                #.Define("GenALPNeutrino_p", "MCParticle::get_p( GenALPNeutrino )")
-                #.Define("GenALPElectron_pt", "MCParticle::get_pt( GenALPElectron )")
-                #.Define("GenALPPositron_pt", "MCParticle::get_pt( GenALPPositron )")
-                #.Define("GenALPNeutrino_pt", "MCParticle::get_pt( GenALPNeutrino )")
-                #.Define("GenALPElectron_px", "MCParticle::get_px( GenALPElectron )")
-                #.Define("GenALPPositron_px", "MCParticle::get_px( GenALPPositron )")
-                #.Define("GenALPNeutrino_px", "MCParticle::get_px( GenALPNeutrino )")
-                #.Define("GenALPElectron_py", "MCParticle::get_py( GenALPElectron )")
-                #.Define("GenALPPositron_py", "MCParticle::get_py( GenALPPositron )")
-                #.Define("GenALPNeutrino_py", "MCParticle::get_py( GenALPNeutrino )")
-                #.Define("GenALPElectron_pz", "MCParticle::get_pz( GenALPElectron )")
-                #.Define("GenALPPositron_pz", "MCParticle::get_pz( GenALPPositron )")
-                #.Define("GenALPNeutrino_pz", "MCParticle::get_pz( GenALPNeutrino )")
-                #.Define("GenALPElectron_eta", "MCParticle::get_eta( GenALPElectron )")
-                #.Define("GenALPPositron_eta", "MCParticle::get_eta( GenALPPositron )")
-                #.Define("GenALPNeutrino_eta", "MCParticle::get_eta( GenALPNeutrino )")
-                #.Define("GenALPElectron_theta", "MCParticle::get_theta( GenALPElectron )")
-                #.Define("GenALPPositron_theta", "MCParticle::get_theta( GenALPPositron )")
-                #.Define("GenALPNeutrino_theta", "MCParticle::get_theta( GenALPNeutrino )")
-                #.Define("GenALPElectron_phi", "MCParticle::get_phi( GenALPElectron )")
-                #.Define("GenALPPositron_phi", "MCParticle::get_phi( GenALPPositron )")
-                #.Define("GenALPNeutrino_phi", "MCParticle::get_phi( GenALPNeutrino )")
-                #.Define("GenALPElectron_genStatus", "MCParticle::get_genStatus( GenALPElectron )")
-                #.Define("GenALPPositron_genStatus", "MCParticle::get_genStatus( GenALPPositron )")
-                #.Define("GenALPNeutrino_genStatus", "MCParticle::get_genStatus( GenALPNeutrino )")
+                .Define("GenALPPhoton1_e", "MCParticle::get_e( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_e", "MCParticle::get_e( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_p", "MCParticle::get_p( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_p", "MCParticle::get_p( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_pt", "MCParticle::get_pt( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_pt", "MCParticle::get_pt( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_px", "MCParticle::get_px( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_px", "MCParticle::get_px( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_py", "MCParticle::get_py( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_py", "MCParticle::get_py( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_pz", "MCParticle::get_pz( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_pz", "MCParticle::get_pz( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_eta", "MCParticle::get_eta( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_eta", "MCParticle::get_eta( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_theta", "MCParticle::get_theta( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_theta", "MCParticle::get_theta( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_phi", "MCParticle::get_phi( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_phi", "MCParticle::get_phi( GenALPPhoton2 )")
+                .Define("GenALPPhoton1_genStatus", "MCParticle::get_genStatus( GenALPPhoton1 )")
+                .Define("GenALPPhoton2_genStatus", "MCParticle::get_genStatus( GenALPPhoton2 )")
 
-                # Finding the production vertex of the daughters (checking GenALPElectron here)
-                #.Define("GenALPElectron_vertex_x", "MCParticle::get_vertex_x( GenALPElectron )")
-                #.Define("GenALPElectron_vertex_y", "MCParticle::get_vertex_y( GenALPElectron )")
-                #.Define("GenALPElectron_vertex_z", "MCParticle::get_vertex_z( GenALPElectron )")
+                # Finding the production vertex of the daughters (checking GenALPPhoton1 here)
+                .Define("GenALPPhoton1_vertex_x", "MCParticle::get_vertex_x( GenALPPhoton1 )")
+                .Define("GenALPPhoton1_vertex_y", "MCParticle::get_vertex_y( GenALPPhoton1 )")
+                .Define("GenALPPhoton1_vertex_z", "MCParticle::get_vertex_z( GenALPPhoton1 )")
 
                 # Finding the Lxy of the ALP
                 # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )  
-                #.Define("GenALP_Lxy", "return sqrt(GenALPElectron_vertex_x*GenALPElectron_vertex_x + GenALPElectron_vertex_y*GenALPElectron_vertex_y)")
+                .Define("GenALP_Lxy", "return sqrt(GenALPPhoton1_vertex_x*GenALPPhoton1_vertex_x + GenALPPhoton1_vertex_y*GenALPPhoton1_vertex_y)")
+                # Finding the Lxyz of the ALP
+                .Define("GenALP_Lxyz", "return sqrt(GenALPPhoton1_vertex_x*GenALPPhoton1_vertex_x + GenALPPhoton1_vertex_y*GenALPPhoton1_vertex_y + GenALPPhoton1_vertex_z*GenALPPhoton1_vertex_z)")
                 
                 # Calculating the lifetime of the ALP
                 # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
-                #.Define("GenALP_lifetime", "return ( GenALP_Lxy * GenALP_mass / (GenALP_pt * 3E8 * 1000))" )
+                .Define("GenALP_lifetime_xy", "return ( GenALP_Lxy * GenALP_mass / (GenALP_pt * 3E8 * 1000))" )
+                .Define("GenALP_lifetime_xyz", "return ( GenALP_Lxyz * GenALP_mass / (GenALP_p * 3E8 * 1000))" )
                
                 # Finding the production vertex of the ALP which should be at (0,0,0) 
-                #.Define("GenALP_vertex_x", "MCParticle::get_vertex_x(GenALP_PID)")
-                #.Define("GenALP_vertex_y", "MCParticle::get_vertex_y(GenALP_PID)")
-                #.Define("GenALP_vertex_z", "MCParticle::get_vertex_z(GenALP_PID)")
+                .Define("GenALP_vertex_x", "MCParticle::get_vertex_x(GenALP_PID)")
+                .Define("GenALP_vertex_y", "MCParticle::get_vertex_y(GenALP_PID)")
+                .Define("GenALP_vertex_z", "MCParticle::get_vertex_z(GenALP_PID)")
 
-                # ee invariant mass
-                #.Define("GenALP_ee_energy", "return (GenALPElectron_e + GenALPPositron_e)")
-                #.Define("GenALP_ee_px", "return (GenALPElectron_px + GenALPPositron_px)")
-                #.Define("GenALP_ee_py", "return (GenALPElectron_py + GenALPPositron_py)")
-                #.Define("GenALP_ee_pz", "return (GenALPElectron_pz + GenALPPositron_pz)")
-                #.Define("GenALP_ee_invMass", "return sqrt(GenALP_ee_energy*GenALP_ee_energy - GenALP_ee_px*GenALP_ee_px - GenALP_ee_py*GenALP_ee_py - GenALP_ee_pz*GenALP_ee_pz )")
-
-                # eenu invariant mass
-                #.Define("GenALP_eenu_energy", "return (GenALPElectron_e + GenALPPositron_e + GenALPNeutrino_e)")
-                #.Define("GenALP_eenu_px", "return (GenALPElectron_px + GenALPPositron_px + GenALPNeutrino_px)")
-                #.Define("GenALP_eenu_py", "return (GenALPElectron_py + GenALPPositron_py + GenALPNeutrino_py)")
-                #.Define("GenALP_eenu_pz", "return (GenALPElectron_pz + GenALPPositron_pz + GenALPNeutrino_pz)")
-                #.Define("GenALP_eenu_invMass", "return sqrt(GenALP_eenu_energy*GenALP_eenu_energy - GenALP_eenu_px*GenALP_eenu_px - GenALP_eenu_py*GenALP_eenu_py - GenALP_eenu_pz*GenALP_eenu_pz )")
+                # aa invariant mass
+                .Define("GenALP_aa_energy", "return (GenALPPhoton1_e + GenALPPhoton2_e)")
+                .Define("GenALP_aa_px", "return (GenALPPhoton1_px + GenALPPhoton2_px)")
+                .Define("GenALP_aa_py", "return (GenALPPhoton1_py + GenALPPhoton2_py)")
+                .Define("GenALP_aa_pz", "return (GenALPPhoton1_pz + GenALPPhoton2_pz)")
+                .Define("GenALP_aa_invMass", "return sqrt(GenALP_aa_energy*GenALP_aa_energy - GenALP_aa_px*GenALP_aa_px - GenALP_aa_py*GenALP_aa_py - GenALP_aa_pz*GenALP_aa_pz )")
 
                 # Vertexing studies
                 # Finding the vertex of the mother particle ALP using decicated Bs method
-                #.Define("GenALPMCDecayVertex",   "BsMCDecayVertex( GenALP_indices, Particle )")
+                .Define("GenALPMCDecayVertex",   "BsMCDecayVertex( GenALP_indices, Particle )")
 
                 # MC event primary vertex
                 .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
@@ -276,78 +300,78 @@ class analysis():
 
                 # Reconstructed particles
                 # Returns the RecoParticles associated with the ALP decay products
-                #.Define("RecoALPParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( GenALP_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+                .Define("RecoALPParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( GenALP_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
                 # Reconstructing the tracks from the ALP
-                #.Define("RecoALPTracks",   "ReconstructedParticle2Track::getRP2TRK( RecoALPParticles, EFlowTrack_1)")
+                .Define("RecoALPTracks",   "ReconstructedParticle2Track::getRP2TRK( RecoALPParticles, EFlowTrack_1)")
 
                 # Number of tracks in this RecoALPTracks collection ( = the #tracks used to reconstruct the ALP reco decay vertex)
-                #.Define("n_RecoALPTracks", "ReconstructedParticle2Track::getTK_n( RecoALPTracks )")
+                .Define("n_RecoALPTracks", "ReconstructedParticle2Track::getTK_n( RecoALPTracks )")
 
                 # Now we reconstruct the ALP reco decay vertex using the reco'ed tracks
                 # First the full object, of type Vertexing::FCCAnalysesVertex
-                #.Define("RecoALPDecayVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, RecoALPTracks)" )
+                .Define("RecoALPDecayVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, RecoALPTracks)" )
 
                 # from which we extract the edm4hep::VertexData object, which contains the vertex position in mm
-                #.Define("RecoALPDecayVertex",  "VertexingUtils::get_VertexData( RecoALPDecayVertexObject )")
+                .Define("RecoALPDecayVertex",  "VertexingUtils::get_VertexData( RecoALPDecayVertexObject )")
                 
                 # We may want to look at the reco'ed ALPs legs: in the RecoALPParticles vector,
                 # the first particle (vector[0]) is the e-, etc :
-                #.Define("RecoALPElectron",   "selRP_leg(0)( RecoALPParticles )")
-                #.Define("RecoALPPositron",   "selRP_leg(1)( RecoALPParticles )")
+                .Define("RecoALPPhoton1",   "selRP_leg(0)( RecoALPParticles )")
+                .Define("RecoALPPhoton2",   "selRP_leg(1)( RecoALPParticles )")
                 
                 # reconstruced electron, positron values
-                #.Define("RecoALPElectron_e",  "ReconstructedParticle::get_e( RecoALPElectron )")
-                #.Define("RecoALPPositron_e",  "ReconstructedParticle::get_e( RecoALPPositron )")
-                #.Define("RecoALPElectron_p",  "ReconstructedParticle::get_p( RecoALPElectron )")
-                #.Define("RecoALPPositron_p",  "ReconstructedParticle::get_p( RecoALPPositron )")
-                #.Define("RecoALPElectron_pt",  "ReconstructedParticle::get_pt( RecoALPElectron )")
-                #.Define("RecoALPPositron_pt",  "ReconstructedParticle::get_pt( RecoALPPositron )")
-                #.Define("RecoALPElectron_px",  "ReconstructedParticle::get_px( RecoALPElectron )")
-                #.Define("RecoALPPositron_px",  "ReconstructedParticle::get_px( RecoALPPositron )")
-                #.Define("RecoALPElectron_py",  "ReconstructedParticle::get_py( RecoALPElectron )")
-                #.Define("RecoALPPositron_py",  "ReconstructedParticle::get_py( RecoALPPositron )")
-                #.Define("RecoALPElectron_pz",  "ReconstructedParticle::get_pz( RecoALPElectron )")
-                #.Define("RecoALPPositron_pz",  "ReconstructedParticle::get_pz( RecoALPPositron )")
-                #.Define("RecoALPElectron_eta",  "ReconstructedParticle::get_eta( RecoALPElectron )")
-                #.Define("RecoALPPositron_eta",  "ReconstructedParticle::get_eta( RecoALPPositron )")
-                #.Define("RecoALPElectron_theta",  "ReconstructedParticle::get_theta( RecoALPElectron )")
-                #.Define("RecoALPPositron_theta",  "ReconstructedParticle::get_theta( RecoALPPositron )")
-                #.Define("RecoALPElectron_phi",  "ReconstructedParticle::get_phi( RecoALPElectron )")
-                #.Define("RecoALPPositron_phi",  "ReconstructedParticle::get_phi( RecoALPPositron )")
-                #.Define("RecoALPElectron_charge",  "ReconstructedParticle::get_charge( RecoALPElectron )")
-                #.Define("RecoALPPositron_charge",  "ReconstructedParticle::get_charge( RecoALPPositron )")
-                #add dxy, dz, dxyz, and uncertainties
+                .Define("RecoALPPhoton1_e",  "ReconstructedParticle::get_e( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_e",  "ReconstructedParticle::get_e( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_p",  "ReconstructedParticle::get_p( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_p",  "ReconstructedParticle::get_p( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_pt",  "ReconstructedParticle::get_pt( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_pt",  "ReconstructedParticle::get_pt( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_px",  "ReconstructedParticle::get_px( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_px",  "ReconstructedParticle::get_px( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_py",  "ReconstructedParticle::get_py( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_py",  "ReconstructedParticle::get_py( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_pz",  "ReconstructedParticle::get_pz( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_pz",  "ReconstructedParticle::get_pz( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_eta",  "ReconstructedParticle::get_eta( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_eta",  "ReconstructedParticle::get_eta( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_theta",  "ReconstructedParticle::get_theta( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_theta",  "ReconstructedParticle::get_theta( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_phi",  "ReconstructedParticle::get_phi( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_phi",  "ReconstructedParticle::get_phi( RecoALPPhoton2 )")
+                .Define("RecoALPPhoton1_charge",  "ReconstructedParticle::get_charge( RecoALPPhoton1 )")
+                .Define("RecoALPPhoton2_charge",  "ReconstructedParticle::get_charge( RecoALPPhoton2 )")
+                # add dxy, dz, dxyz, and uncertainties
 
-                # ee invariant mass
-                #.Define("RecoALP_ee_energy", "return (RecoALPElectron_e + RecoALPPositron_e)")
-                #.Define("RecoALP_ee_px", "return (RecoALPElectron_px + RecoALPPositron_px)")
-                #.Define("RecoALP_ee_py", "return (RecoALPElectron_py + RecoALPPositron_py)")
-                #.Define("RecoALP_ee_pz", "return (RecoALPElectron_pz + RecoALPPositron_pz)")
-                #.Define("RecoALP_ee_invMass", "return sqrt(RecoALP_ee_energy*RecoALP_ee_energy - RecoALP_ee_px*RecoALP_ee_px - RecoALP_ee_py*RecoALP_ee_py - RecoALP_ee_pz*RecoALP_ee_pz )")
+                # aa invariant mass
+                .Define("RecoALP_aa_energy", "return (RecoALPPhoton1_e + RecoALPPhoton2_e)")
+                .Define("RecoALP_aa_px", "return (RecoALPPhoton1_px + RecoALPPhoton2_px)")
+                .Define("RecoALP_aa_py", "return (RecoALPPhoton1_py + RecoALPPhoton2_py)")
+                .Define("RecoALP_aa_pz", "return (RecoALPPhoton1_pz + RecoALPPhoton2_pz)")
+                .Define("RecoALP_aa_invMass", "return sqrt(RecoALP_aa_energy*RecoALP_aa_energy - RecoALP_aa_px*RecoALP_aa_px - RecoALP_aa_py*RecoALP_aa_py - RecoALP_aa_pz*RecoALP_aa_pz )")
 
                 #gen-reco
-                #.Define("GenMinusRecoALPElectron_e",   "GenALPElectron_e-RecoALPElectron_e")
-                #.Define("GenMinusRecoALPPositron_e",   "GenALPPositron_e-RecoALPPositron_e")
-                #.Define("GenMinusRecoALPElectron_p",   "GenALPElectron_p-RecoALPElectron_p")
-                #.Define("GenMinusRecoALPPositron_p",   "GenALPPositron_p-RecoALPPositron_p")
-                #.Define("GenMinusRecoALPElectron_pt",   "GenALPElectron_pt-RecoALPElectron_pt")
-                #.Define("GenMinusRecoALPPositron_pt",   "GenALPPositron_pt-RecoALPPositron_pt")
-                #.Define("GenMinusRecoALPElectron_px",   "GenALPElectron_px-RecoALPElectron_px")
-                #.Define("GenMinusRecoALPPositron_px",   "GenALPPositron_px-RecoALPPositron_px")
-                #.Define("GenMinusRecoALPElectron_py",   "GenALPElectron_py-RecoALPElectron_py")
-                #.Define("GenMinusRecoALPPositron_py",   "GenALPPositron_py-RecoALPPositron_py")
-                #.Define("GenMinusRecoALPElectron_pz",   "GenALPElectron_pz-RecoALPElectron_pz")
-                #.Define("GenMinusRecoALPPositron_pz",   "GenALPPositron_pz-RecoALPPositron_pz")
-                #.Define("GenMinusRecoALPElectron_eta",  "GenALPElectron_eta-RecoALPElectron_eta")
-                #.Define("GenMinusRecoALPPositron_eta",  "GenALPPositron_eta-RecoALPPositron_eta")
-                #.Define("GenMinusRecoALPElectron_theta",  "GenALPElectron_theta-RecoALPElectron_theta")
-                #.Define("GenMinusRecoALPPositron_theta",  "GenALPPositron_theta-RecoALPPositron_theta")
-                #.Define("GenMinusRecoALPElectron_phi",  "GenALPElectron_phi-RecoALPElectron_phi")
-                #.Define("GenMinusRecoALPPositron_phi",  "GenALPPositron_phi-RecoALPPositron_phi")
+                .Define("GenMinusRecoALPPhoton1_e",   "GenALPPhoton1_e-RecoALPPhoton1_e")
+                .Define("GenMinusRecoALPPhoton2_e",   "GenALPPhoton2_e-RecoALPPhoton2_e")
+                .Define("GenMinusRecoALPPhoton1_p",   "GenALPPhoton1_p-RecoALPPhoton1_p")
+                .Define("GenMinusRecoALPPhoton2_p",   "GenALPPhoton2_p-RecoALPPhoton2_p")
+                .Define("GenMinusRecoALPPhoton1_pt",   "GenALPPhoton1_pt-RecoALPPhoton1_pt")
+                .Define("GenMinusRecoALPPhoton2_pt",   "GenALPPhoton2_pt-RecoALPPhoton2_pt")
+                .Define("GenMinusRecoALPPhoton1_px",   "GenALPPhoton1_px-RecoALPPhoton1_px")
+                .Define("GenMinusRecoALPPhoton2_px",   "GenALPPhoton2_px-RecoALPPhoton2_px")
+                .Define("GenMinusRecoALPPhoton1_py",   "GenALPPhoton1_py-RecoALPPhoton1_py")
+                .Define("GenMinusRecoALPPhoton2_py",   "GenALPPhoton2_py-RecoALPPhoton2_py")
+                .Define("GenMinusRecoALPPhoton1_pz",   "GenALPPhoton1_pz-RecoALPPhoton1_pz")
+                .Define("GenMinusRecoALPPhoton2_pz",   "GenALPPhoton2_pz-RecoALPPhoton2_pz")
+                .Define("GenMinusRecoALPPhoton1_eta",  "GenALPPhoton1_eta-RecoALPPhoton1_eta")
+                .Define("GenMinusRecoALPPhoton2_eta",  "GenALPPhoton2_eta-RecoALPPhoton2_eta")
+                .Define("GenMinusRecoALPPhoton1_theta",  "GenALPPhoton1_theta-RecoALPPhoton1_theta")
+                .Define("GenMinusRecoALPPhoton2_theta",  "GenALPPhoton2_theta-RecoALPPhoton2_theta")
+                .Define("GenMinusRecoALPPhoton1_phi",  "GenALPPhoton1_phi-RecoALPPhoton1_phi")
+                .Define("GenMinusRecoALPPhoton2_phi",  "GenALPPhoton2_phi-RecoALPPhoton2_phi")
 
-                #.Define("GenMinusRecoALP_DecayVertex_x",  "GenALPElectron_vertex_x-RecoALPDecayVertex.position.x")
-                #.Define("GenMinusRecoALP_DecayVertex_y",  "GenALPElectron_vertex_y-RecoALPDecayVertex.position.y")
-                #.Define("GenMinusRecoALP_DecayVertex_z",  "GenALPElectron_vertex_z-RecoALPDecayVertex.position.z")
+                .Define("GenMinusRecoALP_DecayVertex_x",  "GenALPPhoton1_vertex_x-RecoALPDecayVertex.position.x")
+                .Define("GenMinusRecoALP_DecayVertex_y",  "GenALPPhoton1_vertex_y-RecoALPDecayVertex.position.y")
+                .Define("GenMinusRecoALP_DecayVertex_z",  "GenALPPhoton1_vertex_z-RecoALPDecayVertex.position.z")
                 
                        
                 ####################################################################################################
@@ -461,11 +485,15 @@ class analysis():
                                 "FSGenElectron_eta",
                                 "FSGenElectron_theta",
                                 "FSGenElectron_phi",
-                                "FSGenElectron_vertex_x",
-                                "FSGenElectron_vertex_y",
-                                "FSGenElectron_vertex_z",
-                                #"FSGen_Lxy",
-                                #"FSGen_lifetime",
+                                "FSGenPhoton_vertex_x",
+                                "FSGenPhoton_vertex_y",
+                                "FSGenPhoton_vertex_z",
+                                # "n_FSGenElectron_forFS2GenPhotons",
+                                # "n_FSGenPositron_forFS2GenPhotons",
+                                "FSGen_Lxy",
+                                "FSGen_Lxyz",
+                                "FSGen_lifetime_xy",
+                                "FSGen_lifetime_xyz",
                                 "n_FSGenPositron",
                                 "FSGenPositron_e",
                                 "FSGenPositron_p",
@@ -506,109 +534,110 @@ class analysis():
                                 "FSGenPhoton_eta",
                                 "FSGenPhoton_theta",
                                 "FSGenPhoton_phi",
-                                #"FSGen_ee_invMass",
-                                #"FSGen_eenu_invMass",
-                                #"GenALP_vertex_x",
-                                #"GenALP_vertex_y",
-                                #"GenALP_vertex_z",
-                                #"GenALP_ee_invMass",
-                                #"GenALP_eenu_invMass",
-                                #"GenALP_mass",
-                                #"GenALP_p",
-                                #"GenALP_pt",
-                                #"GenALP_pz",
-                                #"GenALP_eta",
-                                #"GenALP_theta",
-                                #"GenALP_phi",
-                                #"GenALP_genStatus",
-                                #"GenALPElectron_mass",
-                                #"GenALPElectron_e",
-                                #"GenALPPositron_e",
-                                #"GenALPNeutrino_e",
-                                #"GenALPElectron_p",
-                                #"GenALPPositron_p",
-                                #"GenALPNeutrino_p",
-                                #"GenALPElectron_pt",
-                                #"GenALPPositron_pt",
-                                #"GenALPNeutrino_pt",
-                                #"GenALPElectron_px",
-                                #"GenALPPositron_px",
-                                #"GenALPNeutrino_px",
-                                #"GenALPElectron_py",
-                                #"GenALPPositron_py",
-                                #"GenALPNeutrino_py",
-                                #"GenALPElectron_pz",
-                                #"GenALPPositron_pz",
-                                #"GenALPNeutrino_pz",
-                                #"GenALPElectron_eta",
-                                #"GenALPPositron_eta",
-                                #"GenALPNeutrino_eta",
-                                #"GenALPElectron_theta",
-                                #"GenALPPositron_theta",
-                                #"GenALPNeutrino_theta",
-                                #"GenALPElectron_phi",
-                                #"GenALPPositron_phi",
-                                #"GenALPNeutrino_phi",
-                                #"GenALPElectron_genStatus",
-                                #"GenALPPositron_genStatus",
-                                #"GenALPNeutrino_genStatus",
+                                # "FSGenPhoton0_e",
+                                # "FSGenPhoton1_e",
+                                # "FSGenPhoton2_e",
+                                # "FSGenPhoton0_p",
+                                # "FSGenPhoton1_p",
+                                # "FSGenPhoton2_p",
+                                # "FSGenPhoton0_pt",
+                                # "FSGenPhoton1_pt",
+                                # "FSGenPhoton2_pt",
+                                # "FSGen_a0a1_invMass",
+                                # "FSGen_a0a2_invMass",
+                                # "FSGen_a1a2_invMass",
+                                # "FSGen_aaa_invMass",
+                                "GenALP_vertex_x",
+                                "GenALP_vertex_y",
+                                "GenALP_vertex_z",
+                                "GenALP_aa_invMass",
+                                "GenALP_mass",
+                                "GenALP_p",
+                                "GenALP_pt",
+                                "GenALP_pz",
+                                "GenALP_eta",
+                                "GenALP_theta",
+                                "GenALP_phi",
+                                "GenALP_genStatus",
+                                "GenALPPhoton1_e",
+                                "GenALPPhoton2_e",
+                                "GenALPPhoton1_p",
+                                "GenALPPhoton2_p",
+                                "GenALPPhoton1_pt",
+                                "GenALPPhoton2_pt",
+                                "GenALPPhoton1_px",
+                                "GenALPPhoton2_px",
+                                "GenALPPhoton1_py",
+                                "GenALPPhoton2_py",
+                                "GenALPPhoton1_pz",
+                                "GenALPPhoton2_pz",
+                                "GenALPPhoton1_eta",
+                                "GenALPPhoton2_eta",
+                                "GenALPPhoton1_theta",
+                                "GenALPPhoton2_theta",
+                                "GenALPPhoton1_phi",
+                                "GenALPPhoton2_phi",
+                                "GenALPPhoton1_genStatus",
+                                "GenALPPhoton2_genStatus",
                                 #"GenALP_decay",
-                                #"GenALPElectron_vertex_x",
-                                #"GenALPElectron_vertex_y",
-                                #"GenALPElectron_vertex_z",
-                                #"GenALP_Lxy",
-                                #"GenALP_lifetime",
+                                "GenALPPhoton1_vertex_x",
+                                "GenALPPhoton1_vertex_y",
+                                "GenALPPhoton1_vertex_z",
+                                "GenALP_Lxy",
+                                "GenALP_Lxyz",
+                                "GenALP_lifetime_xy",
+                                "GenALP_lifetime_xyz",
                                 #"GenALPMCDecayVertex",
                                 "MC_PrimaryVertex",
                                 "n_RecoTracks",
                                 ######## Reconstructed particles #######
-                                #"RecoALPParticles",
-                                #"RecoALPTracks",
-                                #"n_RecoALPTracks",
-                                #"RecoALPDecayVertexObject",
-                                #"RecoALPDecayVertex",
-                                #"RecoALPElectron_e",
-                                #"RecoALPPositron_e",
-                                #"RecoALPElectron_p",
-                                #"RecoALPPositron_p",
-                                #"RecoALPElectron_pt",
-                                #"RecoALPPositron_pt",
-                                #"RecoALPElectron_px",
-                                #"RecoALPPositron_px",
-                                #"RecoALPElectron_py",
-                                #"RecoALPPositron_py",
-                                #"RecoALPElectron_pz",
-                                #"RecoALPPositron_pz",
-                                #"RecoALPElectron_eta",
-                                #"RecoALPPositron_eta",
-                                #"RecoALPElectron_theta",
-                                #"RecoALPPositron_theta",
-                                #"RecoALPElectron_phi",
-                                #"RecoALPPositron_phi",
-                                #"RecoALPElectron_charge",
-                                #"RecoALPPositron_charge",
-                                #"RecoALP_ee_invMass",
-                                #"GenMinusRecoALPElectron_e",
-                                #"GenMinusRecoALPPositron_e",
-                                #"GenMinusRecoALPElectron_p",
-                                #"GenMinusRecoALPPositron_p",
-                                #"GenMinusRecoALPElectron_pt",
-                                #"GenMinusRecoALPPositron_pt",
-                                #"GenMinusRecoALPElectron_px",
-                                #"GenMinusRecoALPPositron_px",
-                                #"GenMinusRecoALPElectron_py",
-                                #"GenMinusRecoALPPositron_py",
-                                #"GenMinusRecoALPElectron_pz",
-                                #"GenMinusRecoALPPositron_pz",
-                                #"GenMinusRecoALPElectron_eta",
-                                #"GenMinusRecoALPPositron_eta",
-                                #"GenMinusRecoALPElectron_theta",
-                                #"GenMinusRecoALPPositron_theta",
-                                #"GenMinusRecoALPElectron_phi",
-                                #"GenMinusRecoALPPositron_phi",
-                                #"GenMinusRecoALP_DecayVertex_x",
-                                #"GenMinusRecoALP_DecayVertex_y",
-                                #"GenMinusRecoALP_DecayVertex_z",
+                                "RecoALPParticles",
+                                "RecoALPTracks",
+                                "n_RecoALPTracks",
+                                "RecoALPDecayVertexObject",
+                                "RecoALPDecayVertex",
+                                "RecoALPPhoton1_e",
+                                "RecoALPPhoton2_e",
+                                "RecoALPPhoton1_p",
+                                "RecoALPPhoton2_p",
+                                "RecoALPPhoton1_pt",
+                                "RecoALPPhoton2_pt",
+                                "RecoALPPhoton1_px",
+                                "RecoALPPhoton2_px",
+                                "RecoALPPhoton1_py",
+                                "RecoALPPhoton2_py",
+                                "RecoALPPhoton1_pz",
+                                "RecoALPPhoton2_pz",
+                                "RecoALPPhoton1_eta",
+                                "RecoALPPhoton2_eta",
+                                "RecoALPPhoton1_theta",
+                                "RecoALPPhoton2_theta",
+                                "RecoALPPhoton1_phi",
+                                "RecoALPPhoton2_phi",
+                                "RecoALPPhoton1_charge",
+                                "RecoALPPhoton2_charge",
+                                "RecoALP_aa_invMass",
+                                "GenMinusRecoALPPhoton1_e",
+                                "GenMinusRecoALPPhoton2_e",
+                                "GenMinusRecoALPPhoton1_p",
+                                "GenMinusRecoALPPhoton2_p",
+                                "GenMinusRecoALPPhoton1_pt",
+                                "GenMinusRecoALPPhoton2_pt",
+                                "GenMinusRecoALPPhoton1_px",
+                                "GenMinusRecoALPPhoton2_px",
+                                "GenMinusRecoALPPhoton1_py",
+                                "GenMinusRecoALPPhoton2_py",
+                                "GenMinusRecoALPPhoton1_pz",
+                                "GenMinusRecoALPPhoton2_pz",
+                                "GenMinusRecoALPPhoton1_eta",
+                                "GenMinusRecoALPPhoton2_eta",
+                                "GenMinusRecoALPPhoton1_theta",
+                                "GenMinusRecoALPPhoton2_theta",
+                                "GenMinusRecoALPPhoton1_phi",
+                                "GenMinusRecoALPPhoton2_phi",
+                                "GenMinusRecoALP_DecayVertex_x",
+                                "GenMinusRecoALP_DecayVertex_y",
+                                "GenMinusRecoALP_DecayVertex_z",
 				"n_RecoJets",
 				"n_RecoPhotons",
 				"n_RecoElectrons",

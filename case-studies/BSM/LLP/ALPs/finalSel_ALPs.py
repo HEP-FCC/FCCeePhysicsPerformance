@@ -7,9 +7,11 @@ baseDir  = "read_EDM4HEP/"
 ###Link to the dictonary that contains all the cross section informations etc...
 procDict = "../DisplacedHNL/myFCCee_procDict_spring2021_IDEA.json"
 process_list=[
-    'ALP_Z_aa_1GeV_cYY_0p1',
     'ALP_Z_aa_1GeV_cYY_0p5',
     'ALP_Z_aa_1GeV_cYY_0p9',
+    'ALP_Z_aa_1GeV_cYY_1p0',
+    'ALP_Z_aa_1GeV_cYY_1p5',
+    'ALP_Z_aa_1GeV_cYY_1p9',
 ]
 
 ###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file
@@ -41,7 +43,10 @@ variables = {
     "n_FSGenPositron":                 {"name":"n_FSGenPositron",                "title":"Number of final state gen positrons",        "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "n_FSGenNeutrino":                 {"name":"n_FSGenNeutrino",                "title":"Number of final state gen neutrinos",        "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "n_FSGenAntiNeutrino":             {"name":"n_FSGenAntiNeutrino",            "title":"Number of final state gen anti-neutrinos",   "bin":5,"xmin":-0.5 ,"xmax":4.5},
-    "n_FSGenPhoton":                   {"name":"n_FSGenPhoton",                  "title":"Number of final state gen photons",          "bin":5,"xmin":-0.5 ,"xmax":4.5},
+    "n_FSGenPhoton":                   {"name":"n_FSGenPhoton",                  "title":"Number of final state gen photons",          "bin":8,"xmin":-0.5 ,"xmax":7.5},
+
+    # "n_FSGenElectron_forFS2GenPhotons":                 {"name":"n_FSGenElectron_forFS2GenPhotons",                "title":"Number of final state gen electrons for events with 2 FS photons",        "bin":7,"xmin":-2.5 ,"xmax":4.5},
+    # "n_FSGenPositron_forFS2GenPhotons":                 {"name":"n_FSGenPositron_forFS2GenPhotons",                "title":"Number of final state gen positrons for events with 2 FS photons",        "bin":7,"xmin":-2.5 ,"xmax":4.5},
 
     "FSGenElectron_e":                 {"name":"FSGenElectron_e",                "title":"Final state gen electrons energy [GeV]",     "bin":100,"xmin":0 ,"xmax":50},
     "FSGenElectron_p":                 {"name":"FSGenElectron_p",                "title":"Final state gen electrons p [GeV]",          "bin":100,"xmin":0 ,"xmax":50},
@@ -83,19 +88,29 @@ variables = {
     "FSGenPhoton_theta":               {"name":"FSGenPhoton_theta",              "title":"Final state gen photons #theta",             "bin":64, "xmin":0,"xmax":3.2},
     "FSGenPhoton_phi":                 {"name":"FSGenPhoton_phi",                "title":"Final state gen photons #phi",               "bin":64, "xmin":-3.2,"xmax":3.2},
 
-    #"FSGenPhoton_vertex_x": {"name":"FSGenPhoton_vertex_x", "title":"Final state gen photon production vertex x [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
-    #"FSGenPhoton_vertex_y": {"name":"FSGenPhoton_vertex_y", "title":"Final state gen photon production vertex y [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
-    #"FSGenPhoton_vertex_z": {"name":"FSGenPhoton_vertex_z", "title":"Final state gen photon production vertex z [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
+    # "FSGenPhoton0_e":                 {"name":"FSGenPhoton0_e",                "title":"Final state gen photon_{0} energy [GeV]",               "bin":64, "xmin":-3.2,"xmax":3.2},
+    # "FSGenPhoton1_e":                 {"name":"FSGenPhoton1_e",                "title":"Final state gen photon_{1} energy [GeV]",               "bin":64, "xmin":-3.2,"xmax":3.2},
+    # "FSGenPhoton2_e":                 {"name":"FSGenPhoton2_e",                "title":"Final state gen photon_{2} energy [GeV]",               "bin":64, "xmin":-3.2,"xmax":3.2},
+    # "FSGenPhoton0_p":                   {"name":"FSGenPhoton0_p",                  "title":"Final state gen photon_{0} p [GeV]",            "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenPhoton1_p":                   {"name":"FSGenPhoton1_p",                  "title":"Final state gen photon_{1} p [GeV]",            "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenPhoton2_p":                   {"name":"FSGenPhoton2_p",                  "title":"Final state gen photon_{2} p [GeV]",            "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenPhoton0_pt":                  {"name":"FSGenPhoton0_pt",                 "title":"Final state gen photon_{0} p_{T} [GeV]",        "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenPhoton1_pt":                  {"name":"FSGenPhoton1_pt",                 "title":"Final state gen photon_{1} p_{T} [GeV]",        "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenPhoton2_pt":                  {"name":"FSGenPhoton2_pt",                 "title":"Final state gen photon_{2} p_{T} [GeV]",        "bin":100,"xmin":0 ,"xmax":50},
 
-    #"FSGen_lifetime": {"name":"FSGen_lifetime", "title":"Gen ALP (FS eles) #tau [s]",        "bin":100,"xmin":0 ,"xmax":1E-9},
-    #"FSGen_lifetime_xyz": {"name":"FSGen_lifetime_xyz", "title":"Gen ALP (FS eles) #tau_{xyz} [s]",        "bin":100,"xmin":0 ,"xmax":1E-9},
-    #"FSGen_Lxy":      {"name":"FSGen_Lxy",      "title":"Gen ALP (FS eles) L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
-    #"FSGen_Lxyz":     {"name":"FSGen_Lxyz",     "title":"Gen ALP (FS eles) L_{xyz} [mm]",    "bin":100,"xmin":0 ,"xmax":1000},
+    "FSGenPhoton_vertex_x": {"name":"FSGenPhoton_vertex_x", "title":"Final state gen photon production vertex x [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
+    "FSGenPhoton_vertex_y": {"name":"FSGenPhoton_vertex_y", "title":"Final state gen photon production vertex y [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
+    "FSGenPhoton_vertex_z": {"name":"FSGenPhoton_vertex_z", "title":"Final state gen photon production vertex z [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
 
-    #"FSGen_ee_invMass":   {"name":"FSGen_ee_invMass",   "title":"Gen FS m_{ee} [GeV]",           "bin":100,"xmin":0, "xmax":100},
-    #"FSGen_eenu_invMass": {"name":"FSGen_eenu_invMass", "title":"Gen FS m_{ee#nu} [GeV]",        "bin":100,"xmin":0, "xmax":100},
-    #"FSGen_enu_invMass": {"name":"FSGen_enu_invMass", "title":"Gen FS m_{e-#nu} [GeV]",          "bin":100,"xmin":0, "xmax":100},
-    #"FSGen_pnu_invMass": {"name":"FSGen_pnu_invMass", "title":"Gen FS m_{e+#nu} [GeV]",          "bin":100,"xmin":0, "xmax":100},
+    "FSGen_lifetime_xy": {"name":"FSGen_lifetime_xy", "title":"Gen ALP (FS eles) #tau_{xy} [s]",        "bin":100,"xmin":0 ,"xmax":1E-10},
+    "FSGen_lifetime_xyz": {"name":"FSGen_lifetime_xyz", "title":"Gen ALP (FS eles) #tau_{xyz} [s]",        "bin":100,"xmin":0 ,"xmax":1E-10},
+    "FSGen_Lxy":      {"name":"FSGen_Lxy",      "title":"Gen ALP (FS eles) L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
+    "FSGen_Lxyz":     {"name":"FSGen_Lxyz",     "title":"Gen ALP (FS eles) L_{xyz} [mm]",    "bin":100,"xmin":0 ,"xmax":1000},
+
+    # "FSGen_a0a1_invMass":   {"name":"FSGen_a0a1_invMass",   "title":"Gen FS photons m_{01} [GeV]",           "bin":105,"xmin":-5, "xmax":100},
+    # "FSGen_a0a2_invMass":   {"name":"FSGen_a0a2_invMass",   "title":"Gen FS photons m_{02} [GeV]",           "bin":105,"xmin":-5, "xmax":100},
+    # "FSGen_a1a2_invMass":   {"name":"FSGen_a1a2_invMass",   "title":"Gen FS photons m_{12} [GeV]",           "bin":105,"xmin":-5, "xmax":100},
+    # "FSGen_aaa_invMass":   {"name":"FSGen_aaa_invMass",   "title":"Gen FS m_{#gamma #gamma #gamma} [GeV]",           "bin":105,"xmin":-5, "xmax":100},
 
     "GenALP_mass":     {"name":"GenALP_mass",     "title":"Gen ALP mass [GeV]",      "bin":100,"xmin":0 ,"xmax":10},
     "GenALP_p":        {"name":"GenALP_p",        "title":"Gen ALP p [GeV]",         "bin":100,"xmin":0 ,"xmax":50},
@@ -104,8 +119,8 @@ variables = {
     "GenALP_eta":      {"name":"GenALP_eta",      "title":"Gen ALP #eta",            "bin":60, "xmin":-3,"xmax":3},
     "GenALP_theta":    {"name":"GenALP_theta",    "title":"Gen ALP #theta",          "bin":64, "xmin":0,"xmax":3.2},
     "GenALP_phi":      {"name":"GenALP_phi",      "title":"Gen ALP #phi",            "bin":64, "xmin":-3.2,"xmax":3.2},
-    "GenALP_lifetime_xy": {"name":"GenALP_lifetime_xy", "title":"Gen ALP #tau_{xy} [s]",        "bin":100,"xmin":0 ,"xmax":10E-9},
-    "GenALP_lifetime_xyz": {"name":"GenALP_lifetime_xyz", "title":"Gen ALP #tau_{xyz} [s]",        "bin":100,"xmin":0 ,"xmax":10E-9},
+    "GenALP_lifetime_xy": {"name":"GenALP_lifetime_xy", "title":"Gen ALP #tau_{xy} [s]",        "bin":100,"xmin":0 ,"xmax":1E-10},
+    "GenALP_lifetime_xyz": {"name":"GenALP_lifetime_xyz", "title":"Gen ALP #tau_{xyz} [s]",        "bin":100,"xmin":0 ,"xmax":1E-10},
     "GenALP_Lxy":      {"name":"GenALP_Lxy",      "title":"Gen ALP L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
     "GenALP_Lxyz":     {"name":"GenALP_Lxyz",     "title":"Gen ALP L_{xyz} [mm]",    "bin":100,"xmin":0 ,"xmax":1000},
     "GenALP_vertex_x": {"name":"GenALP_vertex_x", "title":"Gen ALP production vertex x [mm]",   "bin":100,"xmin":-1000 ,"xmax":1000},

@@ -94,18 +94,6 @@ class analysis():
                 .Define("FSGenElectron_theta", "MCParticle::get_theta(FSGenElectron)")
                 .Define("FSGenElectron_phi", "MCParticle::get_phi(FSGenElectron)")
 
-                # .Define("FSGenElectron_vertex_x", "MCParticle::get_vertex_x( FSGenElectron )")
-                # .Define("FSGenElectron_vertex_y", "MCParticle::get_vertex_y( FSGenElectron )")
-                # .Define("FSGenElectron_vertex_z", "MCParticle::get_vertex_z( FSGenElectron )")
-
-                # Finding the Lxy of the ALP
-                # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )
-                #.Define("FSGen_Lxy", "return sqrt(FSGenElectron_vertex_x*FSGenElectron_vertex_x + FSGenElectron_vertex_y*FSGenElectron_vertex_y)")
-
-                # Calculating the lifetime of the ALP
-                # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
-                #.Define("FSGen_lifetime", "return ( FSGen_Lxy.at(0) * AllGenALP_mass / (AllGenALP_pt * 3E8 * 1000))" )
-
                 #all final state gen positrons
                 .Define("GenPositron_PID", "MCParticle::sel_pdgID(-11, false)(Particle)")
                 .Define("FSGenPositron", "MCParticle::sel_genStatus(1)(GenPositron_PID)") #gen status==1 means final state particle (FS)
@@ -162,25 +150,77 @@ class analysis():
                 .Define("FSGenPhoton_theta", "MCParticle::get_theta(FSGenPhoton)")
                 .Define("FSGenPhoton_phi", "MCParticle::get_phi(FSGenPhoton)")
 
-                # ee invariant mass
-                #.Define("FSGen_ee_energy", "return (FSGenElectron_e.at(0) + FSGenPositron_e.at(0))")
-                #.Define("FSGen_ee_px", "return (FSGenElectron_px.at(0) + FSGenPositron_px.at(0))")
-                #.Define("FSGen_ee_py", "return (FSGenElectron_py.at(0) + FSGenPositron_py.at(0))")
-                #.Define("FSGen_ee_pz", "return (FSGenElectron_pz.at(0) + FSGenPositron_pz.at(0))")
-                #.Define("FSGen_ee_invMass", "return sqrt(FSGen_ee_energy*FSGen_ee_energy - FSGen_ee_px*FSGen_ee_px - FSGen_ee_py*FSGen_ee_py - FSGen_ee_pz*FSGen_ee_pz )")
+                # Number of final state electrons and positrons when the number of final state photons is only 2
+                # Returns -2 if the number of final state photons != 2, and therefore will be shown as -2 in the plots
+                # .Define("n_FSGenElectron_forFS2GenPhotons", "if (n_FSGenPhoton == 2) {return (n_FSGenElectron); } else {return (-2); }")
+                # .Define("n_FSGenPositron_forFS2GenPhotons", "if (n_FSGenPhoton == 2) {return (n_FSGenPositron); } else {return (-2); }")
 
-                # eenu invariant mass
-                #.Define("FSGen_eenu_energy", "return (FSGenElectron_e.at(0) + FSGenPositron_e.at(0) + FSGenNeutrino_e.at(0))")
-                #.Define("FSGen_eenu_px", "return (FSGenElectron_px.at(0) + FSGenPositron_px.at(0) + FSGenNeutrino_px.at(0))")
-                #.Define("FSGen_eenu_py", "return (FSGenElectron_py.at(0) + FSGenPositron_py.at(0) + FSGenNeutrino_py.at(0))")
-                #.Define("FSGen_eenu_pz", "return (FSGenElectron_pz.at(0) + FSGenPositron_pz.at(0) + FSGenNeutrino_pz.at(0))")
-                #.Define("FSGen_eenu_invMass", "return sqrt(FSGen_eenu_energy*FSGen_eenu_energy - FSGen_eenu_px*FSGen_eenu_px - FSGen_eenu_py*FSGen_eenu_py - FSGen_eenu_pz*FSGen_eenu_pz )")
+                .Define("FSGenPhoton_vertex_x", "MCParticle::get_vertex_x( FSGenPhoton )")
+                .Define("FSGenPhoton_vertex_y", "MCParticle::get_vertex_y( FSGenPhoton )")
+                .Define("FSGenPhoton_vertex_z", "MCParticle::get_vertex_z( FSGenPhoton )")
+
+                # Finding the Lxy of the ALP
+                # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )
+                .Define("FSGen_Lxy", "return sqrt(FSGenPhoton_vertex_x*FSGenPhoton_vertex_x + FSGenPhoton_vertex_y*FSGenPhoton_vertex_y)")
+                .Define("FSGen_Lxyz", "return sqrt(FSGenPhoton_vertex_x*FSGenPhoton_vertex_x + FSGenPhoton_vertex_y*FSGenPhoton_vertex_y + FSGenPhoton_vertex_z*FSGenPhoton_vertex_z)")
+
+                # Calculating the lifetime of the ALP
+                # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
+                .Define("FSGen_lifetime_xy", "return ( FSGen_Lxy.at(0) * AllGenALP_mass / (AllGenALP_pt * 3E8 * 1000))" )
+                .Define("FSGen_lifetime_xyz", "return ( FSGen_Lxy.at(0) * AllGenALP_mass / (AllGenALP_p * 3E8 * 1000))" )
+
+                # Separating the three first final state photons
+                # Returns -2 if the number of final state photons != 2, and therefore will be shown as -2 in the plots
+                # .Define("FSGenPhoton0_e", "return FSGenPhoton_e.at(0)")
+                # .Define("FSGenPhoton1_e", "if (n_FSGenPhoton > 2) {return FSGenPhoton_e.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_e", "if (n_FSGenPhoton > 3) {return FSGenPhoton_e.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_p", "return FSGenPhoton_p.at(0)")
+                # .Define("FSGenPhoton1_p", "if (n_FSGenPhoton > 2) {return FSGenPhoton_p.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_p", "if (n_FSGenPhoton > 2) {return FSGenPhoton_p.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_pt", "return FSGenPhoton_pt.at(0)")
+                # .Define("FSGenPhoton1_pt", "if (n_FSGenPhoton > 2) {return FSGenPhoton_pt.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_pt", "if (n_FSGenPhoton > 3) {return FSGenPhoton_pt.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_px", "return FSGenPhoton_px.at(0)")
+                # .Define("FSGenPhoton1_px", "if (n_FSGenPhoton > 2) {return FSGenPhoton_px.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_px", "if (n_FSGenPhoton > 3) {return FSGenPhoton_px.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_py", "return FSGenPhoton_py.at(0)")
+                # .Define("FSGenPhoton1_py", "if (n_FSGenPhoton > 2) {return FSGenPhoton_py.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_py", "if (n_FSGenPhoton > 3) {return FSGenPhoton_py.at(2);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton0_pz", "return FSGenPhoton_pz.at(0)")
+                # .Define("FSGenPhoton1_pz", "if (n_FSGenPhoton > 2) {return FSGenPhoton_pz.at(1);} else {return (-2.0f); }")
+                # .Define("FSGenPhoton2_pz", "if (n_FSGenPhoton > 3) {return FSGenPhoton_pz.at(2);} else {return (-2.0f); }")
+
+                # aa invariant mass - for all three combinations of the three first FS photons
+                # returns -2 for events with only 1 number of photons
+                # .Define("FSGen_a0a1_energy", "return (FSGenPhoton0_e + FSGenPhoton1_e)")
+                # .Define("FSGen_a0a1_px", "return (FSGenPhoton0_px + FSGenPhoton1_px)")
+                # .Define("FSGen_a0a1_py", "return (FSGenPhoton0_py + FSGenPhoton1_py)")
+                # .Define("FSGen_a0a1_pz", "return (FSGenPhoton0_pz + FSGenPhoton1_pz)")
+                # .Define("FSGen_a0a1_invMass", "if (n_FSGenPhoton > 1) { return sqrt(FSGen_a0a1_energy*FSGen_a0a1_energy - FSGen_a0a1_px*FSGen_a0a1_px - FSGen_a0a1_py*FSGen_a0a1_py - FSGen_a0a1_pz*FSGen_a0a1_pz ); } else {return -2.0f;}")
+
+                # .Define("FSGen_a0a2_energy", "return (FSGenPhoton0_e + FSGenPhoton2_e)")
+                # .Define("FSGen_a0a2_px", "return (FSGenPhoton0_px + FSGenPhoton2_px)")
+                # .Define("FSGen_a0a2_py", "return (FSGenPhoton0_py + FSGenPhoton2_py)")
+                # .Define("FSGen_a0a2_pz", "return (FSGenPhoton0_pz + FSGenPhoton2_pz)")
+                # .Define("FSGen_a0a2_invMass", "if (n_FSGenPhoton > 1) { return sqrt(FSGen_a0a2_energy*FSGen_a0a2_energy - FSGen_a0a2_px*FSGen_a0a2_px - FSGen_a0a2_py*FSGen_a0a2_py - FSGen_a0a2_pz*FSGen_a0a2_pz ); } else {return -2.0f;}")
+
+                # .Define("FSGen_a1a2_energy", "return (FSGenPhoton1_e + FSGenPhoton2_e)")
+                # .Define("FSGen_a1a2_px", "return (FSGenPhoton1_px + FSGenPhoton2_px)")
+                # .Define("FSGen_a1a2_py", "return (FSGenPhoton1_py + FSGenPhoton2_py)")
+                # .Define("FSGen_a1a2_pz", "return (FSGenPhoton1_pz + FSGenPhoton2_pz)")
+                # .Define("FSGen_a1a2_invMass", "if (n_FSGenPhoton > 1) { return sqrt(FSGen_a1a2_energy*FSGen_a1a2_energy - FSGen_a1a2_px*FSGen_a1a2_px - FSGen_a1a2_py*FSGen_a1a2_py - FSGen_a1a2_pz*FSGen_a1a2_pz ); } else {return -2.0f;}")
+
+                # aaa invariant mass
+                # Returns -2 for events with only 1 or 2 number of photons
+                # .Define("FSGen_aaa_energy", "return (FSGenPhoton0_e + FSGenPhoton1_e + FSGenPhoton2_e)")
+                # .Define("FSGen_aaa_px", "return (FSGenPhoton0_px + FSGenPhoton1_px + FSGenPhoton2_px)")
+                # .Define("FSGen_aaa_py", "return (FSGenPhoton0_py + FSGenPhoton1_py + FSGenPhoton2_py)")
+                # .Define("FSGen_aaa_pz", "return (FSGenPhoton0_pz + FSGenPhoton1_pz + FSGenPhoton2_pz)")
+                # .Define("FSGen_aaa_invMass", "if (n_FSGenPhoton > 2) { return sqrt(FSGen_aaa_energy*FSGen_aaa_energy - FSGen_aaa_px*FSGen_aaa_px - FSGen_aaa_py*FSGen_aaa_py - FSGen_aaa_pz*FSGen_aaa_pz ); } else {return -2.0f;}")
 
                 # Defining a vector containing the ALP and its daughters in order written
                 # Name of vector is ALP_indices
-                .Define("GenALP_indices", "MCParticle::get_indices_InclusiveDecay(9000005, {22, 22}, true, false)(Particle, Particle1)")
-                #.Define("GenALP_indices", "MCParticle::get_indices_ExclusiveDecay(9000005, {11, -11, 12}, true, false)(Particle, Particle1)")
-                #.Define("GenALP_indices", "MCParticle::get_indices_ExclusiveDecay(9000005, {11, -11, 12, 22, 22, 22, 22, 22, 22, 22}, true, false)(Particle, Particle1)")
+                .Define("GenALP_indices", "MCParticle::get_indices_InclusiveDecay(9000005, {22, 22}, true, false, false)(Particle, Particle1)")
                 
                 # Defining the individual particles from the vector
                 .Define("GenALP", "selMC_leg(0)(GenALP_indices, Particle)")
@@ -445,11 +485,15 @@ class analysis():
                                 "FSGenElectron_eta",
                                 "FSGenElectron_theta",
                                 "FSGenElectron_phi",
-                                # "FSGenElectron_vertex_x",
-                                # "FSGenElectron_vertex_y",
-                                # "FSGenElectron_vertex_z",
-                                #"FSGen_Lxy",
-                                #"FSGen_lifetime",
+                                "FSGenPhoton_vertex_x",
+                                "FSGenPhoton_vertex_y",
+                                "FSGenPhoton_vertex_z",
+                                # "n_FSGenElectron_forFS2GenPhotons",
+                                # "n_FSGenPositron_forFS2GenPhotons",
+                                "FSGen_Lxy",
+                                "FSGen_Lxyz",
+                                "FSGen_lifetime_xy",
+                                "FSGen_lifetime_xyz",
                                 "n_FSGenPositron",
                                 "FSGenPositron_e",
                                 "FSGenPositron_p",
@@ -490,13 +534,23 @@ class analysis():
                                 "FSGenPhoton_eta",
                                 "FSGenPhoton_theta",
                                 "FSGenPhoton_phi",
-                                #"FSGen_ee_invMass",
-                                #"FSGen_eenu_invMass",
+                                # "FSGenPhoton0_e",
+                                # "FSGenPhoton1_e",
+                                # "FSGenPhoton2_e",
+                                # "FSGenPhoton0_p",
+                                # "FSGenPhoton1_p",
+                                # "FSGenPhoton2_p",
+                                # "FSGenPhoton0_pt",
+                                # "FSGenPhoton1_pt",
+                                # "FSGenPhoton2_pt",
+                                # "FSGen_a0a1_invMass",
+                                # "FSGen_a0a2_invMass",
+                                # "FSGen_a1a2_invMass",
+                                # "FSGen_aaa_invMass",
                                 "GenALP_vertex_x",
                                 "GenALP_vertex_y",
                                 "GenALP_vertex_z",
                                 "GenALP_aa_invMass",
-                                #"GenALP_eenu_invMass",
                                 "GenALP_mass",
                                 "GenALP_p",
                                 "GenALP_pt",

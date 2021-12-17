@@ -7,16 +7,21 @@ baseDir  = "read_EDM4HEP/"
 ###Link to the dictonary that contains all the cross section informations etc...
 procDict = "myFCCee_procDict_spring2021_IDEA.json"
 process_list=[
-    'HNL_eenu_5GeV_1p41e-6Ve',
-    'HNL_eenu_10GeV_1p41e-6Ve',
-    'HNL_eenu_12GeV_1p41e-6Ve',
-    'HNL_eenu_15GeV_1p41e-6Ve',
-    'HNL_eenu_20GeV_1p41e-6Ve',
-    'HNL_eenu_30GeV_1p41e-6Ve',
-    'HNL_eenu_40GeV_1p41e-6Ve',
-    'HNL_eenu_50GeV_1p41e-6Ve',
-    'HNL_eenu_70GeV_1p41e-6Ve',
-    'HNL_eenu_90GeV_1p41e-6Ve',
+    #'HNL_50'
+    #'HNL_50_old'
+    'HNL_eenu_40GeV_1e-3Ve',
+    'HNL_eenu_40GeV_1e-4Ve',
+    'HNL_eenu_40GeV_1e-5Ve',
+    #'HNL_eenu_5GeV_1p41e-6Ve',
+    #'HNL_eenu_10GeV_1p41e-6Ve',
+    #'HNL_eenu_12GeV_1p41e-6Ve',
+    #'HNL_eenu_15GeV_1p41e-6Ve',
+    #'HNL_eenu_20GeV_1p41e-6Ve',
+    #'HNL_eenu_30GeV_1p41e-6Ve',
+    #'HNL_eenu_40GeV_1p41e-6Ve',
+    #'HNL_eenu_50GeV_1p41e-6Ve',
+    #'HNL_eenu_70GeV_1p41e-6Ve',
+    #'HNL_eenu_90GeV_1p41e-6Ve',
 ]
 
 ###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file
@@ -36,7 +41,7 @@ variables = {
     #gen variables
     "All_n_GenHNL":                    {"name":"All_n_GenHNL",                   "title":"Total number of gen HNLs",                   "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "AllGenHNL_mass":                  {"name":"AllGenHNL_mass",                 "title":"All gen N mass [GeV]",                       "bin":100,"xmin":0 ,"xmax":100},
-    "AllGenHNL_e":                     {"name":"AllGenHNL_e",                    "title":"All gen N energy [GeV]",                     "bin":100,"xmin":0 ,"xmax":50},
+    "AllGenHNL_e":                     {"name":"AllGenHNL_e",                    "title":"All gen N energy [GeV]",                     "bin":100,"xmin":0 ,"xmax":100},
     "AllGenHNL_p":                     {"name":"AllGenHNL_p",                    "title":"All gen N p [GeV]",                          "bin":100,"xmin":0 ,"xmax":50},
     "AllGenHNL_pt":                    {"name":"AllGenHNL_pt",                   "title":"All gen N p_{T} [GeV]",                      "bin":100,"xmin":0 ,"xmax":50},
     "AllGenHNL_pz":                    {"name":"AllGenHNL_pz",                   "title":"All gen N p_{z} [GeV]",                      "bin":100,"xmin":0 ,"xmax":50},
@@ -47,7 +52,7 @@ variables = {
     "n_FSGenElectron":                 {"name":"n_FSGenElectron",                "title":"Number of final state gen electrons",        "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "n_FSGenPositron":                 {"name":"n_FSGenPositron",                "title":"Number of final state gen positrons",        "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "n_FSGenNeutrino":                 {"name":"n_FSGenNeutrino",                "title":"Number of final state gen neutrinos",        "bin":5,"xmin":-0.5 ,"xmax":4.5},
-    "n_FSGenAntiNeutrino":             {"name":"n_FSGenAntiNeutrino",            "title":"Number of final state gen anti-neutrinos",   "bin":5,"xmin":-0.5 ,"xmax":4.5},
+    #"n_FSGenAntiNeutrino":             {"name":"n_FSGenAntiNeutrino",            "title":"Number of final state gen anti-neutrinos",   "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "n_FSGenPhoton":                   {"name":"n_FSGenPhoton",                  "title":"Number of final state gen photons",          "bin":5,"xmin":-0.5 ,"xmax":4.5},
 
     "FSGenElectron_e":                 {"name":"FSGenElectron_e",                "title":"Final state gen electrons energy [GeV]",     "bin":100,"xmin":0 ,"xmax":50},
@@ -74,13 +79,13 @@ variables = {
     "FSGenNeutrino_theta":             {"name":"FSGenNeutrino_theta",            "title":"Final state gen neutrinos #theta",           "bin":64, "xmin":0,"xmax":3.2},
     "FSGenNeutrino_phi":               {"name":"FSGenNeutrino_phi",              "title":"Final state gen neutrinos #phi",             "bin":64, "xmin":-3.2,"xmax":3.2},
 
-    "FSGenAntiNeutrino_e":             {"name":"FSGenAntiNeutrino_e",            "title":"Final state gen anti-neutrino energy [GeV]", "bin":100,"xmin":0 ,"xmax":50},
-    "FSGenAntiNeutrino_p":             {"name":"FSGenAntiNeutrino_p",            "title":"Final state gen anti-neutrino p [GeV]",      "bin":100,"xmin":0 ,"xmax":50},
-    "FSGenAntiNeutrino_pt":            {"name":"FSGenAntiNeutrino_pt",           "title":"Final state gen anti-neutrino p_{T} [GeV]",  "bin":100,"xmin":0 ,"xmax":50},
-    "FSGenAntiNeutrino_pz":            {"name":"FSGenAntiNeutrino_pz",           "title":"Final state gen anti-neutrino p_{z} [GeV]",  "bin":100,"xmin":0 ,"xmax":50},
-    "FSGenAntiNeutrino_eta":           {"name":"FSGenAntiNeutrino_eta",          "title":"Final state gen anti-neutrinos #eta",        "bin":60, "xmin":-3,"xmax":3},
-    "FSGenAntiNeutrino_theta":         {"name":"FSGenAntiNeutrino_theta",        "title":"Final state gen anti-neutrinos #theta",      "bin":64, "xmin":0,"xmax":3.2},
-    "FSGenAntiNeutrino_phi":           {"name":"FSGenAntiNeutrino_phi",          "title":"Final state gen anti-neutrinos #phi",        "bin":64, "xmin":-3.2,"xmax":3.2},
+    # "FSGenAntiNeutrino_e":             {"name":"FSGenAntiNeutrino_e",            "title":"Final state gen anti-neutrino energy [GeV]", "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenAntiNeutrino_p":             {"name":"FSGenAntiNeutrino_p",            "title":"Final state gen anti-neutrino p [GeV]",      "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenAntiNeutrino_pt":            {"name":"FSGenAntiNeutrino_pt",           "title":"Final state gen anti-neutrino p_{T} [GeV]",  "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenAntiNeutrino_pz":            {"name":"FSGenAntiNeutrino_pz",           "title":"Final state gen anti-neutrino p_{z} [GeV]",  "bin":100,"xmin":0 ,"xmax":50},
+    # "FSGenAntiNeutrino_eta":           {"name":"FSGenAntiNeutrino_eta",          "title":"Final state gen anti-neutrinos #eta",        "bin":60, "xmin":-3,"xmax":3},
+    # "FSGenAntiNeutrino_theta":         {"name":"FSGenAntiNeutrino_theta",        "title":"Final state gen anti-neutrinos #theta",      "bin":64, "xmin":0,"xmax":3.2},
+    # "FSGenAntiNeutrino_phi":           {"name":"FSGenAntiNeutrino_phi",          "title":"Final state gen anti-neutrinos #phi",        "bin":64, "xmin":-3.2,"xmax":3.2},
 
     "FSGenPhoton_e":                   {"name":"FSGenPhoton_e",                  "title":"Final state gen photons energy [GeV]",       "bin":100,"xmin":0 ,"xmax":50},
     "FSGenPhoton_p":                   {"name":"FSGenPhoton_p",                  "title":"Final state gen photons p [GeV]",            "bin":100,"xmin":0 ,"xmax":50},
@@ -94,8 +99,11 @@ variables = {
     "FSGenElectron_vertex_y": {"name":"FSGenElectron_vertex_y", "title":"Final state gen e^{#font[122]{\55}} production vertex y [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
     "FSGenElectron_vertex_z": {"name":"FSGenElectron_vertex_z", "title":"Final state gen e^{#font[122]{\55}} production vertex z [mm]",      "bin":100,"xmin":-1000 ,"xmax":1000},
 
-    "FSGen_lifetime": {"name":"FSGen_lifetime", "title":"Gen HNL (FS eles) #tau [s]",        "bin":100,"xmin":0 ,"xmax":1E-9},
-    "FSGen_Lxy":      {"name":"FSGen_Lxy",      "title":"Gen HNL (FS eles) L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
+    "FSGen_lifetime": {"name":"FSGen_lifetime", "title":"Gen HNL (FS eles) #tau [s]",        "bin":100,"xmin":0 ,"xmax":2E-9},
+    "FSGen_Lxy":      {"name":"FSGen_Lxy",      "title":"Gen HNL (FS eles) L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":100},
+
+    "FSGen_lifetimeLxyz": {"name":"FSGen_lifetimeLxyz", "title":"Gen HNL (FS eles) #tau [s]",        "bin":100,"xmin":0 ,"xmax":2E-9},
+    "FSGen_Lxyz":      {"name":"FSGen_Lxyz",      "title":"Gen HNL (FS eles) L_{xyz} [mm]",     "bin":100,"xmin":0 ,"xmax":0.01},
 
     "FSGen_ee_invMass":   {"name":"FSGen_ee_invMass",   "title":"Gen FS m_{ee} [GeV]",           "bin":100,"xmin":0, "xmax":100},
     "FSGen_eenu_invMass": {"name":"FSGen_eenu_invMass", "title":"Gen FS m_{ee#nu} [GeV]",        "bin":100,"xmin":0, "xmax":100},
@@ -107,8 +115,10 @@ variables = {
     "GenHNL_eta":      {"name":"GenHNL_eta",      "title":"Gen N #eta",            "bin":60, "xmin":-3,"xmax":3},
     "GenHNL_theta":    {"name":"GenHNL_theta",    "title":"Gen N #theta",          "bin":64, "xmin":0,"xmax":3.2},
     "GenHNL_phi":      {"name":"GenHNL_phi",      "title":"Gen N #phi",            "bin":64, "xmin":-3.2,"xmax":3.2},
-    "GenHNL_lifetime": {"name":"GenHNL_lifetime", "title":"Gen N #tau [s]",        "bin":100,"xmin":0 ,"xmax":10E-9},
-    "GenHNL_Lxy":      {"name":"GenHNL_Lxy",      "title":"Gen N L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
+    "GenHNL_lifetime": {"name":"GenHNL_lifetime", "title":"Gen N #tau [s]",        "bin":100,"xmin":0 ,"xmax":2E-9},
+    "GenHNL_Lxy":      {"name":"GenHNL_Lxy",      "title":"Gen N L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":100},
+    "GenHNL_lifetimeLxyz": {"name":"GenHNL_lifetimeLxyz", "title":"Gen N #tau [s]",        "bin":100,"xmin":0 ,"xmax":2E-9},
+    "GenHNL_Lxyz":      {"name":"GenHNL_Lxyz",      "title":"Gen N L_{xyz} [mm]",     "bin":100,"xmin":0 ,"xmax":0.01},
     "GenHNL_vertex_x": {"name":"GenHNL_vertex_x", "title":"Gen N production vertex x [mm]",   "bin":100,"xmin":-1000 ,"xmax":1000},
     "GenHNL_vertex_y": {"name":"GenHNL_vertex_y", "title":"Gen N production vertex y [mm]",   "bin":100,"xmin":-1000 ,"xmax":1000},
     "GenHNL_vertex_z": {"name":"GenHNL_vertex_z", "title":"Gen N production vertex z [mm]",   "bin":100,"xmin":-1000 ,"xmax":1000},
@@ -241,7 +251,7 @@ variables = {
 NUM_CPUS = 2
 
 ###Produce TTrees
-DO_TREE=True
+DO_TREE=False
 
 ###This part is standard to all analyses
 import config.runDataFrameFinal as rdf

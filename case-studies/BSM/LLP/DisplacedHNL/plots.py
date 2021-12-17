@@ -31,7 +31,6 @@ variables = [
     "n_FSGenElectron",
     "n_FSGenPositron",
     "n_FSGenNeutrino",
-    "n_FSGenAntiNeutrino",
     "n_FSGenPhoton",
 
     "FSGenElectron_e",
@@ -58,13 +57,13 @@ variables = [
     "FSGenNeutrino_theta",
     "FSGenNeutrino_phi",
 
-    "FSGenAntiNeutrino_e",
-    "FSGenAntiNeutrino_p",
-    "FSGenAntiNeutrino_pt",
-    "FSGenAntiNeutrino_pz",
-    "FSGenAntiNeutrino_eta",
-    "FSGenAntiNeutrino_theta",
-    "FSGenAntiNeutrino_phi",
+    # "FSGenAntiNeutrino_e",
+    # "FSGenAntiNeutrino_p",
+    # "FSGenAntiNeutrino_pt",
+    # "FSGenAntiNeutrino_pz",
+    # "FSGenAntiNeutrino_eta",
+    # "FSGenAntiNeutrino_theta",
+    # "FSGenAntiNeutrino_phi",
 
     "FSGenPhoton_e",
     "FSGenPhoton_p",
@@ -81,6 +80,9 @@ variables = [
     "FSGen_Lxy",
     "FSGen_lifetime",
 
+    "FSGen_Lxyz",
+    "FSGen_lifetimeLxyz",
+
     "FSGen_ee_invMass",
     "FSGen_eenu_invMass",
 
@@ -93,6 +95,8 @@ variables = [
     "GenHNL_phi",
     "GenHNL_lifetime",
     "GenHNL_Lxy",
+    "GenHNL_lifetimeLxyz",
+    "GenHNL_Lxyz",
     "GenHNL_vertex_x",
     "GenHNL_vertex_y",
     "GenHNL_vertex_z",
@@ -223,7 +227,7 @@ variables = [
     
 ###Dictionary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection
 selections = {}
-selections['HNL']   = ["selNone","sel0","sel1"]
+selections['HNL']   = ["selNone"] #,"sel0","sel1"]
 
 extralabel = {}
 extralabel['selNone'] = "No selection"
@@ -231,31 +235,41 @@ extralabel['sel0'] = "Selection: At least 1 N"
 extralabel['sel1'] = "Selection: At least 1 N, at least 2 reco electrons"
 
 colors = {}
+# colors['HNL_50'] = ROOT.kBlack
+# colors['HNL_50_old'] = ROOT.kRed
+colors['HNL_eenu_40GeV_1e-3Ve'] = ROOT.kBlack
+colors['HNL_eenu_40GeV_1e-4Ve'] = ROOT.kCyan
+colors['HNL_eenu_40GeV_1e-5Ve'] = ROOT.kRed
 #colors['HNL_eenu_5GeV_1p41e-6Ve'] = ROOT.kGreen+2
-colors['HNL_eenu_10GeV_1p41e-6Ve'] = ROOT.kBlack
+#colors['HNL_eenu_10GeV_1p41e-6Ve'] = ROOT.kBlack
 #colors['HNL_eenu_12GeV_1p41e-6Ve'] = ROOT.kCyan
 #colors['HNL_eenu_15GeV_1p41e-6Ve'] = ROOT.kBlue
-colors['HNL_eenu_20GeV_1p41e-6Ve'] = ROOT.kMagenta
+#colors['HNL_eenu_20GeV_1p41e-6Ve'] = ROOT.kMagenta
 #colors['HNL_eenu_30GeV_1p41e-6Ve'] = ROOT.kRed
-colors['HNL_eenu_40GeV_1p41e-6Ve'] = ROOT.kRed
+#colors['HNL_eenu_40GeV_1p41e-6Ve'] = ROOT.kRed
 #colors['HNL_eenu_50GeV_1p41e-6Ve'] = ROOT.kBlue
-colors['HNL_eenu_70GeV_1p41e-6Ve'] = ROOT.kGreen+2
+#colors['HNL_eenu_70GeV_1p41e-6Ve'] = ROOT.kGreen+2
 #colors['HNL_eenu_90GeV_1p41e-6Ve'] = ROOT.kBlack
-colors['HNL_eenu_90GeV_1p41e-6Ve'] = ROOT.kBlue
+#colors['HNL_eenu_90GeV_1p41e-6Ve'] = ROOT.kBlack
 #colors['Ztotautau'] = ROOT.kRed
 
 plots = {}
 plots['HNL'] = {'signal':{
+    # 'HNL_50':['HNL_50'],
+    # 'HNL_50_old':['HNL_50_old'],
+    'HNL_eenu_40GeV_1e-3Ve':['HNL_eenu_40GeV_1e-3Ve'],
+    'HNL_eenu_40GeV_1e-4Ve':['HNL_eenu_40GeV_1e-4Ve'],
+    'HNL_eenu_40GeV_1e-5Ve':['HNL_eenu_40GeV_1e-5Ve'],
     #'HNL_eenu_5GeV_1p41e-6Ve':['HNL_eenu_5GeV_1p41e-6Ve'],
-    'HNL_eenu_10GeV_1p41e-6Ve':['HNL_eenu_10GeV_1p41e-6Ve'],
+    #'HNL_eenu_10GeV_1p41e-6Ve':['HNL_eenu_10GeV_1p41e-6Ve'],
     #'HNL_eenu_12GeV_1p41e-6Ve':['HNL_eenu_12GeV_1p41e-6Ve'],
     #'HNL_eenu_15GeV_1p41e-6Ve':['HNL_eenu_15GeV_1p41e-6Ve'],
-    'HNL_eenu_20GeV_1p41e-6Ve':['HNL_eenu_20GeV_1p41e-6Ve'],
+    #'HNL_eenu_20GeV_1p41e-6Ve':['HNL_eenu_20GeV_1p41e-6Ve'],
     #'HNL_eenu_30GeV_1p41e-6Ve':['HNL_eenu_30GeV_1p41e-6Ve'],
-    'HNL_eenu_40GeV_1p41e-6Ve':['HNL_eenu_40GeV_1p41e-6Ve'],
+    #'HNL_eenu_40GeV_1p41e-6Ve':['HNL_eenu_40GeV_1p41e-6Ve'],
     #'HNL_eenu_50GeV_1p41e-6Ve':['HNL_eenu_50GeV_1p41e-6Ve'],
-    'HNL_eenu_70GeV_1p41e-6Ve':['HNL_eenu_70GeV_1p41e-6Ve'],
-    'HNL_eenu_90GeV_1p41e-6Ve':['HNL_eenu_90GeV_1p41e-6Ve'],
+    #'HNL_eenu_70GeV_1p41e-6Ve':['HNL_eenu_70GeV_1p41e-6Ve'],
+    #'HNL_eenu_90GeV_1p41e-6Ve':['HNL_eenu_90GeV_1p41e-6Ve'],
 },
                 'backgrounds':{
                     #'WW':['p8_ee_WW_ecm240'],
@@ -266,14 +280,19 @@ plots['HNL'] = {'signal':{
 
 
 legend = {}
+# legend['HNL_50']  = 'New'
+# legend['HNL_50_old']  = 'Old'
+legend['HNL_eenu_40GeV_1e-3Ve']  = 'm_{N} = 40 GeV, V_{e} = 1e-3'
+legend['HNL_eenu_40GeV_1e-4Ve']  = 'm_{N} = 40 GeV, V_{e} = 1e-4'
+legend['HNL_eenu_40GeV_1e-5Ve']  = 'm_{N} = 40 GeV, V_{e} = 1e-5'
 #legend['HNL_eenu_5GeV_1p41e-6Ve']  = 'm_{N} = 5 GeV, V_{e} = 1.41e-6'
-legend['HNL_eenu_10GeV_1p41e-6Ve'] = 'm_{N} = 10 GeV, V_{e} = 1.41e-6'
+#legend['HNL_eenu_10GeV_1p41e-6Ve'] = 'm_{N} = 10 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_12GeV_1p41e-6Ve'] = 'm_{N} = 12 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_15GeV_1p41e-6Ve'] = 'm_{N} = 15 GeV, V_{e} = 1.41e-6'
-legend['HNL_eenu_20GeV_1p41e-6Ve'] = 'm_{N} = 20 GeV, V_{e} = 1.41e-6'
+#legend['HNL_eenu_20GeV_1p41e-6Ve'] = 'm_{N} = 20 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_30GeV_1p41e-6Ve'] = 'm_{N} = 30 GeV, V_{e} = 1.41e-6'
-legend['HNL_eenu_40GeV_1p41e-6Ve'] = 'm_{N} = 40 GeV, V_{e} = 1.41e-6'
+#legend['HNL_eenu_40GeV_1p41e-6Ve'] = 'm_{N} = 40 GeV, V_{e} = 1.41e-6'
 #legend['HNL_eenu_50GeV_1p41e-6Ve'] = 'm_{N} = 50 GeV, V_{e} = 1.41e-6'
-legend['HNL_eenu_70GeV_1p41e-6Ve'] = 'm_{N} = 70 GeV, V_{e} = 1.41e-6'
-legend['HNL_eenu_90GeV_1p41e-6Ve'] = 'm_{N} = 90 GeV, V_{e} = 1.41e-6'
+#legend['HNL_eenu_70GeV_1p41e-6Ve'] = 'm_{N} = 70 GeV, V_{e} = 1.41e-6'
+#legend['HNL_eenu_90GeV_1p41e-6Ve'] = 'm_{N} = 90 GeV, V_{e} = 1.41e-6'
 #legend['Ztotautau'] = 'Z #rightarrow #tau#tau'

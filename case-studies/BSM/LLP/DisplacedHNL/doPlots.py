@@ -147,7 +147,7 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
  
 
     # first retrieve maximum 
-    sumhistos = histos[0].Clone()
+    sumhistos = histos[1].Clone()
     iterh = iter(histos)
     next(iterh)
 
@@ -342,6 +342,9 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     legend.Draw() 
      
     #pave = ROOT.TPaveText(0.63,0.42,0.88,0.68,"ndc") #6 entries
+    #pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
+    #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
+    pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
     pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
     #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
     #pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries

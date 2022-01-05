@@ -103,9 +103,15 @@ class analysis():
                 # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )
                 .Define("FSGen_Lxy", "return sqrt(FSGenElectron_vertex_x*FSGenElectron_vertex_x + FSGenElectron_vertex_y*FSGenElectron_vertex_y)")
 
+                # Finding the Lxyz of the HNL
+                .Define("FSGen_Lxyz", "return sqrt(FSGenElectron_vertex_x*FSGenElectron_vertex_x + FSGenElectron_vertex_y*FSGenElectron_vertex_y + FSGenElectron_vertex_z*FSGenElectron_vertex_z)")
+
                 # Calculating the lifetime of the HNL
                 # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
                 .Define("FSGen_lifetime", "return ( FSGen_Lxy.at(0) * AllGenHNL_mass / (AllGenHNL_pt * 3E8 * 1000))" )
+
+                # Calculating the lifetime of the HNL for Lxyz
+                .Define("FSGen_lifetimeLxyz", "return ( FSGen_Lxyz.at(0) * AllGenHNL_mass / (AllGenHNL_p * 3E8 * 1000))" )
 
                 #all final state gen positrons
                 .Define("GenPositron_PID", "MCParticle::sel_pdgID(-11, false)(Particle)")
@@ -122,7 +128,7 @@ class analysis():
                 .Define("FSGenPositron_phi", "MCParticle::get_phi(FSGenPositron)")
 
                 #all final state gen neutrinos
-                .Define("GenNeutrino_PID", "MCParticle::sel_pdgID(12, false)(Particle)")
+                .Define("GenNeutrino_PID", "MCParticle::sel_pdgID(12, true)(Particle)")
                 .Define("FSGenNeutrino", "MCParticle::sel_genStatus(1)(GenNeutrino_PID)") #gen status==1 means final state particle (FS)
                 .Define("n_FSGenNeutrino", "MCParticle::get_n(FSGenNeutrino)")
                 .Define("FSGenNeutrino_e", "MCParticle::get_e(FSGenNeutrino)")
@@ -134,20 +140,6 @@ class analysis():
                 .Define("FSGenNeutrino_eta", "MCParticle::get_eta(FSGenNeutrino)")
                 .Define("FSGenNeutrino_theta", "MCParticle::get_theta(FSGenNeutrino)")
                 .Define("FSGenNeutrino_phi", "MCParticle::get_phi(FSGenNeutrino)")
-
-                #all final state gen anti-neutrinos
-                .Define("GenAntiNeutrino_PID", "MCParticle::sel_pdgID(-12, false)(Particle)")
-                .Define("FSGenAntiNeutrino", "MCParticle::sel_genStatus(1)(GenAntiNeutrino_PID)") #gen status==1 means final state particle (FS)
-                .Define("n_FSGenAntiNeutrino", "MCParticle::get_n(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_e", "MCParticle::get_e(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_p", "MCParticle::get_p(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_pt", "MCParticle::get_pt(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_px", "MCParticle::get_px(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_py", "MCParticle::get_py(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_pz", "MCParticle::get_pz(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_eta", "MCParticle::get_eta(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_theta", "MCParticle::get_theta(FSGenAntiNeutrino)")
-                .Define("FSGenAntiNeutrino_phi", "MCParticle::get_phi(FSGenAntiNeutrino)")
 
                 #all final state gen photons
                 .Define("GenPhoton_PID", "MCParticle::sel_pdgID(22, false)(Particle)")
@@ -178,7 +170,7 @@ class analysis():
                 .Define("FSGen_eenu_invMass", "return sqrt(FSGen_eenu_energy*FSGen_eenu_energy - FSGen_eenu_px*FSGen_eenu_px - FSGen_eenu_py*FSGen_eenu_py - FSGen_eenu_pz*FSGen_eenu_pz )")
 
                 # Defining a vector containing the HNL and its daughters in order written
-                # Name of vector is HNL_indices
+                # Name of vector is HNL_indices 
                 .Define("GenHNL_indices", "MCParticle::get_indices_InclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
                 #.Define("GenHNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12}, true, false)(Particle, Particle1)")
                 #.Define("GenHNL_indices", "MCParticle::get_indices_ExclusiveDecay(9900012, {11, -11, 12, 22, 22, 22, 22, 22, 22, 22}, true, false)(Particle, Particle1)")
@@ -243,10 +235,16 @@ class analysis():
                 # Finding the Lxy of the HNL
                 # Definition: Lxy = math.sqrt( (branchGenPtcl.At(daut1).X)**2 + (branchGenPtcl.At(daut1).Y)**2 )  
                 .Define("GenHNL_Lxy", "return sqrt(GenHNLElectron_vertex_x*GenHNLElectron_vertex_x + GenHNLElectron_vertex_y*GenHNLElectron_vertex_y)")
+
+                # Finding the Lxyz of the HNL
+                .Define("GenHNL_Lxyz", "return sqrt(GenHNLElectron_vertex_x*GenHNLElectron_vertex_x + GenHNLElectron_vertex_y*GenHNLElectron_vertex_y + GenHNLElectron_vertex_z*GenHNLElectron_vertex_z)")
                 
                 # Calculating the lifetime of the HNL
                 # Definition: t = Lxy * branchGenPtcl.At(i).Mass / (branchGenPtcl.At(i).PT * 1000 * 3E8)
                 .Define("GenHNL_lifetime", "return ( GenHNL_Lxy * GenHNL_mass / (GenHNL_pt * 3E8 * 1000))" )
+
+                #Calculationg the lifetime of the HNL for Lxyz
+                .Define("GenHNL_lifetimeLxyz", "return ( GenHNL_Lxyz * GenHNL_mass / (GenHNL_p * 3E8 * 1000))" )
                
                 # Finding the production vertex of the HNL which should be at (0,0,0) 
                 .Define("GenHNL_vertex_x", "MCParticle::get_vertex_x(GenHNL_PID)")
@@ -466,7 +464,9 @@ class analysis():
                                 "FSGenElectron_vertex_y",
                                 "FSGenElectron_vertex_z",
                                 "FSGen_Lxy",
+                                "FSGen_Lxyz",
                                 "FSGen_lifetime",
+                                "FSGen_lifetimeLxyz",
                                 "n_FSGenPositron",
                                 "FSGenPositron_e",
                                 "FSGenPositron_p",
@@ -487,16 +487,6 @@ class analysis():
                                 "FSGenNeutrino_eta",
                                 "FSGenNeutrino_theta",
                                 "FSGenNeutrino_phi",
-                                "n_FSGenAntiNeutrino",
-                                "FSGenAntiNeutrino_e",
-                                "FSGenAntiNeutrino_p",
-                                "FSGenAntiNeutrino_pt",
-                                "FSGenAntiNeutrino_px",
-                                "FSGenAntiNeutrino_py",
-                                "FSGenAntiNeutrino_pz",
-                                "FSGenAntiNeutrino_eta",
-                                "FSGenAntiNeutrino_theta",
-                                "FSGenAntiNeutrino_phi",
                                 "n_FSGenPhoton",
                                 "FSGenPhoton_e",
                                 "FSGenPhoton_p",
@@ -558,7 +548,9 @@ class analysis():
                                 "GenHNLElectron_vertex_y",
                                 "GenHNLElectron_vertex_z",
                                 "GenHNL_Lxy",
+                                "GenHNL_Lxyz",
                                 "GenHNL_lifetime",
+                                "GenHNL_lifetimeLxyz",
                                 "GenHNLMCDecayVertex",
                                 "MC_PrimaryVertex",
                                 "n_RecoTracks",

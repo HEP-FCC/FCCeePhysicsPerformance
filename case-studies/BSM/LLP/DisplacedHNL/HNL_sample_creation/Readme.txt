@@ -45,7 +45,7 @@ To create delphes root file you need to do the following on your command line:
 
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
-DelphesPythia8_EDM4HEP ../../../../../../FCC-config/FCCee/Delphes/card_IDEA.tcl ../../../../../../FCC-config/FCCee/Delphes/edm4hep_IDEA.tcl HNL_pythia.cmnd HNL_ejj.root
+DelphesPythia8_EDM4HEP ../../../../../../FCC-config/FCCee/Delphes/card_IDEA.tcl ../../../../../../FCC-config/FCCee/Delphes/edm4hep_IDEA.tcl HNL_eenu_pythia.cmnd HNL_ejj.root
 ```
 
 the resulting HNL_ejj.root is your EDM sample.

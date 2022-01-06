@@ -65,7 +65,7 @@ class analysis():
  
                 ##### Added branch for MCParticle; finding PID of the MC particle for ALP
                 .Define("GenALP_PID", "MCParticle::sel_pdgID(9000005, false)(Particle)")
-                .Define("GenALP_decay", "MCParticle::list_of_particles_from_decay(0, GenALP_PID, Particle1)")
+                .Define("GenALP_decay", "MCParticle::get_list_of_particles_from_decay(0, GenALP_PID, Particle1)")
 
                 .Define("All_n_GenALP", "MCParticle::get_n(GenALP_PID)")
                 .Define("AllGenALP_mass", "MCParticle::get_mass(GenALP_PID)") #finding the generator mass of the ALP through separate ALP branch
@@ -220,7 +220,7 @@ class analysis():
 
                 # Defining a vector containing the ALP and its daughters in order written
                 # Name of vector is ALP_indices
-                .Define("GenALP_indices", "MCParticle::get_indices_InclusiveDecay(9000005, {22, 22}, true, false, false)(Particle, Particle1)")
+                .Define("GenALP_indices", "MCParticle::get_indices(9000005, {22, 22}, true, false, false, true)(Particle, Particle1)")
                 
                 # Defining the individual particles from the vector
                 .Define("GenALP", "selMC_leg(0)(GenALP_indices, Particle)")

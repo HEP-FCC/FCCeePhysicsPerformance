@@ -60,7 +60,12 @@ def mapHistos(var, label, sel, param):
                 tf=ROOT.TFile(fin)
                 h=tf.Get(var)
                 hh = copy.deepcopy(h)
-                hh.Scale(param.intLumi)
+                if hh.GetSumOfWeights()!=0.:
+                    scale=1./hh.GetSumOfWeights()
+                else:
+                    scale=1.
+                #hh.Scale(param.intLumi)
+                hh.Scale(scale)
                 if len(hbackgrounds[b])==0:
                     hbackgrounds[b].append(hh)
                 else:
@@ -281,6 +286,7 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
             #histos[0].SetMinimum(lowY)
             histos[0].SetMaximum(100)
             histos[0].SetMinimum(0.001)
+            #histos[0].SetMinimum(0.00001)
         else:
             histos[0].SetMaximum(1.5*maxh)
             histos[0].SetMinimum(0.)
@@ -344,16 +350,16 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     #pave = ROOT.TPaveText(0.63,0.42,0.88,0.68,"ndc") #6 entries
     #pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
     #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
-    pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
-    pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
-    #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
     #pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
+    #pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
+    #pave = ROOT.TPaveText(0.63,0.5,0.88,0.68,"ndc") #4 entries
+    pave = ROOT.TPaveText(0.63,0.54,0.88,0.68,"ndc") #3 entries
     pave.SetFillColor(0)
     pave.SetBorderSize(0)
     for m,s in zip(mean, stdDev):
         #print(", mean = "+str(m)+", s.d. = "+str(s))
         pave.AddText(", mean = {:.1e}, s.d. = {:.1e}".format(m,s))
-    pave.Draw()
+    #pave.Draw()
     
     Text = ROOT.TLatex()
     

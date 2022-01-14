@@ -215,11 +215,16 @@ class analysis():
 		.Define("RecoMuon_phi",     "ReconstructedParticle::get_phi(RecoMuons)") #polar angle in the transverse plane phi
                 .Define("RecoMuon_charge",  "ReconstructedParticle::get_charge(RecoMuons)")
 
-		#EVENTWIDE VARIABLES: Access quantities that exist only once per event, such as the missing transverse energy
-		.Define("RecoMET", "ReconstructedParticle::get_pt(MissingET)") #absolute value of RecoMET
-		.Define("RecoMET_x", "ReconstructedParticle::get_px(MissingET)") #x-component of RecoMET
-		.Define("RecoMET_y", "ReconstructedParticle::get_py(MissingET)") #y-component of RecoMET
-		.Define("RecoMET_phi", "ReconstructedParticle::get_phi(MissingET)") #angle of RecoMET
+                #EVENTWIDE VARIABLES: Access quantities that exist only once per event, such as the missing energy (despite the name, the MissingET collection contains the total missing energy)
+		.Define("RecoMissingEnergy_e", "ReconstructedParticle::get_e(MissingET)")
+		.Define("RecoMissingEnergy_p", "ReconstructedParticle::get_p(MissingET)")
+		.Define("RecoMissingEnergy_pt", "ReconstructedParticle::get_pt(MissingET)")
+		.Define("RecoMissingEnergy_px", "ReconstructedParticle::get_px(MissingET)") #x-component of RecoMissingEnergy
+		.Define("RecoMissingEnergy_py", "ReconstructedParticle::get_py(MissingET)") #y-component of RecoMissingEnergy
+		.Define("RecoMissingEnergy_pz", "ReconstructedParticle::get_pz(MissingET)") #z-component of RecoMissingEnergy
+		.Define("RecoMissingEnergy_eta", "ReconstructedParticle::get_eta(MissingET)")
+		.Define("RecoMissingEnergy_theta", "ReconstructedParticle::get_theta(MissingET)")
+		.Define("RecoMissingEnergy_phi", "ReconstructedParticle::get_phi(MissingET)") #angle of RecoMissingEnergy
 
                 # ee invariant mass
                 .Define("Reco_ee_energy", "if (n_RecoElectrons>1) return (RecoElectron_e.at(0) + RecoElectron_e.at(1)); else return float(-1.);")
@@ -318,10 +323,15 @@ class analysis():
                         "RecoMuon_theta",
                         "RecoMuon_phi",
                         "RecoMuon_charge",
-                        "RecoMET",
-                        "RecoMET_x",
-                        "RecoMET_y",
-                        "RecoMET_phi",
+                        "RecoMissingEnergy_e",
+                        "RecoMissingEnergy_p",
+                        "RecoMissingEnergy_pt",
+                        "RecoMissingEnergy_px",
+                        "RecoMissingEnergy_py",
+                        "RecoMissingEnergy_pz",
+                        "RecoMissingEnergy_eta",
+                        "RecoMissingEnergy_theta",
+                        "RecoMissingEnergy_phi",
 
                         # enunu branches
                         "FSGen_ee_invMass",

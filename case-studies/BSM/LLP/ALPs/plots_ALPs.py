@@ -200,6 +200,16 @@ variables = [
     "RecoMuon_theta",
     "RecoMuon_phi",
     "RecoMuon_charge",
+
+    "RecoMissingEnergy_e",
+    "RecoMissingEnergy_p",
+    "RecoMissingEnergy_pt",
+    "RecoMissingEnergy_px",
+    "RecoMissingEnergy_py",
+    "RecoMissingEnergy_pz",
+    "RecoMissingEnergy_eta",
+    "RecoMissingEnergy_theta",
+    "RecoMissingEnergy_phi",
 ]
 
 ###Dictionary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection

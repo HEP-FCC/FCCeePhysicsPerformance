@@ -10,6 +10,8 @@ process_list=[
     'p8_ee_Zee_ecm91',
     'p8_ee_Zbb_ecm91',
     'p8_ee_Ztautau_ecm91',
+    'p8_ee_Zcc_ecm91',
+    'p8_ee_Zuds_ecm91',
 ]
 
 ###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file

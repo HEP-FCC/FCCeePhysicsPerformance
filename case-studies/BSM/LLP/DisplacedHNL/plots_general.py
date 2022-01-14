@@ -134,6 +134,8 @@ colors = {}
 colors['Zee'] = ROOT.kBlack
 colors['Zbb'] = ROOT.kRed
 colors['Ztautau'] = ROOT.kBlue
+colors['Zcc'] = ROOT.kMagenta
+colors['Zuds'] = ROOT.kCyan
 
 
 plots = {}
@@ -143,6 +145,8 @@ plots['HNL'] = {'signal':{
                     'Zee':['p8_ee_Zee_ecm91'],
                     'Zbb':['p8_ee_Zbb_ecm91'],
                     'Ztautau': ['p8_ee_Ztautau_ecm91'],
+                    'Zcc': ['p8_ee_Zcc_ecm91'],
+                    'Zuds': ['p8_ee_Zuds_ecm91'],
                 }
                 }
 
@@ -151,3 +155,5 @@ legend = {}
 legend['Zee'] = 'e^{+}e^{-} #rightarrow Z #rightarrow ee'
 legend['Zbb'] = 'e^{+}e^{-} #rightarrow Z #rightarrow bb'
 legend['Ztautau'] = 'e^{+}e^{-} #rightarrow Z #rightarrow #tau#tau'
+legend['Zcc'] = 'e^{+}e^{-} #rightarrow Z #rightarrow cc'
+legend['Zuds'] = 'e^{+}e^{-} #rightarrow Z #rightarrow uds'

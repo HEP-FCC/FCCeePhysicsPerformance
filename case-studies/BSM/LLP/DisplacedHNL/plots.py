@@ -127,6 +127,18 @@ variables = [
     #reco variables
     "n_RecoTracks",
     "n_RecoHNLTracks",
+
+    "RecoHNLTracks_absD0",
+    "RecoHNLTracks_absD0_prompt",
+    "RecoHNLTracks_absZ0",
+    "RecoHNLTracks_absZ0_prompt",
+    "RecoHNLTracks_absD0sig",
+    "RecoHNLTracks_absD0sig_prompt",
+    "RecoHNLTracks_absZ0sig",
+    "RecoHNLTracks_absZ0sig_prompt",
+    "RecoHNLTracks_D0cov",
+    "RecoHNLTracks_Z0cov",
+
     "RecoHNL_DecayVertex_x",
     "RecoHNL_DecayVertex_y",
     "RecoHNL_DecayVertex_z",
@@ -171,6 +183,17 @@ variables = [
     "RecoJet_phi",
     "RecoJet_charge",
 
+    "RecoJetTrack_absD0",
+    "RecoJetTrack_absD0_prompt",
+    "RecoJetTrack_absZ0",
+    "RecoJetTrack_absZ0_prompt",
+    "RecoJetTrack_absD0sig",
+    "RecoJetTrack_absD0sig_prompt",
+    "RecoJetTrack_absZ0sig",
+    "RecoJetTrack_absZ0sig_prompt",
+    "RecoJetTrack_D0cov",
+    "RecoJetTrack_Z0cov",
+
     "RecoElectron_e",
     "RecoElectron_p",
     "RecoElectron_pt",
@@ -179,6 +202,17 @@ variables = [
     "RecoElectron_theta",
     "RecoElectron_phi",
     "RecoElectron_charge",
+
+    "RecoElectronTrack_absD0",
+    "RecoElectronTrack_absD0_prompt",
+    "RecoElectronTrack_absZ0",
+    "RecoElectronTrack_absZ0_prompt",
+    "RecoElectronTrack_absD0sig",
+    "RecoElectronTrack_absD0sig_prompt",
+    "RecoElectronTrack_absZ0sig",
+    "RecoElectronTrack_absZ0sig_prompt",
+    "RecoElectronTrack_D0cov",
+    "RecoElectronTrack_Z0cov",
 
     "RecoPhoton_e",
     "RecoPhoton_p",
@@ -197,6 +231,17 @@ variables = [
     "RecoMuon_theta",
     "RecoMuon_phi",
     "RecoMuon_charge",
+
+    "RecoMuonTrack_absD0",
+    "RecoMuonTrack_absD0_prompt",
+    "RecoMuonTrack_absZ0",
+    "RecoMuonTrack_absZ0_prompt",
+    "RecoMuonTrack_absD0sig",
+    "RecoMuonTrack_absD0sig_prompt",
+    "RecoMuonTrack_absZ0sig",
+    "RecoMuonTrack_absZ0sig_prompt",
+    "RecoMuonTrack_D0cov",
+    "RecoMuonTrack_Z0cov",
 
     "RecoMissingEnergy_e",
     "RecoMissingEnergy_p",
@@ -222,6 +267,9 @@ variables = [
     "GenMinusRecoHNL_DecayVertex_x",
     "GenMinusRecoHNL_DecayVertex_y",
     "GenMinusRecoHNL_DecayVertex_z",
+    "GenMinusRecoHNL_Lxy",
+    "GenMinusRecoHNL_Lxyz",
+    "GenMinusRecoHNL_Lxyz_prompt",
     
              ]
     

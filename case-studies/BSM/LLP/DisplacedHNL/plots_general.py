@@ -79,6 +79,17 @@ variables = [
     "RecoJet_phi",
     "RecoJet_charge",
 
+    "RecoJetTrack_absD0",
+    "RecoJetTrack_absD0_prompt",
+    "RecoJetTrack_absZ0",
+    "RecoJetTrack_absZ0_prompt",
+    "RecoJetTrack_absD0sig",
+    "RecoJetTrack_absD0sig_prompt",
+    "RecoJetTrack_absZ0sig",
+    "RecoJetTrack_absZ0sig_prompt",
+    "RecoJetTrack_D0cov",
+    "RecoJetTrack_Z0cov",
+
     "RecoElectron_e",
     "RecoElectron_p",
     "RecoElectron_pt",
@@ -87,6 +98,17 @@ variables = [
     "RecoElectron_theta",
     "RecoElectron_phi",
     "RecoElectron_charge",
+
+    "RecoElectronTrack_absD0",
+    "RecoElectronTrack_absD0_prompt",
+    "RecoElectronTrack_absZ0",
+    "RecoElectronTrack_absZ0_prompt",
+    "RecoElectronTrack_absD0sig",
+    "RecoElectronTrack_absD0sig_prompt",
+    "RecoElectronTrack_absZ0sig",
+    "RecoElectronTrack_absZ0sig_prompt",
+    "RecoElectronTrack_D0cov",
+    "RecoElectronTrack_Z0cov",
 
     "Reco_ee_invMass",
 
@@ -107,6 +129,17 @@ variables = [
     "RecoMuon_theta",
     "RecoMuon_phi",
     "RecoMuon_charge",
+
+    "RecoMuonTrack_absD0",
+    "RecoMuonTrack_absD0_prompt",
+    "RecoMuonTrack_absZ0",
+    "RecoMuonTrack_absZ0_prompt",
+    "RecoMuonTrack_absD0sig",
+    "RecoMuonTrack_absD0sig_prompt",
+    "RecoMuonTrack_absZ0sig",
+    "RecoMuonTrack_absZ0sig_prompt",
+    "RecoMuonTrack_D0cov",
+    "RecoMuonTrack_Z0cov",
 
     "RecoMissingEnergy_e",
     "RecoMissingEnergy_p",

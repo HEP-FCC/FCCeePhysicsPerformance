@@ -325,6 +325,14 @@ class analysis():
                 # Number of tracks in this RecoHNLTracks collection ( = the #tracks used to reconstruct the HNL reco decay vertex)
                 .Define("n_RecoHNLTracks", "ReconstructedParticle2Track::getTK_n( RecoHNLTracks )")
 
+                # properties of RecoHNLTracks
+                .Define("RecoHNLTracks_absD0", "return abs(ReconstructedParticle2Track::getRP2TRK_D0(RecoHNLParticles,RecoHNLTracks))")
+                .Define("RecoHNLTracks_absZ0", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0(RecoHNLParticles,RecoHNLTracks))")
+                .Define("RecoHNLTracks_absD0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_D0_sig(RecoHNLParticles,RecoHNLTracks))") #significance
+                .Define("RecoHNLTracks_absZ0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0_sig(RecoHNLParticles,RecoHNLTracks))")
+                .Define("RecoHNLTracks_D0cov", "ReconstructedParticle2Track::getRP2TRK_D0_cov(RecoHNLParticles,RecoHNLTracks)") #variance (not sigma)
+                .Define("RecoHNLTracks_Z0cov", "ReconstructedParticle2Track::getRP2TRK_Z0_cov(RecoHNLParticles,RecoHNLTracks)")
+
                 # Now we reconstruct the HNL reco decay vertex using the reco'ed tracks
                 # First the full object, of type Vertexing::FCCAnalysesVertex
                 .Define("RecoHNLDecayVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, RecoHNLTracks)" )
@@ -393,7 +401,8 @@ class analysis():
                 .Define("GenMinusRecoHNL_DecayVertex_x",  "GenHNLElectron_vertex_x-RecoHNLDecayVertex.position.x")
                 .Define("GenMinusRecoHNL_DecayVertex_y",  "GenHNLElectron_vertex_y-RecoHNLDecayVertex.position.y")
                 .Define("GenMinusRecoHNL_DecayVertex_z",  "GenHNLElectron_vertex_z-RecoHNLDecayVertex.position.z")
-
+                .Define("GenMinusRecoHNL_Lxy", "GenHNL_Lxy-RecoHNL_Lxy")
+                .Define("GenMinusRecoHNL_Lxyz", "GenHNL_Lxyz-RecoHNL_Lxyz")
                 
                        
                 ####################################################################################################
@@ -438,7 +447,13 @@ class analysis():
 		.Define("RecoJet_eta",     "ReconstructedParticle::get_eta(Jet)") #pseudorapidity eta
                 .Define("RecoJet_theta",   "ReconstructedParticle::get_theta(Jet)")
 		.Define("RecoJet_phi",     "ReconstructedParticle::get_phi(Jet)") #polar angle in the transverse plane phi
-                .Define("RecoJet_charge",  "ReconstructedParticle::get_charge(Jet)")
+                .Define("RecoJet_charge",  "ReconstructedParticle::get_charge(Jet)") 
+                .Define("RecoJetTrack_absD0", "return abs(ReconstructedParticle2Track::getRP2TRK_D0(Jet,EFlowTrack_1))")
+                .Define("RecoJetTrack_absZ0", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0(Jet,EFlowTrack_1))")
+                .Define("RecoJetTrack_absD0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_D0_sig(Jet,EFlowTrack_1))") #significance
+                .Define("RecoJetTrack_absZ0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0_sig(Jet,EFlowTrack_1))")
+                .Define("RecoJetTrack_D0cov", "ReconstructedParticle2Track::getRP2TRK_D0_cov(Jet,EFlowTrack_1)") #variance (not sigma)
+                .Define("RecoJetTrack_Z0cov", "ReconstructedParticle2Track::getRP2TRK_Z0_cov(Jet,EFlowTrack_1)")
 
                 .Define("RecoElectron_e",      "ReconstructedParticle::get_e(RecoElectrons)")
                 .Define("RecoElectron_p",      "ReconstructedParticle::get_p(RecoElectrons)")
@@ -450,6 +465,12 @@ class analysis():
                 .Define("RecoElectron_theta",   "ReconstructedParticle::get_theta(RecoElectrons)")
 		.Define("RecoElectron_phi",     "ReconstructedParticle::get_phi(RecoElectrons)") #polar angle in the transverse plane phi
                 .Define("RecoElectron_charge",  "ReconstructedParticle::get_charge(RecoElectrons)")
+                .Define("RecoElectronTrack_absD0", "return abs(ReconstructedParticle2Track::getRP2TRK_D0(RecoElectrons,EFlowTrack_1))")
+                .Define("RecoElectronTrack_absZ0", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0(RecoElectrons,EFlowTrack_1))")
+                .Define("RecoElectronTrack_absD0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_D0_sig(RecoElectrons,EFlowTrack_1))") #significance
+                .Define("RecoElectronTrack_absZ0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0_sig(RecoElectrons,EFlowTrack_1))")
+                .Define("RecoElectronTrack_D0cov", "ReconstructedParticle2Track::getRP2TRK_D0_cov(RecoElectrons,EFlowTrack_1)") #variance (not sigma)
+                .Define("RecoElectronTrack_Z0cov", "ReconstructedParticle2Track::getRP2TRK_Z0_cov(RecoElectrons,EFlowTrack_1)")
 
                 .Define("RecoPhoton_e",      "ReconstructedParticle::get_e(RecoPhotons)")
                 .Define("RecoPhoton_p",      "ReconstructedParticle::get_p(RecoPhotons)")
@@ -472,6 +493,13 @@ class analysis():
                 .Define("RecoMuon_theta",   "ReconstructedParticle::get_theta(RecoMuons)")
 		.Define("RecoMuon_phi",     "ReconstructedParticle::get_phi(RecoMuons)") #polar angle in the transverse plane phi
                 .Define("RecoMuon_charge",  "ReconstructedParticle::get_charge(RecoMuons)")
+                .Define("RecoMuonTrack_absD0", "return abs(ReconstructedParticle2Track::getRP2TRK_D0(RecoMuons,EFlowTrack_1))")
+                .Define("RecoMuonTrack_absZ0", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0(RecoMuons,EFlowTrack_1))")
+                .Define("RecoMuonTrack_absD0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_D0_sig(RecoMuons,EFlowTrack_1))") #significance
+                .Define("RecoMuonTrack_absZ0sig", "return abs(ReconstructedParticle2Track::getRP2TRK_Z0_sig(RecoMuons,EFlowTrack_1))")
+                .Define("RecoMuonTrack_D0cov", "ReconstructedParticle2Track::getRP2TRK_D0_cov(RecoMuons,EFlowTrack_1)") #variance (not sigma)
+                .Define("RecoMuonTrack_Z0cov", "ReconstructedParticle2Track::getRP2TRK_Z0_cov(RecoMuons,EFlowTrack_1)")
+
 
 		#EVENTWIDE VARIABLES: Access quantities that exist only once per event, such as the missing energy (despite the name, the MissingET collection contains the total missing energy)
                 .Define("RecoMissingEnergy_e", "ReconstructedParticle::get_e(MissingET)")
@@ -577,6 +605,12 @@ class analysis():
                         "RecoHNLParticles",
                         "RecoHNLTracks",
                         "n_RecoHNLTracks",
+                        "RecoHNLTracks_absD0",
+                        "RecoHNLTracks_absZ0",
+                        "RecoHNLTracks_absD0sig",
+                        "RecoHNLTracks_absZ0sig",
+                        "RecoHNLTracks_D0cov",
+                        "RecoHNLTracks_Z0cov",
                         "RecoHNLDecayVertexObject",
                         "RecoHNLDecayVertex",
                         "RecoHNL_Lxy",
@@ -603,6 +637,8 @@ class analysis():
                         "GenMinusRecoHNL_DecayVertex_x",
                         "GenMinusRecoHNL_DecayVertex_y",
                         "GenMinusRecoHNL_DecayVertex_z",
+                        "GenMinusRecoHNL_Lxy",
+                        "GenMinusRecoHNL_Lxyz",
                         "n_RecoJets",
                         "n_RecoPhotons",
                         "n_RecoElectrons",
@@ -617,6 +653,12 @@ class analysis():
                         "RecoJet_theta",
                         "RecoJet_phi",
                         "RecoJet_charge",
+                        "RecoJetTrack_absD0",
+                        "RecoJetTrack_absZ0",
+                        "RecoJetTrack_absD0sig",
+                        "RecoJetTrack_absZ0sig",
+                        "RecoJetTrack_D0cov",
+                        "RecoJetTrack_Z0cov",
                         "RecoPhoton_e",
                         "RecoPhoton_p",
                         "RecoPhoton_pt",
@@ -637,6 +679,12 @@ class analysis():
                         "RecoElectron_theta",
                         "RecoElectron_phi",
                         "RecoElectron_charge",
+                        "RecoElectronTrack_absD0",
+                        "RecoElectronTrack_absZ0",
+                        "RecoElectronTrack_absD0sig",
+                        "RecoElectronTrack_absZ0sig",
+                        "RecoElectronTrack_D0cov",
+                        "RecoElectronTrack_Z0cov",
                         "RecoMuon_e",
                         "RecoMuon_p",
                         "RecoMuon_pt",
@@ -647,6 +695,12 @@ class analysis():
                         "RecoMuon_theta",
                         "RecoMuon_phi",
                         "RecoMuon_charge",
+                        "RecoMuonTrack_absD0",
+                        "RecoMuonTrack_absZ0",
+                        "RecoMuonTrack_absD0sig",
+                        "RecoMuonTrack_absZ0sig",
+                        "RecoMuonTrack_D0cov",
+                        "RecoMuonTrack_Z0cov",
                         "RecoMissingEnergy_e",
                         "RecoMissingEnergy_p",
                         "RecoMissingEnergy_pt",

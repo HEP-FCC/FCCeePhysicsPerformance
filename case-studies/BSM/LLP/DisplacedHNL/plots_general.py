@@ -159,14 +159,22 @@ selections['HNL']  = [
     "selNone",
     "sel1FSGenEle",
     "sel1FSGenNu",
-    #"sel2RecoEle",
+    "sel2RecoEle",
+    "sel2RecoEle_vetoes",
+    "sel2RecoEle_absD0Gt0p1",
+    "sel2RecoEle_vetoes_MissingEnergyGt10",
+    "sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5",
 ]
 
 extralabel = {}
 extralabel['selNone'] = "No selection"
 extralabel['sel1FSGenEle'] = "Selection: At least 1 final state gen electron"
 extralabel['sel1FSGenNu'] = "Selection: At least 1 final state gen neutrino"
-extralabel['sel2RecoEle'] = "Selection: At least 2 reco electrons"
+extralabel['sel2RecoEle'] = "Selection: Exactly 2 reco electrons"
+extralabel['sel2RecoEle_vetoes'] = "Selection: Exactly 2 reco electrons; No reco muons, jets, or photons"
+extralabel['sel2RecoEle_absD0Gt0p1'] = "Selection: Exactly 2 reco electrons with |d_0|>0.1"
+extralabel['sel2RecoEle_vetoes_MissingEnergyGt10'] = "Selection: Exactly 2 reco electrons; No reco muons, jets, or photons; Missing energy > 10 GeV"
+extralabel['sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5'] = "Selection: Exactly 2 reco electrons with |d_0|>0.5; No reco muons, jets, or photons; Missing energy > 10 GeV"
 
 colors = {}
 colors['Zee'] = ROOT.kBlack

@@ -37,6 +37,7 @@ cut_list = {
     "selNone": "n_RecoTracks > -1",
     "sel0": "GenHNL_mass.size() > 0",
     "sel1": "GenHNL_mass.size() > 0 && n_RecoElectrons > 1",
+    "selGenLxyzGt500": "GenHNL_mass.size() > 0 && GenHNL_Lxyz[0]>500", #>500 mm
 }
 
 
@@ -156,10 +157,10 @@ variables = {
     "n_RecoTracks":                    {"name":"n_RecoTracks",                   "title":"Total number of reco tracks",           "bin":5,"xmin":-0.5 ,"xmax":4.5},
     "n_RecoHNLTracks":                 {"name":"n_RecoHNLTracks",                "title":"Number of reco HNL tracks",             "bin":5,"xmin":-0.5 ,"xmax":4.5},
 
-    "RecoHNLTracks_absD0":             {"name":"RecoHNLTracks_absD0",     "title":"Reco HNL tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoHNLTracks_absD0_prompt":      {"name":"RecoHNLTracks_absD0",     "title":"Reco HNL tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":1},
-    "RecoHNLTracks_absZ0":             {"name":"RecoHNLTracks_absZ0",     "title":"Reco HNL tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoHNLTracks_absZ0_prompt":      {"name":"RecoHNLTracks_absZ0",     "title":"Reco HNL tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":1},
+    "RecoHNLTracks_absD0":             {"name":"RecoHNLTracks_absD0",     "title":"Reco HNL tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoHNLTracks_absD0_prompt":      {"name":"RecoHNLTracks_absD0",     "title":"Reco HNL tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
+    "RecoHNLTracks_absZ0":             {"name":"RecoHNLTracks_absZ0",     "title":"Reco HNL tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoHNLTracks_absZ0_prompt":      {"name":"RecoHNLTracks_absZ0",     "title":"Reco HNL tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
     "RecoHNLTracks_absD0sig":          {"name":"RecoHNLTracks_absD0sig",  "title":"Reco HNL tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
     "RecoHNLTracks_absD0sig_prompt":   {"name":"RecoHNLTracks_absD0sig",  "title":"Reco HNL tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":5},
     "RecoHNLTracks_absZ0sig":          {"name":"RecoHNLTracks_absZ0sig",  "title":"Reco HNL tracks |z_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
@@ -213,10 +214,10 @@ variables = {
     "RecoJet_phi":      {"name":"RecoJet_phi",      "title":"Reco jet #phi",         "bin":64, "xmin":-3.2,"xmax":3.2},
     "RecoJet_charge":   {"name":"RecoJet_charge",   "title":"Reco jet charge",       "bin":3, "xmin":-1.5,"xmax":1.5},
 
-    "RecoJetTrack_absD0":             {"name":"RecoJetTrack_absD0",     "title":"Reco jet tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoJetTrack_absD0_prompt":      {"name":"RecoJetTrack_absD0",     "title":"Reco jet tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":1},
-    "RecoJetTrack_absZ0":             {"name":"RecoJetTrack_absZ0",     "title":"Reco jet tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoJetTrack_absZ0_prompt":      {"name":"RecoJetTrack_absZ0",     "title":"Reco jet tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":1},
+    "RecoJetTrack_absD0":             {"name":"RecoJetTrack_absD0",     "title":"Reco jet tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoJetTrack_absD0_prompt":      {"name":"RecoJetTrack_absD0",     "title":"Reco jet tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
+    "RecoJetTrack_absZ0":             {"name":"RecoJetTrack_absZ0",     "title":"Reco jet tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoJetTrack_absZ0_prompt":      {"name":"RecoJetTrack_absZ0",     "title":"Reco jet tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
     "RecoJetTrack_absD0sig":          {"name":"RecoJetTrack_absD0sig",  "title":"Reco jet tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
     "RecoJetTrack_absD0sig_prompt":   {"name":"RecoJetTrack_absD0sig",  "title":"Reco jet tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":5},
     "RecoJetTrack_absZ0sig":          {"name":"RecoJetTrack_absZ0sig",  "title":"Reco jet tracks |z_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
@@ -233,10 +234,10 @@ variables = {
     "RecoElectron_phi":      {"name":"RecoElectron_phi",      "title":"Reco electron #phi",         "bin":64, "xmin":-3.2,"xmax":3.2},
     "RecoElectron_charge":   {"name":"RecoElectron_charge",   "title":"Reco electron charge",       "bin":3, "xmin":-1.5,"xmax":1.5},
 
-    "RecoElectronTrack_absD0":             {"name":"RecoElectronTrack_absD0",     "title":"Reco electron tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoElectronTrack_absD0_prompt":      {"name":"RecoElectronTrack_absD0",     "title":"Reco electron tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":1},
-    "RecoElectronTrack_absZ0":             {"name":"RecoElectronTrack_absZ0",     "title":"Reco electron tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoElectronTrack_absZ0_prompt":      {"name":"RecoElectronTrack_absZ0",     "title":"Reco electron tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":1},
+    "RecoElectronTrack_absD0":             {"name":"RecoElectronTrack_absD0",     "title":"Reco electron tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoElectronTrack_absD0_prompt":      {"name":"RecoElectronTrack_absD0",     "title":"Reco electron tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
+    "RecoElectronTrack_absZ0":             {"name":"RecoElectronTrack_absZ0",     "title":"Reco electron tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoElectronTrack_absZ0_prompt":      {"name":"RecoElectronTrack_absZ0",     "title":"Reco electron tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
     "RecoElectronTrack_absD0sig":          {"name":"RecoElectronTrack_absD0sig",  "title":"Reco electron tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
     "RecoElectronTrack_absD0sig_prompt":   {"name":"RecoElectronTrack_absD0sig",  "title":"Reco electron tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":5},
     "RecoElectronTrack_absZ0sig":          {"name":"RecoElectronTrack_absZ0sig",  "title":"Reco electron tracks |z_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
@@ -262,10 +263,10 @@ variables = {
     "RecoMuon_phi":      {"name":"RecoMuon_phi",      "title":"Reco muon #phi",         "bin":64, "xmin":-3.2,"xmax":3.2},
     "RecoMuon_charge":   {"name":"RecoMuon_charge",   "title":"Reco muon charge",       "bin":3, "xmin":-1.5,"xmax":1.5},
 
-    "RecoMuonTrack_absD0":             {"name":"RecoMuonTrack_absD0",     "title":"Reco muon tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoMuonTrack_absD0_prompt":      {"name":"RecoMuonTrack_absD0",     "title":"Reco muon tracks |d_{0}|",      "bin":100,"xmin":0, "xmax":1},
-    "RecoMuonTrack_absZ0":             {"name":"RecoMuonTrack_absZ0",     "title":"Reco muon tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":2000},
-    "RecoMuonTrack_absZ0_prompt":      {"name":"RecoMuonTrack_absZ0",     "title":"Reco muon tracks |z_{0}|",      "bin":100,"xmin":0, "xmax":1},
+    "RecoMuonTrack_absD0":             {"name":"RecoMuonTrack_absD0",     "title":"Reco muon tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoMuonTrack_absD0_prompt":      {"name":"RecoMuonTrack_absD0",     "title":"Reco muon tracks |d_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
+    "RecoMuonTrack_absZ0":             {"name":"RecoMuonTrack_absZ0",     "title":"Reco muon tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":2000},
+    "RecoMuonTrack_absZ0_prompt":      {"name":"RecoMuonTrack_absZ0",     "title":"Reco muon tracks |z_{0}| [mm]",      "bin":100,"xmin":0, "xmax":1},
     "RecoMuonTrack_absD0sig":          {"name":"RecoMuonTrack_absD0sig",  "title":"Reco muon tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},
     "RecoMuonTrack_absD0sig_prompt":   {"name":"RecoMuonTrack_absD0sig",  "title":"Reco muon tracks |d_{0} significance|",      "bin":100,"xmin":0, "xmax":5},
     "RecoMuonTrack_absZ0sig":          {"name":"RecoMuonTrack_absZ0sig",  "title":"Reco muon tracks |z_{0} significance|",      "bin":100,"xmin":0, "xmax":600000},

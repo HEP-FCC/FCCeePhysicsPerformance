@@ -275,12 +275,16 @@ variables = [
     
 ###Dictionary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection
 selections = {}
-selections['HNL']   = ["selNone"] #,"sel0","sel1"]
+selections['HNL']   = [
+    "selNone",
+    "selGenLxyzGt500",
+] #,"sel0","sel1"]
 
 extralabel = {}
 extralabel['selNone'] = "No selection"
 extralabel['sel0'] = "Selection: At least 1 N"
 extralabel['sel1'] = "Selection: At least 1 N, at least 2 reco electrons"
+extralabel['selGenLxyzGt500'] = "Selection: At least 1 N with gen L_{xyz}>50 cm"
 
 colors = {}
 # colors['HNL_50'] = ROOT.kBlack

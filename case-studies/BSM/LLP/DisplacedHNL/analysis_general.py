@@ -205,6 +205,18 @@ class analysis():
                 .Define("RecoElectronTrack_D0cov", "ReconstructedParticle2Track::getRP2TRK_D0_cov(RecoElectrons,EFlowTrack_1)") #variance (not sigma)
                 .Define("RecoElectronTrack_Z0cov", "ReconstructedParticle2Track::getRP2TRK_Z0_cov(RecoElectrons,EFlowTrack_1)")
 
+                .Define("RecoElectronTracks",   "ReconstructedParticle2Track::getRP2TRK( RecoElectrons, EFlowTrack_1)")
+
+                # Now we reconstruct the reco decay vertex using the reco'ed tracks from electrons
+                # First the full object, of type Vertexing::FCCAnalysesVertex
+                .Define("RecoDecayVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, RecoElectronTracks)" )
+
+                # from which we extract the edm4hep::VertexData object, which contains the vertex position in mm
+                .Define("RecoDecayVertex",  "VertexingUtils::get_VertexData( RecoDecayVertexObject )")
+
+                .Define("Reco_Lxy", "return sqrt(RecoDecayVertex.position.x*RecoDecayVertex.position.x + RecoDecayVertex.position.y*RecoDecayVertex.position.y)")
+                .Define("Reco_Lxyz","return sqrt(RecoDecayVertex.position.x*RecoDecayVertex.position.x + RecoDecayVertex.position.y*RecoDecayVertex.position.y + RecoDecayVertex.position.z*RecoDecayVertex.position.z)")
+
                 .Define("RecoPhoton_e",      "ReconstructedParticle::get_e(RecoPhotons)")
                 .Define("RecoPhoton_p",      "ReconstructedParticle::get_p(RecoPhotons)")
                 .Define("RecoPhoton_pt",      "ReconstructedParticle::get_pt(RecoPhotons)")
@@ -343,6 +355,10 @@ class analysis():
                         "RecoElectronTrack_absZ0sig",
                         "RecoElectronTrack_D0cov",
                         "RecoElectronTrack_Z0cov",
+                        "RecoDecayVertexObject",
+                        "RecoDecayVertex",
+                        "Reco_Lxy",
+                        "Reco_Lxyz",
                         "RecoMuon_e",
                         "RecoMuon_p",
                         "RecoMuon_pt",

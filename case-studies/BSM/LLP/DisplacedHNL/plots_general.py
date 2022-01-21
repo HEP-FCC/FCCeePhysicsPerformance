@@ -110,6 +110,18 @@ variables = [
     "RecoElectronTrack_D0cov",
     "RecoElectronTrack_Z0cov",
 
+    "Reco_DecayVertex_x",
+    "Reco_DecayVertex_y",
+    "Reco_DecayVertex_z",
+    "Reco_DecayVertex_x_prompt",
+    "Reco_DecayVertex_y_prompt",
+    "Reco_DecayVertex_z_prompt",
+    "Reco_DecayVertex_chi2",
+    "Reco_DecayVertex_probability",
+    "Reco_Lxy",
+    "Reco_Lxyz",
+    "Reco_Lxyz_prompt",
+
     "Reco_ee_invMass",
 
     "RecoPhoton_e",
@@ -172,9 +184,9 @@ extralabel['sel1FSGenEle'] = "Selection: At least 1 final state gen electron"
 extralabel['sel1FSGenNu'] = "Selection: At least 1 final state gen neutrino"
 extralabel['sel2RecoEle'] = "Selection: Exactly 2 reco electrons"
 extralabel['sel2RecoEle_vetoes'] = "Selection: Exactly 2 reco electrons; No reco muons, jets, or photons"
-extralabel['sel2RecoEle_absD0Gt0p1'] = "Selection: Exactly 2 reco electrons with |d_0|>0.1"
+extralabel['sel2RecoEle_absD0Gt0p1'] = "Selection: Exactly 2 reco electrons with |d_0|>0.1 mm"
 extralabel['sel2RecoEle_vetoes_MissingEnergyGt10'] = "Selection: Exactly 2 reco electrons; No reco muons, jets, or photons; Missing energy > 10 GeV"
-extralabel['sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5'] = "Selection: Exactly 2 reco electrons with |d_0|>0.5; No reco muons, jets, or photons; Missing energy > 10 GeV"
+extralabel['sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5'] = "Selection: Exactly 2 reco electrons with |d_0|>0.5 mm; No reco muons, jets, or photons; Missing energy > 10 GeV"
 
 colors = {}
 colors['Zee'] = ROOT.kBlack

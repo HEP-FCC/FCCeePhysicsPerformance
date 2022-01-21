@@ -24,8 +24,10 @@ cut_list = {
     "sel2RecoEle": "n_RecoElectrons==2",
     "sel2RecoEle_vetoes": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0",
     "sel2RecoEle_absD0Gt0p1": "n_RecoElectrons==2 && RecoElectronTrack_absD0[0]>0.1 && RecoElectronTrack_absD0[1]>0.1", #both electrons displaced
+    "sel2RecoEle_chi2Gt0p1_LxyzGt1": "n_RecoElectrons==2 && RecoDecayVertex.chi2>0.1 && Reco_Lxyz>1", #displaced vertex
     "sel2RecoEle_vetoes_MissingEnergyGt10": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0 && RecoMissingEnergy_p[0]>10", #missing energy > 10 GeV
     "sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0 && RecoMissingEnergy_p[0]>10 && RecoElectronTrack_absD0[0]>0.5 && RecoElectronTrack_absD0[1]>0.5", #both electrons displaced
+    "sel2RecoEle_vetoes_MissingEnergyGt10_chi2Gt1_LxyzGt5": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0 && RecoMissingEnergy_p[0]>10 && RecoDecayVertex.chi2>1 && Reco_Lxyz>5", #displaced vertex
 }
 
 
@@ -128,6 +130,18 @@ variables = {
     "RecoElectronTrack_absZ0sig_prompt":   {"name":"RecoElectronTrack_absZ0sig",  "title":"Reco electron tracks |z_{0} significance|",      "bin":100,"xmin":0, "xmax":5},
     "RecoElectronTrack_D0cov":      {"name":"RecoElectronTrack_D0cov",     "title":"Reco electron tracks d_{0} #sigma^{2}",      "bin":100,"xmin":0, "xmax":0.5},
     "RecoElectronTrack_Z0cov":      {"name":"RecoElectronTrack_Z0cov",     "title":"Reco electron tracks z_{0} #sigma^{2}",      "bin":100,"xmin":0, "xmax":0.5},
+
+    "Reco_DecayVertex_x":           {"name":"RecoDecayVertex.position.x",  "title":"Reco decay vertex x [mm]",            "bin":100,"xmin":-1000 ,"xmax":1000},
+    "Reco_DecayVertex_y":           {"name":"RecoDecayVertex.position.y",  "title":"Reco decay vertex y [mm]",            "bin":100,"xmin":-1000 ,"xmax":1000},
+    "Reco_DecayVertex_z":           {"name":"RecoDecayVertex.position.z",  "title":"Reco decay vertex z [mm]",            "bin":100,"xmin":-1000 ,"xmax":1000},
+    "Reco_DecayVertex_x_prompt":    {"name":"RecoDecayVertex.position.x",  "title":"Reco decay vertex x [mm]",            "bin":100,"xmin":-0.01 ,"xmax":0.01},
+    "Reco_DecayVertex_y_prompt":    {"name":"RecoDecayVertex.position.y",  "title":"Reco decay vertex y [mm]",            "bin":100,"xmin":-0.01 ,"xmax":0.01},
+    "Reco_DecayVertex_z_prompt":    {"name":"RecoDecayVertex.position.z",  "title":"Reco decay vertex z [mm]",            "bin":100,"xmin":-0.01 ,"xmax":0.01},
+    "Reco_DecayVertex_chi2":        {"name":"RecoDecayVertex.chi2",        "title":"Reco decay vertex #chi^{2}",          "bin":100,"xmin":0 ,"xmax":3},
+    "Reco_DecayVertex_probability": {"name":"RecoDecayVertex.probability", "title":"Reco decay vertex probability",       "bin":100,"xmin":0 ,"xmax":10},
+    "Reco_Lxy":                     {"name":"Reco_Lxy",                    "title":"Reco L_{xy} [mm]",     "bin":100,"xmin":0 ,"xmax":1000},
+    "Reco_Lxyz":                    {"name":"Reco_Lxyz",                   "title":"Reco L_{xyz} [mm]",    "bin":100,"xmin":0 ,"xmax":1000},
+    "Reco_Lxyz_prompt":             {"name":"Reco_Lxyz",                   "title":"Reco L_{xyz} [mm]",    "bin":100,"xmin":0 ,"xmax":0.1},
 
     "Reco_ee_invMass":   {"name":"Reco_ee_invMass",   "title":"Reco m_{ee} [GeV]",           "bin":100,"xmin":0, "xmax":100},
 

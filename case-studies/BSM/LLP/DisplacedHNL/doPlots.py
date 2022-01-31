@@ -82,6 +82,72 @@ def mapHistos(var, label, sel, param):
 
     return hsignal,hbackgrounds
 
+
+#__________________________________________________________
+def mapEffHistos(denVar, numVar, label, sel, param):
+    print ('run efficiency plots for denVar:{}  numVar:{}   label:{}     selection:{}'.format(denVar,numVar,label,sel))
+    signal=param.plots[label]['signal']
+    backgrounds=param.plots[label]['backgrounds']
+
+    hsignal = {}
+    for s in signal:
+        hsignal[s]=[]
+        for f in signal[s]:
+            fin=param.inputDir+f+'_'+sel+'_histo.root'
+            if not os.path.isfile(fin):
+                print ('file {} does not exist, skip'.format(fin))
+            else:
+                tf=ROOT.TFile(fin)
+                denh=tf.Get(denVar)
+                denhh = copy.deepcopy(denh)
+
+                numh=tf.Get(numVar)
+                numhh = copy.deepcopy(numh)
+
+                #don't scale histograms
+
+                numhh.Divide(denhh)
+                if len(hsignal[s])==0:
+                    hsignal[s].append(numhh)
+                else:
+                    hh.Add(hsignal[s][0])
+                    hsignal[s][0]=numhh
+
+
+    hbackgrounds = {}
+    for b in backgrounds:
+        hbackgrounds[b]=[]
+        for f in backgrounds[b]:
+            fin=param.inputDir+f+'_'+sel+'_histo.root'
+            if not os.path.isfile(fin):
+                print ('file {} does not exist, skip'.format(fin))
+            else:
+                tf=ROOT.TFile(fin)
+                denh=tf.Get(denVar)
+                denhh = copy.deepcopy(denh)
+
+                numh=tf.Get(numVar)
+                numhh = copy.deepcopy(numh)
+
+                #don't scale histograms
+
+                numhh.Divide(denhh)
+                if len(hbackgrounds[b])==0:
+                    hbackgrounds[b].append(numhh)
+                else:
+                    hh.Add(hbackgrounds[b][0])
+                    hbackgrounds[b][0]=numhh
+
+    for s in hsignal:
+        if len(hsignal[s])==0:
+            hsignal=removekey(hsignal,s)
+
+    for b in hbackgrounds:
+        if len(hbackgrounds[b])==0:
+            hbackgrounds=removekey(hbackgrounds,b)
+
+    return hsignal,hbackgrounds
+
 #__________________________________________________________
 def runPlots(var,param,hsignal,hbackgrounds,extralab):
     legsize = 0.04*(len(hbackgrounds)+len(hsignal))
@@ -121,7 +187,6 @@ def runPlots(var,param,hsignal,hbackgrounds,extralab):
         lt = "FCC-ee Simulation (Delphes)"
         rt = "#sqrt{{s}} = {:.1f} GeV,   L = {:.0f} ab^{{-1}}".format(param.energy,intLumiab)
 
-
     if 'stack' in param.stacksig:
         if 'lin' in param.yaxis:
             drawStack(var+"_stack_lin", 'Events', leg, lt, rt, param.formats, param.outdir, False , True , histos, colors, param.ana_tex, extralab)
@@ -141,6 +206,54 @@ def runPlots(var,param,hsignal,hbackgrounds,extralab):
         print ('unrecognised option in stacksig, should be [\'stack\',\'nostack\']'.format(param.formats))
 
 
+
+#__________________________________________________________
+def runEffPlots(denVar,numVar,param,hsignal,hbackgrounds,extralab):
+    legsize = 0.04*(len(hbackgrounds)+len(hsignal))
+    #leg = ROOT.TLegend(0.58,0.86 - legsize,0.86,0.88)
+    leg = ROOT.TLegend(0.18,0.66 - legsize,0.46,0.68)
+    leg.SetFillColor(0)
+    leg.SetFillStyle(0)
+    leg.SetLineColor(0)
+    leg.SetShadowColor(10)
+    leg.SetTextSize(0.035)
+    leg.SetTextFont(42)
+
+    for s in hsignal:
+    #    leg.AddEntry("")
+        leg.AddEntry(hsignal[s][0],param.legend[s],"l")
+    for b in hbackgrounds:
+    #    leg.AddEntry("")
+        leg.AddEntry(hbackgrounds[b][0],param.legend[b],"f")
+
+    histos=[]
+    colors=[]
+
+    for s in hsignal:
+        histos.append(hsignal[s][0])
+        colors.append(param.colors[s])
+
+    for b in hbackgrounds:
+        histos.append(hbackgrounds[b][0])
+        colors.append(param.colors[b])
+
+    intLumiab = param.intLumi/1e+06
+
+    lt = "FCC-hh Simulation (Delphes)"
+    rt = "#sqrt{{s}} = {:.1f} TeV,   L = {:.0f} ab^{{-1}}".format(param.energy,intLumiab)
+
+    if 'ee' in param.collider:
+        lt = "FCC-ee Simulation (Delphes)"
+        rt = "#sqrt{{s}} = {:.1f} GeV,   L = {:.0f} ab^{{-1}}".format(param.energy,intLumiab)
+
+    if 'lin' in param.yaxis:
+        drawEffPlots("eff_"+denVar+"_"+numVar+"_lin", 'Reco/Gen Efficiency', leg, lt, rt, param.formats, param.outdir, False , True , histos, colors, param.ana_tex, extralab)
+    if 'log' in param.yaxis:
+        drawEffPlots("eff_"+denVar+"_"+numVar+"_log", 'Reco/Gen Efficiency', leg, lt, rt, param.formats, param.outdir, True , True , histos, colors, param.ana_tex, extralab)
+    if 'lin' not in param.yaxis and 'log' not in param.yaxis:
+        print ('unrecognised option in formats, should be [\'lin\',\'log\']'.format(param.formats))
+
+
 #_____________________________________________________________________________________________________________
 def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, logY, stacksig, histos, colors, ana_tex, extralab):
 
@@ -152,9 +265,10 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
  
 
     # first retrieve maximum 
-    sumhistos = histos[1].Clone()
+    sumhistos = histos[0].Clone()
     iterh = iter(histos)
     next(iterh)
+
 
     try:
         histos[1]
@@ -285,8 +399,8 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
             #histos[0].SetMaximum(highY)
             #histos[0].SetMinimum(lowY)
             histos[0].SetMaximum(100)
-            histos[0].SetMinimum(0.001)
-            #histos[0].SetMinimum(0.00001)
+            #histos[0].SetMinimum(0.001)
+            histos[0].SetMinimum(0.00001)
         else:
             histos[0].SetMaximum(1.5*maxh)
             histos[0].SetMinimum(0.)
@@ -337,15 +451,15 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
             histos[0].SetMaximum(5000)
         else:
             histos[0].SetMaximum(2.3*maxh)         
-        histos[0].Draw("hist")
+        histos[0].Draw("histe")
         for h in histos:
             mean.append(h.GetMean(1))
             stdDev.append(h.GetStdDev(1))
             if h!=histos[0]:
-                h.Draw("histsame")
+                h.Draw("histesame")
         
     #legend.SetTextFont(font) 
-    legend.Draw() 
+    legend.Draw()
      
     #pave = ROOT.TPaveText(0.63,0.42,0.88,0.68,"ndc") #6 entries
     #pave = ROOT.TPaveText(0.63,0.46,0.88,0.68,"ndc") #5 entries
@@ -363,25 +477,25 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     
     Text = ROOT.TLatex()
     
-    Text.SetNDC() 
+    Text.SetNDC()
     Text.SetTextAlign(31)
-    Text.SetTextSize(0.04) 
+    Text.SetTextSize(0.04)
 
     text = '#it{' + leftText +'}'
     
-    Text.DrawLatex(0.90, 0.92, text) 
+    Text.DrawLatex(0.90, 0.92, text)
 
     rightText = re.split(",", rightText)
     text = '#bf{#it{' + rightText[0] +'}}'
     
-    Text.SetTextAlign(12);
-    Text.SetNDC(ROOT.kTRUE) 
-    Text.SetTextSize(0.04) 
+    Text.SetTextAlign(12)
+    Text.SetNDC(ROOT.kTRUE)
+    Text.SetTextSize(0.04)
     Text.DrawLatex(0.18, 0.83, text)
 
-    rightText[1]=rightText[1].replace("   ","")    
+    rightText[1]=rightText[1].replace("   ","")
     text = '#bf{#it{' + rightText[1] +'}}'
-    Text.SetTextSize(0.035) 
+    Text.SetTextSize(0.035)
     Text.DrawLatex(0.18, 0.78, text)
 
     text = '#bf{#it{' + ana_tex +'}}'
@@ -398,7 +512,136 @@ def drawStack(name, ylabel, legend, leftText, rightText, formats, directory, log
     canvas.Modified()
     canvas.Update()
 
-    printCanvas(canvas, name, formats, directory) 
+    printCanvas(canvas, name, formats, directory)
+
+
+
+
+#_____________________________________________________________________________________________________________
+def drawEffPlots(name, ylabel, legend, leftText, rightText, formats, directory, logY, stacksig, histos, colors, ana_tex, extralab):
+
+    canvas = ROOT.TCanvas(name, name, 600, 600)
+    canvas.SetLogy(logY)
+    canvas.SetTicks(1,1)
+    canvas.SetLeftMargin(0.1)
+    canvas.SetRightMargin(0.1)
+
+    # first retrieve maximum
+    sumhistos = histos[0].Clone()
+    iterh = iter(histos)
+    next(iterh)
+
+    try:
+        histos[1]
+    except IndexError:
+        histos1_exists = False
+    else:
+        histos1_exists = True
+
+    for h in iterh:
+      sumhistos.Add(h)
+
+    maxh = 2.3
+
+    if logY:
+       canvas.SetLogy(1)
+
+    k = 0
+    for h in histos:
+       h.SetLineWidth(3)
+       h.SetLineColor(colors[k])
+       k += 1
+
+
+    # fix names if needed
+    if(histos1_exists):
+        #xlabel = histos[1].GetXaxis().GetTitle()
+        xlabel = "Electron p [GeV]"
+
+        #histos[0].GetXaxis().SetTitleFont(font)
+        #histos[0].GetXaxis().SetLabelFont(font)
+        histos[0].GetXaxis().SetTitle(xlabel)
+        histos[0].GetYaxis().SetTitle(ylabel)
+        #histos[0].GetYaxis().SetTitleFont(font)
+        #histos[0].GetYaxis().SetLabelFont(font)
+        '''histos[0].GetXaxis().SetTitleOffset(1.3)
+        histos[0].GetYaxis().SetTitleOffset(1.3)
+        histos[0].GetXaxis().SetLabelOffset(0.02)
+        histos[0].GetYaxis().SetLabelOffset(0.02)
+        histos[0].GetXaxis().SetTitleSize(0.06)
+        histos[0].GetYaxis().SetTitleSize(0.06)
+        histos[0].GetXaxis().SetLabelSize(0.06)
+        histos[0].GetYaxis().SetLabelSize(0.06)
+        histos[0].GetXaxis().SetNdivisions(505);
+        histos[0].GetYaxis().SetNdivisions(505);
+        histos[0].SetTitle("") '''
+
+        histos[0].GetYaxis().SetTitleOffset(1.45)
+        histos[0].GetXaxis().SetTitleOffset(1.3)
+
+
+        #hStack.SetMaximum(1.5*maxh)
+
+        #if logY:
+        #    histos[0].SetMaximum(3)
+        #    histos[0].SetMinimum(0.00001)
+        #else:
+    histos[0].SetMaximum(maxh)
+    histos[0].SetMinimum(0.)
+
+    escape_scale_Xaxis=True
+
+    #if not stacksig:
+        #if logY:
+        #    maxh=200.*maxh/ROOT.gPad.GetUymax()
+        #    histos[0].SetMaximum(5000)
+        #else:
+        #    histos[0].SetMaximum(2.3*maxh)         
+    histos[0].Draw("e")
+    for h in histos:
+        if h!=histos[0]:
+            h.Draw("esame")
+
+    #legend.SetTextFont(font)
+    legend.Draw()
+
+    Text = ROOT.TLatex()
+
+    Text.SetNDC()
+    Text.SetTextAlign(31)
+    Text.SetTextSize(0.04)
+
+    text = '#it{' + leftText +'}'
+
+    Text.DrawLatex(0.90, 0.92, text)
+
+    rightText = re.split(",", rightText)
+    text = '#bf{#it{' + rightText[0] +'}}'
+
+    Text.SetTextAlign(12)
+    Text.SetNDC(ROOT.kTRUE)
+    Text.SetTextSize(0.04)
+    Text.DrawLatex(0.18, 0.83, text)
+
+    rightText[1]=rightText[1].replace("   ","")
+    text = '#bf{#it{' + rightText[1] +'}}'
+    Text.SetTextSize(0.035)
+    Text.DrawLatex(0.18, 0.78, text)
+
+    text = '#bf{#it{' + ana_tex +'}}'
+    Text.SetTextSize(0.04)
+    Text.DrawLatex(0.18, 0.73, text)
+
+    text = '#bf{#it{' + extralab +'}}'
+    Text.SetTextSize(0.025)
+    Text.DrawLatex(0.18, 0.68, text)
+
+    canvas.RedrawAxis()
+    canvas.GetFrame().SetBorderSize( 12 )
+    canvas.Modified()
+    canvas.Update()
+
+    printCanvas(canvas, name, formats, directory)
 
     
 
@@ -436,3 +679,8 @@ if __name__=="__main__":
             for sel in sels:
                 hsignal,hbackgrounds=mapHistos(var,label,sel, param)
                 runPlots(var+"_"+label+"_"+sel,param,hsignal,hbackgrounds,param.extralabel[sel])
+                if var in param.effPlots.keys():
+                    print("variable in effPlots.keys() is: "+var+", value is then: "+param.effPlots.get(var))
+                    effsignal,effbackgrounds=mapEffHistos(param.effPlots.get(var),var,label,sel, param)
+                    runEffPlots(param.effPlots.get(var),var+"_"+label+"_"+sel,param,effsignal,effbackgrounds,param.extralabel[sel])
+

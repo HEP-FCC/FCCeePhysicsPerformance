@@ -164,6 +164,11 @@ variables = [
     "RecoMissingEnergy_phi",
     
              ]
+
+effPlots = {
+    #num: den
+    "RecoElectron_p":"FSGenElectron_p",
+}
     
 ###Dictionary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection
 selections = {}

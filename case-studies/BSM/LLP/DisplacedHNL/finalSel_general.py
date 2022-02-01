@@ -4,6 +4,9 @@ import ROOT
 ###Input directory where the files produced at the pre-selection level are
 baseDir  = "read_EDM4HEP/"
 
+###Integrated luminosity for scaling number of events
+intLumi = 150e6 #pb^-1
+
 ###Link to the dictonary that contains all the cross section informations etc...
 procDict = "myFCCee_procDict_spring2021_IDEA.json"
 process_list=[
@@ -12,6 +15,9 @@ process_list=[
     'p8_ee_Ztautau_ecm91',
     'p8_ee_Zcc_ecm91',
     'p8_ee_Zuds_ecm91',
+    # 'HNL_eenu_30GeV_1p41e-6Ve',
+    # 'HNL_eenu_50GeV_1p41e-6Ve',
+    # 'HNL_eenu_70GeV_1p41e-6Ve',
 ]
 
 ###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file
@@ -191,8 +197,9 @@ NUM_CPUS = 2
 
 ###Produce TTrees
 DO_TREE=False
+DO_SCALE=False
 
 ###This part is standard to all analyses
 import config.runDataFrameFinal as rdf
-myana=rdf.runDataFrameFinal(baseDir,procDict,process_list,cut_list,variables)
-myana.run(ncpu=NUM_CPUS, doTree=DO_TREE)
+myana=rdf.runDataFrameFinal(baseDir,procDict,process_list,cut_list,variables,intLumi)
+myana.run(ncpu=NUM_CPUS, doTree=DO_TREE, doScale=DO_SCALE)

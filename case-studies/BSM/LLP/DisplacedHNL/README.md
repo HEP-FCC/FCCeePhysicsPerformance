@@ -9,6 +9,40 @@
 This is the code used for the project titled: [Towards Vertexing Studies of Heavy Neutral Leptons with the Future Circular Collider at CERN](http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-444997) by Rohini Sengupta, defended in June 2021.
 
 ## Setup Instructions
+
+### setup once, in the beginning:
+```
+bash
+git clone https://github.com/jalimena/FCCAnalyses.git #this is a common FCC analyses repository, but I needed to add one thing there
+cd FCCAnalyses
+git checkout inclusiveDecay #this git command checks out the specific branch where I made the change in FCCAnalyses
+source ./setup.sh
+mkdir build install
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
+make install
+cd ../..
+
+git clone https://github.com/jalimena/FCCeePhysicsPerformance.git #our main analysis code for HNLs and ALPs lives here
+cd FCCeePhysicsPerformance/case-studies/flavour/dataframe
+source ./localSetup.sh
+mkdir build install
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install -DFCCANALYSES_INCLUDE_PATH=<Your_Complete_Path_to>/FCCAnalyses/install/include/FCCAnalyses/
+make install
+cd ../../../BSM/LLP/DisplacedHNL/
+```
+
+### you will need to run these setup commands every time you log in:
+```
+bash
+cd FCCAnalyses
+source ./setup.sh
+cd ../FCCeePhysicsPerformance/case-studies/flavour/dataframe
+source ./localSetup.sh
+cd ../../BSM/LLP/DisplacedHNL/
+```
+
 In the folder [HNL_sample_creation](HNL_sample_creation) you can find a readme file that explains how to create the samples used in this project. 
 
 ## Analysis Files
@@ -32,3 +66,14 @@ To run the analysis_HNL_read.py file the FCC framework has to be setup following
 from GitHub. The repositories of interest are the FCCAnalysis and the FCCeePhysicsPerformance. It is very important to make sure that the
 sourcing is correct. For FCCAnalyses, the sourcing should point to the personal FCCAnalyses and not the central version. FCCAnalyses also
 needs to be  linked against FCCeePhysicsPerformane, instructions for which can be found on the respective GitHub pages.
+
+
+### run the analysis:
+```
+cd FCCeePhysicsPerformance/case-studies/BSM/LLP/DisplacedHNL
+python3 analysis_HNL_read.py -i HNL_sample_creation/HNL_eenu_50GeV_1p41e-6Ve.root #for one example signal point
+./runAnalysis.sh #for all points i've generated so far
+
+python3 finalSel.py #to run the "final selection"
+python3 doPlots.py plots.py #to create plots
+```

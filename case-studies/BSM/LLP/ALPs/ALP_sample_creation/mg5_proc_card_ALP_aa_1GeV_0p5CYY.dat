@@ -1,0 +1,78 @@
+#************************************************************
+#*                     MadGraph5_aMC@NLO                    *
+#*                                                          *
+#*                *                       *                 *
+#*                  *        * *        *                   *
+#*                    * * * * 5 * * * *                     *
+#*                  *        * *        *                   *
+#*                *                       *                 *
+#*                                                          *
+#*                                                          *
+#*         VERSION 3.2.0                 2021-08-22         *
+#*                                                          *
+#*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+#*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+#*                                                          *
+#************************************************************
+#*                                                          *
+#*               Command File for MadGraph5_aMC@NLO         *
+#*                                                          *
+#*     run as ./bin/mg5_aMC  filename                       *
+#*                                                          *
+#************************************************************
+set group_subprocesses Auto
+set ignore_six_quark_processes False
+set low_mem_multicore_nlo_generation False
+set complex_mass_scheme False
+set include_lepton_initiated_processes False
+set gauge unitary
+set loop_optimized_output True
+set loop_color_flows False
+set max_npoint_for_channel 0
+set default_unset_couplings 99
+set max_t_for_channel 99
+set zerowidth_tchannel True
+set nlo_mixed_expansion True
+set auto_convert_model T
+import model sm
+define p = g u c d s u~ c~ d~ s~
+define j = g u c d s u~ c~ d~ s~
+define l+ = e+ mu+
+define l- = e- mu-
+define vl = ve vm vt
+define vl~ = ve~ vm~ vt~
+import model ALP_NLO_UFO
+generate e+ e- > Z, (Z > a ALP, (ALP > a a))
+output ALP_Z_aa_1GeV_cYY_0p5
+launch ALP_Z_aa_1GeV_cYY_0p5
+done
+# set to electron beams (0 for ele, 1 for proton)
+set lpp1 0
+set lpp2 0
+set ebeam1 45.594
+set ebeam2 45.594
+# set ALP mass
+set Ma 1.
+# set ALP couplings
+set cWW = 0.0
+set CYY = 0.5
+set cGG = 0.
+set cuu = 0.
+set cdd = 0.
+set ccc = 0.
+set css = 0.
+set ctt = 0.
+set cbb = 0.
+set cee = 0.
+set cmumu = 0.
+set ctautau = 0.
+set cah = 0.
+set cZh5 = 0.
+# set supression scale in the effective operators coupling the ALP to SM particles
+set falp = 1000
+
+# set the decay width of the ALP to auto
+set WALP auto
+set time_of_flight 0
+set nevents 10000
+done

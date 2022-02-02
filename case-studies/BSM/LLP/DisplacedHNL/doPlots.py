@@ -39,9 +39,10 @@ def mapHistos(var, label, sel, param):
                     scaleSig=param.scaleSig
                 except AttributeError:
                     print ('no scale signal, using 1')
-                #print ('scaleSig ',scaleSig)
+                if scaleSig != 0.:
+                    hh.Scale(scaleSig) 
                 #hh.Scale(param.intLumi*scaleSig)
-                hh.Scale(scaleSig)
+                #hh.Scale(scaleSig)
                 if len(hsignal[s])==0:
                     hsignal[s].append(hh)
                 else:
@@ -64,8 +65,14 @@ def mapHistos(var, label, sel, param):
                     scale=1./hh.GetSumOfWeights()
                 else:
                     scale=1.
+                try:
+                    scale=param.scaleBack
+                except AttributeError:
+                    print ('no scale background, using 1')
+                if scale != 0.:
+                    hh.Scale(scale)
+                print('entries ', hh.GetEntries())
                 #hh.Scale(param.intLumi)
-                hh.Scale(scale)
                 if len(hbackgrounds[b])==0:
                     hbackgrounds[b].append(hh)
                 else:

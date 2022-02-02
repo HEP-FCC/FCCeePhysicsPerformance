@@ -1,8 +1,10 @@
 import ROOT
 
 # global parameters
-intLumi        = 5.0e+06 #in pb-1
-#scaleSig       = 
+intLumi        = 150.0e+06 #in pb-1
+# if scaleSig=0, we don't apply any additional scaling, on top of the normalization to cross section and integrated luminosity, as defined in finalSel.py
+# if scaleSig is not defined, plots will be normalized to 1
+#scaleSig       = 0.
 ana_tex        = 'e^{+}e^{-} #rightarrow N #nu, N #rightarrow ee#nu'
 delphesVersion = '3.4.2'
 energy         = 91
@@ -275,16 +277,36 @@ variables = [
     
 ###Dictionary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection
 selections = {}
-selections['HNL']   = [
+# selections['HNL']   = [
+#     "selNone",
+#     "selGenLxyzGt500",
+# ] #,"sel0","sel1"]
+selections['HNL']  = [
     "selNone",
-    "selGenLxyzGt500",
-] #,"sel0","sel1"]
+    "sel1FSGenEle",
+    "sel1FSGenNu",
+    "sel2RecoEle",
+    "sel2RecoEle_vetoes",
+    "sel2RecoEle_absD0Gt0p1",
+    "sel2RecoEle_chi2Gt0p1",
+    "sel2RecoEle_vetoes_MissingEnergyGt10",
+    "sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5",
+]
 
 extralabel = {}
+# extralabel['selNone'] = "No selection"
+# extralabel['sel0'] = "Selection: At least 1 N"
+# extralabel['sel1'] = "Selection: At least 1 N, at least 2 reco electrons"
+# extralabel['selGenLxyzGt500'] = "Selection: At least 1 N with gen L_{xyz}>50 cm"
 extralabel['selNone'] = "No selection"
-extralabel['sel0'] = "Selection: At least 1 N"
-extralabel['sel1'] = "Selection: At least 1 N, at least 2 reco electrons"
-extralabel['selGenLxyzGt500'] = "Selection: At least 1 N with gen L_{xyz}>50 cm"
+extralabel['sel1FSGenEle'] = "Selection: At least 1 final state gen electron"
+extralabel['sel1FSGenNu'] = "Selection: At least 1 final state gen neutrino"
+extralabel['sel2RecoEle'] = "Selection: Exactly 2 reco electrons"
+extralabel['sel2RecoEle_vetoes'] = "Selection: Exactly 2 reco electrons; No reco muons, jets, or photons"
+extralabel['sel2RecoEle_absD0Gt0p1'] = "Selection: Exactly 2 reco electrons with |d_0|>0.1 mm"
+extralabel['sel2RecoEle_chi2Gt0p1'] = "Selection: Exactly 2 reco electrons with #chi^{2}>0.1"
+extralabel['sel2RecoEle_vetoes_MissingEnergyGt10'] = "Selection: Exactly 2 reco electrons; No reco muons, jets, or photons; Missing energy > 10 GeV"
+extralabel['sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5'] = "Selection: Exactly 2 reco electrons with |d_0|>0.5 mm; No reco muons, jets, or photons; Missing energy > 10 GeV"
 
 colors = {}
 # colors['HNL_50'] = ROOT.kBlack

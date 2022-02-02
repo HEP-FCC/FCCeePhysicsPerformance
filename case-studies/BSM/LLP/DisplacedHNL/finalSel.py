@@ -4,6 +4,9 @@ import ROOT
 ###Input directory where the files produced at the pre-selection level are
 baseDir  = "read_EDM4HEP/"
 
+###Integrated luminosity for scaling number of events
+intLumi = 150e6 #pb^-1
+
 ###Link to the dictonary that contains all the cross section informations etc...
 procDict = "myFCCee_procDict_spring2021_IDEA.json"
 process_list=[
@@ -32,12 +35,26 @@ process_list=[
 
 ###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file
 
+# cut_list = {
+#     #"sel1":"zed_leptonic_m.size() == 1 && zed_leptonic_m[0] > 80 &&  zed_leptonic_m[0] < 100"
+#     "selNone": "n_RecoTracks > -1",
+#     "sel0": "GenHNL_mass.size() > 0",
+#     "sel1": "GenHNL_mass.size() > 0 && n_RecoElectrons > 1",
+#     "selGenLxyzGt500": "GenHNL_mass.size() > 0 && GenHNL_Lxyz[0]>500", #>500 mm
+# }
 cut_list = {
     #"sel1":"zed_leptonic_m.size() == 1 && zed_leptonic_m[0] > 80 &&  zed_leptonic_m[0] < 100"
     "selNone": "n_RecoTracks > -1",
-    "sel0": "GenHNL_mass.size() > 0",
-    "sel1": "GenHNL_mass.size() > 0 && n_RecoElectrons > 1",
-    "selGenLxyzGt500": "GenHNL_mass.size() > 0 && GenHNL_Lxyz[0]>500", #>500 mm
+    "sel1FSGenEle": "n_FSGenElectron>0",
+    "sel1FSGenNu": "n_FSGenNeutrino>0",
+    "sel2RecoEle": "n_RecoElectrons==2",
+    "sel2RecoEle_vetoes": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0",
+    "sel2RecoEle_absD0Gt0p1": "n_RecoElectrons==2 && RecoElectronTrack_absD0[0]>0.1 && RecoElectronTrack_absD0[1]>0.1", #both electrons displaced
+    "sel2RecoEle_chi2Gt0p1": "n_RecoElectrons==2 && RecoHNLDecayVertex.chi2>0.1", #displaced vertex
+    "sel2RecoEle_chi2Gt0p1_LxyzGt1": "n_RecoElectrons==2 && RecoHNLDecayVertex.chi2>0.1 && RecoHNL_Lxyz>1", #displaced vertex
+    "sel2RecoEle_vetoes_MissingEnergyGt10": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0 && RecoMissingEnergy_p[0]>10", #missing energy > 10 GeV
+    "sel2RecoEle_vetoes_MissingEnergyGt10_absD0Gt0p5": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0 && RecoMissingEnergy_p[0]>10 && RecoElectronTrack_absD0[0]>0.5 && RecoElectronTrack_absD0[1]>0.5", #both electrons displaced
+    "sel2RecoEle_vetoes_MissingEnergyGt10_chi2Gt1_LxyzGt5": "n_RecoElectrons==2 && n_RecoMuons==0 && n_RecoPhotons==0 && n_RecoJets==0 && n_RecoPhotons==0 && RecoMissingEnergy_p[0]>10 && RecoHNLDecayVertex.chi2>1 && RecoHNL_Lxyz>5", #displaced vertex
 }
 
 
@@ -306,8 +323,9 @@ NUM_CPUS = 2
 
 ###Produce TTrees
 DO_TREE=False
+DO_SCALE=True
 
 ###This part is standard to all analyses
 import config.runDataFrameFinal as rdf
-myana=rdf.runDataFrameFinal(baseDir,procDict,process_list,cut_list,variables)
-myana.run(ncpu=NUM_CPUS, doTree=DO_TREE)
+myana=rdf.runDataFrameFinal(baseDir,procDict,process_list,cut_list,variables,intLumi)
+myana.run(ncpu=NUM_CPUS, doTree=DO_TREE, doScale=DO_SCALE)

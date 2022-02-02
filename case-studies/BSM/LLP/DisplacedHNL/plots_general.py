@@ -2,6 +2,9 @@ import ROOT
 
 # global parameters
 intLumi        = 150.0e+06 #in pb-1
+
+###If scaleSig=0 or scaleBack=0, we don't apply any additional scaling, on top of the normalization to cross section and integrated luminosity, as defined in finalSel.py
+###If scaleSig or scaleBack is not defined, plots will be normalized to 1
 # scaleSig       = 0.
 # scaleBack      = 0.
 ana_tex        = ''

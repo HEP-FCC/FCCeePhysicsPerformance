@@ -96,7 +96,7 @@ E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [he
 
 - the [FCCSW tutorials](https://hep-fcc.github.io/fcc-tutorials/)
 - the tutorials given for Snowmass (September 2020) have been recorded, see [here](https://indico.cern.ch/event/945608/timetable/#20200922.detailed) and [here](https://indico.cern.ch/event/949950/timetable/?layout=room#20200929.detailed)
-- the extremely useful [FCCSW FORUM page] (https://fccsw-forum.web.cern.ch/)
+- the extremely useful [FCCSW FORUM page](https://fccsw-forum.web.cern.ch/)
 
 
 #### Useful repositories

@@ -24,7 +24,7 @@ import utils as ut
 
 def run(vars, sig):
 
-    #Bc -> tau nu signal
+    #Both Bu and Bc -> tau nu signal
     if(vars=="normal"):
         vars_list = train_vars
     elif(vars=="vtx"):
@@ -32,12 +32,26 @@ def run(vars, sig):
     print("TRAINING VARS")
     print(vars_list)
     path = f"{loc.PKL}"
-    df_sig = pd.read_pickle(f"{path}/{sig}.pkl")
-    df_sig = df_sig[vars_list]
+    df_bc = pd.read_pickle(f"{path}/Bc2TauNu.pkl")
+    df_bc = df_bc[vars_list]
+    df_bu = pd.read_pickle(f"{path}/Bu2TauNu.pkl")
+    df_bu = df_bu[vars_list]
+    print(f"Number of Bc events: {len(df_bc)}")
+    print(f"Number of Bu events: {len(df_bu)}")
+    df_sig = df_bc
+    if sig == 'Bu2TauNu':
+      df_sig = df_bu
+    elif sig == 'BuBc':
+      print("Sampling the same number of events from each")
+      if len(df_bu) > len(df_bc):
+        df_bu = df_bu.sample(n=len(df_bc),random_state=10)
+      else:
+        df_bc = df_bc.sample(n=len(df_bu),random_state=10)
+      df_sig = df_bc.append(df_bu)
     print(f"Number of signal events: {len(df_sig)}")
 
     #Z -> qq inclusive
-    n_tot_bkg = 1e6
+    n_tot_bkg = 2e6
     BF = {}
     BF["bb"] = 0.1512
     BF["cc"] = 0.1203
@@ -73,6 +87,12 @@ def run(vars, sig):
         print(f"Efficiency of pre-selection on {q} sample: {eff[q]}")
     BF_tot = eff["uds"]*BF["uds"] + eff["cc"]*BF["cc"] + eff["bb"]*BF["bb"]
     for q in bkgs:
+      if n_tot_bkg > len(df_bkg[q]) / (eff[q]*BF[q]/BF_tot):
+        n_tot_bkg = 0.99 * len(df_bkg[q]) / (eff[q]*BF[q]/BF_tot)
+        # make sure training selection does not exceed sample size
+        # 0.99 to make sure there is no rounding effect
+    print (f"Select total {n_tot_bkg} events")
+    for q in bkgs:
         df_bkg[q] = df_bkg[q].sample(n=int(n_tot_bkg*(eff[q]*BF[q]/BF_tot)),random_state=10)
         print(f"Size of {q} in combined sample: {len(df_bkg[q])}")
 
@@ -103,7 +123,7 @@ def run(vars, sig):
     config_dict = {
             "n_estimators": 400,
             "learning_rate": 0.3,
-            "max_depth": 3,
+            "max_depth": 4,
             }
 
     bdt = xgb.XGBClassifier(n_estimators=config_dict["n_estimators"],
@@ -153,7 +173,7 @@ def run(vars, sig):
 def main():
     parser = argparse.ArgumentParser(description='Train xgb model for Bc -> tau nu vs. Z -> qq, cc, bb')
     parser.add_argument("--Vars", choices=["normal","vtx"],required=False,help="Event-level vars (normal) or added vertex vars (vtx)",default="vtx")
-    parser.add_argument("--SigName", choices=["Bc2TauNu","Bu2TauNu"],required=False,help="Whether to use Bc2TauNu or Bu2TauNu as the signal",default="Bc2TauNu")
+    parser.add_argument("--SigName", choices=["Bc2TauNu","Bu2TauNu", "BuBc"],required=False,help="Whether to use Bc2TauNu or Bu2TauNu as the signal",default="BuBc")
     args = parser.parse_args()
 
     run(args.Vars, args.SigName)

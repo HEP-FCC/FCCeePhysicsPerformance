@@ -25,9 +25,8 @@ import utils as ut
 vars_list = train_vars_2.copy()
 
 #Cut on MVA1 before training to focus it
-MVA1_cut = "EVT_MVA1Bc > 0.6"
+MVA1_cut = "EVT_MVA1Bis > 0.6"
 MVA2_cut = "EVT_MVA2 > 0.0"
-Ortho_cut = "(EVT_MVA1Bc < 0.99979 or EVT_MVA2 < 0.99693)"
 
 
 #use Bc or Bu as sig
@@ -44,9 +43,6 @@ print(f"Number of signal events: {len(df_sig)}")
 #Apply truth-matching, require rho window, require 3π candidate to be in min energy hemisphere, and reqire m_3pi < m_tau
 df_sig = df_sig.query(f"{MVA1_cut} and CUT_CandTruth2==1 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
 print(f"Number of signal events after truth matching, MVA1, rho cut and hemisphere cut: {len(df_sig)}")
-print (f"Number of Bu before ortho cut: {len(df_sig)}")
-df_sig = df_sig.query(Ortho_cut)
-print (f"Number of Bu  after ortho cut: {len(df_sig)}")
 df_sig = df_sig[vars_list]
 
 
@@ -58,14 +54,11 @@ print(f"Number of Bc events: {len(df_bc)}")
 #Apply truth-matching, require rho window, require 3?~@ candidate to be in min energy hemisphere, and reqire m_3pi < m_tau
 df_bc = df_bc.query(f"{MVA1_cut} and CUT_CandTruth==1 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
 print(f"Number of Bc events after truth matching, MVA1, rho cut and hemisphere cut: {len(df_bc)}")
-print (f"Number of Bc before ortho cut: {len(df_bc)}")
-df_bc = df_bc.query(Ortho_cut)
-print (f"Number of Bc  after ortho cut: {len(df_bc)}")
 df_bc = df_bc[vars_list]
 
 
 #Z -> qq inclusive
-n_tot_bkg = 1e6
+n_tot_bkg = 2e6
 BF = {}
 BF["bb"] = 0.1512
 BF["cc"] = 0.1203
@@ -98,12 +91,8 @@ events_bkg = {}
 for q in bkgs:
     tree_bkg[q] = uproot.open(path+f"/{mode_names[q]}.root")["events"]
     df_bkg[q] = tree_bkg[q].arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"])
-    df_bkg[q] = df_bkg[q].query(f"{MVA1_cut} and CUT_CandTruth==0 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
+    df_bkg[q] = df_bkg[q].query(f"{MVA1_cut} and CUT_CandTruth==0 and CUT_CandTruth2==0 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
     print(f"Total size of {q} sample: {len(df_bkg[q])}")
-    df_bkg[q] = df_bkg[q].query("CUT_CandTruth2==0")
-    print(f"    {q} after Truth2 cut: {len(df_bkg[q])}")
-    df_bkg[q] = df_bkg[q].query(Ortho_cut)
-    print(f"    {q} after ortho   cut: {len(df_bkg[q])}")
     eff[q] = float(len(df_bkg[q]))/N[q]
     print(f"Efficiency of pre-selection on {q} sample: {eff[q]}")
     df_bkg[q] = df_bkg[q][vars_list]
@@ -157,9 +146,9 @@ weights = compute_sample_weight(class_weight='balanced', y=y)
 
 #BDT
 config_dict = {
-            "n_estimators": 400,
+            "n_estimators": 600,
             "learning_rate": 0.3,
-            "max_depth": 3,
+            "max_depth": 4,
             }
 
 bdt = xgb.XGBClassifier(n_estimators=config_dict["n_estimators"],
@@ -186,9 +175,12 @@ out = f"{loc.BDT}"
 #Write model to joblib file
 joblib.dump(bdt, f"{out}/xgb_bdt_stage2_{suffix}.joblib")
 
+#Also dump as json for ROOT interpretation
+bdt.dump_model(f"{out}/xgb_bdt_stage2_{suffix}.json", dump_format='json')
+
 # comment TMVA form output. TMVA Experimental only supports binary at the moment.
 print("Writing xgboost model to ROOT file")
-ROOT.TMVA.Experimental.SaveXGBoost(bdt, f"{sig}_BDT2", f"{out}/xgb_bdt_stage2_{suffix}.root", num_inputs=len(vars_list))
+ROOT.TMVA.Experimental.SaveXGBoost(bdt, "BuBc_BDT2", f"{out}/xgb_bdt_stage2_{suffix}.root", num_inputs=len(vars_list))
 
 
 # ROC curve plotting accomplished in the plotting script and not here.

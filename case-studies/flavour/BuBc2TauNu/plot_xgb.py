@@ -44,7 +44,7 @@ def run(vars, sig):
     df_other = df_Bu
     sig_label = '$B_c^+ \\to \\tau^+ \\nu_\\tau$'
     other_label = '$B^+ \\to \\tau^+ \\nu_\\tau$'
-    if sig == 'Bu2TauNu':
+    if sig == 'Bu2TauNu' or sig == 'BuBc':
       df_sig = df_Bu
       df_other = df_Bc
       sig_label = '$B^+ \\to \\tau^+ \\nu_\\tau$'
@@ -132,7 +132,7 @@ def run(vars, sig):
 def main():
     parser = argparse.ArgumentParser(description='Plot xgb model for Bc -> tau nu vs. Z -> qq, cc, bb')
     parser.add_argument("--Vars", choices=["normal","vtx"],required=False,help="Event-level vars (normal) or added vertex vars (vtx)",default="vtx")
-    parser.add_argument("--SigName", choices=["Bc2TauNu","Bu2TauNu"],required=False,help="Name of signal sample used in the training",default="Bc2TauNu")
+    parser.add_argument("--SigName", choices=["Bc2TauNu","Bu2TauNu", "BuBc"],required=False,help="Name of signal sample used in the training",default="BuBc")
     args = parser.parse_args()
 
     run(args.Vars, args.SigName)

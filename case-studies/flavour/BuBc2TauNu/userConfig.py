@@ -1,6 +1,7 @@
 import os
-#repo = os.getenv('PWD')
-repo = "/afs/cern.ch/work/x/xzuo/public/FCC_files/Bc2TauNu"
+repo = os.getenv('PWD')
+if 'xzuo' in repo:
+  repo = "/afs/cern.ch/work/x/xzuo/public/FCC_files/BuBc2TauNu"
 #repo can be changed, but by default writes locally
 class loc : pass
 loc.ROOT = repo+'/'
@@ -27,7 +28,7 @@ loc.TRAIN = f"{loc.PROD}/Batch_Training_4stage1/"
 
 #Samples for second stage training
 #loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
-loc.TRAIN2 = f"{loc.PROD}/Training_4stage2_Bu2TauNu/"
+loc.TRAIN2 = f"{loc.PROD}/Training_4stage2_BuBc2TauNu/"
 
 
 #Samples for final analysis

@@ -32,9 +32,8 @@ BDT_Name = 'xgb_bdt_stage2_Bu_vs_Bc_only'
 
 bdt = joblib.load(f"{loc.BDT}/xgb_bdt_stage2_Bu_vs_Bc_vs_qq_multi.joblib")
 
-MVA1_cut = "EVT_MVA1Bc > 0.6"
+MVA1_cut = "EVT_MVA1Bis > 0.6"
 MVA2_cut = "EVT_MVA2 > 0.0"
-Ortho_cut = "(EVT_MVA1Bc < 0.99979 or EVT_MVA2 < 0.99693)"
 
 
 path = f"{loc.TRAIN2}"
@@ -42,18 +41,14 @@ path = f"{loc.TRAIN2}"
 tree_sig = uproot.open(f"{path}/p8_ee_Zbb_ecm91_EvtGen_{bu}TAUHADNU.root")["events"]
 df_sig = tree_sig.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = 100000)
 df_sig = df_sig.query(f"{MVA1_cut} and CUT_CandTruth2==1 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
-print (f"Number of Bu before ortho cut: {len(df_sig)}")
-df_sig = df_sig.query(Ortho_cut)
-print (f"Number of Bu after ortho cut: {len(df_sig)}")
+print (f"Number of Bu selected: {len(df_sig)}")
 df_sig = df_sig[vars_list]
 
 #Bc -> tau nu signal
 tree_other = uproot.open(f"{path}/p8_ee_Zbb_ecm91_EvtGen_{bc}TAUHADNU.root")["events"]
 df_other = tree_other.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = 100000)
 df_other = df_other.query(f"{MVA1_cut} and CUT_CandTruth==1 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
-print (f"Number of Bc before ortho cut: {len(df_other)}")
-df_other = df_other.query(Ortho_cut)
-print (f"Number of Bc after  ortho cut: {len(df_other)}")
+print (f"Number of Bc selected: {len(df_other)}")
 df_other = df_other[vars_list]
 
 
@@ -89,9 +84,7 @@ for q in bkgs:
     tree_bkg[q] = uproot.open(f"{path}/p8_ee_Z{q}_ecm91.root")["events"]
     df_bkg[q] = tree_bkg[q].arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = n_read[q])
     df_bkg[q] = df_bkg[q].query(f"{MVA1_cut} and CUT_CandTruth==0 and CUT_CandTruth2==0 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
-    print (f"Number of {q} before ortho cut: {len(df_bkg[q])}")
-    df_bkg[q] = df_bkg[q].query(Ortho_cut)
-    print (f"Number of {q} after  ortho cut: {len(df_bkg[q])}")
+    print (f"Number of {q} selected: {len(df_bkg[q])}")
     print(f"getting {int(entry_tot * BF[q] * eff[q])} events for {q}")
     df_bkg[q] = df_bkg[q].sample(n=int(entry_tot * BF[q] * eff[q]),random_state=10)
     df_bkg[q] = df_bkg[q][vars_list]

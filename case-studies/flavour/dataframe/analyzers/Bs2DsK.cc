@@ -2,6 +2,7 @@
 
 #include <random>
 #include <chrono>
+#include <iostream>
 
 using namespace MCParticle;
 using namespace VertexFitterSimple;

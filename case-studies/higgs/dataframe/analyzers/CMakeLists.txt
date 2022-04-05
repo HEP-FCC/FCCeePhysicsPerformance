@@ -28,7 +28,6 @@ ROOT_GENERATE_DICTIONARY(G__FCCAnalysesHiggs
 file(GLOB sources *.cc)
 file(GLOB headers *.h)
 add_library(FCCAnalysesHiggs SHARED ${sources} ${headers} G__FCCAnalysesHiggs.cxx )
-message( "aaa " ${VDT_INCLUDE_DIR})
 target_include_directories(FCCAnalysesHiggs  PUBLIC
                            ${CMAKE_SOURCE_DIR}/analyzers
 	                         ${FCCANALYSES_INCLUDE_PATH}

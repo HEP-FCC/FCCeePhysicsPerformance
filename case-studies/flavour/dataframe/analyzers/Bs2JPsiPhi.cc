@@ -1,4 +1,5 @@
 #include "Bs2JPsiPhi.h"
+#include <iostream>
 
 using namespace MCParticle;
 using namespace VertexFitterSimple;

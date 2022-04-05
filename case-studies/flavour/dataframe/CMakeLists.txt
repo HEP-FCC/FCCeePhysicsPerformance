@@ -25,5 +25,7 @@ set(INSTALL_INCLUDE_DIR include CACHE PATH
 
 add_subdirectory(analyzers)
 
-set(FCCANALYSES_INCLUDE_PATH "FCCAnalysesIncludePath" CACHE PATH "Description")
+# todo: replace with a cmake target
+# ( FCCAnalyses should create a target if the headers are needed for other projects )
+set(FCCANALYSES_INCLUDE_PATH "$ENV{FCCANALYSES}/../include/FCCAnalyses/" CACHE PATH "Location of FCCAnalyses headers")
 message(STATUS "FCCAnalysesIncludePath ${FCCANALYSES_INCLUDE_PATH}")

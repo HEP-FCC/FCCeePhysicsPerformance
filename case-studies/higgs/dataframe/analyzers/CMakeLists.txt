@@ -1,10 +1,10 @@
 
 find_package(ROOT REQUIRED COMPONENTS ROOTDataFrame ROOTVecOps)
 include(${ROOT_USE_FILE})
-#include("${ROOT_DIR}/modules/RootNewMacros.cmake")
 
 find_package(EDM4HEP)
 find_package(podio)
+# Until root properly exports vdt include dirs, include it explicitly 
 find_package(Vdt)
 
 
@@ -12,7 +12,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 get_target_property(EDM4HEP_INCLUDE_DIRS EDM4HEP::edm4hep INTERFACE_INCLUDE_DIRECTORIES)
 
-include_directories(${EDM4HEP_INCLUDE_DIRS} ${podio_INCLUDE_DIR})
+include_directories(${EDM4HEP_INCLUDE_DIRS}
+                    ${podio_INCLUDE_DIR}
+                    ${VDT_INCLUDE_DIR}
+	                  ${FCCANALYSES_INCLUDE_PATH}
+                   )
 
 ROOT_GENERATE_DICTIONARY(G__FCCAnalysesHiggs 
                          dummyLoaderHiggs.h

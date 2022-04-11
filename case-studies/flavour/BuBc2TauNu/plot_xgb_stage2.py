@@ -35,18 +35,19 @@ bdt = joblib.load(f"{loc.BDT}/xgb_bdt_stage2_Bu_vs_Bc_vs_qq_multi.joblib")
 MVA1_cut = "EVT_MVA1Bis > 0.6"
 MVA2_cut = "EVT_MVA2 > 0.0"
 
+entry_plot = 300000
 
 path = f"{loc.TRAIN2}"
 #Load samples
 tree_sig = uproot.open(f"{path}/p8_ee_Zbb_ecm91_EvtGen_{bu}TAUHADNU.root")["events"]
-df_sig = tree_sig.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = 100000)
+df_sig = tree_sig.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = entry_plot)
 df_sig = df_sig.query(f"{MVA1_cut} and CUT_CandTruth2==1 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
 print (f"Number of Bu selected: {len(df_sig)}")
 df_sig = df_sig[vars_list]
 
 #Bc -> tau nu signal
 tree_other = uproot.open(f"{path}/p8_ee_Zbb_ecm91_EvtGen_{bc}TAUHADNU.root")["events"]
-df_other = tree_other.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = 100000)
+df_other = tree_other.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = entry_plot)
 df_other = df_other.query(f"{MVA1_cut} and CUT_CandTruth==1 and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8")
 print (f"Number of Bc selected: {len(df_other)}")
 df_other = df_other[vars_list]
@@ -67,18 +68,18 @@ BF["uds"] = 0.6991 - BF["bb"] - BF["cc"]
 
 # eff numbers from training script output
 eff = {}
-eff['uds'] = 2.124e-05 
-eff['cc'] = 0.000562215 
-eff['bb'] = 0.004438825
+eff['uds'] = 2.0176e-05 
+eff['cc'] = 0.000814455 
+eff['bb'] = 0.0050582
 
 n_read = {}
-n_read['uds'] = 200000
-n_read['cc'] = 500000
-n_read['bb'] = 1000000
+n_read['uds'] = 100000
+n_read['cc'] = 200000
+n_read['bb'] = 500000
 
 BF_tot = eff["uds"]*BF["uds"] + eff["cc"]*BF["cc"] + eff["bb"]*BF["bb"]
 
-entry_tot = 60000 / BF_tot
+entry_tot = entry_plot / BF_tot
 
 for q in bkgs:
     tree_bkg[q] = uproot.open(f"{path}/p8_ee_Z{q}_ecm91.root")["events"]
@@ -115,6 +116,19 @@ bdt_out['bb'] = bdt.predict_proba(df_bkg['bb'][vars_list])
 bdt_out['bkg'] = bdt.predict_proba(df_bkg_tot[vars_list])
 bdt_out['tot'] = bdt.predict_proba(df_tot[vars_list])
 
+df_sig['BDT_bu'] = bdt_out['bu'][:,1]
+df_sig['BDT_bc'] = bdt_out['bu'][:,2]
+df_other['BDT_bu'] = bdt_out['bc'][:,1]
+df_other['BDT_bc'] = bdt_out['bc'][:,2]
+for q in bkgs:
+    df_bkg[q]['BDT_bu'] = bdt_out[q][:,1]
+    df_bkg[q]['BDT_bc'] = bdt_out[q][:,2]
+df_bkg_tot['BDT_bu'] = bdt_out['bkg'][:,1]
+df_bkg_tot['BDT_bc'] = bdt_out['bkg'][:,2]
+df_sig['color'] = 'r'
+df_other['color'] = 'g'
+df_bkg_tot['color'] = 'b'
+
 # make roc curve
 fpr1, tpr1, thresholds = roc_curve(y, bdt_out['tot'][:,1], pos_label=1)
 roc_auc1 = auc(fpr1, tpr1)
@@ -135,11 +149,15 @@ plt.grid()
 plt.tight_layout()
 fig.savefig(f"{loc.PLOTS}/{suffix}_ROC_stage2.pdf")
 
-
+# make scatter plot
+df_scatter = df_sig.append(df_other).append(df_bkg_tot)
+df_scatter = df_scatter[['BDT_bu', 'BDT_bc', 'color']]
+df_scatter = df_scatter.sample(frac=1,random_state=10)
 fig_scatter, ax_scatter = plt.subplots(figsize=(8,8))
-plt.scatter(bdt_out['bkg'][:,1], bdt_out['bkg'][:,2], 0.02, c='b', alpha=0.5)
-plt.scatter(bdt_out['bu'][:,1],  bdt_out['bu'][:,2],  0.02, c='r', alpha=0.5)
-plt.scatter(bdt_out['bc'][:,1],  bdt_out['bc'][:,2],  0.02, c='g', alpha=0.5)
+plt.scatter(df_scatter['BDT_bu'], df_scatter['BDT_bc'], 0.01, c=df_scatter['color'], alpha=0.5)
+#plt.scatter(bdt_out['bkg'][:,1], bdt_out['bkg'][:,2], 0.02, c='b', alpha=0.5)
+#plt.scatter(bdt_out['bu'][:,1],  bdt_out['bu'][:,2],  0.02, c='r', alpha=0.5)
+#plt.scatter(bdt_out['bc'][:,1],  bdt_out['bc'][:,2],  0.02, c='g', alpha=0.5)
 plt.xlim(0.,1.)
 plt.ylim(0.,1.)
 plt.ylabel('BDT Bc score',fontsize=30)
@@ -151,7 +169,7 @@ leg = [mpl.lines.Line2D([0],[0], marker='o', markersize=10, color='w', markerfac
 plt.legend(handles=leg, loc="upper right",fontsize=20)
 
 fig_scatter.savefig(f"{loc.PLOTS}/{suffix}_stage2_BDT_out_scatter.pdf")
-
+fig_scatter.savefig(f"{loc.PLOTS}/{suffix}_stage2_BDT_out_scatter.png")
 
 # fill BDT scores into histos, first arg is row and will be the y value, second is column and will be the x value
 hist1, xedge1, yedge1 = np.histogram2d(bdt_out['bu'][:,2],  bdt_out['bu'][:,1],  bins =250, range=[[0., 1.], [0., 1.]])
@@ -207,42 +225,45 @@ gbar.set_label('Normalized Bc counts', size=15)
 bbar.set_label('Normalized bkg counts', size=15)
 
 fig_score.savefig(f"{loc.PLOTS}/{suffix}_stage2_BDT_out_RGB.pdf")
+fig_score.savefig(f"{loc.PLOTS}/{suffix}_stage2_BDT_out_RGB.png")
 
 
 #Plot efficiency as a function of BDT cut in each sample
-df_sig['BDT_bu'] = bdt_out['bu'][:,1]
-df_other['BDT_bu'] = bdt_out['bc'][:,1]
-for q in bkgs:
-    df_bkg[q]['BDT_bu'] = bdt_out[q][:,1]
-
 BDT_cuts = np.linspace(0,999,999)
 N_sig = len(df_sig)
 N_other = len(df_other)
 N_Zuds = len(df_bkg["uds"])
 N_Zcc = len(df_bkg["cc"])
 N_Zbb = len(df_bkg["bb"])
-eff_sig = []
-eff_other = []
-eff_bkg = {}
+effbu_sig = []
+effbu_other = []
+effbu_bkg = {}
+effbc_sig = []
+effbc_other = []
+effbc_bkg = {}
 N_bkg = {}
 for q in bkgs:
-    eff_bkg[q] = []
+    effbu_bkg[q] = []
+    effbc_bkg[q] = []
     N_bkg[q] = len(df_bkg[q])
 cut_vals = []
 for x in BDT_cuts:
     cut_val = float(x)/100
     cut_vals.append(cut_val)
-    eff_sig.append(float(len(df_sig.query("BDT_bu > %s" % cut_val))) / N_sig)
-    eff_other.append(float(len(df_other.query("BDT_bu > %s" % cut_val))) / N_other)
+    effbu_sig.append(float(len(df_sig.query("BDT_bu > %s" % cut_val))) / N_sig)
+    effbc_sig.append(float(len(df_sig.query("BDT_bc > %s" % cut_val))) / N_sig)
+    effbu_other.append(float(len(df_other.query("BDT_bu > %s" % cut_val))) / N_other)
+    effbc_other.append(float(len(df_other.query("BDT_bc > %s" % cut_val))) / N_other)
     for q in bkgs:
-        eff_bkg[q].append(float(len(df_bkg[q].query("BDT_bu > %s" % cut_val))) / N_bkg[q])
+        effbu_bkg[q].append(float(len(df_bkg[q].query("BDT_bu > %s" % cut_val))) / N_bkg[q])
+        effbc_bkg[q].append(float(len(df_bkg[q].query("BDT_bc > %s" % cut_val))) / N_bkg[q])
 
 fig_eff, ax = plt.subplots(figsize=(12,8))
 
-plt.plot(cut_vals, eff_sig, color="#b2182b",label=sig_label)
-plt.plot(cut_vals, eff_other, color="k",label=other_label)
+plt.plot(cut_vals, effbu_sig, color="#b2182b",label=sig_label)
+plt.plot(cut_vals, effbu_other, color="k",label=other_label)
 for q in bkgs:
-    plt.plot(cut_vals, eff_bkg[q], color=bkgs[q][0],label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
+    plt.plot(cut_vals, effbu_bkg[q], color=bkgs[q][0],label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
 
 ax.tick_params(axis='both', which='major', labelsize=25)
 plt.xlim(0.,1.)
@@ -255,3 +276,24 @@ plt.legend(fontsize=25, loc="lower left")
 plt.grid(alpha=0.4,which="both")
 plt.tight_layout()
 fig_eff.savefig(f"{loc.PLOTS}/{suffix}_stage2_BDT_Bu_eff.pdf")
+
+
+fig_eff, ax = plt.subplots(figsize=(12,8))
+
+plt.plot(cut_vals, effbc_other, color="#b2182b",label=other_label)
+plt.plot(cut_vals, effbc_sig, color="k",label=sig_label)
+for q in bkgs:
+    plt.plot(cut_vals, effbc_bkg[q], color=bkgs[q][0],label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
+
+ax.tick_params(axis='both', which='major', labelsize=25)
+plt.xlim(0.,1.)
+plt.xlabel("BDT2 Bc score",fontsize=30)
+plt.ylabel("Efficiency",fontsize=30)
+plt.yscale('log')
+ymin,ymax = plt.ylim()
+plt.ylim(max(ymin,1e-4),2)
+plt.legend(fontsize=25, loc="lower left")
+plt.grid(alpha=0.4,which="both")
+plt.tight_layout()
+fig_eff.savefig(f"{loc.PLOTS}/{suffix}_stage2_BDT_Bc_eff.pdf")
+

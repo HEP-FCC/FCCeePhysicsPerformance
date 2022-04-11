@@ -32,7 +32,7 @@ loc.TRAIN2 = f"{loc.PROD}/Training_4stage2_BuBc2TauNu/"
 
 
 #Samples for final analysis
-loc.ANALYSIS = f"{loc.PROD}/Analysis_stage2/"
+loc.ANALYSIS = f"{loc.PROD}/Analysis_stage2_BuBc2TauNu/"
 
 #First stage BDT including event-level vars
 train_vars = ["EVT_ThrustEmin_E",
@@ -103,4 +103,8 @@ train_vars_2 = ["EVT_CandMass",
                ]
 
 #Hemipshere energy difference cut, applied offline prior to MVA2 optimisation
-Ediff_cut = ">10."
+Ediff_cut = "10."
+
+#Number of bins to use in MVA spline fit 
+NBin_MVA_fit = 100
+Nsig_min = 4000.

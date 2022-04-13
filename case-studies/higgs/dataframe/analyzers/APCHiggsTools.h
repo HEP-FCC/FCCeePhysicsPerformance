@@ -41,5 +41,6 @@ namespace APCHiggsTools{
   ROOT::VecOps::RVec<float> get_cosTheta_miss(ROOT::VecOps::RVec<Float_t>Px, ROOT::VecOps::RVec<Float_t>Py, ROOT::VecOps::RVec<Float_t>Pz, ROOT::VecOps::RVec<Float_t>E);
   ///return muon_quality_check result (at least one muon plus and one muon minus)
 	ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>  muon_quality_check(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in);
+  float Reweighting_wzp_kkmc(float pT, float m);
 }
 #endif

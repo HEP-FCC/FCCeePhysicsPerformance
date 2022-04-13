@@ -151,7 +151,35 @@ ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> APCHiggsTools::resonanceZ
   }
 }
 
+float APCHiggsTools::Reweighting_wzp_kkmc(float pT, float m) {
+  float scale;
+  if (m > 220.){
+    if ( pT > 0. && pT <= 1.){scale = 1.0032322;}
+    else if ( pT > 1. && pT <= 2.){scale = 0.95560480;}
+    else if ( pT > 2. && pT <= 3.){scale = 0.94986398;}
+    else if ( pT > 3. && pT <= 4.){scale = 0.95134129;}
+    else if ( pT > 4. && pT <= 5.){scale = 0.94456404;}
+    else if ( pT > 5. && pT <= 6.){scale = 0.94726464;}
+    else if ( pT > 6. && pT <= 7.){scale = 0.94101542;}
+    else if ( pT > 7. && pT <= 8.){scale = 0.91753618;}
+    else if ( pT > 8. && pT <= 9.){scale = 0.91804730;}
+    else if ( pT > 9. && pT <= 10.){scale = 0.92097238;}
+    else if ( pT > 10. && pT <= 11.){scale = 0.91521958;}
+    else if ( pT > 11. && pT <= 12.){scale = 0.94550474;}
+    else if ( pT > 12. && pT <= 13.){scale = 0.91403417;}
+    else if ( pT > 13. && pT <= 14.){scale = 0.87701843;}
+    else if ( pT > 14. && pT <= 15.){scale = 0.89537075;}
+    else if ( pT > 15. && pT <= 16.){scale = 0.90811988;}
+    else if ( pT > 16. && pT <= 17.){scale = 0.90657018;}
+    else if ( pT > 17. && pT <= 18.){scale = 0.93739754;}
+    else if ( pT > 18. && pT <= 19.){scale = 0.98795371;}
+    else if ( pT > 19. && pT <= 20.){scale = 2.6656045;}
+    else {scale = 1.;}
+  }
+  else {scale = 1.;}
 
+  return scale;
+}
 
 
 

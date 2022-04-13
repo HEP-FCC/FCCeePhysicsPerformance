@@ -1,0 +1,134 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red180\green36\blue25;\red47\green180\blue29;}
+{\*\expandedcolortbl;;\csgenericrgb\c70588\c14118\c9804;\csgenericrgb\c18431\c70588\c11373;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15300\viewh10100\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+++++++++++++++++++++++++++++++++  README v1 +++++++++++++++++++++++++++++++ \
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+\
+This UFO file contains an implementation of the SM plus Axion-like Particle (ALP) extension described in arXiv:2012.12272, obtained from Andrea Thamm. The UFO implementation can be used with MadGraph5_aMC@NLO available at https://launchpad.net/mg5amcnlo.\
+This UFO file is build based on the SM.fr file. All ALP couplings have the coupling order NP=1.\
+\
+Please move the ALP folder in the mg5 models directory!\
+\
+The additional parameters in the param_card.dat are:\
+\
+cuu = The ALP coupling to up quarks. This coupling is called $c_\{ff\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+cdd = The ALP coupling to down quarks. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+ccc = The ALP coupling to charm quarks. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+css = The ALP coupling to strange quarks. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+ctt = The ALP coupling to top quarks. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+cbb = The ALP coupling to bottom quarks. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+cee = The ALP coupling to electrons. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+cmumu = The ALP coupling to electrons. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+ctautau = The ALP coupling to electrons. This coupling is called $c_\{gg\}^\{eff\}$ in equation (61) in arXiv:2012.12272. The default value is 1.\
+\
+cah = Coupling of the SM Higgs to 2 ALPs. This coupling is called $C_\{ah\}^\{eff\}$ in equation (50) in arXiv:1708.00443. The default value is 0.\
+\
+cZh5 = Coupling of the SM Higgs to an ALP and a Z boson. This coupling is called $C_\{Zh\}^\{eff\}$ in equation (4) in arXiv:2012.12272. The default value is 0.\
+\
+cYY = Coupling of the ALP to hypercharge gauge bosons. This coupling is called $C_\{BB\}$ in equation (1) in arXiv:2012.12272. The default value is 1. See equation (8) in arXiv:1708.00443 for the ALP-photon coupling.\
+\
+cWW = Coupling of the ALP to W gauge bosons. This coupling is called $C_\{WW\}$ in equation (1) in arXiv:2012.12272. The default value is 1. See equation (8) in arXiv:1708.00443 for the ALP-photon coupling.\
+\
+cGG= Coupling of the ALP to gluons. This coupling is called $C_\{GG\}$ in equation (1) in arXiv:2012.12272. The default value is 1.\
+\
+Ma= ALP mass. This coupling is called $m_\{a,0\}$ in equation (1) in arXiv:2012.12272. The default value is 1 GeV.\
+\
+WALP= Total width of the ALP. If set to Auto the total and partial decay widths are calculated by MadGraph. The default value is 1 GeV.\
+\
+falp = Suppression scale in the effective operators coupling the ALP to SM particles, called $\\Lambda$ in equation (1) in arXiv:2012.12272. The default value is 1000 GeV.\
+\
+\
+\
+CAUTION: All NP couplings are set to 1 per default and the ALP width is 1 GeV. For any process, please adjust the values and write \
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 Do you want to edit a card (press enter to bypass editing)?\
+/------------------------------------------------------------\\\
+|  \cf2 1\cf0 . param : \cf3 param_card.dat\cf0                                  |\
+|  \cf2 2\cf0 . run   : \cf3 run_card.dat\cf0                                    |\
+\\------------------------------------------------------------/\
+ you can also\
+   - enter the path to a valid card or banner.\
+   - use the 'set' command to modify a parameter directly.\
+     The set option works only for param_card and run_card.\
+     Type 'help set' for more information on this command.\
+   - call an external program (ASperGE/MadWidth/...).\
+     Type 'help' for the list of available command\
+ [\ul 0\ulnone , done, 1, param, 2, run, enter path] \
+>set WALP auto\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1  \
+to enable automatic calculation of the ALP width for the required couplings. The Higgs and Z widths are automatically adjusted after the ALP mass and couplings are set.\
+\
+In case of any questions etc. please write to one of the authors of arXiv:1708.00443:\
+\
+martin.m.bauer@durham.ac.uk\
+\
+matthias.neubert@uni-mainz.de\
+\
+srenner@sissa.it\
+\
+andrea.thamm@unimelb.edu.au\
+\
+\
+++++++++++++++++++++++++++++++++  SYNTAX +++++++++++++++++++++++++++++++  \
+\
+In the following, we give the MadGraph syntax used to generate the exotic Z and Higgs decays described in sections 6.1 (Z > a ALP), 5.1 (h > ALP Z), 5.2 (h > ALP ALP) in arXiv:1708.00443.\
+\
+\
+The Z to ALP and photon decay with subsequent ALP decay into photons can be generated with \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 MG5_aMC> 
+\f0\fs24 \CocoaLigature1 import model ALP\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 MG5_aMC> generate p p > Z, (Z > a ALP, (ALP > a a))
+\f0\fs24 \CocoaLigature1  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+The h to ALP and Z decay with subsequent ALP decay into photons and Z decay into electrons can be generated with \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 MG5_aMC> 
+\f0\fs24 \CocoaLigature1 import model ALP\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 MG5_aMC> generate p p > h, (h > ALP Z, ( ALP > a a ) , ( Z > e+ e- ) )
+\f0\fs24 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+The h to 2ALP decay with subsequent ALP decay into photons and muons can be generated with \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 MG5_aMC> 
+\f0\fs24 \CocoaLigature1 import model ALP\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf0 \CocoaLigature0 MG5_aMC> generate p p > h, (h > ALP ALP, ( ALP > a a ) , ( ALP > mu+ mu- ) )}

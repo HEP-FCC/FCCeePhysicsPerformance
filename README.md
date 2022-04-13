@@ -23,7 +23,8 @@ O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of ea
 - [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
 
 Next meetings:
-- June 21: regular Physics Performance meeting
+- April 11, probably starting at 14:00 : regular Physics Performance meeting
+- May 16 : regular Physics Performance meeting
 
 E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).
 
@@ -96,6 +97,7 @@ E-group used for announcements :**fcc-experiments-lepton**. To subscribe, go [he
 
 - the [FCCSW tutorials](https://hep-fcc.github.io/fcc-tutorials/)
 - the tutorials given for Snowmass (September 2020) have been recorded, see [here](https://indico.cern.ch/event/945608/timetable/#20200922.detailed) and [here](https://indico.cern.ch/event/949950/timetable/?layout=room#20200929.detailed)
+- the extremely useful [FCCSW FORUM page](https://fccsw-forum.web.cern.ch/)
 
 
 #### Useful repositories

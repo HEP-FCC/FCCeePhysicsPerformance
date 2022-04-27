@@ -11,7 +11,7 @@ import glob
 #Local code
 #from userConfig import loc, mode, train_vars, train_vars_vtx, mode_names
 from userConfig import loc, train_vars, train_vars_vtx, mode_names
-#import plotting
+import plotting
 import utils as ut
 
 def run(mode):
@@ -24,11 +24,6 @@ def run(mode):
 
     #List of all sub-files in the path
     files = glob.glob(f"{path}/*.root")
-    if(mode=="uds"):
-        #Remove zombie files
-        for f in files:
-            if "flat_chunk_68" in f:
-                files.remove(f)
 
     df_sub = {}
 
@@ -42,10 +37,10 @@ def run(mode):
 
         #Load event-level vars
         print("Converting to awkward array")
-        vars_list = train_vars_vtx.copy()
-        vars_list.append("TrueTau23PiBc_vertex")
-        vars_list.append("TrueTau23PiBu_vertex")
-        df_sub[f] = tree.arrays(library="pd", how="zip", filter_name=train_vars_vtx)
+        vars_list = train_vars.copy()
+        #vars_list.append("TrueTau23PiBc_vertex")
+        #vars_list.append("TrueTau23PiBu_vertex")
+        df_sub[f] = tree.arrays(library="pd", how="zip", filter_name=train_vars)
 
         #Add to the total file
         df = df.append(df_sub[f])
@@ -53,6 +48,7 @@ def run(mode):
     #Save to pickle
     print("Writing output to pickle file")
     ut.create_dir(loc.PKL)
+    print(loc.PKL)
     outfile = f"{loc.PKL}/{mode}.pkl"
     df.to_pickle(outfile)
 

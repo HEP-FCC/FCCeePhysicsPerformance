@@ -20,8 +20,8 @@ rc('text', usetex=True)
 #Local code
 #from userConfig import loc, mode, train_vars, train_vars_vtx, mode_names
 from userConfig import loc, train_vars, train_vars_vtx, mode_names
-#import plotting
-#import utils as ut
+import plotting
+import utils as ut
 
 def run(vars):
 
@@ -33,17 +33,28 @@ def run(vars):
     print("TRAINING VARS")
     print(vars_list)
     path = f"{loc.PKL}"
-    df_sig = pd.read_pickle(f"{path}/ZH_Recoil.pkl")
+    df_sig = pd.read_pickle(f"{path}/mumuH.pkl")
     df_sig = df_sig[vars_list]
     print(f"Number of signal events: {len(df_sig)}")
 
-    #Z -> qq inclusive
-    n_tot_bkg = 1e6
-    BF = {}
-    BF["ZZ"] = 0.1512
-    BF["WWmumu"] = 0.1203
-    BF["Zll"] = 0.6991 - BF["ZZ"] - BF["WWmumu"]
-
+    path_gen_sig = f"{loc.TRAIN}/{mode_names['mumuH']}"
+    files_sig = glob.glob(f"{path_gen_sig}/*.root")
+    
+    N_sig = 0
+    for f_sig in files_sig:
+      tree = uproot.open(f_sig)["metadata"]
+      df_gen_sig = tree.arrays(library="pd")
+      N_sig = N_sig + df_gen_sig.iloc[0]["eventsProcessed"]
+   
+    eff_sig = float(len(df_sig))/N_sig
+    
+    #xsec, from http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php
+    xsec = {}
+    xsec["mumuH"] = 0.0067643
+    xsec["WWmumu"] = 0.25792
+    xsec["ZZ"] = 1.35899
+    #xsec["Zll"] = 13.7787
+    xsec["Zll"] = 1.7787
     #Efficiency of the pre-selection equirements on each bkg
     eff = {}
     #Number of generated events for each background type
@@ -72,10 +83,13 @@ def run(vars):
         print(f"Total size of {q} sample: {len(df_bkg[q])}")
         eff[q] = float(len(df_bkg[q]))/N[q]
         print(f"Efficiency of pre-selection on {q} sample: {eff[q]}")
-    BF_tot = eff["ZZ"]*BF["ZZ"] + eff["WWmumu"]*BF["WWmumu"] + eff["Zll"]*BF["Zll"]
-    for q in bkgs:
-        df_bkg[q] = df_bkg[q].sample(n=int(n_tot_bkg*(eff[q]*BF[q]/BF_tot)),random_state=10)
-        print(f"Size of {q} in combined sample: {len(df_bkg[q])}")
+    
+    xsec_tot_bkg = eff["ZZ"]*xsec["ZZ"] + eff["WWmumu"]*xsec["WWmumu"] + eff["Zll"]*xsec["Zll"]
+   
+    
+    #for q in bkgs:
+    #    df_bkg[q] = df_bkg[q].sample(n=int(N_sig*((eff[q]*xsec[q])/xsec_tot_bkg)),random_state=10)
+    #    print(f"Size of {q} in combined sample: {len(df_bkg[q])}")
 
     #Make a combined background sample according to BFs
     df_bkg_tot = df_bkg["ZZ"].append(df_bkg["WWmumu"])
@@ -104,7 +118,7 @@ def run(vars):
     config_dict = {
             "n_estimators": 400,
             "learning_rate": 0.3,
-            "max_depth": 3,
+            "max_depth": 5,
             }
 
     bdt = xgb.XGBClassifier(n_estimators=config_dict["n_estimators"],

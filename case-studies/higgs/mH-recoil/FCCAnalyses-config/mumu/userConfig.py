@@ -17,13 +17,13 @@ loc.JSON = loc.OUT+'json'
 loc.EOS = "/eos/home-l/lia/FCCee/MVA"
 
 #Output BDT model location - used in official sample production to assign MVA weights
-loc.BDT = loc.EOS+""
+loc.BDT = loc.EOS+"/BDT"
 
 #Loaction of prod_04 tuples used in analysis
 loc.PROD = f"{loc.EOS}/ZH_mumu_recoil_batch"
 
 #Samples for first stage BDT training
-loc.TRAIN = f"{loc.PROD}/"
+loc.TRAIN = f"{loc.PROD}/stage1_training"
 
 #Samples for second stage training
 loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
@@ -32,12 +32,12 @@ loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
 loc.ANALYSIS = f"{loc.PROD}/Analysis_stage2/"
 
 #First stage BDT including event-level vars
-train_vars = ["zed_leptonic_m",
-              "zed_leptonic_pt",
-              "zed_leptonic_costheta",
-              "zed_leptonic_acollinearity",
-              "selected_muons_pt.at(0)",
-              "selected_muons_pt.at(1)"
+train_vars = ["Z_leptonic_m",
+              "Z_leptonic_pt",
+              "Z_leptonic_costheta",
+              "Z_leptonic_acolinearity",
+              "Selected_muons_minus_pt",
+              "Selected_muons_plus_pt"
               ]
 
 #First stage BDT including event-level vars and vertex vars

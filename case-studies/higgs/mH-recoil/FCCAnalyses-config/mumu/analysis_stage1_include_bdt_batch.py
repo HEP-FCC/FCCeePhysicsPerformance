@@ -1,32 +1,18 @@
+import ROOT
 #Mandatory: List of processes
 processList = {
     'wzp6_ee_mumuH_ecm240':{'chunks':5},
-    'wzp6_ee_tautauH_ecm240':{'chunks':5},
-    'wzp6_ee_eeH_ecm240':{'chunks':5},
-    'wzp6_ee_nunuH_ecm240':{'chunks':5},
-    'wzp6_ee_qqH_ecm240':{'chunks':5},
     'p8_ee_WW_mumu_ecm240':{'chunks':5},
-    'p8_ee_ZZ_Zll_ecm240':{'chunks':5},
-    'wzp6_egamma_eZ_Zmumu_ecm240':{'chunks':5},
-    'wzp6_gammae_eZ_Zmumu_ecm240':{'chunks':5},
-    'wzp6_gaga_mumu_60_ecm240':{'chunks':5},
-    'wzp6_gaga_tautau_60_ecm240':{'chunks':5},
     'p8_ee_Zll_ecm240':{'chunks':5},
-    'p8_ee_Zqq_ecm240':{'chunks':5},
-    'wzp6_ee_mumu_ecm240':{'chunks':5},
-    'wzp6_ee_tautau_ecm240':{'chunks':5},
-    'wzp6_ee_ee_Mee_30_150_ecm240':{'chunks':5},
-    'p8_ee_ZZ_ecm240':{'chunks':5},
-    'p8_ee_WW_ecm240':{'chunks':5},
-    'p8_ee_ZH_ecm240':{'chunks':5} 
-    #'p8_ee_ZH_ecm240':{'fraction':0.02}
-}
+    'p8_ee_ZZ_ecm240':{'chunks':5}
+    #'wzp6_ee_mumuH_ecm240':{'fraction':0.1}
+    }
 
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
 prodTag     = "FCCee/spring2021/IDEA/"
 
 #Optional: output directory, default is local dir
-outputDir="/afs/cern.ch/work/l/lia/private/FCC/MVA/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/ZH_mumu_recoil_batch/stage1/flatNtuples"
+outputDir="/afs/cern.ch/work/l/lia/private/FCC/MVA/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/ZH_mumu_recoil_batch/stage1/trainedNtuples"
 #outputDirEos= "/eos/user/l/lia/FCCee/MVA/ZH_mumu_recoil_batch/"
 #eosType = "eosuser"
 #Optional: ncpus, default is 4
@@ -43,7 +29,10 @@ compGroup = "group_u_FCC.local_gen"
 
 userBatchConfig="/afs/cern.ch/work/l/lia/private/FCC/MVA/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/FCCAnalyses-config/mumu/userBatch.Config"
 #USER DEFINED CODE
-
+ROOT.gInterpreter.ProcessLine('''
+    TMVA::Experimental::RBDT<> bdt("ZH_Recoil_BDT", "/eos/user/l/lia/FCCee/MVA/BDT/xgb_bdt_normal.root");
+    computeModel1 = TMVA::Experimental::Compute<6, float>(bdt);
+    ''')
 #Mandatory: RDFanalysis class where the use defines the operations on the TTree
 class RDFanalysis():
 
@@ -143,8 +132,16 @@ class RDFanalysis():
             .Define("Z_leptonic_acolinearity",  "if(zed_leptonic_acolinearity.size()>0) return zed_leptonic_acolinearity.at(0); else return -std::numeric_limits<float>::max()")
             .Define("Z_leptonic_acoplanarity",  "if(zed_leptonic_acoplanarity.size()>0) return zed_leptonic_acoplanarity.at(0); else return -std::numeric_limits<float>::max()")
             
-
-            
+            ###
+            #Define MVA 
+            ###
+            .Define("MVAVec1", ROOT.computeModel1, ("Z_leptonic_m", 
+                                                    "Z_leptonic_pt",
+                                                    "Z_leptonic_costheta", 
+                                                    "Z_leptonic_acolinearity",
+                                                    "Selected_muons_minus_pt",
+                                                    "Selected_muons_plus_pt"))
+            .Define("MVAScore1", "MVAVec1.at(0)")
             ###
             #Reconstruct recoil object of ee->Z(mumu)H 
             ###
@@ -157,7 +154,7 @@ class RDFanalysis():
             .Define("zed_leptonic_recoil_p","ReconstructedParticle::get_p(zed_leptonic_recoil)")
             .Define("zed_leptonic_recoil_e","ReconstructedParticle::get_e(zed_leptonic_recoil)")
             .Define("zed_leptonic_recoil_costheta","APCHiggsTools::get_cosTheta(zed_leptonic_recoil)")
-         
+              
             # Filter at least one candidate
             #.Filter("zed_leptonic_recoil_m.size()>0")
         )
@@ -218,6 +215,9 @@ class RDFanalysis():
             "gen_pt_mumu",
             "gen_mass_mumu",
             "gen_pt_ZH",
-            "gen_mass_ZH"
+            "gen_mass_ZH",
+            #MVA
+            "MVAVec1",
+            "MVAScore1"
        ]
         return branchList

@@ -30,7 +30,7 @@ ROOT::VecOps::RVec<int>  getMC_indices_Ds2KKPi ( ROOT::VecOps::RVec<int> Bs2DsK_
  // get the indices of the Ds+ daughters :
  std::vector<int> pdg_daughters = { 321, -321, 211 } ;  //  K+, K-, Pi+
  bool stable = true;    // look among the list of *stable* daughters of the Ds+
- ROOT::VecOps::RVec<int> Ds_daughters = get_indices_ExclusiveDecay_MotherByIndex( idx_Ds, pdg_daughters, stable, in, ind);
+ ROOT::VecOps::RVec<int> Ds_daughters = get_indices_MotherByIndex( idx_Ds, pdg_daughters, stable, false, false, in, ind);
 
  // Ds_daughters contains the indices of : the mother Ds, the K+, K-, Pi+
  if ( Ds_daughters.size() != 4 ) return result;   // this is not the decay searched for. Return an empty vector

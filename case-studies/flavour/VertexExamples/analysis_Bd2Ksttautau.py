@@ -18,7 +18,7 @@ print ('podio    ',_pod)
 print ('fccana   ',_fcc)
 
 # Require that there be a Bd (PDG = 511 ) in the event
-Filter="MCParticle::filter_pdgID(511, true)(Particle)==true"
+Filter="FCCAnalyses::MCParticle::filter_pdgID(511, true)(Particle)==true"
 
 
 #
@@ -64,7 +64,7 @@ class analysis():
 
 
                # MC event primary vertex
-               .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
+               .Define("MC_PrimaryVertex",  "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )" )
 
                # number of tracks in the event
                .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
@@ -82,9 +82,9 @@ class analysis():
                # requires some care.
                #
                # If the event contains more than one such decays, only the first one is kept.
-               # get_indices_ExclusiveDecay looks for an exclusive decay: if a mother is found, that decays 
+               # get_indices, when the 4th bool is set to false, looks for an exclusive decay: if a mother is found, that decays
                # into the particles specified in the list plus other particle(s), this decay is not selected.
-               .Define("Bd2KstTauTau_indices",   "MCParticle::get_indices_ExclusiveDecay(  511, { 313, 15, -15}, false, false) ( Particle, Particle1)" )
+               .Define("Bd2KstTauTau_indices",   "FCCAnalyses::MCParticle::get_indices(  511, { 313, 15, -15}, false, false, false, false) ( Particle, Particle1)" )
 
                # the MC Bd : the Bd is the first particle in the Bd2KstTauTau_indices  vector
                # for practical reasons (because methods in MCParticle consume a vector of MCParticles),
@@ -94,7 +94,7 @@ class analysis():
                # by construction, the number of Bd that decay to { 313, 15, -15} is zero or one. It can be zero, despite the filter,
                # when the Bd has oscillated into a Bdbar.  The variable below will be used to select the
                # events of interest (for which FoundBd = 1) :
-               .Define("FoundBd",  "MCParticle::get_n( Bd )" )
+               .Define("FoundBd",  "FCCAnalyses::MCParticle::get_n( Bd )" )
 
                # the MC Kstar
                .Define("Kstar",  "selMC_leg(1) ( Bd2KstTauTau_indices , Particle )")
@@ -102,10 +102,10 @@ class analysis():
                .Define("taum",  "selMC_leg(2) ( Bd2KstTauTau_indices , Particle )")
                .Define("taup",  "selMC_leg(3) ( Bd2KstTauTau_indices , Particle )")
 
-               .Define("Bd_theta", "MCParticle::get_theta( Bd )")
-               .Define("Kstar_theta", "MCParticle::get_theta( Kstar )")
-               .Define("taum_theta", "MCParticle::get_theta( taum )")
-               .Define("taup_theta", "MCParticle::get_theta( taup )")
+               .Define("Bd_theta", "FCCAnalyses::MCParticle::get_theta( Bd )")
+               .Define("Kstar_theta", "FCCAnalyses::MCParticle::get_theta( Kstar )")
+               .Define("taum_theta", "FCCAnalyses::MCParticle::get_theta( taum )")
+               .Define("taup_theta", "FCCAnalyses::MCParticle::get_theta( taup )")
 
 
 
@@ -119,7 +119,7 @@ class analysis():
                # element of the vector Bd2KstTauTau_indices :
                .Define("KstarIndex",  " if ( Bd2KstTauTau_indices.size() > 0) return Bd2KstTauTau_indices.at(1); else return -1;")
                # from this index, one gets a vector with the indices of: mother K*, K, Pi, in this order:
-               .Define("Kst2KPi_indices",    "MCParticle::get_indices_ExclusiveDecay_MotherByIndex( KstarIndex, { 321, -211 }, true, Particle, Particle1)" )
+               .Define("Kst2KPi_indices",    "FCCAnalyses::MCParticle::get_indices_MotherByIndex( KstarIndex, { 321, -211 }, true, false, false, Particle, Particle1)" )
                # This is the MC Kaon from the Kstar decay :
                .Define("K_from_Kstar", "selMC_leg(1) ( Kst2KPi_indices, Particle)")
                # and the MC pion :
@@ -143,7 +143,7 @@ class analysis():
                .Define("KstVertex",  "VertexingUtils::get_VertexData( KstVertexObject )")
 
                # MC production vertex of the Kstar ( = MC decay vertex of the Bd, = MC decay vertex of the Kstar)
-               .Define("KstMCDecayVertex", " MCParticle::get_vertex( Kstar )")
+               .Define("KstMCDecayVertex", " FCCAnalyses::MCParticle::get_vertex( Kstar )")
                # alternatively, one could use this, which returns a Vector3d instead of a vector of Vector3d:
                # .Define("KstMCDecayVertex", " if ( Kstar.size() > 0) return Kstar[0].vertex; else return  edm4hep::Vector3d(1e12, 1e12, 1e12) ; ")
 
@@ -157,7 +157,7 @@ class analysis():
 
                # the daughters from the tau-
                .Define("TauMinusIndex",  " if ( Bd2KstTauTau_indices.size() > 0) return Bd2KstTauTau_indices[2];  else return -1;")
-               .Define("Tau2Pions_indices",  " MCParticle::get_indices_ExclusiveDecay_MotherByIndex( TauMinusIndex,  {16, -211, 211, -211  }, true, Particle, Particle1)" )
+               .Define("Tau2Pions_indices",  " FCCAnalyses::MCParticle::get_indices_MotherByIndex( TauMinusIndex,  {16, -211, 211, -211  }, true, false, false, Particle, Particle1)" )
 
                # RecoParticles associated with the pions from the tau decau
                .Define("TaumRecoParticles",   " ReconstructedParticle2MC::selRP_matched_to_list( Tau2Pions_indices, MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
@@ -175,7 +175,7 @@ class analysis():
                # first, get one of the pions from the tau decay ( 0 = the mother tau, 1 = the nu, 2 = a pion)
                .Define("PiFromTaum",  "selMC_leg(2) ( Tau2Pions_indices , Particle )")
                # MC production vertex of this pion:
-               .Define("TaumMCDecayVertex",  " MCParticle::get_vertex( PiFromTaum )")
+               .Define("TaumMCDecayVertex",  " FCCAnalyses::MCParticle::get_vertex( PiFromTaum )")
 
 
                # -------------------------------------------------------------------------------------------------------

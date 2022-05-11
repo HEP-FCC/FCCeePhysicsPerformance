@@ -56,13 +56,13 @@ class analysis():
 
 
                # MC event primary vertex
-               .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
+               .Define("MC_PrimaryVertex",  "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )" )
 
                # number of tracks in the event
                .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
 
                # Retrieve the decay vertex of all MC particles
-               #.Define("MC_DecayVertices",  "MCParticle::get_endPoint( Particle, Particle1)" )
+               #.Define("MC_DecayVertices",  "FCCAnalyses::MCParticle::get_endPoint( Particle, Particle1)" )
 
 
                # MC indices of the decay Bs (PDG = 531) -> mu+ (PDG = -13) mu- (PDG = 13) K+ (PDG = 321) K- (PDG = -321)
@@ -74,9 +74,9 @@ class analysis():
 	       # explored recursively if needed.
                # The second boolean: when set to true, the charge conjugate decays are included too.
                # If the event contains more than one such decays,only the first one is kept.
-	       # get_indices_ExclusiveDecay looks for an exclusive decay: if a mother is found, that decays 
+               # get_indices, when the 4th bool is set to false, looks for an exclusive decay: if a mother is found, that decays
                # into the particles specified in the list plus other particle(s), this decay is not selected.
-               .Define("Bs2MuMuKK_indices",  "MCParticle::get_indices_ExclusiveDecay( 531, {-13,13,321,-321}, true, true) ( Particle, Particle1)" )
+               .Define("Bs2MuMuKK_indices",  "FCCAnalyses::MCParticle::get_indices( 531, {-13,13,321,-321}, true, true, false, false) ( Particle, Particle1)" )
 
                 # the MC Bs : the Bs is the first particle in the Bs2MuMuKK_indices vector
                .Define("Bs",  "selMC_leg(0) ( Bs2MuMuKK_indices, Particle )")
@@ -88,23 +88,23 @@ class analysis():
                .Define("Kminus",  " selMC_leg(4)( Bs2MuMuKK_indices, Particle )")
 
                 # Kinematics of the Bs legs (MC) :
-               .Define("Muplus_theta",  "MCParticle::get_theta( Muplus )")
-               .Define("Muplus_phi",  "MCParticle::get_phi( Muplus )")
-               .Define("Muplus_e",  "MCParticle::get_e( Muplus )")
-               .Define("Muminus_theta",  "MCParticle::get_theta( Muminus )")
-               .Define("Muminus_phi",  "MCParticle::get_phi( Muminus )")
-               .Define("Muminus_e",  "MCParticle::get_e( Muminus )")
-               .Define("Kplus_theta",  "MCParticle::get_theta( Kplus )")
-               .Define("Kplus_phi",  "MCParticle::get_phi( Kplus )")
-               .Define("Kplus_e",  "MCParticle::get_e( Kplus )")
-               .Define("Kminus_theta",  "MCParticle::get_theta( Kminus )")
-               .Define("Kminus_phi",  "MCParticle::get_phi( Kminus )")
-               .Define("Kminus_e",  "MCParticle::get_e( Kminus )")
+               .Define("Muplus_theta",  "FCCAnalyses::MCParticle::get_theta( Muplus )")
+               .Define("Muplus_phi",  "FCCAnalyses::MCParticle::get_phi( Muplus )")
+               .Define("Muplus_e",  "FCCAnalyses::MCParticle::get_e( Muplus )")
+               .Define("Muminus_theta",  "FCCAnalyses::MCParticle::get_theta( Muminus )")
+               .Define("Muminus_phi",  "FCCAnalyses::MCParticle::get_phi( Muminus )")
+               .Define("Muminus_e",  "FCCAnalyses::MCParticle::get_e( Muminus )")
+               .Define("Kplus_theta",  "FCCAnalyses::MCParticle::get_theta( Kplus )")
+               .Define("Kplus_phi",  "FCCAnalyses::MCParticle::get_phi( Kplus )")
+               .Define("Kplus_e",  "FCCAnalyses::MCParticle::get_e( Kplus )")
+               .Define("Kminus_theta",  "FCCAnalyses::MCParticle::get_theta( Kminus )")
+               .Define("Kminus_phi",  "FCCAnalyses::MCParticle::get_phi( Kminus )")
+               .Define("Kminus_e",  "FCCAnalyses::MCParticle::get_e( Kminus )")
 
 	       # Kinematics of the mother Bs (MC)
-               .Define("Bs_theta",   "MCParticle::get_theta( Bs )")
-               .Define("Bs_phi",   "MCParticle::get_phi( Bs )")
-               .Define("Bs_e",   "MCParticle::get_e( Bs )")
+               .Define("Bs_theta",   "FCCAnalyses::MCParticle::get_theta( Bs )")
+               .Define("Bs_phi",   "FCCAnalyses::MCParticle::get_phi( Bs )")
+               .Define("Bs_e",   "FCCAnalyses::MCParticle::get_e( Bs )")
 
                
                # Decay vertex of the Bs (MC)
@@ -175,9 +175,9 @@ class analysis():
                # to the final, stable particles.
                # The second boolean (true) means that the charge conjugate decay isincluded too.
                # If the event contains more than one such decays,only the first one is kept.
-               # get_indices_ExclusiveDecay looks for an exclusive decay: if a mother is found, that decays 
+               # get_indices, when the 4th bool is set to false, looks for an exclusive decay: if a mother is found, that decays
                # into the particles specified in the list plus other particle(s), this decay is not selected.
-               .Define("Bs2JPsiPhi_indices",   "MCParticle::get_indices_ExclusiveDecay( 531, {443,333}, false, true) ( Particle, Particle1)" )
+               .Define("Bs2JPsiPhi_indices",   "FCCAnalyses::MCParticle::get_indices( 531, {443,333}, false, true, false, false) ( Particle, Particle1)" )
 
                # This extracts the MC Jpsi. In list of indices determined above, Bs2JPsiPhi_indices,
                # 1 is the position of the Jpsi in the Bs2JPsiPhi_indices vector.
@@ -186,7 +186,7 @@ class analysis():
                .Define("Phi",   "selMC_leg( 2) ( Bs2JPsiPhi_indices , Particle )")
 
                # From these two MC particles, determine their angular separation
-               .Define("Angle_JpsiPhi",  "MCParticle::AngleBetweenTwoMCParticles( JPsi, Phi)" )
+               .Define("Angle_JpsiPhi",  "FCCAnalyses::MCParticle::AngleBetweenTwoMCParticles( JPsi, Phi)" )
 
 
 
@@ -208,8 +208,8 @@ class analysis():
                # not so useful here, but for completeness : Bs to JPsi decay ?
                # Returns booleans. e.g. the first one means that the event contains a Bs that decayed to a JPsi (443) + X, 
                # not counting the cases where Bs -> Bsbar -> JPsi + X
-               .Define("Bsdecay",  "MCParticle::get_decay(531, 443, false)(Particle, Particle1)")
-               .Define("Bsbardecay",  "MCParticle::get_decay(-531, 443, false)(Particle, Particle1)")
+               .Define("Bsdecay",  "FCCAnalyses::MCParticle::get_decay(531, 443, false)(Particle, Particle1)")
+               .Define("Bsbardecay",  "FCCAnalyses::MCParticle::get_decay(-531, 443, false)(Particle, Particle1)")
 
 	       # to get the distribution of the d0 of the mu+ track
 	       .Define("RecoMuplus_d0",  "ReconstructedParticle2Track::getRP2TRK_D0( RecoMuplus, EFlowTrack_1) ")

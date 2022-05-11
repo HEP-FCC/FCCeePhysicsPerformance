@@ -47,7 +47,7 @@ class analysis():
                .Alias("MCRecoAssociations1", "MCRecoAssociations#1.index")
 
                # MC event primary vertex
-               .Define("MC_PrimaryVertex",  "MCParticle::get_EventPrimaryVertex(21)( Particle )" )
+               .Define("MC_PrimaryVertex",  "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )" )
 
                # number of tracks
                .Define("ntracks","ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
@@ -60,7 +60,7 @@ class analysis():
                # would there be > 1, the method gives the first one encountered.
                # Returns the indices of : mother Bs, Ds+, K-
 
-               .Define("Bs2DsK_indices", "MCParticle::get_indices_ExclusiveDecay( -531, {431, -321}, false, false) ( Particle, Particle1)" )
+               .Define("Bs2DsK_indices", "FCCAnalyses::MCParticle::get_indices( -531, {431, -321}, false, false, false, false) ( Particle, Particle1)" )
 
 
                # MC indices of (this) Ds+ -> K+ K- Pi+
@@ -80,7 +80,7 @@ class analysis():
                .Define("BachelorK",  "selMC_leg(2) ( Bs2DsK_indices, Particle )")
 
 	       # the angle between the MC Ds and the MC K
-               .Define("Angle_DsK",  "MCParticle::AngleBetweenTwoMCParticles( Ds, BachelorK ) ")
+               .Define("Angle_DsK",  "FCCAnalyses::MCParticle::AngleBetweenTwoMCParticles( Ds, BachelorK ) ")
 
                # The MC legs from the Ds decay
                .Define("Kplus",   "selMC_leg(1) ( Bs2KKPiK_indices, Particle )")
@@ -88,21 +88,21 @@ class analysis():
                .Define("Piplus",   "selMC_leg(3) ( Bs2KKPiK_indices, Particle )")
 
 	       # their energies
-               .Define("Kplus_E",  "MCParticle::get_e( Kplus )")
-               .Define("Kminus_E",  "MCParticle::get_e( Kminus )")
-	       .Define("Piplus_E",   "MCParticle::get_e( Piplus )")
+               .Define("Kplus_E",  "FCCAnalyses::MCParticle::get_e( Kplus )")
+               .Define("Kminus_E",  "FCCAnalyses::MCParticle::get_e( Kminus )")
+	       .Define("Piplus_E",   "FCCAnalyses::MCParticle::get_e( Piplus )")
 
 
                # the Ds kinematics 
-               .Define("Ds_E",  "MCParticle::get_e( Ds )")
-               .Define("Ds_pt", "MCParticle::get_pt( Ds ) ")
-               .Define("Ds_theta", "MCParticle::get_theta( Ds )")
-               .Define("Ds_phi", "MCParticle::get_phi( Ds )")
+               .Define("Ds_E",  "FCCAnalyses::MCParticle::get_e( Ds )")
+               .Define("Ds_pt", "FCCAnalyses::MCParticle::get_pt( Ds ) ")
+               .Define("Ds_theta", "FCCAnalyses::MCParticle::get_theta( Ds )")
+               .Define("Ds_phi", "FCCAnalyses::MCParticle::get_phi( Ds )")
 
                # the bachelor K kinematics
-               .Define("BachelorK_E",  "MCParticle::get_e( BachelorK )")
-               .Define("BachelorK_theta",  "MCParticle::get_theta( BachelorK )")
-               .Define("BachelorK_phi",  "MCParticle::get_phi( BachelorK )")
+               .Define("BachelorK_E",  "FCCAnalyses::MCParticle::get_e( BachelorK )")
+               .Define("BachelorK_theta",  "FCCAnalyses::MCParticle::get_theta( BachelorK )")
+               .Define("BachelorK_phi",  "FCCAnalyses::MCParticle::get_phi( BachelorK )")
 
                # Decay vertex of the Ds
                # This takes the production vertex of the 1st non mother particle in Bs2KKPiK_indices, i.e.
@@ -185,7 +185,7 @@ class analysis():
                # This is the final Bs vertex
                .Define("BsVertex_Cov",  "VertexingUtils::get_VertexData( BsVertexObject_Cov )")
 
-               .Define("Kplus_phi",  "MCParticle::get_phi( Kplus )")
+               .Define("Kplus_phi",  "FCCAnalyses::MCParticle::get_phi( Kplus )")
                .Define("RecoKplus_phi",  "ReconstructedParticle::get_phi( RecoKplus ) " )
                .Define("RecoKplus_atVertex_phi", "ReconstructedParticle::get_phi( RecoKplus_atVertex ) ")
 

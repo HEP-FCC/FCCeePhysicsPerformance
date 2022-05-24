@@ -27,6 +27,7 @@ pip3 install --user root-pandas
 pip3 install --user scikit-learn
 pip3 install --user hyperopt
 pip3 install --user hpogrid
+pip3 install --user graphviz
 export PYTHONPATH=${1}/.local/lib/python3.7/site-packages:$PYTHONPATH
 
 echo "> source the localSetup"

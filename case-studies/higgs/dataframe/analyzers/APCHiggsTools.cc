@@ -1,4 +1,8 @@
 #include "APCHiggsTools.h"
+#include "ReconstructedParticle.h"
+
+#include <algorithm>
+
 using namespace APCHiggsTools;
 
 ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>  APCHiggsTools::muon_quality_check(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in){
@@ -118,7 +122,7 @@ ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> APCHiggsTools::resonanceZ
 		     // or (as done below) use the track index to map the leg to the MC particle :-(
 
 		     int track_index = legs[i].tracks_begin ;   // index in the Track array
-		     int mc_index = ReconstructedParticle2MC::getTrack2MC_index( track_index, recind, mcind, reco );
+		     int mc_index = FCCAnalyses::ReconstructedParticle2MC::getTrack2MC_index( track_index, recind, mcind, reco );
 		     if ( mc_index >= 0 && mc_index < mc.size() ) {
 			 int pdgID = mc.at( mc_index).PDG;
 		         leg_lv.SetXYZM(mc.at(mc_index ).momentum.x, mc.at(mc_index ).momentum.y, mc.at(mc_index ).momentum.z, mc.at(mc_index ).mass );
@@ -150,6 +154,30 @@ ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> APCHiggsTools::resonanceZ
     return result;
   }
 }
+
+ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>  APCHiggsTools::sort_greater(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in){
+	ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> result;
+  //at least one muon + and one muon - in each event
+	
+  int n = in.size();
+  if (n == 0 ){
+    return result;
+  }
+  ROOT::VecOps::RVec<float> pT = FCCAnalyses::ReconstructedParticle::get_pt(in);
+  std::vector< std::pair <float, edm4hep::ReconstructedParticleData> > vect;
+  for (int i = 0; i<n ; ++i){
+    vect.push_back(std::make_pair(pT.at(i),in.at(i)));
+  }
+  std::stable_sort(vect.begin(), vect.end(),
+                 [](const auto& a, const auto& b){return a.first > b.first;});
+  //std::sort(vect.begin(), vect.end());
+  for (int i = 0; i<n ; ++i){
+    result.push_back(vect.at(i).second);
+  } 
+  return result;
+}
+
+
 
 float APCHiggsTools::Reweighting_wzp_kkmc(float pT, float m) {
   float scale;

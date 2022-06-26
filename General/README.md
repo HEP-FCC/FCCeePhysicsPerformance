@@ -15,7 +15,7 @@ Rather random for the while...
 6. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
     1. [Vertex-fitter code from Franco Bedeschi](#vertex-fitter-code-from-franco-bedeschi)
     2. [Vertexing with the ACTS suite](#vertexing-with-the-acts-suite)
-    3. [The LCFI+ algorithm](#the-lcfi+-algorithm)
+    3. [The LCFI+ algorithm](#the-LCFIPlus-algorithm)
     4. [The DecayTreeFitter (DTF) algorithm](#the-decaytreefitter-(dtf)-algorithm)
     5. [Flavour tagging using machine learning](#flavour-tagging-using-machine-learning)
 7. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
@@ -275,13 +275,14 @@ A stand-alone vertex-fitter from Franco Bedeschi has been **implemented in FCCAn
     - same convention as described above for the quantities that are retrieved
 
 
-#### The LCFI+ algorithm
+#### The LCFIPlus algorithm
 The LCFIPlus algorithm, developed for ILC and CLIC and used in the [CLD performance paper](https://arxiv.org/abs/1911.12230).
   - [Description of the LCFIPlus algorithm](https://arxiv.org/pdf/1506.08371.pdf) T. Suehara,T. Tanabe, arXiv1506.08371
   - [LCFIPlus in GitHub](https://github.com/lcfiplus/LCFIPlus)
   - [Talk from Clement Helsens, Oct 19, 2020](https://indico.cern.ch/event/965346/contributions/4062989/attachments/2125687/3578824/vertexing.pdf)
     - the algorithm was run on EDM4HEP samples using a converter to LCIO as a first step. 
   - the [status of the implementation into key4hep](https://indico.cern.ch/event/1003610/contributions/4214593/attachments/2187925/3697155/k4marlinWrapper_plfernan_10feb2021.pdf) as reported at the topical meeting of Feb 10, 2021 (P. Fernandez, A. Sailer)
+  - [Implementation in FCCAnalyses](https://indico.cern.ch/event/1159953/contributions/4871528/attachments/2444787/4189097/LCFIPlusFCCAnalyses_PhysPerf16May.pdf), talk from K. Gautam, A. Ilg and E. Ploerer, May 16, 2022
 
 #### The DecayTreeFitter (DTF) algorithm
 The DecayTreeFitter algorithm was developed at BaBar and is used at BaBar, LHCb and Belle-2.

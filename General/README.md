@@ -13,25 +13,25 @@ Rather random for the while...
     5. [How to fit tracks to a common vertex](#How-to-fit-tracks-to-a-common-vertex)
     6. [How to run jet algorithms](#How-to-run-jet-algorithms)
     7. [How to run kinematic fits](#How-to-run-kinematic-fits)
-4. [Code development](#code-development)
-5. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
+3. [Code development](#code-development)
+4. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
     1. [Quick instructions for producing samples](#quick-instructions-for-producing-samples)
     2. [Make simple changes to the tracker or beam-pipe description in Delphes](#make-simple-changes-to-the-tracker-or-beam-pipe-description-in-delphes)
     1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
-6. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
-7. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+5. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
+6. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
     1. [Vertex-fitter code from Franco Bedeschi](#vertex-fitter-code-from-franco-bedeschi)
     2. [Vertexing with the ACTS suite](#vertexing-with-the-acts-suite)
     3. [The LCFI+ algorithm](#the-LCFIPlus-algorithm)
     4. [The DecayTreeFitter (DTF) algorithm](#the-decaytreefitter-(dtf)-algorithm)
     5. [Flavour tagging using machine learning](#flavour-tagging-using-machine-learning)
-8. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-9. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
+7. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+8. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
     1. [Beam energy spread](#beam-energy-spread)
     2. [Vertex distribution](#vertex-distribution)
     3. [Transverse boost to account for the crossing angle](#transverse-boost-to-account-for-the-crossing-angle)
-10. [Monte-Carlo programs](#monte-carlo-programs)
-11. [Bibliography](#bibliography)
+9. [Monte-Carlo programs](#monte-carlo-programs)
+10. [Bibliography](#bibliography)
 
 
 ### Common event samples
@@ -121,10 +121,10 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 #### How to run jet algorithms
 - To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis.py#L40). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
 - remember: the jets that are on the (spring2021) EDM4Hep files **should not be used**, see the caveats above
-- details on the interface to FastJet in FCCAnalyses can be found in Julie Torndal's thesis
+- details on the interface to FastJet in FCCAnalyses can be found in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
 
 #### How to run kinematic fits
-- see the ABCfit++ software package described in Julie's thesis
+- see the ABCfit++ software package described in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
 - stand-alone package for the while, see the [github repo](https://github.com/Torndal/ABCfitplusplus)
 
 

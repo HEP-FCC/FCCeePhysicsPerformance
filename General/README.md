@@ -5,35 +5,44 @@ Rather random for the while...
 ### Table of Contents
 
 1. [Common event samples](#common-event-samples)
-2. [Example analyses](#example-analyses)
-3. [Code development](#code-development)
-4. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
+2. [Example analyses and how-to's](#example-analyses-and-how-to's)
+    1. [Basics](#Basics)
+    2. [How to associate RecoParticles with Monte-Carlo Particles](#How-to-associate-RecoParticles-with-Monte-Carlo-Particles)
+    3. [How to navigate through the history of the Monte-Carlo particles](#How-to-navigate-through-the-history-of-the-Monte-Carlo-particles)
+    4. [How to compute event variables (thrust, sphericity, etc)](#How-to-compute-event-variables-(thrust,-sphericity,-etc))
+    5. [How to fit tracks to a common vertex](#How-to-fit-tracks-to-a-common-vertex)
+    6. [How to run jet algorithms](#How-to-run-jet-algorithms)
+    7. [How to run kinematic fits](#How-to-run-kinematic-fits)
+4. [Code development](#code-development)
+5. [To produce your own Delphes samples](#to-produce-your-own-delphes-samples)
     1. [Quick instructions for producing samples](#quick-instructions-for-producing-samples)
     2. [Make simple changes to the tracker or beam-pipe description in Delphes](#make-simple-changes-to-the-tracker-or-beam-pipe-description-in-delphes)
     1. [Change the Jet algorithms](#change-the-jet-algorithm-in-the-delphes-interface)
-5. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
-6. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
+6. [The five-parameter tracks produced by the Delphes interface](#the-five-parameter-tracks-produced-by-the-delphes-interface)
+7. [Vertexing and flavour tagging](#vertexing-and-flavour-tagging)
     1. [Vertex-fitter code from Franco Bedeschi](#vertex-fitter-code-from-franco-bedeschi)
     2. [Vertexing with the ACTS suite](#vertexing-with-the-acts-suite)
     3. [The LCFI+ algorithm](#the-LCFIPlus-algorithm)
     4. [The DecayTreeFitter (DTF) algorithm](#the-decaytreefitter-(dtf)-algorithm)
     5. [Flavour tagging using machine learning](#flavour-tagging-using-machine-learning)
-7. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
-8. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
+8. [Making particle combinations with awkward arrays](#making-particle-combinations-with-awkward-arrays)
+9. [Generating events under realistic FCC-ee environment conditions](#generating-events-under-realistic-fcc-ee-environment-conditions)
     1. [Beam energy spread](#beam-energy-spread)
     2. [Vertex distribution](#vertex-distribution)
     3. [Transverse boost to account for the crossing angle](#transverse-boost-to-account-for-the-crossing-angle)
-9. [Monte-Carlo programs](#monte-carlo-programs)
-10. [Bibliography](#bibliography)
+10. [Monte-Carlo programs](#monte-carlo-programs)
+11. [Bibliography](#bibliography)
 
 
 ### Common event samples
 
-#### Delphes samples (FCCSW), September 2020
+<!---
+#### Delphes samples (FCCSW), September 2020"
 Some samples in FCC-EDM (ZH, ZZ and WW, at sqrts = 240 GeV) have been produced (Sep 2020) for the Snowmass Software tutorial.
-The events were simulated with Delphes, with the "IDEA\_TrkCov" card.
-They are on EOS at CERN, details can be found [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php).
+The events were simulated with Delphes, with the "IDEA\_TrkCov" card. They are on EOS at CERN, details can be found [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php).
+-->
 
+<!---
 #### Delphes samples in EDM4HEP, Nov 2020
 A large set of DELPHES samples (Pythia) have been produced (C. Helsens) in EDM4HEP, using the "IDEA\_TrkCov" card, and are stored in EOS.
 See [here for the EOS path, number of events, cross-section, etc](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_tmp.php).
@@ -56,6 +65,7 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
 - Samples at √s = 365 GeV:
   - ttbar, ZZ, WW, ZH production
   - ttbar, ZZ and WW in the full hadronic channel
+-->
 
 
 #### The "spring2021" Monte-Carlo samples (May 2021)
@@ -65,34 +75,58 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
   - the production  uses the [EventProducer](https://github.com/HEP-FCC/EventProducer) developed by C. Helsens.
   - release from 2021-04-30, uses Delphes 3.4.3pre10
   - configuration cards (delphes cards, Monte-Carlo cards): see the  [FCC-configs repository](https://github.com/HEP-FCC/FCC-config), branch  **spring2021**.
+ <!---
   - Main changes compared to the "tmp" samples:
     - bugfix of the MC-associations for electrons
     - beam-pipe model updated
     - better resolution for displaced tracks; 
     - the error matrix of the track parameters now include also the off-diagonal terms
     - addition of "inclusive" (non-isolated) muons in the output files
+-->
   - See [here for  information about the files made with IDEA](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php)
-  - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA_3T.php)
+  - The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/spring2021
+  - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA_3T.php), and to "IDEA" where the Drift Chamber was repaced by the CLD tracker
 
 ##### Known caveats in the "spring2021" samples:
 - there is some inefficiency for electrons, due primarily to the overlap removal procedure, see [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)
 - the efficiency for very low momentum tracks is lower than what it should be, see [Tristan's talk](https://indico.cern.ch/event/1076058/contributions/4525621/attachments/2312669/3936050/Talk_FCC_miralles.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)
 - the jets that are on the EDM4Hep files, i.e. that were produced during the Delphes step, **should not be used**. See [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1096051/contributions/4614509/attachments/2344926/3998410/2021_11_12_News.pdf). The issue lies in the Delphes card that was used (some jets are suppressed in the overlap removal procedure). The solution is to **re-cluster the jets in FCCAnalyses, as explained below.**
 
-### Example analyses
+### Example analyses and how-to's
 
 Example analyses can be found in the [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
 Checkout the master branch if you want to analyze EDM4HEP samples (the fccedm branch contains examples for the FCCSW-FCCEDM samples).
 And follow the instructions in the README of [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
-- Simple example used in the README: [examples/FCCee/higgs/mH-recoil/mumu/](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/higgs/mH-recoil/mumu)
-- The example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
-- The same example also shows how to use the code of FCCAnalyses to compute event variables (thrust, sphericity, etc)
+
+#### Basics
+- A first introduction to FCCAnalyses was also given in [Clement's talk at our December 2021 Phys Perf meeting](https://indico.cern.ch/event/982690/contributions/4138504/attachments/2162441/3648904/FCCAnalyses_clement.pdf).
+- Basic documentation can be found [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics). The configuration file [read_EDM4HEP.py](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics/read_EDM4HEP.py) contains a few comments, which can help people get started. 
+- First example, Higgs mass recoil : Simple example used in the README: [examples/FCCee/higgs/mH-recoil/mumu/](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/higgs/mH-recoil/mumu)
+
+#### How to associate RecoParticles with Monte-Carlo Particles
+- see explanations [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics#association-between-RecoParticles-and-MonteCarloParticles)
+- see also the example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
+
+#### How to navigate through the history of the Monte-Carlo particles
+- see exaplanations [here][(https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics#Navigation-through-the-history-of-the-Monte-Carlo-particles)
+
+#### How to compute event variables (thrust, sphericity, etc)
+- same example as above, in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)
+
+#### How to fit tracks to a common vertex 
 - To see how one can run the vertex fitter over a collection of tracks, see in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex)
+- see also various examples in this repository, [case-studies/flavour/VertexExamples](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/VertexExamples)
+- and some links below 
+
+#### How to run jet algorithms
 - To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis.py#L40). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
+- remember: the jets that are on the (spring2021) EDM4Hep files **should not be used**, see the caveats above
+- details on the interface to FastJet in FCCAnalyses can be found in Julie Torndal's thesis
 
-Other basic examples, although not marged yet in the master branch of the repository, can be found [here](https://github.com/HEP-FCC/FCCAnalyses/tree/basicexamples/examples/basics), with basic documentation being in-progress. The configuration file [read_EDM4HEP.py](https://github.com/HEP-FCC/FCCAnalyses/blob/basicexamples/examples/basics/read_EDM4HEP.py) contains a few comments, which can help people get started. 
+#### How to run kinematic fits
+- see the ABCfit++ software package described in Julie's thesis
+- stand-alone package for the while, see the [github repo](https://github.com/Torndal/ABCfitplusplus)
 
-An introduction to FCCAnalyses was also given in [Clement's talk at our December Phys Perf meeting](https://indico.cern.ch/event/982690/contributions/4138504/attachments/2162441/3648904/FCCAnalyses_clement.pdf).
 
 
 ### Code development

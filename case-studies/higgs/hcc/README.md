@@ -13,9 +13,8 @@ Loukas Gouskos <Loukas.Gouskos@cern.ch>
 Michele Selvaggi <Michele.Selvaggi@cern.ch>
 
 ## People
-Interest from:
-- Aram Apyan (MIT)
 - Giovanni Marchiori (LPNHE)
+- E. Ploerer, K. Gautam (Brussels), F. Blekman (DESY), A. Ilg (Zuerich)
 
 
 ## Talks
@@ -24,7 +23,8 @@ Interest from:
 - [Jet flavor tagging for FCC-ee](https://indico.cern.ch/event/956147/contributions/4018062/attachments/2106040/3541880/lg-fccee-flvtagging_20200921.pdf) L. Gouskos and M. Selvaggi, talk at the Physics Performance meeting, Sep 21, 2020
 - [Update on jet flavour tagging using ParticleNet](https://indico.cern.ch/event/965346/contributions/4070750/attachments/2125772/3578978/lg-fccee-flvtagging_20201019.pdf) L. Gouskos and M. Selvaggi, talk at the FCC-ee physics performance meeting, Oct. 19, 2020
 - [Flavour tagging and application to H to cc](https://indico.cern.ch/event/932973/contributions/4080491/attachments/2142682/3610847/lg_fccee_workshop2020_flvtagging.pdf) L. Gouskos and M. Selvaggi, talk at the 4th FCC Physics and Experiments workshop, Nov 13, 2020
-- [status report at the FCC week, June 2022](https://indico.cern.ch/event/1064327/contributions/4893199/attachments/2453592/4204863/Higgs_Hadronic_final_states.pdf) talk by M. Selvaggi
+- [status report on Flavour Tagging, FCC week, June 2022](https://indico.cern.ch/event/1064327/contributions/4893177/attachments/2452236/4203776/Jet-Flavour_Tagging_at_FCCee_KG.pdf) talk by K. Gautam
+- [status report on Higgs ouplings, FCC week, June 2022](https://indico.cern.ch/event/1064327/contributions/4893199/attachments/2453592/4204863/Higgs_Hadronic_final_states.pdf) talk by M. Selvaggi
 
 ## Bibliography
 

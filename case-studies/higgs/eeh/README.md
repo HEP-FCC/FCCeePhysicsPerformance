@@ -10,6 +10,10 @@ Measuring the electron Yukawa is impossible in Higgs boson decays, H → e+e−,
 ### Contact
 David d'Enterria
 
+### Bibliography
+- EPJ+ essay, [Measuring the electron Yukawa coupling via resonant s-channel Higgs production at FCC-ee](https://arxiv.org/abs/2107.02686) D. d'Enterria et al, July 2021
+- EPJ+, [The challenge of monochromatization](https://link.springer.com/article/10.1140/epjp/s13360-021-02151-y) A. Faus-Golfe et al, Dec. 2021
+
 ### Talks 
 
 - [The Snowmass/EF01 meeting devoted to ee -> H, 2 Sep, 2020](https://indico.fnal.gov/event/44636/)

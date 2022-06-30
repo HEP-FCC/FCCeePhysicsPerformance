@@ -122,6 +122,8 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis.py#L40). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
 - remember: the jets that are on the (spring2021) EDM4Hep files **should not be used**, see the caveats above
 - details on the interface to FastJet in FCCAnalyses can be found in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
+- please read the [FastJet manual](https://arxiv.org/abs/1111.6097)
+- [Basic guidance on jet algorithms (& FastJet) at FCC-ee](https://indico.cern.ch/event/1173562/contributions/4929025/attachments/2470068/4237859/2022-06-FCC-jets.pdf): talk by Gavin Salam, Gregory Soyez and Matteo Cacciari at the Physics Performance meeting of June 27, 2022. Most recommended.
 
 #### How to run kinematic fits
 - see the ABCfit++ software package described in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
@@ -329,6 +331,7 @@ The DecayTreeFitter algorithm was developed at BaBar and is used at BaBar, LHCb 
 
 #### Flavour tagging using machine learning
   - see the work done in the context of the [Hcc case study](../case-studies/higgs/hcc)
+  - status report: see the [talk of K. Gautam](https://indico.cern.ch/event/1064327/contributions/4893177/attachments/2452236/4203776/Jet-Flavour_Tagging_at_FCCee_KG.pdf) at the FCC week, June 2022
 
 
 

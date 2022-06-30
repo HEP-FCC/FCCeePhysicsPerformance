@@ -1,4 +1,4 @@
-## The Higgs coupling to charm quarks
+## The Higgs coupling to charm quarks (and bottom quarks, and gluons)
 
 ## Abstract
 The SM Higgs boson is expected to decay to c ̄c with a branching ratio of about 3%. This decay will be extremely 
@@ -24,7 +24,9 @@ Interest from:
 - [Jet flavor tagging for FCC-ee](https://indico.cern.ch/event/956147/contributions/4018062/attachments/2106040/3541880/lg-fccee-flvtagging_20200921.pdf) L. Gouskos and M. Selvaggi, talk at the Physics Performance meeting, Sep 21, 2020
 - [Update on jet flavour tagging using ParticleNet](https://indico.cern.ch/event/965346/contributions/4070750/attachments/2125772/3578978/lg-fccee-flvtagging_20201019.pdf) L. Gouskos and M. Selvaggi, talk at the FCC-ee physics performance meeting, Oct. 19, 2020
 - [Flavour tagging and application to H to cc](https://indico.cern.ch/event/932973/contributions/4080491/attachments/2142682/3610847/lg_fccee_workshop2020_flvtagging.pdf) L. Gouskos and M. Selvaggi, talk at the 4th FCC Physics and Experiments workshop, Nov 13, 2020
+- [status report at the FCC week, June 2022](https://indico.cern.ch/event/1064327/contributions/4893199/attachments/2453592/4204863/Higgs_Hadronic_final_states.pdf) talk by M. Selvaggi
 
 ## Bibliography
 
 - [ParticleNet: Jet Tagging via Particle Clouds](https://arxiv.org/abs/1902.08570) H. Qu and L. Gouskos, Phys. Rev. D 101, 056019 (2020)
+- [Measurements of decay branching fractions of H → bb/cc/gg in associated (ee/mumu)H production at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/44/1/013001) Y. Bai et al., 2020

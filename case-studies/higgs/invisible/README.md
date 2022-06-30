@@ -13,7 +13,8 @@ Preliminary studies of the invisible decay channel at FCC-ee have already been p
 - [Prospective Studies for LEP3 with the CMS Detector](https://arxiv.org/abs/1208.1662) P. Azzi et al, arXiv:1208.1662 [hep-ex]
 - [Study the effect of beam energy spread and detector resolution on the search for Higgs boson decays to invisible particles at a future e+ e− circular collider](https://arxiv.org/abs/1605.00100) O. Cerri et al, Eur. Phys. J. C 77 (2017) 116,
 
-### People
+### Contact
+Andy Mehta (amehta@cern.ch) and Nikolaos Rompotis (nikolaos.rompotis@cern.ch), Liverpool
 
-Interest from:
-- M. Klute et al (MIT)
+### Talks
+[Higgs to invisible at FCC-ee](https://indico.cern.ch/event/1066234/contributions/4708083/attachments/2385645/4077258/mehta.pdf) status report by A. Mehta, "Liverpool" FCC Physics workshop, Feb 2022

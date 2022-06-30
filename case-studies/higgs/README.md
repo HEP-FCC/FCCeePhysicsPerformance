@@ -9,7 +9,7 @@
 
 ### Case studies
 - [Measurement of the ZH production cross section with hadronic Z decays (and the Higgs self-coupling)](ZH-crosssection): hadronic mass and hadronic recoil-mass resolutions
-- [The Higgs coupling to charm quarks](hcc): flavour tagging, vertexing (hence beam-pipe radius, tracker material etc)
+- [The Higgs coupling to charm quarks (and bottom quarks, and gluons)](hcc): flavour tagging, vertexing (hence beam-pipe radius, tracker material etc)
 - [Determination of the HZγ effective coupling](hzgamma): photon identification, energy and angular scale
 - [The invisible Higgs branching fraction](invisible): hadronic mass resolution, hadronic recoil-mass resolutions, maybe b-tagging performance
 - [The total decay width of the Higgs boson via ZZZ\* events](width-zzz): jet clustering algorithms, jet directions, kinematic fits (separation of H → ZZ∗ and H → WW∗ )

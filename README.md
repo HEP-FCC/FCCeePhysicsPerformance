@@ -7,7 +7,7 @@
 3. [List of Active Case studies (evolving)](#case-studies-evolving-list)
 4. [General information for FCC-ee analyses](#general-information-for-fcc-ee-analyses)
 5. [LOIs submitted to Snowmass](#lois-submitted-to-snowmass)
-5. [Software](#software)
+5. [Software](#software-documentation-&-links)
 
 -----
 
@@ -56,27 +56,34 @@ E-group used for announcements: **FCC-PED-FeasibilityStudy**. To subscribe, go [
 
 ### General information for FCC-ee analyses
 
-
 1. [Common event samples](General/README.md#common-event-samples)
-2. [Example analyses](General/README.md#example-analyses)
-3. [To produce your own Delphes samples](General/README.md#to-produce-your-own-delphes-samples)
+2. [Example analyses and how-to's](General/README.md#example-analyses-and-how-to's)
+    1. [Basics](General/README.md#Basics)
+    2. [How to associate RecoParticles with Monte-Carlo Particles](General/README.md#How-to-associate-RecoParticles-with-Monte-Carlo-Particles)
+    3. [How to navigate through the history of the Monte-Carlo particles](General/README.md#How-to-navigate-through-the-history-of-the-Monte-Carlo-particles)
+    4. [How to compute event variables (thrust, sphericity, etc)](General/README.md#How-to-compute-event-variables-(thrust,-sphericity,-etc))
+    5. [How to fit tracks to a common vertex](General/README.md#How-to-fit-tracks-to-a-common-vertex)
+    6. [How to run jet algorithms](General/README.md#How-to-run-jet-algorithms)
+    7. [How to run kinematic fits](General/README.md#How-to-run-kinematic-fits)
+3. [Code development](General/README.md#code-development)
+4. [To produce your own Delphes samples](General/README.md#to-produce-your-own-delphes-samples)
     1. [Quick instructions for producing samples](General/README.md#quick-instructions-for-producing-samples)
     2. [Make simple changes to the tracker or beam-pipe description in Delphes](General/README.md#make-simple-changes-to-the-tracker-or-beam-pipe-description-in-delphes)
     1. [Change the Jet algorithms](General/README.md#change-the-jet-algorithm-in-the-delphes-interface)
-4. [The five-parameter tracks produced by the Delphes interface](General/README.md#the-five-parameter-tracks-produced-by-the-delphes-interface)
-5. [Vertexing and flavour tagging](General/README.md#vertexing-and-flavour-tagging)
+5. [The five-parameter tracks produced by the Delphes interface](General/README.md#the-five-parameter-tracks-produced-by-the-delphes-interface)
+6. [Vertexing and flavour tagging](General/README.md#vertexing-and-flavour-tagging)
     1. [Vertex-fitter code from Franco Bedeschi](General/README.md#vertex-fitter-code-from-franco-bedeschi)
     2. [Vertexing with the ACTS suite](General/README.md#vertexing-with-the-acts-suite)
-    3. [The LCFI+ algorithm](General/README.md#the-lcfi+-algorithm)
-    4. [The DecayTreeFitter (General/README.mdDTF) algorithm](General/README.md#the-decaytreefitter-(General/README.mddtf)-algorithm)
+    3. [The LCFI+ algorithm](General/README.md#the-LCFIPlus-algorithm)
+    4. [The DecayTreeFitter (DTF) algorithm](General/README.md#the-decaytreefitter-(dtf)-algorithm)
     5. [Flavour tagging using machine learning](General/README.md#flavour-tagging-using-machine-learning)
-6. [Making particle combinations with awkward arrays](General/README.md#making-particle-combinations-with-awkward-arrays)
-6. [Generating events under realistic FCC-ee environment conditions](General/README.md#generating-events-under-realistic-fcc-ee-environment-conditions)
+7. [Making particle combinations with awkward arrays](General/README.md#making-particle-combinations-with-awkward-arrays)
+8. [Generating events under realistic FCC-ee environment conditions](General/README.md#generating-events-under-realistic-fcc-ee-environment-conditions)
     1. [Beam energy spread](General/README.md#beam-energy-spread)
     2. [Vertex distribution](General/README.md#vertex-distribution)
     3. [Transverse boost to account for the crossing angle](General/README.md#transverse-boost-to-account-for-the-crossing-angle)
-7. [Monte-Carlo programs](General/README.md#monte-carlo-programs)
-8. [Bibliography](General/README.md#bibliography)
+9. [Monte-Carlo programs](General/README.md#monte-carlo-programs)
+10. [Bibliography](General/README.md#bibliography)
 
 
 

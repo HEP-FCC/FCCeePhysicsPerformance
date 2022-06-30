@@ -25,6 +25,7 @@ for the determination of the recoil mass.
 
 - [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002
 - [Measurement of the Higgs boson mass and ee → ZH cross section using Z→μμ and Z→ee at the ILC](https://arxiv.org/abs/1604.07524) J. Yan et al, Phys Rev D94 (2016) 113002
+- EPJ+ essay, [Measuring the mass and production cross section with ultimate precision at FCC-ee](https://arxiv.org/abs/2106.15438), P. Azzurri et al, June 2021
 
 ### List of Monte-Carlo samples (spring2021)
 

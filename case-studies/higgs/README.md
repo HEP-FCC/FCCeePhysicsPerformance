@@ -4,6 +4,7 @@
 
 - The [introduction to the Higgs session, 2nd FCC-France workshop](https://indico.in2p3.fr/event/23012/contributions/89966/attachments/62013/84752/HiggsIntro_FCCFrance.pdf) talk by P. Janot, Jan 21, 2021
 - [Precision Higgs physics at the CEPC](https://iopscience.iop.org/article/10.1088/1674-1137/43/4/043002) Fenfen An et al 2019 Chinese Phys. C 43 043002
+- EPJ+ essay, [Measuring the mass and production cross section with ultimate precision at FCC-ee](https://arxiv.org/abs/2106.15438), P. Azzurri et al, June 2021
 
 
 ### Case studies

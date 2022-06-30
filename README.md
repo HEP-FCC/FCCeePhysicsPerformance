@@ -21,6 +21,7 @@
 
 O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of each month. 
 - [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
+- [indico category for the meetings of the Physics Groups](https://indico.cern.ch/category/15156/)
 
 Next meetings: 
 - July 18, 15:00

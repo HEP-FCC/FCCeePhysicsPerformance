@@ -1,6 +1,6 @@
 # General information
 
-Rather random for the while...
+
 
 ### Table of Contents
 

@@ -105,7 +105,9 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 
 #### How to associate RecoParticles with Monte-Carlo Particles
 - see explanations [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics#association-between-RecoParticles-and-MonteCarloParticles)
+<!---
 - see also the example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
+-->
 
 #### How to navigate through the history of the Monte-Carlo particles
 - see exaplanations [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics#Navigation-through-the-history-of-the-MonteCarloParticles)

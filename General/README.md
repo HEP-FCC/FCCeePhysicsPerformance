@@ -119,7 +119,7 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - and some links below 
 
 #### How to run jet algorithms
-- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis.py#L40). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
+- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis_stage1.py). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/JetClustering.h) for more details.
 - remember: the jets that are on the (spring2021) EDM4Hep files **should not be used**, see the caveats above
 - details on the interface to FastJet in FCCAnalyses can be found in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
 - please read the [FastJet manual](https://arxiv.org/abs/1111.6097)

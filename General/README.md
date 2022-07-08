@@ -108,10 +108,10 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - see also the example in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)  shows how the associations work (how to retrieve the Monte-Carlo particle associated to a reconstructed particle; how to retrieve the track of a reconstructed particle)
 
 #### How to navigate through the history of the Monte-Carlo particles
-- see exaplanations [here][(https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics#Navigation-through-the-history-of-the-Monte-Carlo-particles)
+- see exaplanations [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics#Navigation-through-the-history-of-the-Monte-Carlo-particles)
 
 #### How to compute event variables (thrust, sphericity, etc)
-- same example as above, in [examples/FCCee/flavour/generic-analysis](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/flavour/generic-analysis)
+- see an example in [examples/FCCee/flavour/Bc2TauNu](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/flavour/Bc2TauNu/analysis_stage1.py) 
 
 #### How to fit tracks to a common vertex 
 - To see how one can run the vertex fitter over a collection of tracks, see in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex)

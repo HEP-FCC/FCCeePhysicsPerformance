@@ -294,6 +294,7 @@ An informal e-group was created after the topical meeting:   vertexing-FCCee-inf
 
 A stand-alone vertex-fitter from Franco Bedeschi has been **implemented in FCCAnalyses**.
   - the algorithm was described in [Franco's talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf) at the [topical meeting on vertexing, Feb 10, 2021](https://indico.cern.ch/event/1003610/).
+  - Franco presented an [update at the Physics Performance meeting of July 18, 2022](https://indico.cern.ch/event/1180976/contributions/4960968/attachments/2481467/4259924/Bedeschi_Vertexing_Jul2022.pdf)
   - In FCCAnalyses, see an example usage in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex).
     - analysis.py runs over Z to light jet events and determines the event primary vertex
     - The macro vertex\_plots.x makes plots of the chi2 of the fit, of the resolutions of the fitted vertex position in (x, y, z), and of the corresponding pulls.

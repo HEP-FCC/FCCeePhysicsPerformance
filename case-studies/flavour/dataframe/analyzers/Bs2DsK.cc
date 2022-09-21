@@ -3,10 +3,10 @@
 #include <random>
 #include <chrono>
 
-using namespace FCCAnalyses::MCParticle;
-using namespace FCCAnalyses::VertexFitterSimple;
+using namespace MCParticle;
+using namespace VertexFitterSimple;
 
-using namespace FCCAnalyses::VertexingUtils;
+using namespace VertexingUtils;
 
 
 // ---------------------------------------------------------------------------------------------------------------

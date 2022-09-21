@@ -1,8 +1,8 @@
 #include "Bs2JPsiPhi.h"
 
-using namespace FCCAnalyses::MCParticle;
-using namespace FCCAnalyses::VertexFitterSimple;
-using namespace FCCAnalyses::VertexingUtils;
+using namespace MCParticle;
+using namespace VertexFitterSimple;
+using namespace VertexingUtils;
 
 
 // the decay vertex of the Bs that decayed to mu mu KK; the indices

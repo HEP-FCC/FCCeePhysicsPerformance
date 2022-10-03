@@ -24,9 +24,9 @@ O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of ea
 - [indico category for the meetings of the Physics Groups](https://indico.cern.ch/category/15156/)
 
 Next meetings: 
-- July 18, 15:00
-- no meeting in August
-- September 19, t.b.c.
+- October 17, 15:00 or 14:00
+- November 14, t.b.c. 
+
 
 E-group used for announcements: **FCC-PED-FeasibilityStudy**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).
 

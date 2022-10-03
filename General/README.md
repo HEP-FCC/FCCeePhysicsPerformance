@@ -83,9 +83,9 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
     - the error matrix of the track parameters now include also the off-diagonal terms
     - addition of "inclusive" (non-isolated) muons in the output files
 -->
-  - See [here for  information about the files made with IDEA](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php)
+  - See [here for  information about the files made with IDEA](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/spring2021/Delphesevents_IDEA.php) 
   - The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/spring2021
-  - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA_3T.php), and to "IDEA" where the Drift Chamber was repaced by the CLD tracker
+  - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/spring2021/Delphesevents_IDEA_3T.php), and to "IDEA" where the Drift Chamber was repaced by the CLD tracker
 
 ##### Known caveats in the "spring2021" samples:
 - there is some inefficiency for electrons, due primarily to the overlap removal procedure, see [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)

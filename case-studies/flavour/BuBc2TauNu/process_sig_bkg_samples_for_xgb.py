@@ -13,13 +13,15 @@ from userConfig import loc, train_vars, train_vars_vtx, mode_names
 import plotting
 import utils as ut
 
-def run(mode):
+def run(mode,Type):
 
     #Master dataframe to store to CSV
     df = pd.DataFrame()
 
     #Location of MC files
     path = f"{loc.TRAIN}/{mode_names[mode]}"
+    if Type == "testing":
+      path = f"{loc.TEST}/{mode_names[mode]}"
 
     #List of all sub-files in the path
     files = glob.glob(f"{path}/*.root")
@@ -52,15 +54,16 @@ def run(mode):
     #Save to pickle
     print("Writing output to pickle file")
     ut.create_dir(loc.PKL)
-    outfile = f"{loc.PKL}/{mode}.pkl"
+    outfile = f"{loc.PKL}/{mode}_{Type}.pkl"
     df.to_pickle(outfile)
 
 def main():
     parser = argparse.ArgumentParser(description='Process inclusive Z -> uds / cc / bb / B -> tau nu MC to make reduced files for xgboost training')
     parser.add_argument("--Mode", choices=["uds","cc","bb","Bu2TauNu","Bc2TauNu"],required=True,help="Decay mode")
+    parser.add_argument("--Type", choices=["testing", "training"],help="testing or training samples",default="testing" )
     args = parser.parse_args()
 
-    run(args.Mode)
+    run(args.Mode,args.Type)
 
 if __name__ == '__main__':
     main()

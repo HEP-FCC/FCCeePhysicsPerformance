@@ -18,11 +18,14 @@ rc('font',**{'family':'serif','serif':['Roman']})
 rc('text', usetex=True)
 
 #Local code
-from userConfig import loc, mode_names, train_vars, train_vars_vtx, train_vars_2
+from userConfig import loc, mode_names, train_vars, train_vars_vtx, train_vars_2, train_vars_2_Dvtx, train_vars_2_Dvtx_trim1
 import plotting
 import utils as ut
 
+train_with_Dvtx = True
 vars_list = train_vars_2.copy()
+if train_with_Dvtx:
+  vars_list = train_vars_2_Dvtx.copy()
 
 #Cut on MVA1 before training to focus it
 MVA1_cut = "EVT_MVA1Bis > 0.6"
@@ -31,10 +34,12 @@ MVA2_cut = "EVT_MVA2 > 0.0"
 
 #use Bc or Bu as sig
 suffix = 'Bu_vs_Bc_vs_qq_multi'
+if train_with_Dvtx:
+  suffix = suffix + '_Dvtx_morelayer_d3n1000'
 path = f"{loc.TRAIN2}"
 
 tree_sig = uproot.open(path+f"/{mode_names['Bu2TauNu']}.root")["events"]
-df_sig = tree_sig.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"])
+df_sig = tree_sig.arrays(library="pd", how="zip", filter_name=["EVT_*","CUT_*"], entry_stop = 6e5)
 print("TRAINING VARS")
 print(vars_list)
 print("Number of training vars: %s" % len(vars_list))
@@ -80,10 +85,8 @@ for q in bkgs:
 
     N[q] = 0
     for f in files:
-        #df_gen = read_root(f,"metadata")
-        tree_gen = uproot.open(f)["metadata"]
-        df_gen = tree_gen.arrays(library="pd", how="zip")
-        N[q] = N[q] + df_gen.iloc[0]["eventsProcessed"]
+        N_this = uproot.open(f)["eventsProcessed"].value
+        N[q] = N[q] + N_this
 
 tree_bkg = {}
 df_bkg = {}
@@ -146,9 +149,9 @@ weights = compute_sample_weight(class_weight='balanced', y=y)
 
 #BDT
 config_dict = {
-            "n_estimators": 600,
+            "n_estimators": 1000, #1000,
             "learning_rate": 0.3,
-            "max_depth": 4,
+            "max_depth": 3, #5,
             }
 
 bdt = xgb.XGBClassifier(n_estimators=config_dict["n_estimators"],
@@ -176,7 +179,7 @@ out = f"{loc.BDT}"
 joblib.dump(bdt, f"{out}/xgb_bdt_stage2_{suffix}.joblib")
 
 #Also dump as json for ROOT interpretation
-bdt.dump_model(f"{out}/xgb_bdt_stage2_{suffix}.json", dump_format='json')
+#bdt.dump_model(f"{out}/xgb_bdt_stage2_{suffix}.json", dump_format='json')
 
 # comment TMVA form output. TMVA Experimental only supports binary at the moment.
 print("Writing xgboost model to ROOT file")

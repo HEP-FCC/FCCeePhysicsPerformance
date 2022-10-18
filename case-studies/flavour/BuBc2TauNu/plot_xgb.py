@@ -7,13 +7,14 @@ import xgboost as xgb
 import joblib
 
 #Local code
-from userConfig import loc, train_vars, train_vars_vtx
+from userConfig import loc, train_vars, train_vars_vtx, FCC_label
 import plotting
 import utils as ut
 
 from matplotlib import rc
 rc('font',**{'family':'serif','serif':['Roman']})
 rc('text', usetex=True)
+
 
 def run(vars, sig):
     # Load trained model
@@ -70,12 +71,13 @@ def run(vars, sig):
     xmax = 1
     bins_bkg = int(np.sqrt(len(df_bkg["cc"])))
     bins_sig = int(np.sqrt(len(df_sig)))
-    plt.hist(df_sig["BDT"],bins=bins_sig,range=(xmin,xmax),density=True,color="#b2182b",histtype='step',linewidth=1.5)
-    plt.hist(df_sig["BDT"],bins=bins_sig,range=(xmin,xmax),density=True,color="#b2182b",histtype='stepfilled',alpha=0.3,linewidth=1.5,label=sig_label)
-    plt.hist(df_other["BDT"],bins=bins_sig,range=(xmin,xmax),density=True,color="k",histtype='step',linewidth=1.5,label=other_label)
+    plt.hist(df_sig["BDT"],bins=bins_sig,range=(xmin,xmax),density=True,color="#b2182b",histtype='step',linewidth=1.5, label=sig_label)
+#    plt.hist(df_sig["BDT"],bins=bins_sig,range=(xmin,xmax),density=True,color="#b2182b",histtype='stepfilled',alpha=0.3,linewidth=1.5,label=sig_label)
+    plt.hist(df_other["BDT"],bins=bins_sig,range=(xmin,xmax),density=True,color="#508273",histtype='step',linewidth=1.5,label=other_label)
     for q in bkgs:
         plt.hist(df_bkg[q]["BDT"],bins=bins_bkg,range=(xmin,xmax),density=True,color=bkgs[q][0],histtype='step',linewidth=1.5,label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
     ax.tick_params(axis='both', which='major', labelsize=25)
+    ax.set_title( FCC_label, loc='right', fontsize=20)
     plt.xlim(xmin,xmax)
     plt.xlabel("BDT1 score",fontsize=30)
     plt.ylabel("Normalised counts",fontsize=30)
@@ -112,11 +114,12 @@ def run(vars, sig):
     fig, ax = plt.subplots(figsize=(12,8))
 
     plt.plot(cut_vals, eff_sig, color="#b2182b",label=sig_label)
-    plt.plot(cut_vals, eff_other, color="k",label=other_label)
+    plt.plot(cut_vals, eff_other, color="#508273",label=other_label)
     for q in bkgs:
         plt.plot(cut_vals, eff_bkg[q], color=bkgs[q][0],label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
 
     ax.tick_params(axis='both', which='major', labelsize=25)
+    ax.set_title( FCC_label, loc='right', fontsize=20)
     plt.xlim(xmin,xmax)
     plt.xlabel("BDT1 score",fontsize=30)
     plt.ylabel("Efficiency",fontsize=30)

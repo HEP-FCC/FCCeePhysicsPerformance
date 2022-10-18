@@ -11,7 +11,7 @@ from sklearn.metrics import roc_curve, auc
 #from root_pandas import read_root, to_root
 
 #Local code
-from userConfig import loc, train_vars, train_vars_vtx, train_vars_2
+from userConfig import loc, train_vars, train_vars_vtx, train_vars_2, train_vars_2_Dvtx, train_vars_2_Dvtx_trim1, FCC_label
 import plotting
 import utils as ut
 
@@ -19,7 +19,7 @@ from matplotlib import rc
 rc('font',**{'family':'serif','serif':['Roman']})
 rc('text', usetex=True)
 
-vars_list = train_vars_2.copy()
+vars_list = train_vars_2_Dvtx.copy()
 
 
 #use Bc or Bu as sig
@@ -27,10 +27,10 @@ vars_list = train_vars_2.copy()
 bu = 'Bu2TauNu'
 bc = 'Bc2TauNu'
 
-suffix = 'Bu_vs_Bc_vs_qq_multi'
-BDT_Name = 'xgb_bdt_stage2_Bu_vs_Bc_only'
+suffix = 'Bu_vs_Bc_vs_qq_multi_final'
+#BDT_Name = 'xgb_bdt_stage2_Bu_vs_Bc_only'
 
-bdt = joblib.load(f"{loc.BDT}/xgb_bdt_stage2_Bu_vs_Bc_vs_qq_multi.joblib")
+bdt = joblib.load(f"{loc.BDT}/xgb_bdt_stage2_{suffix}.joblib")
 
 MVA1_cut = "EVT_MVA1Bis > 0.6"
 MVA2_cut = "EVT_MVA2 > 0.0"
@@ -136,6 +136,7 @@ fpr2, tpr2, thresholds = roc_curve(y, bdt_out['tot'][:,2], pos_label=2)
 roc_auc2 = auc(fpr2, tpr2)
 
 fig, ax = plt.subplots(figsize=(8,8))
+ax.set_title( FCC_label, loc='right', fontsize=20)
 plt.plot(tpr1, 1-fpr1, lw=1.5, color="k", label='Bu ROC (area = %0.3f)'%(roc_auc1))
 plt.plot(tpr2, 1-fpr2, lw=1.5, color="r", label='Bc ROC (area = %0.3f)'%(roc_auc2))
 plt.plot([0.45, 1.], [0.45, 1.], linestyle="--", color="k", label='50/50')
@@ -162,7 +163,8 @@ plt.xlim(0.,1.)
 plt.ylim(0.,1.)
 plt.ylabel('BDT Bc score',fontsize=30)
 plt.xlabel('BDT Bu score',fontsize=30)
-ax.tick_params(axis='both', which='major', labelsize=25)
+ax_scatter.tick_params(axis='both', which='major', labelsize=25)
+ax_scatter.set_title( FCC_label, loc='right', fontsize=20)
 leg = [mpl.lines.Line2D([0],[0], marker='o', markersize=10, color='w', markerfacecolor='b', label=bkg_label),
        mpl.lines.Line2D([0],[0], marker='o', markersize=10, color='w', markerfacecolor='r', label=sig_label),
        mpl.lines.Line2D([0],[0], marker='o', markersize=10, color='w', markerfacecolor='g', label=other_label)]
@@ -266,6 +268,7 @@ for q in bkgs:
     plt.plot(cut_vals, effbu_bkg[q], color=bkgs[q][0],label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
 
 ax.tick_params(axis='both', which='major', labelsize=25)
+ax.set_title( FCC_label, loc='right', fontsize=20)
 plt.xlim(0.,1.)
 plt.xlabel("BDT2 Bu score",fontsize=30)
 plt.ylabel("Efficiency",fontsize=30)
@@ -286,6 +289,7 @@ for q in bkgs:
     plt.plot(cut_vals, effbc_bkg[q], color=bkgs[q][0],label="Inc. $Z^0 \\to %s$" % bkgs[q][1])
 
 ax.tick_params(axis='both', which='major', labelsize=25)
+ax.set_title( FCC_label, loc='right', fontsize=20)
 plt.xlim(0.,1.)
 plt.xlabel("BDT2 Bc score",fontsize=30)
 plt.ylabel("Efficiency",fontsize=30)

@@ -32,6 +32,7 @@ def run(vars, sig):
     print("TRAINING VARS")
     print(vars_list)
     path = f"{loc.PKL}"
+#    path = "/afs/cern.ch/work/x/xzuo/public/FCC_files/Bc2TauNu/data/pkl"
     df_bc = pd.read_pickle(f"{path}/Bc2TauNu.pkl")
     df_bc = df_bc[vars_list]
     df_bu = pd.read_pickle(f"{path}/Bu2TauNu.pkl")
@@ -73,10 +74,8 @@ def run(vars, sig):
 
         N[q] = 0
         for f in files:
-            tree = uproot.open(f)["metadata"]
-            df_gen = tree.arrays(library="pd")
-            #df_gen = read_root(f,"metadata")
-            N[q] = N[q] + df_gen.iloc[0]["eventsProcessed"]
+            N_this = uproot.open(f)["eventsProcessed"].value
+            N[q] = N[q] + N_this
 
     df_bkg = {}
     for q in bkgs:
@@ -121,9 +120,9 @@ def run(vars, sig):
 
     #BDT
     config_dict = {
-            "n_estimators": 400,
+            "n_estimators": 1000,
             "learning_rate": 0.3,
-            "max_depth": 4,
+            "max_depth": 5,
             }
 
     bdt = xgb.XGBClassifier(n_estimators=config_dict["n_estimators"],

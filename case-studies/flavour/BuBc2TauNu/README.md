@@ -2,13 +2,13 @@
 
 ### Overview
 
-This analysis is a spin-off of the Bc2TauNu search.
-It inherits the basic steps from Bc2TauNu but aims to consider both Bc2TauNu and Bu2TauNu as separate signals.
+This analysis is a spin-off of the Bc2TauNu search. \
+It inherits the basic steps from Bc2TauNu but aims to consider both Bc2TauNu and Bu2TauNu as separate signals. \
 This analysis will also be used as a benchmark to help optimize the generic [FCC analysis workflow](https://github.com/HEP-FCC/FCCAnalyses).
 
 ### Contact
 
-Clement Helsens <clement.helsens@cern.ch>
+Clement Helsens <clement.helsens@cern.ch> \
 Xunwu Zuo <xunwu.zuo@cern.ch>
 
 
@@ -38,8 +38,8 @@ The statistical analysis is performed with the following steps:
 - `final_sel_pretrim_signal.py`: Process signal samples to skim events. Just to save time of loading samples in the final analysis. No need to pretrim backgrounds as they are quick to load.
 - `final_sel_estimate_purity.py`: Read splines and estimate signal and background yields. Scan MVA cuts for optimal signal purity, output to yields.json
 - `fit_simultaneous_template.py`: Generate pseudo-data and perform combined fit in two categories. If more than 1 pseudo-data, output to fit_results.json
-- `fit_multidim_simultaneous_template.py`: (Deprecated) It is a modification of `fit_simultaneous_template.py` to fit multi-dimensional distributions. 
- 
+- `fit_multidim_simultaneous_template.py`: (DEPRECATED) It is a modification of `fit_simultaneous_template.py` to fit multi-dimensional distributions. 
+- `study_toy_stats.py`: It takes the fit results from the previous step and extra the total uncertainty on the signal strength.
 
 This is an additional script to study the decay chains in background events after MVA selections, in order to understand what processes need to be generated for exclusive background samples.
 - `survey_exclusive_modes.py`: It takes a special sample set (produced by `analysis_extra_bkg_composition.py` in FCCAnalysis) as inputs. It loops through event with high MVA scores and rebuild decay chains that are selected as the signal-like decay. Output is a table in a text file.

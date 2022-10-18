@@ -261,7 +261,7 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
             # set pulls on bkg uncertainty as a log likelihood of a lognormal distribution
             # 1/2 * ( log(x) - mean ) ** 2 / sigma ** 2, x = mu * yield, mean = 0, sigma = bkg_syst * yield
             # yield cancels, leaving the form below
-            tot_nll += 0.5 * ( np.log(mu_bb_bc)**2 + np.log(mu_cc_bc)**2 + np.log(mu_bb_bu)**2 + np.log(mu_cc_bu)**2 )/ (bkg_syst ** 2)
+            tot_nll += 0.5 * ( np.log(mu_bb_bc)**2 + np.log(mu_cc_bc)**2 + np.log(mu_bb_bu)**2 + np.log(mu_cc_bu)**2 ) / (bkg_syst ** 2)
 
             return tot_nll
 
@@ -352,9 +352,9 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
 def main():
     parser = argparse.ArgumentParser(description='Run toy fits to measure the signal yield')
     parser.add_argument("--NZ", choices=["0.5","1","2","3","4","5"],required=False,help="Number of Z's (x 10^12)",default="5")
-    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=5) 
-    # The bkgSF is an uniform factor applied to all toys. essentially a bias in bkg modeling , not an uncertainty
-    parser.add_argument("--bkgSyst", required=False,help="lognormal sigma on systematics of background normalization",default=1) 
+    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=1) 
+    # The bkgSF is an uniform factor applied to all toys. It is an exaggeration of bkg norm, not an uncertainty
+    parser.add_argument("--bkgSyst", required=False,help="lognormal sigma on systematics of background normalization",default=5) 
     # The bkgSyst is a random factor applied to each toy. The value indicates where the positive bound of 68% coverage lies in the distribution of bkg scaling. 
     # It should be a value greater than 1. (1 means it is a Delta function at 1 and no spread, i.e. no syst uncertainty.) 
     parser.add_argument("--Ntoys", required=False,help="Number of toys to run (if 1, runs a single toy and plots it)",default=2000)

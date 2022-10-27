@@ -80,6 +80,9 @@ def create_hist(df, bins, branches, weights=None,
 
 def run(nz, bkg_sf, bkg_syst, ntoys):
 
+    bkg_sf   = int(bkg_sf)
+    bkg_syst = int(bkg_syst)
+
     #Fetch signal and bkg yields from optimisation
     yields = {}
     with open(f'{loc.JSON}/optimal_yields_bc_with_{nz}Z_5000sig.json') as fbc:
@@ -127,7 +130,6 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
       for m in df[cat]:
         print (f"use {len(df[cat][m])} {m} MC to model {yields[cat][m] :.5} data")
 
- #   sys.exit()
 
     # Fit variables
     # could take multiple variables, just to compare performance in each.
@@ -171,9 +173,11 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
         plt.xlabel(f"{fit_vars[v]['name']} ({fit_vars[v]['unit']})",fontsize=30)
         plt.ylabel("Normalised distribution (a.u.)",fontsize=30)
         ymin,ymax = plt.ylim()
-        plt.ylim(0.,1.5*ymax)
+        plt.ylim(0.,1.1*ymax)
         plt.tight_layout()
         fig.savefig(f"{loc.PLOTS}/{cat}_{v}_template_compare.pdf")
+
+#    sys.exit()
 
     # generate toys and perform fit
     data = {}
@@ -352,12 +356,12 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
 def main():
     parser = argparse.ArgumentParser(description='Run toy fits to measure the signal yield')
     parser.add_argument("--NZ", choices=["0.5","1","2","3","4","5"],required=False,help="Number of Z's (x 10^12)",default="5")
-    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=1) 
+    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=5) 
     # The bkgSF is an uniform factor applied to all toys. It is an exaggeration of bkg norm, not an uncertainty
     parser.add_argument("--bkgSyst", required=False,help="lognormal sigma on systematics of background normalization",default=5) 
     # The bkgSyst is a random factor applied to each toy. The value indicates where the positive bound of 68% coverage lies in the distribution of bkg scaling. 
     # It should be a value greater than 1. (1 means it is a Delta function at 1 and no spread, i.e. no syst uncertainty.) 
-    parser.add_argument("--Ntoys", required=False,help="Number of toys to run (if 1, runs a single toy and plots it)",default=2000)
+    parser.add_argument("--Ntoys", required=False,help="Number of toys to run (if 1, runs a single toy and plots it)",default=4000)
     args = parser.parse_args()
 
     run(args.NZ, args.bkgSF, args.bkgSyst, args.Ntoys)

@@ -39,7 +39,8 @@ The statistical analysis is performed with the following steps:
 - `final_sel_estimate_purity.py`: Read splines and estimate signal and background yields. Scan MVA cuts for optimal signal purity, output to yields.json
 - `fit_simultaneous_template.py`: Generate pseudo-data and perform combined fit in two categories. If more than 1 pseudo-data, output to fit_results.json
 - `fit_multidim_simultaneous_template.py`: (DEPRECATED) It is a modification of `fit_simultaneous_template.py` to fit multi-dimensional distributions. 
-- `study_toy_stats.py`: It takes the fit results from the previous step and extra the total uncertainty on the signal strength.
+- `toy_study_stats.py`: It takes the fit results from the previous fit step and extract the total uncertainty on the signal strength.
+- `toy_plot_summary.py`: It reads the results from the previous toy stats step and make a summary plot for several toy groups.
 
 This is an additional script to study the decay chains in background events after MVA selections, in order to understand what processes need to be generated for exclusive background samples.
 - `survey_exclusive_modes.py`: It takes a special sample set (produced by `analysis_extra_bkg_composition.py` in FCCAnalysis) as inputs. It loops through event with high MVA scores and rebuild decay chains that are selected as the signal-like decay. Output is a table in a text file.

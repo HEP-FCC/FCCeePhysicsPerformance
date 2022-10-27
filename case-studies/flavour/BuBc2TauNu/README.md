@@ -42,6 +42,10 @@ The statistical analysis is performed with the following steps:
 - `toy_study_stats.py`: It takes the fit results from the previous fit step and extract the total uncertainty on the signal strength.
 - `toy_plot_summary.py`: It reads the results from the previous toy stats step and make a summary plot for several toy groups.
 
+One small file for a custom defined function:
+- `double_sided_gaussian.py`: double sided gaussian function in zfit, used in `toy_study_stats.py`. Would be better to replace it with something more centralized. 
+
+
 This is an additional script to study the decay chains in background events after MVA selections, in order to understand what processes need to be generated for exclusive background samples.
 - `survey_exclusive_modes.py`: It takes a special sample set (produced by `analysis_extra_bkg_composition.py` in FCCAnalysis) as inputs. It loops through event with high MVA scores and rebuild decay chains that are selected as the signal-like decay. Output is a table in a text file.
 

@@ -14,13 +14,12 @@ The modifications I made are:
 <ul>
 <li> Download the code from git https://github.com/lialavezzi/IDEADetectorSIM.git </li>
 
-<li> Modify by hand the file: $STANDALONE_INSTALL_DIR/IDEADetectorSIM/simulation/g4GMC/src/GMCG4EventAction.cc adding the line marked with asterisks here:
+<li> If you need to save space, modify by hand the file: $STANDALONE_INSTALL_DIR/IDEADetectorSIM/simulation/g4GMC/src/GMCG4EventAction.cc adding the line marked with asterisks here, in order not to save non primary tracks:
 <code>
-for (G4int i=0;i<n_trajectories;i++) {    
-      G4VTrajectory *tmpTrk = (*trajectoryContainer)[i];
-      *** if(tmpTrk->GetParentID() != 0) continue; ***                 
-      cnttracks.push_back( new GMCG4Particle( tmpTrk->GetTrackID(), tmpTrk->GetParentID(), 
-      ...
+for (G4int i=0;i < n_trajectories;i++) {                          </br>                        
+      G4VTrajectory *tmpTrk = (*trajectoryContainer)[i];        </br>
+      *** if(tmpTrk->GetParentID() != 0) continue; ***          </br>        
+      cnttracks.push_back( new GMCG4Particle( tmpTrk->GetTrackID(), tmpTrk->GetParentID(), ...
 </code>
 </li>
   

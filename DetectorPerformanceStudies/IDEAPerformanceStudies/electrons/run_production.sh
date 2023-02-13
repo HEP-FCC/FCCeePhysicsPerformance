@@ -23,7 +23,7 @@ do
 	# simulation
 	echo "SIMULATING"
 	cd $SIM_INSTAL_DIR
-	./bin/g4GMC ./g4mac/mymac/run_e_${theta}_${ptot}.mac geom_IDEA.txt 1 $SIM_OUTPUT_DIR >& $SIM_OUTPUT_DIR/log/log.txt
+	./bin/g4GMC ./g4mac/mymac/run_${pdg}_${theta}_${ptot}.mac geom_IDEA.txt 1 $SIM_OUTPUT_DIR >& $SIM_OUTPUT_DIR/log/log.txt
 	# conversion
 	echo "CONVERTING G4 -> ROME"
 	cd $PRJBASE/converter

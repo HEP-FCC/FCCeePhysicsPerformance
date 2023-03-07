@@ -68,7 +68,7 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
 -->
 
 
-#### The "spring2021" Monte-Carlo samples (May 2021)
+#### (Oldish) The "spring2021" Monte-Carlo samples (May 2021)
 
 - some input on the MC production had been collected in early 2021 at [this googledoc](https://docs.google.com/document/d/1-3L_8u542-dlaL6ws41PYmCgwzffgsleaQKs_qQb6AM/edit#).
 - Details of the spring2021 samples:
@@ -96,19 +96,20 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
 
  - release from 2022-12-23, uses Delphes 3.5.1pre05
  - configuration cards (delphes cards, Monte-Carlo cards): see the  [FCC-configs repository](https://github.com/HEP-FCC/FCC-config), branch  **winter2023**.
-  - Main changes compared to spring2021:
+  - Main changes compared to spring2021 - see details [here](https://indico.cern.ch/event/1236823/contributions/5210039/attachments/2576345/4442600/2023_01_16_winter2023_Electrons_brems.pdf)
      - Updated IDEA geometry in the Delphes card:
         - smaller radius beam-pipe ( R = 1 cm )
         - ECAL crystal calorimeter hence much better ECAL resolution. Note that while the crystals are a seriously considered option, this is not yet the baseline of IDEA.
-     - Electron and Muons are now stored prior to any isolation requirement
+     - Electrons and Muons are stored prior to any isolation requirement
      - Track uncertainties are now reliable also for very displaced tracks
-     - fixed issues with electron inefficiencies and inefficiencies for low pT tracks. Overlap removal let to the user.
+     - fixed issues with electron inefficiencies and inefficiencies for low pT tracks. Overlap removal left to the user.
      - Updated machine parameters (hence beam energy spread and size of the luminous region)
      - Whizard samples now have a non-zero event vertex
      - Jets that are on the files correspond to the ee_genkt algorithm, with p = -1 (i.e. antikT like), radius = 1.5, PTmin = 1 GeV. These jets may not be suited to all analyses, and as before, the best is to  **re-cluster the jets in FCCAnalyses, as explained below.**
      - Electron resolution: slightly degraded compared to muon resolution (by 20%), to account approximatively for the brems. 
      - Generator cards: Particles are decayed only if the decay vertex is within a cylindrical volume, corresponding to the volume of the tracker.
-- See details [here](https://indico.cern.ch/event/1236823/contributions/5210039/attachments/2576345/4442600/2023_01_16_winter2023_Electrons_brems.pdf)
+- List of samples produced is [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/winter2023/Delphesevents_IDEA.php). More samples, esp. at 91 GeV, will be produced.
+- The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023
 
 ### Example analyses and how-to's
 
@@ -135,15 +136,48 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 
 #### How to fit tracks to a common vertex 
 - To see how one can run the vertex fitter over a collection of tracks, see in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex)
-- see also various examples in this repository, [case-studies/flavour/VertexExamples](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/VertexExamples)
+- see also the [section devoted to vertexing in the software tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#)
 - and some links below 
+<!--
+- see also various examples in this repository, [case-studies/flavour/VertexExamples](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/VertexExamples)
+-->
 
 #### How to run jet algorithms
-- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis_stage1.py). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/addons/FastJet/JetClustering.h)for more details.
+- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis_stage1.py). This is an interface to FastJet. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/addons/FastJet/JetClustering.h) for more details and for the definition of the parameters.
+   - The relevant lines in FCCAnalysis are given in the example below (here Durham algorithm, exclusive N=2) :
+ ```
+             # Jet clustering
+            .Define("RP_px", "ReconstructedParticle::get_px(ReconstructedParticles) ")
+            .Define("RP_py", "ReconstructedParticle::get_py(ReconstructedParticles) ")
+            .Define("RP_pz", "ReconstructedParticle::get_pz(ReconstructedParticles) ")
+            .Define("RP_e", "ReconstructedParticle::get_e(ReconstructedParticles) ")
+
+            # build pseudo jets with the RP, using the interface that takes px,py,pz,E
+            .Define( "pseudo_jets",  "JetClusteringUtils::set_pseudoJets(RP_px, RP_py, RP_pz, RP_e)" )
+
+            # run jet clustering with all reconstructed particles. Durham algo, exclusive clustering N=2, E-scheme
+            .Define( "FCCAnalysesJets_ee_genkt",  "JetClustering::clustering_ee_kt(2, 2, 1, 0)(pseudo_jets)" )
+            .Define("jets_ee_genkt",  "JetClusteringUtils::get_pseudoJets( FCCAnalysesJets_ee_genkt )")
+	        # access the jets kinematics :
+            .Define("jets_px",  "JetClusteringUtils::get_px( jets_ee_genkt )")
+	    
+	        # access the jet constituents:
+	        .Define("jetconstituents_ee_genkt", "JetClusteringUtils::get_constituents(FCCAnalysesJets_ee_genkt) ")
+		
+		# access the "dmerge" distances:
+		.Define("dmerge_23", "JetClusteringUtils::get_exclusive_dmerge( FCCAnalysesJets, 2)" )
+ ```
+- You may want to remove e.g. leptons from the list of particles that are to be clustered by the jet algorithm. Example:
+```
+      .Define("my_recoparticles",  "ReconstructedParticle::remove( ReconstructedParticles,  my_leptons )")
+      .Define("RP_px", "ReconstructedParticle::get_px( my_recoparticles ) ")
+      etc..
+```
 - remember: the jets that are on the (spring2021) EDM4Hep files **should not be used**, see the caveats above
 - details on the interface to FastJet in FCCAnalyses can be found in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
 - please read the [FastJet manual](https://arxiv.org/abs/1111.6097)
 - [Basic guidance on jet algorithms (& FastJet) at FCC-ee](https://indico.cern.ch/event/1173562/contributions/4929025/attachments/2470068/4237859/2022-06-FCC-jets.pdf): talk by Gavin Salam, Gregory Soyez and Matteo Cacciari at the Physics Performance meeting of June 27, 2022. Most recommended.
+- Durham algorithm in exclusive mode is often a good choice. The "dmerge<sub> i, i+1</sub>" distances (see the FastJet manual, and the snippet above) can then be used to disentangle i-jets like events from (i+1)-like events
 
 #### How to run kinematic fits
 - see the ABCfit++ software package described in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)

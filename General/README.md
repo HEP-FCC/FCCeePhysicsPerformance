@@ -92,6 +92,24 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
 - the efficiency for very low momentum tracks is lower than what it should be, see [Tristan's talk](https://indico.cern.ch/event/1076058/contributions/4525621/attachments/2312669/3936050/Talk_FCC_miralles.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)
 - the jets that are on the EDM4Hep files, i.e. that were produced during the Delphes step, **should not be used**. See [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1096051/contributions/4614509/attachments/2344926/3998410/2021_11_12_News.pdf). The issue lies in the Delphes card that was used (some jets are suppressed in the overlap removal procedure). The solution is to **re-cluster the jets in FCCAnalyses, as explained below.**
 
+#### The "winter2023" Monte-Carlo samples (January 2023)
+
+ - release from 2022-12-23, uses Delphes 3.5.1pre05
+ - configuration cards (delphes cards, Monte-Carlo cards): see the  [FCC-configs repository](https://github.com/HEP-FCC/FCC-config), branch  **winter2023**.
+  - Main changes compared to spring2021:
+     - Updated IDEA geometry in the Delphes card:
+        - smaller radius beam-pipe ( R = 1 cm )
+        - ECAL crystal calorimeter hence much better ECAL resolution. Note that while the crystals are a seriously considered option, this is not yet the baseline of IDEA.
+     - Electron and Muons are now stored prior to any isolation requirement
+     - Track uncertainties are now reliable also for very displaced tracks
+     - fixed issues with electron inefficiencies and inefficiencies for low pT tracks. Overlap removal let to the user.
+     - Updated machine parameters (hence beam energy spread and size of the luminous region)
+     - Whizard samples now have a non-zero event vertex
+     - Jets that are on the files correspond to the ee_genkt algorithm, with p = -1 (i.e. antikT like), radius = 1.5, PTmin = 1 GeV. These jets may not be suited to all analyses, and as before, the best is to  **re-cluster the jets in FCCAnalyses, as explained below.**
+     - Electron resolution: slightly degraded compared to muon resolution (by 20%), to account approximatively for the brems. 
+     - Generator cards: Particles are decayed only if the decay vertex is within a cylindrical volume, corresponding to the volume of the tracker.
+- See details [here](https://indico.cern.ch/event/1236823/contributions/5210039/attachments/2576345/4442600/2023_01_16_winter2023_Electrons_brems.pdf)
+
 ### Example analyses and how-to's
 
 Example analyses can be found in the [FCCAnalyses repository](https://github.com/HEP-FCC/FCCAnalyses).
@@ -121,7 +139,7 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 - and some links below 
 
 #### How to run jet algorithms
-- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis_stage1.py). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/JetClustering.h) for more details.
+- To see how one can run a jet algorithm over a collection of particles, see in [examples/FCCee/top/hadronic](https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/top/hadronic/analysis_stage1.py). This is an interface to FastJet, although not all the algorithms that are implemented in FastJet are currently available in this interface. See in [JetClustering.h](https://github.com/HEP-FCC/FCCAnalyses/blob/master/addons/FastJet/JetClustering.h)for more details.
 - remember: the jets that are on the (spring2021) EDM4Hep files **should not be used**, see the caveats above
 - details on the interface to FastJet in FCCAnalyses can be found in [Julie Torndal's thesis](https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ)
 - please read the [FastJet manual](https://arxiv.org/abs/1111.6097)

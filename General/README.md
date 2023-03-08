@@ -402,15 +402,15 @@ Combinatoric functions provided by the python *awkward array* pckage  are very h
 
 #### Beam energy spread
 
-At FCC, the energy of the beams is distributed according to a Gaussian function. The corresponding beam energy spread is given in Table S.1 of the CDR, [see the highlighted line here](parameters_CDR_table.pdf). One should use the second number, the one that corresponds to "BS" (with beamstrahlung). For example, at the Z peak, the beam energy spread amounts to 0.132%. Note that this is the spread of the energy of the beam; to get the relative spread of the centre-of-mass energy √s, these numbers  have to be divided by √2.
+At FCC, the energy of the beams is distributed according to a Gaussian function. The corresponding beam energy spread is given in Table S.1 of the CDR, [see the highlighted line here](parameters_CDR_table.pdf) - these parameters were used for the spring2021 samples - or [in the December 2022 parameters table](parameters_Dec2022_table.pdf), used for the winter2023 samples. One should use the second number, the one that corresponds to "BS" (with beamstrahlung). For example, at the Z peak, the beam energy spread amounts to 0.132%. Note that this is the spread of the energy of the beam; to get the relative spread of the centre-of-mass energy √s, these numbers  have to be divided by √2.
 
 It is important to take into account the beam energy spread when generating events. Some Monte-Carlo programs (e.g. Whizard) offer a built-in possibility to convolute the matrix elements with a Gaussian beam energy distribution.   
 
-For example, with Whizard, at √s = 240 GeV where the beam energy spread amounts to 0.165%, the steering card should contain:
+For example, with Whizard, at √s = 240 GeV where the beam energy spread amounts to 0.185% (Dec 2022 parameters), the steering card should contain:
 ```markdown
 beams = e1, E1 => gaussian => isr
-gaussian_spread1 = 0.165%
-gaussian_spread2 = 0.165%
+gaussian_spread1 = 0.185%
+gaussian_spread2 = 0.185%
 ```
 
 <!--
@@ -427,17 +427,19 @@ For example with Pythia, at √s = 240 GeV where the beam energy spread amounts 
 #### Vertex distribution
 
 - Bunch dimensions: 
-  - The bunch length is given by the σ<sub>z</sub> line in the [CDR table](parameters_CDR_table.pdf); one should use the second number, corresponding to the "BS" (with beamstrahlung case). For example, at the Z peak, it amounts to 12.1 mm
+  - The bunch length is given by the σ<sub>z</sub> line in the [CDR table](parameters_CDR_table.pdf) (used for the spring2021 samples) or in the [December 2022 table](parameters_Dec2022_table.pdf) (used for the winter2023 samples); one should use the second number, corresponding to the "BS" (with beamstrahlung case). For example, at the Z peak, it amounts to 12.1 mm with the CDR parameters, and to 15.4 mm with the Dec 2022 parameters.
   - The bunch dimensions in the transverse plane, at the interaction point,  are given by 
-     σ<sub>x,y</sub> = √ ( β*<sub>x,y</sub> ε<sub>x,y</sub>) where the values of the β function at the IP, and the horizontal and vertical emittance ε<sub>x,y</sub>  are given in the [CDR table](parameters_CDR_table.pdf).
+     σ<sub>x,y</sub> = √ ( β*<sub>x,y</sub> ε<sub>x,y</sub>) where the values of the β function at the IP, and the horizontal and vertical emittance ε<sub>x,y</sub>  are given in the [CDR table](parameters_CDR_table.pdf) or in the [December 2022 table](parameters_Dec2022_table.pdf).
 
 - For gaussian bunches, the vertex distribution in (x, y, z) and in time is well approximated by a 4-dimensional gaussian distribution, with (see [here](overlap_gaussian_bunches.pdf) ):
 <img src="vertex_formulae.png" alt="drawing" width="480"/>
-where α denotes the half-crossing angle, α = 15 mrad.
+where α denotes the half-crossing angle, α = 15 mrad.       
 
-Summary table:
+                  
+      
+            
 
-
+**Summary table, CDR parameters :**
 
   Ebeam (GeV)  |  45.6  |  80  |  120  |  175  |  182.5  
 ------------|--------|------|-------|-------|----------
@@ -448,6 +450,21 @@ Vertex σ<sub>x</sub> (µm) | 4.5 | 9.2 | 9.7 | 25.9 | 27.0
 Vertex σ<sub>y</sub> (nm) | 20  | 29.2 | 25.5 | 46.5 | 48.2 
 Vertex σ<sub>z</sub> (mm) | 0.30 | 0.60 | 0.64 | 1.26 |1.27 
 Vertex σ<sub>t</sub> (ps) | 28.6 | 14.1 | 12.5 | 6.2 | 6.0 
+
+
+
+**Summary table, December 2022 parameters:**
+
+  Ebeam (GeV)  |  45.6  |  80  |  120  |  182.5  
+------------|--------|------|-------|----------------
+σ<sub>x</sub> (µm)  |  8.4  |  20.8  |  13.9  |  38.6
+σ<sub>y</sub> (nm)  |  33.7  |  65.7  |  35.9  |  69.1
+σ<sub>z</sub> (mm)  |  15.4  |  8.0  |  6.0  |  2.74
+Vertex σ<sub>x</sub> (µm) | 5.96 | 14.7 | 9.8  | 27.3
+Vertex σ<sub>y</sub> (nm) | 23.8  | 46.5 | 25.4 | 48.8 
+Vertex σ<sub>z</sub> (mm) | 0.397 | 0.97 | 0.65 |1.33 
+Vertex σ<sub>t</sub> (ps) | 36.3 | 18.9 | 14.1 | 6.5 
+
 
 
 #### Transverse boost to account for the crossing angle

@@ -108,6 +108,8 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
      - Jets that are on the files correspond to the ee_genkt algorithm, with p = -1 (i.e. antikT like), radius = 1.5, PTmin = 1 GeV. These jets may not be suited to all analyses, and as before, the best is to  **re-cluster the jets in FCCAnalyses, as explained below.**
      - Electron resolution: slightly degraded compared to muon resolution (by 20%), to account approximatively for the brems. 
      - Generator cards: Particles are decayed only if the decay vertex is within a cylindrical volume, corresponding to the volume of the tracker.
+     - The magnetic field is stored on the files (branch "magFieldBz")
+     - For the tracks, the dNdx can be accessed in the "EFlowTrack_2" collection. 
 - List of samples produced is [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/winter2023/Delphesevents_IDEA.php). More samples, esp. at 91 GeV, will be produced.
 - The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023
 

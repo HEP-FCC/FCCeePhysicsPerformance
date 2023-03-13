@@ -26,7 +26,7 @@ from decay_mode_xs import prod, b_hadrons, c_hadrons
 def run(Sig):
 
     #BDT variables to optimise, and the hemisphere energy difference which we cut on > 10 GeV
-    var_list = ["EVT_MVA1Bis", "EVT_MVA2_bc", "EVT_MVA2_bu", "EVT_ThrustEmax_E", "EVT_ThrustEmin_E"]
+    var_list = ["EVT_MVA1Bis", "EVT_MVA2_bc", "EVT_MVA2_bu", "EVT_MVA2_bkg", "EVT_ThrustEmax_E", "EVT_ThrustEmin_E"]
     path = loc.ANALYSIS 
  
     EVT_MVA2 = 'EVT_MVA2_bc'
@@ -35,7 +35,7 @@ def run(Sig):
 
     Cut_truth = 'CUT_CandTruth==0 and CUT_CandTruth2==0'
     Cut_sel = f'{Cut_truth} and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8 and EVT_ThrustDiff_E > {Ediff_cut}'
-    cut = f"EVT_MVA1Bis > {MVA_cuts['base']['MVA1']} and {EVT_MVA2} > {MVA_cuts['base']['MVA2']} and {Cut_sel}"
+    cut = f"EVT_MVA1Bis > {MVA_cuts['base']['MVA1']} and {EVT_MVA2} > {MVA_cuts['base']['MVA2_sig']} and 1 - EVT_MVA2_bkg > {MVA_cuts['base']['MVA2_bkg']} and {Cut_sel}"
 
     modes = OrderedDict()
     modes['bb'] = OrderedDict()
@@ -71,7 +71,7 @@ def run(Sig):
         print (f"{m} : {len(df[m])}")
 
 
-    cut_MVA = f"EVT_MVA1Bis > {MVA_cuts['tight']['MVA1']} and {EVT_MVA2} > {MVA_cuts['tight']['MVA2']}"
+    cut_MVA = f"EVT_MVA1Bis > {MVA_cuts['tight']['MVA1']} and {EVT_MVA2} > {MVA_cuts['tight']['MVA2_sig']} and 1 - EVT_MVA2_bkg > {MVA_cuts['tight']['MVA2_bkg']}"
     base = {}
     count = {}
     eff_scan = {}
@@ -124,7 +124,7 @@ def run(Sig):
 
 def main():
     parser = argparse.ArgumentParser(description='Estimate optimal cuts and associated yields')
-    parser.add_argument("--Sig", choices=['bu','bc'],required=False,default='bc')
+    parser.add_argument("--Sig", choices=['bu','bc'],required=False,default='bu')
     args = parser.parse_args()
 
     run(args.Sig)

@@ -26,7 +26,7 @@ from decay_mode_xs import prod, b_hadrons, c_hadrons
 def run(Sig):
 
     #BDT variables to optimise, and the hemisphere energy difference which we cut on > 10 GeV
-    var_list = ["EVT_MVA1Bis", "EVT_MVA2_bc", "EVT_MVA2_bu", "EVT_ThrustEmax_E", "EVT_ThrustEmin_E"]
+    var_list = ["EVT_MVA1Bis", "EVT_MVA2_bc", "EVT_MVA2_bu", "EVT_MVA2_bkg", "EVT_ThrustEmax_E", "EVT_ThrustEmin_E"]
     path = loc.ANALYSIS 
  
     EVT_MVA2 = 'EVT_MVA2_bc'
@@ -35,9 +35,7 @@ def run(Sig):
 
     Cut_truth = 'CUT_CandTruth==0 and CUT_CandTruth2==0'
     Cut_sel = f'{Cut_truth} and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8 and EVT_ThrustDiff_E > {Ediff_cut}'
-    cut = f"EVT_MVA1Bis > 0.9 and {EVT_MVA2} > 0.8 and {Cut_sel}"
-
-    MVA_values = [0.9, 0.95, 0.98]
+    cut = f"EVT_MVA1Bis > {MVA_cuts['base']['MVA1']} and 1 - EVT_MVA2_bkg > {MVA_cuts['base']['MVA2_bkg']} and {EVT_MVA2} > {MVA_cuts['base']['MVA2_sig']} and {Cut_sel}"
 
     modes = OrderedDict()
     modes['bb'] = OrderedDict()
@@ -92,11 +90,12 @@ def run(Sig):
         print (f"{m} : {len(df[m])}")
 
 
-
-
-    for stage in ["EVT_MVA1Bis", EVT_MVA2]:
-      other_cut = "EVT_MVA1Bis > 0.9"
-      if stage   == "EVT_MVA1Bis": other_cut = EVT_MVA2 + "> 0.8"
+    other_values = [0.9, 0.95, 0.98, 0.99]
+    MVA_values = [0.95, 0.98, 0.987, 0.99, 0.995, 0.999, 0.9995, 0.9999]
+    
+    for stage in ["EVT_MVA1Bis", "EVT_MVA2_bkg"]:
+      other = "EVT_MVA2_bkg"
+      if stage == "EVT_MVA2_bkg": other = "EVT_MVA1Bis"
 
       print (f"\n\nscan cuts for {stage}:")
       base = {}
@@ -110,65 +109,67 @@ def run(Sig):
       for m in df:
           base[m] = len(df[m])
           eff_scan[m] = {}
-      for MVA_cut in MVA_values:
-        cut_MVA = f"{stage} > {MVA_cut} and {other_cut}"
-
-        temp_bb = df_bb.query(cut_MVA)
-        temp_cc = df_cc.query(cut_MVA)
-        eff_scan['bb'][MVA_cut] = len(temp_bb) / base['bb']
-        eff_scan['cc'][MVA_cut] = len(temp_cc) / base['cc']
-        base['bb_comb'] = 0
-        base['cc_comb'] = 0
-        eff_scan['bb_comb'][MVA_cut] = 0
-        eff_scan['cc_comb'][MVA_cut] = 0
-        #for m in df:
-        for m in modes["bb"]:
-          temp_df = df[m].query(cut_MVA)
-          eff_scan[m][MVA_cut] = len(temp_df) / base[m]
-          base["bb_comb"] += base[m] / N_gen[m] * modes['bb'][m][1] * modes['bb'][m][2]
-          eff_scan['bb_comb'][MVA_cut] += len(temp_df) / N_gen[m] * modes['bb'][m][1] * modes['bb'][m][2]
-        eff_scan['bb_comb'][MVA_cut] = eff_scan['bb_comb'][MVA_cut] / base["bb_comb"]
-        for m in modes["cc"]:
-          temp_df = df[m].query(cut_MVA)
-          eff_scan[m][MVA_cut] = len(temp_df) / base[m]
-          base["cc_comb"] += base[m] / N_gen[m] * modes['cc'][m][1] * modes['cc'][m][2]
-          eff_scan['cc_comb'][MVA_cut] += len(temp_df) / N_gen[m] * modes['cc'][m][1] * modes['cc'][m][2]
-        eff_scan['cc_comb'][MVA_cut] = eff_scan['cc_comb'][MVA_cut] / base["cc_comb"]
-
-      out_name = f'{loc.TEXT}/bkg_eff_comparison_cat_{Sig}_MVA_{stage}.txt' 
-      out_f = open(out_name, 'w')
-      title = "mode".ljust(20) + "BR".ljust(15) + "base events".ljust(15)
-      for MVA_cut in MVA_values:
-          title = title + (stage + " > " + f"{MVA_cut}").ljust(20)
-      out_f.write (title + '\n')
-      bb_line = 'Zbb'.ljust(20) + "-".ljust(15) + f"{base['bb']}".ljust(15)
-      for MVA_cut in MVA_values:
-          bb_line = bb_line + ("%.3E"%eff_scan['bb'][MVA_cut]).ljust(20)
-      out_f.write (bb_line + '\n')
-      bb_comb_line = 'Zbb_exc_comb'.ljust(20) + "-".ljust(15) + "-".ljust(15)
-      for MVA_cut in MVA_values:
-          bb_comb_line = bb_comb_line + ("%.3E"%eff_scan['bb_comb'][MVA_cut]).ljust(20)
-      out_f.write (bb_comb_line + '\n')
-      for m in modes['bb']:
-        exc_line = m.ljust(20) + f"{modes['bb'][m][2]}".ljust(15) + f"{base[m]}".ljust(15)
+      for other_cut in other_values: 
         for MVA_cut in MVA_values:
-          exc_line = exc_line + ("%.3E"%eff_scan[m][MVA_cut]).ljust(20)
-        out_f.write (exc_line + '\n')
+          cut_MVA = f"{stage} > {MVA_cut} and 1 - {other} > {other_cut} "
+          if stage == "EVT_MVA2_bkg": cut_MVA = f"1 - {stage} > {MVA_cut} and {other} > {other_cut}"
 
-      out_f.write ('\n')
-      cc_line = 'Zcc'.ljust(20) + "-".ljust(15) + f"{base['cc']}".ljust(15)
-      for MVA_cut in MVA_values:
-          cc_line = cc_line + ("%.3E"%eff_scan['cc'][MVA_cut]).ljust(20)
-      out_f.write (cc_line + '\n')
-      cc_comb_line = 'Zcc_exc_comb'.ljust(20) + "-".ljust(15) + "-".ljust(15)
-      for MVA_cut in MVA_values:
-          cc_comb_line = cc_comb_line + ("%.3E"%eff_scan['cc_comb'][MVA_cut]).ljust(20)
-      out_f.write (cc_comb_line + '\n')
-      for m in modes['cc']:
-        exc_line = m.ljust(20) + f"{modes['cc'][m][2]}".ljust(15) + f"{base[m]}".ljust(15)
+          temp_bb = df_bb.query(cut_MVA)
+          temp_cc = df_cc.query(cut_MVA)
+          eff_scan['bb'][MVA_cut] = len(temp_bb) / base['bb']
+          eff_scan['cc'][MVA_cut] = len(temp_cc) / base['cc']
+          base['bb_comb'] = 0
+          base['cc_comb'] = 0
+          eff_scan['bb_comb'][MVA_cut] = 0
+          eff_scan['cc_comb'][MVA_cut] = 0
+          #for m in df:
+          for m in modes["bb"]:
+            temp_df = df[m].query(cut_MVA)
+            eff_scan[m][MVA_cut] = len(temp_df) / base[m]
+            base["bb_comb"] += base[m] / N_gen[m] * modes['bb'][m][1] * modes['bb'][m][2]
+            eff_scan['bb_comb'][MVA_cut] += len(temp_df) / N_gen[m] * modes['bb'][m][1] * modes['bb'][m][2]
+          eff_scan['bb_comb'][MVA_cut] = eff_scan['bb_comb'][MVA_cut] / base["bb_comb"]
+          for m in modes["cc"]:
+            temp_df = df[m].query(cut_MVA)
+            eff_scan[m][MVA_cut] = len(temp_df) / base[m]
+            base["cc_comb"] += base[m] / N_gen[m] * modes['cc'][m][1] * modes['cc'][m][2]
+            eff_scan['cc_comb'][MVA_cut] += len(temp_df) / N_gen[m] * modes['cc'][m][1] * modes['cc'][m][2]
+          eff_scan['cc_comb'][MVA_cut] = eff_scan['cc_comb'][MVA_cut] / base["cc_comb"]
+
+        out_name = f'{loc.TEXT}/bkg_eff_comparison_cat_{Sig}_keep_{other}_{other_cut}_scan_MVA_{stage}.txt' 
+        out_f = open(out_name, 'w')
+        title = "mode".ljust(20) + "BR".ljust(15) + "base events".ljust(15)
         for MVA_cut in MVA_values:
-          exc_line = exc_line + ("%.3E"%eff_scan[m][MVA_cut]).ljust(20)
-        out_f.write (exc_line + '\n')
+            title = title + (stage + " > " + f"{MVA_cut}").ljust(20)
+        out_f.write (title + '\n')
+        bb_line = 'Zbb'.ljust(20) + "-".ljust(15) + f"{base['bb']}".ljust(15)
+        for MVA_cut in MVA_values:
+            bb_line = bb_line + ("%.3E"%eff_scan['bb'][MVA_cut]).ljust(20)
+        out_f.write (bb_line + '\n')
+        bb_comb_line = 'Zbb_exc_comb'.ljust(20) + "-".ljust(15) + "-".ljust(15)
+        for MVA_cut in MVA_values:
+            bb_comb_line = bb_comb_line + ("%.3E"%eff_scan['bb_comb'][MVA_cut]).ljust(20)
+        out_f.write (bb_comb_line + '\n')
+        for m in modes['bb']:
+          exc_line = m.ljust(20) + f"{modes['bb'][m][2]}".ljust(15) + f"{base[m]}".ljust(15)
+          for MVA_cut in MVA_values:
+            exc_line = exc_line + ("%.3E"%eff_scan[m][MVA_cut]).ljust(20)
+          out_f.write (exc_line + '\n')
+
+        out_f.write ('\n')
+        cc_line = 'Zcc'.ljust(20) + "-".ljust(15) + f"{base['cc']}".ljust(15)
+        for MVA_cut in MVA_values:
+            cc_line = cc_line + ("%.3E"%eff_scan['cc'][MVA_cut]).ljust(20)
+        out_f.write (cc_line + '\n')
+        cc_comb_line = 'Zcc_exc_comb'.ljust(20) + "-".ljust(15) + "-".ljust(15)
+        for MVA_cut in MVA_values:
+            cc_comb_line = cc_comb_line + ("%.3E"%eff_scan['cc_comb'][MVA_cut]).ljust(20)
+        out_f.write (cc_comb_line + '\n')
+        for m in modes['cc']:
+          exc_line = m.ljust(20) + f"{modes['cc'][m][2]}".ljust(15) + f"{base[m]}".ljust(15)
+          for MVA_cut in MVA_values:
+            exc_line = exc_line + ("%.3E"%eff_scan[m][MVA_cut]).ljust(20)
+          out_f.write (exc_line + '\n')
 
 def main():
     parser = argparse.ArgumentParser(description='Estimate optimal cuts and associated yields')

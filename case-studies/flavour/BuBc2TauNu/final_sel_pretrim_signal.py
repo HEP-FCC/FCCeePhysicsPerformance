@@ -27,7 +27,7 @@ truth_bc = 'CUT_CandTruth ==1'
 truth_bu = 'CUT_CandTruth2==1'
 
 Cut_sel = f'CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8 and EVT_ThrustDiff_E > {Ediff_cut}'
-cut = f"EVT_MVA1Bis > {MVA_cuts['tight']['MVA1']} and {Cut_sel}"
+cut = f"EVT_MVA1Bis > {MVA_cuts['tight']['MVA1']} and 1 - EVT_MVA2_bkg > {MVA_cuts['tight']['MVA2_bkg']} and {Cut_sel}"
 
 file_prefix = "p8_ee_Zbb_ecm91_EvtGen"
 print ('open tree')
@@ -55,19 +55,19 @@ print (f"process Bu : {len(df_bu)}")
 
 
 
-df_Bc_in_bc = df_bc.query(f"EVT_MVA2_bc > {MVA_cuts['tight']['MVA2']}")
+df_Bc_in_bc = df_bc.query(f"EVT_MVA2_bc > {MVA_cuts['tight']['MVA2_sig']}")
 df_Bc_in_bc.to_pickle(f"{loc.PKL}/final/Bc_evt_in_bc_cat_for_final_sel.pkl")
 print (f"Bc in bc: {len(df_Bc_in_bc)}")
 
-df_Bu_in_bc = df_bu.query(f"EVT_MVA2_bc > {MVA_cuts['tight']['MVA2']}")
+df_Bu_in_bc = df_bu.query(f"EVT_MVA2_bc > {MVA_cuts['tight']['MVA2_sig']}")
 df_Bu_in_bc.to_pickle(f"{loc.PKL}/final/Bu_evt_in_bc_cat_for_final_sel.pkl")
 print (f"Bu in bc: {len(df_Bu_in_bc)}")
 
-df_Bc_in_bu = df_bc.query(f"EVT_MVA2_bu > {MVA_cuts['tight']['MVA2']}")
+df_Bc_in_bu = df_bc.query(f"EVT_MVA2_bu > {MVA_cuts['tight']['MVA2_sig']}")
 df_Bc_in_bu.to_pickle(f"{loc.PKL}/final/Bc_evt_in_bu_cat_for_final_sel.pkl")
 print (f"Bc in bu: {len(df_Bc_in_bu)}")
 
-df_Bu_in_bu = df_bu.query(f"EVT_MVA2_bu > {MVA_cuts['tight']['MVA2']}")
+df_Bu_in_bu = df_bu.query(f"EVT_MVA2_bu > {MVA_cuts['tight']['MVA2_sig']}")
 df_Bu_in_bu.to_pickle(f"{loc.PKL}/final/Bu_evt_in_bu_cat_for_final_sel.pkl")
 print (f"Bu in bu: {len(df_Bu_in_bu)}")
 

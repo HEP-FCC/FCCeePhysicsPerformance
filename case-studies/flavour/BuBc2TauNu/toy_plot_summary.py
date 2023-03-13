@@ -44,17 +44,18 @@ def run(nz):
       fig,ax = plt.subplots(figsize=(10,8))
       for bkg_sf in sf_list:
         # latex LARGE probably with respect to 12pt, still smaller than fontsize 30
-        line_label = '$N_\\textrm{\\LARGE{bkg}} =$'+f' {bkg_sf}'+'$\\times N_\\textrm{\\LARGE{bkg}}^\\textrm{\\LARGE{exp}}$'
+        line_label = 'Background inflation:'+f' {bkg_sf}'+'$\\times N_\\textrm{\\LARGE{bkg}}^\\textrm{\\LARGE{exp}}$'
         # marker 'o' does not show as filled circle in UNIX $display, but is actually properly filled in other pdf viewers
         ax.plot( syst_list, sens[f'{sig}_{bkg_sf}'], marker='o', markersize=4, color=colors[bkg_sf], mfc=colors[bkg_sf], label=line_label)
   
       ax.tick_params(axis='both', which='major', labelsize=25)
       ax.set_title( FCC_label, loc='right', fontsize=20)
-      plt.xlabel("Relative $\\sigma_\\textrm{\\LARGE{bkg}}^\\textrm{\\LARGE{syst}}$",fontsize=30)
+      plt.xlabel("Relative $\\sigma_\\textrm{\\LARGE{bkg}}$ of background fluctuation",fontsize=30)
       plt.ylabel("Relative $\\sigma$"+f"({sig_labels[sig]})",fontsize=30)
       ymin, ymax = plt.ylim()
       plt.xlim(0,11)
-      plt.ylim(0,0.068)
+      plt.ylim(0,0.062)
+      #if sig == 'Bc': plt.ylim(0,0.034)
       plt.legend(loc="upper left",fontsize=20)
       plt.grid(alpha=0.4,which="major",axis='y')
       plt.tight_layout()

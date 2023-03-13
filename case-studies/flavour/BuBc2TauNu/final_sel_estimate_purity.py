@@ -90,11 +90,13 @@ def run(NZ,cat):
       N_other2TauNu = N_Bc2TauNu
 
 
+    spline_path = f'{loc.PKL}/spline'
+#    spline_path = '/afs/cern.ch/work/x/xzuo/public/FCC_files/BuBc2TauNu/data/pkl_2022Oct/spline'
     spline = {'MVA1': {}, 'MVA2': {}}
     for flav in ['bb', 'cc']:
-      with open(f'{loc.PKL}/spline/{cat}_MVA1_scan_{flav}_spline.pkl', 'rb') as f:
+      with open(f'{spline_path}/{cat}_MVA1_scan_{flav}_spline.pkl', 'rb') as f:
         spline['MVA1'][flav] = pickle.load(f)
-      with open(f'{loc.PKL}/spline/{cat}_MVA2_2d_scan_{flav}_spline.pkl', 'rb') as f:
+      with open(f'{spline_path}/{cat}_MVA2_2d_scan_{flav}_spline.pkl', 'rb') as f:
 #      with open(f'{loc.PKL}/spline/{cat}_MVA2_1d_bkg_scan_{flav}_spline.pkl', 'rb') as f: #for validating bkg scan only
         spline['MVA2'][flav] = pickle.load(f)
 
@@ -106,7 +108,8 @@ def run(NZ,cat):
     eff2 = {}
     n_bkg = {}
     best = {'purity': 0, 'MVA1': 0, 'MVA2_sig': 0, 'MVA2_bkg': 0,
-            'n_sig': 0, 'n_other': 0, 'bkg_bb': 0, 'bkg_cc': 0}
+            'n_sig': 0, 'n_other': 0, 'bkg_bb': 0, 'bkg_cc': 0,
+            'eff1_bb': 0, 'eff2_bb': 0, 'eff1_cc': 0, 'eff2_cc': 0}
 
     # scan range should be within spline range
     # from BDT eff, best S/B for MVA2_bc is around 0.92, best S/B for MVA2_bu is around 0.995
@@ -114,19 +117,19 @@ def run(NZ,cat):
 #    if cat == 'bc': 
 #      # Optimal sel is loose MVA2_bc + tight MVA2_bkg
 #      MVA1_min     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmin"] + 0.1
-#      MVA1_max     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmax"] - 0.1
-#      MVA2_sig_min = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmin"] + 1e-4 # 0.90
-#      MVA2_sig_max = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmax"] - 3    # 0.995
-#      MVA2_bkg_min = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmin"] + 0.5  # 0.03
-#      MVA2_bkg_max = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmax"] - 0.1  # 0.00037
+#      MVA1_max     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmax"] - 0.5
+#      MVA2_sig_min = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmin"] + 1e-4 
+#      MVA2_sig_max = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmax"] - 0.5   
+#      MVA2_bkg_min = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmin"] + 1e-4 
+#      MVA2_bkg_max = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmax"] - 1  
 #    if cat == 'bu': 
 #      # Optimal sel is tight MVA2_bu + loose MVA2_bkg
-#      MVA1_min     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmin"] + 0.01
-#      MVA1_max     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmax"] - 2.01
-#      MVA2_sig_min = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmin"] + 0.2  # 0.92
-#      MVA2_sig_max = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmax"] - 0.1  # 0.998
-#      MVA2_bkg_min = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmin"] + 1e-4 # 0.05
-#      MVA2_bkg_max = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmax"] - 1    # 0.0025
+#      MVA1_min     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmin"] + 0.1
+#      MVA1_max     = MVA_cuts['spline'][f"MVA1_in_{cat}"]["xmax"] - 0.5
+#      MVA2_sig_min = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmin"] + 1e-4 
+#      MVA2_sig_max = MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmax"] - 3 
+#      MVA2_bkg_min = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmin"] + 1e-4 
+#      MVA2_bkg_max = MVA_cuts['spline'][f"MVA2_bkg_in_{cat}"]["xmax"] - 0.5   
 #
 #    # coarse scan in wide range
 #    MVA1_vals     = np.linspace( MVA1_min,     MVA1_max,     50)
@@ -135,16 +138,16 @@ def run(NZ,cat):
 
     # fine scan in more specific region
     if cat == 'bc':
-      (MVA1_min,     MVA1_max)     = (8.8, 9.0)
-      (MVA2_sig_min, MVA2_sig_max) = (2.2, 2.3) #2.2 is out of lower bound, basically not in use
-      (MVA2_bkg_min, MVA2_bkg_max) = (5.6, 6.2)
+      (MVA1_min,     MVA1_max)     = (9.3, 9.5)
+      (MVA2_sig_min, MVA2_sig_max) = (1.3, 1.6) #2.2 is out of lower bound, basically not in use
+      (MVA2_bkg_min, MVA2_bkg_max) = (4.725, 4.745)
     if cat == 'bu':
-      (MVA1_min,     MVA1_max)     = (7.6, 7.9)
-      (MVA2_sig_min, MVA2_sig_max) = (2.29, 2.39) #2.2 is out of lower bound, basically not in use
-      (MVA2_bkg_min, MVA2_bkg_max) = (4.33, 4.43)
-    MVA1_vals     = np.linspace( MVA1_min,     MVA1_max,     50)
-    MVA2_sig_vals = np.linspace( MVA2_sig_min, MVA2_sig_max, 2)
-    MVA2_bkg_vals = np.linspace( MVA2_bkg_min, MVA2_bkg_max, 60)
+      (MVA1_min,     MVA1_max)     = (7.43, 7.63)
+      (MVA2_sig_min, MVA2_sig_max) = (MVA_cuts['spline'][f"MVA2_sig_in_{cat}"]["xmin"] + 1e-4, 1.11) #2.2 is out of lower bound, basically not in use
+      (MVA2_bkg_min, MVA2_bkg_max) = (4.385, 4.405)
+    MVA1_vals     = np.linspace( MVA1_min,     MVA1_max,     3)
+    MVA2_sig_vals = np.linspace( MVA2_sig_min, MVA2_sig_max, 21)
+    MVA2_bkg_vals = np.linspace( MVA2_bkg_min, MVA2_bkg_max, 3)
 
 
 #    MVA2_sig_vals = [0.9] # for validating bkg scan only
@@ -166,15 +169,18 @@ def run(NZ,cat):
 
                 # if negative because of spline fit behavior
                 if eff1['bb'] < 0 or eff2['bb'] < 0: continue
+                if flav == 'cc' and eff1[flav] < 0: eff1[flav] = 0.0
                 if flav == 'cc' and eff2[flav] < 0: eff2[flav] = 0.0 
                 n_bkg[flav] = N_tight[flav] * eff1[flav] * eff2[flav]
             if eff1['bb'] < 0 or eff2['bb'] < 0:
                 print ('Found a region with negative interpolation. Skip it.')
                 continue
-            purity = n_sig / (n_sig + n_bkg['bb'] + n_bkg['cc'])
+            purity = n_sig / (n_sig + n_bkg['bb'] + n_bkg['cc'] + n_other /10)
             if purity > best['purity']:
                 best = {'purity': purity,  'MVA1'   : cut1,     'MVA2_sig': cut2_sig,    'MVA2_bkg': cut2_bkg,
-                        'n_sig' : n_sig,   'n_other': n_other,  'bkg_bb'  : n_bkg['bb'], 'bkg_cc'  : n_bkg['cc']}
+                        'n_sig' : n_sig,   'n_other': n_other,  'bkg_bb'  : n_bkg['bb'], 'bkg_cc'  : n_bkg['cc'],
+                        'eff1_bb': f"{eff1['bb']:.3e}", 'eff2_bb': f"{eff2['bb']:.3e}", 
+                        'eff1_cc': f"{eff1['cc']:.3e}", 'eff2_cc': f"{eff2['cc']:.3e}" }
                 print ('\nFound new optimal at:')
                 print (f'MVA1: {cut1}, MVA2_sig: {cut2_sig}, MVA2_bkg: {cut2_bkg}')
                 print (f'{cat}: {n_sig :.2f},  {other}: {n_other :.2f}')
@@ -192,7 +198,7 @@ def run(NZ,cat):
 def main():
     parser = argparse.ArgumentParser(description='Estimate optimal cuts and associated yields')
     parser.add_argument("--NZ", choices=["0.5","1","2","3","4","5"],required=False,help="Number of Z's (x 10^12)",default="5")
-    parser.add_argument("--cat", choices=['bu','bc'],required=False,default='bc')
+    parser.add_argument("--cat", choices=['bu','bc'],required=False,default='bu')
     args = parser.parse_args()
 
     run(args.NZ,args.cat)

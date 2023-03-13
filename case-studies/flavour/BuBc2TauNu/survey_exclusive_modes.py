@@ -89,7 +89,7 @@ def write_decay_str(decay_chain, only_final = False):
 
 def output_summary(out_name, cat, special_cases, summary_count):
   out_f = open(out_name, 'w')
-  out_f.write(f'Category selection: MVA1 > {MVA_cuts["base"]["MVA1"]}, MVA2_{cat} > {MVA_cuts["base"]["MVA2"]}\n')
+  out_f.write(f'Category selection: MVA1 > {MVA_cuts["base"]["MVA1"]}, MVA2_{cat} > {MVA_cuts["base"]["MVA2_sig"]}\n')
   out_f.write(f'Total number of events passing selection: {summary_count["total"]}\n')
   out_f.write('----Event type----\n')
   for case in special_cases:
@@ -131,8 +131,8 @@ def run(bkg_samples, cat, find_further_decay):
       if iEvt % 1000 == 0: print (f'=============\nat {iEvt} event')
       trees[samp].GetEntry(iEvt)
       if trees[samp].EVT_MVA1 < MVA_cuts["base"]["MVA1"]: continue
-      if cat == 'bu' and trees[samp].EVT_MVA2_bu < MVA_cuts["base"]["MVA2"]: continue
-      if cat == 'bc' and trees[samp].EVT_MVA2_bc < MVA_cuts["base"]["MVA2"]: continue
+      if cat == 'bu' and trees[samp].EVT_MVA2_bu < MVA_cuts["base"]["MVA2_sig"]: continue
+      if cat == 'bc' and trees[samp].EVT_MVA2_bc < MVA_cuts["base"]["MVA2_sig"]: continue
       if VERBOSE: print ('--------------------')
       if VERBOSE: print (f'at {iEvt} event')
       summary_count['total'] += 1

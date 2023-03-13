@@ -78,20 +78,20 @@ def create_hist(df, bins, branches, weights=None,
         else:
             return hist
 
-def run(nz, bkg_sf, bkg_syst, ntoys):
+def run(nz, free_mubb, bkg_sf, bkg_syst, ntoys):
 
     bkg_sf   = int(bkg_sf)
     bkg_syst = int(bkg_syst)
 
     #Fetch signal and bkg yields from optimisation
     yields = {}
-    with open(f'{loc.JSON}/optimal_yields_bc_with_{nz}Z_5000sig.json') as fbc:
+    with open(f'{loc.JSON}/optimal_yields_bc_with_{nz}Z_1e+04sig.json') as fbc:
       yields['bc'] = json.load(fbc)
       yields['bc']['Bc2TauNu'] = yields['bc']['n_sig']
       yields['bc']['Bu2TauNu'] = yields['bc']['n_other']
       yields['bc']['bb'] = yields['bc']['bkg_bb']
       yields['bc']['cc'] = yields['bc']['bkg_cc']
-    with open(f'{loc.JSON}/optimal_yields_bu_with_{nz}Z_5000sig.json') as fbu:
+    with open(f'{loc.JSON}/optimal_yields_bu_with_{nz}Z_1e+04sig.json') as fbu:
       yields['bu'] = json.load(fbu)
       yields['bu']['Bc2TauNu'] = yields['bu']['n_other']
       yields['bu']['Bu2TauNu'] = yields['bu']['n_sig']
@@ -122,7 +122,7 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
 
       Cut_truth = 'CUT_CandTruth==0 and CUT_CandTruth2==0'
       Cut_sel = f'{Cut_truth} and CUT_CandRho==1 and CUT_CandVtxThrustEmin==1 and EVT_CandMass < 1.8 and EVT_ThrustDiff_E > {Ediff_cut}'
-      cut = f"EVT_MVA1Bis > {MVA_cuts['base']['MVA1']} and EVT_MVA2_{cat} > {MVA_cuts['base']['MVA2']} and {Cut_sel}"
+      cut = f"EVT_MVA1Bis > {MVA_cuts['base']['MVA1']} and EVT_MVA2_{cat} > {MVA_cuts['base']['MVA2_sig']} and 1 - EVT_MVA2_bkg > {MVA_cuts['base']['MVA2_bkg']} and {Cut_sel}"
       df[cat]['bb'] = df_bb.query(cut)
       df[cat]['cc'] = df_cc.query(cut)
 
@@ -265,7 +265,9 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
             # set pulls on bkg uncertainty as a log likelihood of a lognormal distribution
             # 1/2 * ( log(x) - mean ) ** 2 / sigma ** 2, x = mu * yield, mean = 0, sigma = bkg_syst * yield
             # yield cancels, leaving the form below
-            tot_nll += 0.5 * ( np.log(mu_bb_bc)**2 + np.log(mu_cc_bc)**2 + np.log(mu_bb_bu)**2 + np.log(mu_cc_bu)**2 ) / (bkg_syst ** 2)
+            tot_nll += 0.5 * ( np.log(mu_cc_bu)**2 ) / (10 ** 2)
+            if not free_mubb:
+                tot_nll += 0.5 * ( np.log(mu_bb_bc)**2 + np.log(mu_bb_bu)**2 ) / (bkg_syst ** 2)
 
             return tot_nll
 
@@ -356,15 +358,16 @@ def run(nz, bkg_sf, bkg_syst, ntoys):
 def main():
     parser = argparse.ArgumentParser(description='Run toy fits to measure the signal yield')
     parser.add_argument("--NZ", choices=["0.5","1","2","3","4","5"],required=False,help="Number of Z's (x 10^12)",default="5")
-    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=5) 
+    parser.add_argument("--free_mubb", choices=[True, False],required=False,help="whether to set mubb as free or constrained param",default=True)
+    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=1) 
     # The bkgSF is an uniform factor applied to all toys. It is an exaggeration of bkg norm, not an uncertainty
-    parser.add_argument("--bkgSyst", required=False,help="lognormal sigma on systematics of background normalization",default=5) 
+    parser.add_argument("--bkgSyst", required=False,help="lognormal sigma on systematics of background normalization",default=1) 
     # The bkgSyst is a random factor applied to each toy. The value indicates where the positive bound of 68% coverage lies in the distribution of bkg scaling. 
     # It should be a value greater than 1. (1 means it is a Delta function at 1 and no spread, i.e. no syst uncertainty.) 
     parser.add_argument("--Ntoys", required=False,help="Number of toys to run (if 1, runs a single toy and plots it)",default=4000)
     args = parser.parse_args()
 
-    run(args.NZ, args.bkgSF, args.bkgSyst, args.Ntoys)
+    run(args.NZ, args.free_mubb, args.bkgSF, args.bkgSyst, args.Ntoys)
 
 if __name__ == '__main__':
     main()

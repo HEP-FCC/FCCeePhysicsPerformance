@@ -38,15 +38,15 @@ events = {}
 df = {}
 
 #Cuts
-BDT2_cut = 0.90 #Looser than optimal to have enough stats in each sample to plot
-BDT1_cut = 0.98 #Looser than optimal to have enough stats in each sample to plot
+BDT2_cut = 0.95 #Looser than optimal to have enough stats in each sample to plot
+BDT1_cut = 0.95 #Looser than optimal to have enough stats in each sample to plot
 
 cut = f"EVT_ThrustDiff_E > {Ediff_cut} and EVT_MVA1Bis > {BDT1_cut} and (EVT_MVA2_bu > {BDT2_cut} or EVT_MVA2_bc > {BDT2_cut})"
 
 print (path)
 for m in modes:
     print(m)
-    tree[m] = uproot.open(f"{path}/{modes[m]}_selBase.root")["events"]
+    tree[m] = uproot.open(f"{path}/{modes[m]}.root")["events"]
     df[m] = tree[m].arrays(library="pd", how="zip", filter_name=["EVT_*"])
     print (len(df))
     df[m] = df[m].query(cut)

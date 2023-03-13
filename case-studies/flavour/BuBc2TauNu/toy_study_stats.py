@@ -18,7 +18,7 @@ rc('text', usetex=True)
 
 def run(bkg_sf, bkg_syst, nz):
     #Load toy results from json
-    with open(f'{loc.JSON}/toy_simultaneous_template_fit_results_{bkg_sf}bkg_{bkg_syst}Syst_{nz}Z.json') as f:     
+    with open(f'{loc.JSON}/sig_shape_syst_toy_simultaneous_template_fit_results_{bkg_sf}bkg_{bkg_syst}Syst_{nz}Z.json') as f:     
         results_dict = json.load(f)
 
 
@@ -37,8 +37,8 @@ def run(bkg_sf, bkg_syst, nz):
           pull = (val - 1.0)/err
   
       #Fit the N_Bc values distribution, and plot the generated value as a vertical line to compare
-      min = 1.0 - 4*np.mean(errs)
-      max = 1.0 + 4*np.mean(errs)
+      min = 1.0 - 3.1*np.mean(errs)
+      max = 1.0 + 2.9*np.mean(errs)
       obs = zfit.Space('x', limits=(min, max))
       mu_name = 'mu'+sig
       sigma_L_name = 'sigma_L'+sig
@@ -88,20 +88,20 @@ def run(bkg_sf, bkg_syst, nz):
       ymin, ymax = plt.ylim()
       plt.xlim(min,max)
       plt.ylim(0,1.2*ymax)
-      leg = [mpl.lines.Line2D([0],[0], label="mean = %.4f" %params[mu_name]['value']),
-             mpl.lines.Line2D([0],[0], label="sigma_L = %.4f" %params[sigma_L_name]['value']),
-             mpl.lines.Line2D([0],[0], label="sigma_R = %.4f" %params[sigma_R_name]['value'])]
+      leg = [mpl.lines.Line2D([0],[0], label="$\\mu ~$ = %.4f" %params[mu_name]['value']),
+             mpl.lines.Line2D([0],[0], label="$\\sigma_L$ = %.4f" %params[sigma_L_name]['value']),
+             mpl.lines.Line2D([0],[0], label="$\\sigma_R$ = %.4f" %params[sigma_R_name]['value'])]
       plt.legend(handles=leg, loc="upper left",fontsize=20)
       plt.tight_layout()
-      fig.savefig(f"{loc.PLOTS}/toy_results_{sig}_{bkg_sf}bkg_{bkg_syst}Syst_{nz}Z.pdf")
+      fig.savefig(f"{loc.PLOTS}/sig_shape_syst_toy_results_{sig}_{bkg_sf}bkg_{bkg_syst}Syst_{nz}Z.pdf")
 
       #Persist the toy results to json
-      with open(f'{loc.JSON}/toy_results_{sig}_{bkg_sf}bkg_{bkg_syst}Syst_{nz}Z.json', 'w') as fp:
+      with open(f'{loc.JSON}/sig_shape_syst_toy_results_{sig}_{bkg_sf}bkg_{bkg_syst}Syst_{nz}Z.json', 'w') as fp:
         json.dump(toy_dict, fp)
 
 def main():
     parser = argparse.ArgumentParser(description='Analyse toys for template fit')
-    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=10)
+    parser.add_argument("--bkgSF", required=False,help="Scale factor for background, for optimistic or pessimistic estimates",default=1)
     parser.add_argument("--bkgSyst", required=False,help="lognormal sigma on systematics of background normalization",default=1)
     parser.add_argument("--NZ", choices=["0.5","1","2","3","4","5"],required=False,help="Number of Z's (x 10^12)",default="5")
     args = parser.parse_args()

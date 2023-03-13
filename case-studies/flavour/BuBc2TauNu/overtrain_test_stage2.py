@@ -135,8 +135,10 @@ for cat in ['BDT_Bu', 'BDT_Bc', 'BDT_bkg']:
     ax.set_title( FCC_label, loc='right', fontsize=20)
     plt.xlim(0,3.6)
     plt.xlabel(BDT_label,fontsize=30)
+    if cat != 'BDT_bkg':
+      plt.xlabel('1 - ' + BDT_label, fontsize=30)
     plt.ylabel("Efficiency",fontsize=30)
-    plt.xticks([0, 1, 2, 3], ["$1-10^0$", "$1-10^{-1}$", "$1-10^{-2}$", "$1-10^{-3}$"])
+    plt.xticks([0, 1, 2, 3], ["$10^0$", "$10^{-1}$", "$10^{-2}$", "$10^{-3}$"])
     if cat == 'BDT_bkg': plt.xticks([0, 1, 2, 3], ["$10^0$", "$10^{-1}$", "$10^{-2}$", "$10^{-3}$"])
     plt.yscale('log')
     ymin,ymax = plt.ylim()

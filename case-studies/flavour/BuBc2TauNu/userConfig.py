@@ -166,14 +166,14 @@ Ediff_cut = "10."
 
 #Different cuts for MVA category and bkg estimate
 MVA_cuts = {}
-MVA_cuts['base']   = {"MVA1": 0.9,  "MVA2": 0.8}
-MVA_cuts['tight']  = {"MVA1": 0.98, "MVA2": 0.90}
+MVA_cuts['base']   = {"MVA1": 0.9,  "MVA2_bkg": 0.9, "MVA2_sig": 0.6}
+MVA_cuts['tight']  = {"MVA1": 0.99, "MVA2_bkg": 0.95, "MVA2_sig": 0.6}
 MVA_cuts['spline'] = {"MVA1_in_bu":     {"xmin": -np.log(1. - MVA_cuts['tight']['MVA1']), "xmax": 10},      # e^-10 ~ 0.00005
                       "MVA1_in_bc":     {"xmin": -np.log(1. - MVA_cuts['tight']['MVA1']), "xmax": 10},     # e^-9  ~ 0.0001
-                      "MVA2_sig_in_bu": {"xmin": -np.log(1. - MVA_cuts['tight']['MVA2']), "xmax": 7},      # e^-7  ~ 0.001 
-                      "MVA2_sig_in_bc": {"xmin": -np.log(1. - MVA_cuts['tight']['MVA2']), "xmax": 8},
-                      "MVA2_bkg_in_bu": {"xmin": 3, "xmax": 7},   # e^-3 ~ 0.05
-                      "MVA2_bkg_in_bc": {"xmin": 3, "xmax": 8}    # e^-8 ~ 0.0003
+                      "MVA2_sig_in_bu": {"xmin": -np.log(1. - MVA_cuts['tight']['MVA2_sig']), "xmax": 6},      # e^-7  ~ 0.001 
+                      "MVA2_sig_in_bc": {"xmin": -np.log(1. - MVA_cuts['tight']['MVA2_sig']), "xmax": 6},
+                      "MVA2_bkg_in_bu": {"xmin": -np.log(1. - MVA_cuts['tight']['MVA2_bkg']), "xmax": 7},   # e^-3 ~ 0.05
+                      "MVA2_bkg_in_bc": {"xmin": -np.log(1. - MVA_cuts['tight']['MVA2_bkg']), "xmax": 8}    # e^-8 ~ 0.0003
                      } 
 # xmin does not have to start from the tight cut, as efficiencies are always calculated with the correct passing value
 # xmax has to end at the limit (close to 1.0), otherwise the rest of the good events will not be included
@@ -188,14 +188,23 @@ MVA_cuts['sig_cut_for_bkg_scan'] = {#"bu": [0.95],
 
 
 Eff = {}
-Eff['base'] =  {"bu": {"Zbb": 3.005e-5, "Zcc": 5.642e-6},  # 29445 inc bb events, 5642 inc cc events after baseline cut for bu cat
-                "bc": {"Zbb": 9.278e-6, "Zcc": 2.576e-6},  #  9092 inc bb events, 2576 inc cc events after baseline cut for bc cat
-               } 
-Eff['tight'] = {"bu": {"Zbb": 1.091e-1, "Zcc": 6.770e-2},  # 90895 total exc bb events,  511 total exc cc events after baseline cut for bu cat
-                "bc": {"Zbb": 1.156e-1, "Zcc": 1.565e-1},  # 27124 total exc bb events, 2822 total exc cc events after baseline cut for bc cat
+#Eff['base'] =  {"bu": {"Zbb": 3.005e-5, "Zcc": 5.642e-6},  # 29445 inc bb events, 5642 inc cc events after baseline cut for bu cat
+#                "bc": {"Zbb": 9.278e-6, "Zcc": 2.576e-6},  #  9092 inc bb events, 2576 inc cc events after baseline cut for bc cat
+#               } 
+#Eff['tight'] = {"bu": {"Zbb": 1.091e-1, "Zcc": 6.770e-2},  # 90895 total exc bb events,  511 total exc cc events after baseline cut for bu cat
+#                "bc": {"Zbb": 1.156e-1, "Zcc": 1.565e-1},  # 27124 total exc bb events, 2822 total exc cc events after baseline cut for bc cat
+#               }
+
+Eff['base'] =  {"bu": {"Zbb": 2.756e-5, "Zcc": 5.794e-6},  # 27004 inc bb events, 5794 inc cc events after baseline cut for bu cat
+                "bc": {"Zbb": 1.992e-5, "Zcc": 4.634e-6},  # 19526 inc bb events, 4634 inc cc events after baseline cut for bc cat
                }
+Eff['tight'] = {"bu": {"Zbb": 7.389e-2, "Zcc": 7.628e-2},  # 68087 total exc bb events, 1651 total exc cc events after baseline cut for bu cat
+                "bc": {"Zbb": 1.388e-1, "Zcc": 1.974e-1},  # 82727 total exc bb events, 9220 total exc cc events after baseline cut for bc cat
+               }
+
+
 
 #Number of bins to use in MVA spline fit 
 NBin_MVA_fit = {'MVA1': 1000, 'MVA2_sig': 300, 'MVA2_bkg': 300} # could use less bins for MVA2, but does not take any resource (finishes in 1 second)
-Nsig_min = 5000.
+Nsig_min = 10000.
 

@@ -24,7 +24,8 @@ The following scripts are used to perform BDT trainings:
 - `train_xgb_stage2.py`: train second stage multi-class BDT. Takes second stage training ntuples as inputs.
 
 The following scripts are used to make plots for MVA performance and validations against overtraining:
-- `plot_vars_bdt.py`: (OUTDATED) make distributions of BDT variables before and after BDT cuts. To compare signal to background and understand how BDT sculpts the distributions.
+- `plot_bdt_vars_stage1.py`: plot all input variables of the first stage BDT. Takes first stage training and testing ntuples as inputs.
+- `plot_bdt_vars_stage2.py`: plot all input variables of the second stage BDT. Takes second stage training and testing ntuples as inputs.
 - `plot_xgb.py`: make performance plots for first stage BDT. Takes first stage pickles as inputs.
 - `plot_xgb_stage2.py`: make performance plots for second stage BDT. Takes second stage training ntuples as inputs.
 - `overtrain_test_stage1.py`: validate first stage BDT against overtraining. Takes first stage training and testing ntuples as inputs.
@@ -39,6 +40,8 @@ The statistical analysis is performed with the following steps:
 - `final_sel_estimate_purity.py`: Read splines and estimate signal and background yields. Scan MVA cuts for optimal signal purity, output to yields.json
 - `fit_simultaneous_template.py`: Generate pseudo-data and perform combined fit in two categories. If more than 1 pseudo-data, output to fit_results.json
 - `fit_multidim_simultaneous_template.py`: (DEPRECATED) It is a modification of `fit_simultaneous_template.py` to fit multi-dimensional distributions. 
+- `check_sig_shape_variation.py`: Split signal samples into a few subsets and compare the signal shape to get an estimate of signal shape uncertainty.
+- `fit_test_sig_shape_uncert.py`: Duplicate of `fit_simultaneous_template.py`, with additional setup for signal shape uncertainty.
 - `toy_study_stats.py`: It takes the fit results from the previous fit step and extract the total uncertainty on the signal strength.
 - `toy_plot_summary.py`: It reads the results from the previous toy stats step and make a summary plot for several toy groups.
 

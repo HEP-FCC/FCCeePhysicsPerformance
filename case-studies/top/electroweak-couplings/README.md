@@ -1,5 +1,7 @@
 ### Top electroweak couplings
 
+- Julie Munch Thorndal Master Thesis:  https://cernbox.cern.ch/index.php/s/UJ179yqvXhzTvJZ
+
 - The [corresponding Snowmass LOI](https://indico.cern.ch/event/951830/contributions/3999022/attachments/2095114/3521333/Top_SNOWMASS21-EF3_EF4_Patrizia_Azzi-154.pdf)
 
 - A [talk from Feb 2016, Pisa](https://indico.cern.ch/event/469561/contributions/1977972/attachments/1221484/1828346/nicolo_foppiani_top_couplings.pdf) N. Foppiani et al

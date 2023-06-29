@@ -138,8 +138,7 @@ And follow the instructions in the README of [FCCAnalyses repository](https://gi
 
 #### How to fit tracks to a common vertex 
 - To see how one can run the vertex fitter over a collection of tracks, see in [examples/FCCee/vertex](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/FCCee/vertex)
-- see also the [section devoted to vertexing in the software tutorial](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#)
-- and some links below 
+- see also the [section devoted to vertexing in the software tutorial](https://hep-fcc.github.io/fcc-tutorials/master/fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html) and some links below 
 <!--
 - see also various examples in this repository, [case-studies/flavour/VertexExamples](https://github.com/HEP-FCC/FCCeePhysicsPerformance/tree/master/case-studies/flavour/VertexExamples)
 -->

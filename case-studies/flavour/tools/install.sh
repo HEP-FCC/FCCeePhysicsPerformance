@@ -22,10 +22,10 @@ pip3 install --user uproot
 pip3 install --user awkward
 pip3 install --user zfit
 pip3 install --user xgboost
-pip3 install --user root-pandas
 pip3 install --user scikit-learn
+pip3 install --user particle
 
-export PYTHONPATH=${1}/.local/lib/python3.7/site-packages:$PYTHONPATH
+export PYTHONPATH=${1}/.local/lib/python3.9/site-packages:$PYTHONPATH
 
 echo "> source the localSetup"
 source ./localSetup.sh ${1}

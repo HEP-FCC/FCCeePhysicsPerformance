@@ -31,7 +31,7 @@ for the determination of the recoil mass.
 
 See  the compilation from Jan at [this googledoc](https://docs.google.com/spreadsheets/d/1W33UhfJbTILDkeN9ovl2Hcs32DTpSB7v0T0xsQzWPNw/edit#gid=0)
 
-Recommended nominal samples in the [spring2021 campaign](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php) :
+Recommended nominal samples in the [spring2021 campaign](https://fcc-physics-events.web.cern.ch/FCCee/spring2021/Delphesevents_IDEA.php):
   - ZH signal: Use the **Whizard** samples (proper description of the BES), wzp6\_ee\_XXH\_ecm240 with XX = mumu, tautau, ee, nunu, or qq.
   - WW background:
     - mumu analysis: better use p8\_ee\_WW\_mumu\_ecm240, which includes W -> mu and W -> tau -> mu

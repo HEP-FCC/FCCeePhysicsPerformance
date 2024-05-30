@@ -83,9 +83,9 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
     - the error matrix of the track parameters now include also the off-diagonal terms
     - addition of "inclusive" (non-isolated) muons in the output files
 -->
-  - See [here for  information about the files made with IDEA](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/spring2021/Delphesevents_IDEA.php) 
+  - See [here for information about the files made with IDEA](https://fcc-physics-events.web.cern.ch/FCCee/spring2021/Delphesevents_IDEA.php)
   - The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/spring2021
-  - a few files were produced, corresponding to [IDEA with  a  3T field](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/spring2021/Delphesevents_IDEA_3T.php), and to "IDEA" where the Drift Chamber was repaced by the CLD tracker
+  - a few files were produced, corresponding to [IDEA with  a  3T field](https://fcc-physics-events.web.cern.ch/FCCee/spring2021/Delphesevents_IDEA_3T.php), and to "IDEA" where the Drift Chamber was repaced by the CLD tracker
 
 ##### Known caveats in the "spring2021" samples:
 - there is some inefficiency for electrons, due primarily to the overlap removal procedure, see [Jean-Loup's talk](https://indico.cern.ch/event/1076058/contributions/4525652/attachments/2312556/3935839/Angular%20analysis%20ee%20-%20WW%20final%20states.pdf) and [here](https://indico.cern.ch/event/1085888/contributions/4565672/attachments/2329756/3969735/2021_10_18_PPC_News.pdf)
@@ -110,7 +110,7 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
      - Generator cards: Particles are decayed only if the decay vertex is within a cylindrical volume, corresponding to the volume of the tracker.
      - The magnetic field is stored on the files (branch "magFieldBz")
      - For the tracks, the dNdx can be accessed in the "EFlowTrack_2" collection. 
-- List of samples produced is [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/winter2023/Delphesevents_IDEA.php). More samples, esp. at 91 GeV, will be produced.
+- List of samples produced is [here](https://fcc-physics-events.web.cern.ch/FCCee/winter2023/Delphesevents_IDEA.php). More samples, esp. at 91 GeV, will be produced.
 - The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023
 
 ### Example analyses and how-to's

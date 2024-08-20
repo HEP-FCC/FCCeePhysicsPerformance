@@ -16,15 +16,13 @@
 #### Coordinators
 - Patrizia Azzi (INFN Padova) - Patrizia.Azzi@cern.ch
 - Emmanuel Perez (CERN) - Emmanuel.Perez@cern.ch
+- Michele Selvaggi (CERN) - michele.Selvaggi@cern.ch
 
 #### Physics Performance meetings
 
 O(monthly) meetings: Mondays, 3pm-5pm, CERN time. Usually the third Monday of each month. 
 - [indico category "Physics Performance"](https://indico.cern.ch/category/12894/).
 - [indico category for the meetings of the Physics Groups](https://indico.cern.ch/category/15156/)
-
-Next meetings: 
-- March 20, 15:00
 
 
 E-group used for announcements: **FCC-PED-FeasibilityStudy**. To subscribe, go [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).

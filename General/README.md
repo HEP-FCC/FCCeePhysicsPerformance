@@ -110,7 +110,7 @@ The Pythia cards can be found in EOS in /eos/experiment/fcc/ee/utils/pythiacards
      - Generator cards: Particles are decayed only if the decay vertex is within a cylindrical volume, corresponding to the volume of the tracker.
      - The magnetic field is stored on the files (branch "magFieldBz")
      - For the tracks, the dNdx can be accessed in the "EFlowTrack_2" collection. 
-- List of samples produced is [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/winter2023/Delphesevents_IDEA.php). More samples, esp. at 91 GeV, will be produced.
+- List of samples produced is [here](https://fcc-physics-events.web.cern.ch/FCCee/delphes/winter2023/). More samples, esp. at 91 GeV, will be produced.
 - The event files can be found in EOS /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023
 
 ### Example analyses and how-to's

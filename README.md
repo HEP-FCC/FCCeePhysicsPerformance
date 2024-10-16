@@ -22,6 +22,43 @@
 * 345 GeV (scan): 0.41 ab-1 (or 0.2 ab-1 if it’s enough for mtop)
 * 365 GeV: 2.65 ab-1 (or 2.80 ab-1 if only 0.2 ab-1 are needed for mtop)
 
+---------  More details here below: 
+The FCC-ee baseline is now with four interaction points. The latest instantaneous luminosities 
+were given by Oide San in San Francisco last June.  See slide 3 of 
+https://indico.cern.ch/event/1298458/contributions/5977859/attachments/2873388/5034194/Optics_Oide_240611.pdf:
+
+At the Z: 143 10^34 cm-2 s-1 at each IP
+at the WW threshold: 20 10^34 
+at the ZH maximum: 7.5 10^34
+at 365 GeV: 1.38 10^34
+(not indicated in this slide: 
+at the ttbar threshold: 1.72 10^34)
+
+We will run
+4 years at the Z (with the first two years at half lumi for commissioning)
+2 years at the WW threshold
+3 years at the ZH maximum 
+1 year at the ttbar threshold (at half lumi)
+4 years at 365 GeV
+
+Giving
+
+At and around the Z pole: 205 ab-1
+(~40 ab-1 at 88 GeV, ~40 ab-1 at 94 GeV, ~125 ab-1 at the Z pole - about 6 . 10^12 Z in total)
+
+At the WW threshold: 19.2 ab-1 (typically half at 157.5 GeV and half at 162.5 GeV, maybe 
+also another energy point to measure the continuum background below 157.5 GeV, in which 
+case the luminosity would be divided in three thirds. This optimisation needs to be done.)
+
+At the ZH maximum: 10.8 ab-1   (~2 million ZH events)
+
+At the ttbar threshold: 0.41 ab-1 
+    (~2 million ttbar events altogether)
+At 365 GeV: 2.65 ab-1 
+
+[The ttbar points can also be distributed differently: only 0.2 ab-1 for the threshold scan if it is 
+enough, and 2.81 ab-1 at 365 GeV. This is fine structure.]
+-----------
 
 ### Organisation
 

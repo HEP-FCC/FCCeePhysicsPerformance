@@ -2,6 +2,7 @@
 ## Welcome to the FCC-ee Physics Performance Documentation
 
 ### Table of Contents
+0. [Latest Integrated Luminosity Table for Feasibility Study Report](#lumi) 
 1. [Organisation](#organisation)
 2. [Towards the definition of detector requirements](#towards-the-definition-of-detector-requirements)
 3. [List of Active Case studies (evolving)](#case-studies-evolving-list)
@@ -10,6 +11,17 @@
 5. [Software](#software-documentation-&-links)
 
 -----
+### Integrated Luminosity Table for Feasibility Study Report 
+
+* 87.9 GeV: 40 ab-1 
+* 91.2 GeV: 125 ab-1 
+* 94.3 GeV: 40 ab-1 
+* 157.5 GeV: 9.6 ab-1 
+* 162.5 GeV: 9.6 ab-1 
+* 240 GeV: 10.8 ab-1
+* 345 GeV (scan): 0.41 ab-1 (or 0.2 ab-1 if it’s enough for mtop)
+* 365 GeV: 2.65 ab-1 (or 2.80 ab-1 if only 0.2 ab-1 are needed for mtop)
+
 
 ### Organisation
 

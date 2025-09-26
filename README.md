@@ -142,7 +142,7 @@ E-group used for announcements: **FCC-PED-FeasibilityStudy**. To subscribe, go [
 - Other documents submitted to Snowmass 2021:
     - LOIs sent by the [CEPC](https://indico.ihep.ac.cn/event/12410/) collaboration
     - LOIs sent by the [CALICE](https://agenda.linearcollider.org/event/8647/) collaboration
-    - Link to the [Snowmass portal](https://snowmass21.org)
+    - Link to the [Snowmass portal](https://web.archive.org/web/20250227025314/https://atlaswww.hep.anl.gov/snowmass21/doku.php) [Internet archive snapshot from February 20, 2025]
 
 ----------
  
